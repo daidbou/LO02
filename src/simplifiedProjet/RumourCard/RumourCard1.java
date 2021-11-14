@@ -11,7 +11,7 @@ public class RumourCard1 implements RumourCard {
 
 	@Override
 	public Player skillWitch() {
-		//System.out.print(" Skill Witch  " + name);	
+
 		System.out.println("Take next turn");
 		return null;
 		

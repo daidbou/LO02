@@ -9,18 +9,13 @@ import java.util.Scanner;
 public class Test extends Preparation{
 
 	public static void main(String[] args) {
-		
 
-		Scanner in = new Scanner(System.in);
-	
 		int turns = 1;
-
-		Player pNextTurn = playerList.get(1);
-		p1.showCards();
-		pNextTurn.showCards();
-		
+		int i = 0;
 		while(turns<3) {
-			turns++;
+			Scanner in = new Scanner(System.in);
+			
+			Player pNextTurn = playerList.get(i);//the first round begins at player 1
 			Player pTurn1 = pNextTurn;  // in every round each players has the same status, so we
 			Player pTurn2;		 // just put then in pTurn1 and pTurn2
 			
@@ -32,15 +27,24 @@ public class Test extends Preparation{
 				pTurn2 = isExiste(pName,pTurn1, playerList);
 				pTurn1.accuse(pTurn2);
 
-				System.out.println(pTurn2.getName()+"skill witch or show identity? [sk/id]");
+				System.out.println(pTurn2.getName()+" skill witch or show identity? [sk/id]");
 				String choiceWS = in.nextLine();
 
 				if(choiceWS.equals("sk")){//choose to use skill witch
 
 					System.out.println("Which card do you want to use?");
 					pTurn2.showCards();
+					System.out.println("entre 0 for the first card");
 					int cardNum = in.nextInt();//let player choose which card to use
 					pNextTurn = pTurn2.witch(cardNum);
+					if(pNextTurn == null){
+						//if(i)
+						pNextTurn = playerList.get(++i);// null means take next turn
+						//System.out.println("did take next turn");
+						//System.out.println(pNextTurn.getName());
+					}else{
+						pNextTurn = isExiste(pNextTurn.getName(), null, playerList);//turn to the player chosen
+					}
 					
 				}else if(choiceWS.equals("id")){//choose to show identity
 
@@ -68,6 +72,7 @@ public class Test extends Preparation{
 				System.out.println("noooooo");
 			}
 			
+			//in.close();
 		}
 	}
 

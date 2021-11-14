@@ -16,7 +16,8 @@ public class Preparation {
     static RumourCard4 rumourCard4 = new RumourCard4();	//create 12 rumour cards
 
     public static List<RumourCard> rumourCardList = new ArrayList<RumourCard>(){{
-		add(rumourCard1);
+		//add(null);
+        add(rumourCard1);
 		add(rumourCard2);
 		add(rumourCard3);
 		add(rumourCard4);
@@ -27,19 +28,22 @@ public class Preparation {
 	//static List<RumourCard> rumourCardListP2 = rumourCardList.subList(2, 4);// needs to be controlled, it's not random yet
 
     public static List<RumourCard> rumourCardListP1 = new ArrayList<RumourCard>(){{
+        //add(null);
         add(rumourCard1);
         add(rumourCard2);
     }};
     public static List<RumourCard> rumourCardListP2 = new ArrayList<RumourCard>(){{
+        //add(null);
         add(rumourCard3);
         add(rumourCard4);
     }};
-    
+
 	public static Player p1 = new Player("p1",1,rumourCardListP1);
 	public static Player p2 = new Player("p2",0,rumourCardListP2);
 
 	public static List<Player> playerList = new ArrayList<Player>(){{//player list
-		add(p1);
+		//add(null);
+        add(p1);
 		add(p2);
 	}};
 		

@@ -6,7 +6,8 @@ public class RumourCard3 implements RumourCard{
 	String name = "Pointed Hat";
 	@Override
 	public Player skillWitch() {
-		System.out.print(" Skill Witch " + name);	
+		System.out.println("skill witch for " + name);
+		System.out.println("Take next turn");
 		return null;
 	}
 
