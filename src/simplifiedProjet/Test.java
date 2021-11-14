@@ -22,7 +22,7 @@ public class Test extends Preparation{
 			System.out.println(pTurn1.getName() + " accuse or hunt? [a/h]");
 			String choiceAH = in.nextLine();
 			if(choiceAH.equals("a")) {
-				System.out.println("which player?");
+				System.out.println("which player? ex: p1 ");
 				String pName = in.nextLine();
 				pTurn2 = isExiste(pName,pTurn1, playerList);
 				pTurn1.accuse(pTurn2);
