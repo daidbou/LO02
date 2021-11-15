@@ -106,8 +106,17 @@ public interface Preparation {
         }
         System.out.println("no such player");
         return null;
-            
-            
+    }
+    
+    public static Player isExiste(String pName,List<Player> playerList) {
+    // sometimes we dont need to verify
+        for(Player p:playerList) {
+            if(pName.equals(p.getName())) {
+                return p;
+            }	
         }
+        System.out.println("no such player");
+        return null;
+    }
 
 }

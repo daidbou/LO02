@@ -12,12 +12,21 @@ public class Test implements Preparation{
 
 		int turns = 1;
 		int i = 0;
+		int didChangedPlayer = 0; // 0 = didn't change , 1 = changed
+		Player pNextTurn  = new Player();
+		Player pTurn1 = new Player();// in every round each players has the same status, so we
+		Player pTurn2 = new Player();// just put then in pTurn1 and pTurn2
 		while(turns<3) {
 			Scanner in = new Scanner(System.in);
+	
+			if(didChangedPlayer == 0){
+				pTurn1 = playerList.get(i);//the first round begins at player 1
+			}else{
+				pTurn1 = pNextTurn;  
+			}
 			
-			Player pNextTurn = playerList.get(i);//the first round begins at player 1
-			Player pTurn1 = pNextTurn;  // in every round each players has the same status, so we
-			Player pTurn2;		 // just put then in pTurn1 and pTurn2
+			
+			
 			
 			System.out.println(pTurn1.getName() + " accuse or hunt? [a/h]");
 			String choiceAH = in.nextLine();
@@ -36,23 +45,24 @@ public class Test implements Preparation{
 					System.out.println("entre 0 for the first card");
 					int cardNum = in.nextInt();//let player choose which card to use
 					pNextTurn = pTurn2.witch(cardNum);// use witch skill
-					if(pNextTurn == null){
-		
-						pNextTurn = playerList.get(++i);// null means take next turn
-						//System.out.println("did take next turn");
-						//System.out.println(pNextTurn.getName());
+					//System.out.println("pNextTurn is " + pNextTurn.getName());
+					if(pNextTurn == null){							
+						pNextTurn = playerList.get(++i);// null means take next turn	
 					}else{
-						pNextTurn = Preparation.isExiste(pNextTurn.getName(), null, playerList);//turn to the player chosen
+						pNextTurn = Preparation.isExiste(pNextTurn.getName(), playerList);//turn to the chosen player 
+						didChangedPlayer = 1;	
 					}
 					
 				}else if(choiceWS.equals("id")){//choose to show identity
 					pTurn2.showIdentity();
 					if(pTurn2.getIdentity() == 1){// witch ,pTurn1 gains 1 points
 						pTurn1.raisePoints(1);
-						playerList.remove(Preparation.isExiste(pTurn2.getName(), null, playerList));//pTurn2 should left the game
+						System.out.println(pTurn2.getName() + "gains 1 point");
+						playerList.remove(Preparation.isExiste(pTurn2.getName(), playerList));//pTurn2 should left the game
 						
 					}else{
 						pTurn1.raisePoints(0);//villager , gain no point;
+						System.out.println(pTurn2.getName() + "gains 0 point");
 					}
 					pNextTurn = playerList.get(++i);
 
