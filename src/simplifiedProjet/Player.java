@@ -5,7 +5,7 @@ import simplifiedProjet.RumourCard.RumourCard;
 
 import java.util.List;
 
-public class Player extends Preparation{
+public class Player implements Preparation{
 	private String name;
 	private int identity;//1 = witch, 0 = villager
 	private int point;
@@ -29,14 +29,14 @@ public class Player extends Preparation{
 			System.out.println("Which card do you want to use?");
 			int i = in.nextInt();
 			System.out.print(this.name);
-			rumourCardListPlayer.get(i).skillHunt();
+			rumourCardListPlayer.get(i).skillHunt(name);
 		}
 		System.out.println(player.name);
 	}
 	
 	public Player witch(int cardNum) {
 		
-		Player pNextTurn = rumourCardListPlayer.get(cardNum).skillWitch();	
+		Player pNextTurn = rumourCardListPlayer.get(cardNum).skillWitch(name);// name here is this player's name
 		return pNextTurn;
 	}
 
@@ -65,7 +65,9 @@ public class Player extends Preparation{
 		return identity;
 	}
 
-	public void raisePoints(){
-		point++;
+	public void raisePoints(int num){
+		for(int i = 0; i < num; i++){
+			point++;
+		}
 	}
 }

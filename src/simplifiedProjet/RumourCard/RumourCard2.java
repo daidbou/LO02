@@ -5,13 +5,13 @@ import simplifiedProjet.Player;
 public class RumourCard2 implements RumourCard {
 	String name = "The Inquisition";
 	@Override
-	public Player skillWitch() {
+	public Player skillWitch(String name) {
 		System.out.print(" Skill Witch " + name);	
 		return null;
 	}
 
 	@Override
-	public Player skillHunt() {
+	public Player skillHunt(String name) {
 		System.out.print(" Skill Hunt " + name);
 		return null;
 	}

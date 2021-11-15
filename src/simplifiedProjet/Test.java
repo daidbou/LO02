@@ -6,7 +6,7 @@ package simplifiedProjet;
 import java.util.Scanner;
 
 
-public class Test extends Preparation{
+public class Test implements Preparation{
 
 	public static void main(String[] args) {
 
@@ -24,37 +24,37 @@ public class Test extends Preparation{
 			if(choiceAH.equals("a")) {
 				System.out.println("which player? ex: p1 ");
 				String pName = in.nextLine();
-				pTurn2 = isExiste(pName,pTurn1, playerList);
+				pTurn2 = Preparation.isExiste(pName,pTurn1, playerList);
 				pTurn1.accuse(pTurn2);
 
-				System.out.println(pTurn2.getName()+" skill witch or show identity? [sk/id]");
-				String choiceWS = in.nextLine();
+				System.out.println(pTurn2.getName() + " skill witch or show identity? [sk/id]");
+				String choiceWS = in.nextLine();// scan the choise: skillWitch or show id
 
 				if(choiceWS.equals("sk")){//choose to use skill witch
-
 					System.out.println("Which card do you want to use?");
-					pTurn2.showCards();
+					pTurn2.showCards();//shows what cards do you have
 					System.out.println("entre 0 for the first card");
 					int cardNum = in.nextInt();//let player choose which card to use
-					pNextTurn = pTurn2.witch(cardNum);
+					pNextTurn = pTurn2.witch(cardNum);// use witch skill
 					if(pNextTurn == null){
-						//if(i)
+		
 						pNextTurn = playerList.get(++i);// null means take next turn
 						//System.out.println("did take next turn");
 						//System.out.println(pNextTurn.getName());
 					}else{
-						pNextTurn = isExiste(pNextTurn.getName(), null, playerList);//turn to the player chosen
+						pNextTurn = Preparation.isExiste(pNextTurn.getName(), null, playerList);//turn to the player chosen
 					}
 					
 				}else if(choiceWS.equals("id")){//choose to show identity
-
 					pTurn2.showIdentity();
-					if(pTurn2.getIdentity() == 1){// witch ,pTurn1 gains 2 points
-						pTurn1.raisePoints();
-						pTurn1.raisePoints();
+					if(pTurn2.getIdentity() == 1){// witch ,pTurn1 gains 1 points
+						pTurn1.raisePoints(1);
+						playerList.remove(Preparation.isExiste(pTurn2.getName(), null, playerList));//pTurn2 should left the game
+						
 					}else{
-						pTurn1.raisePoints();//villager raise 1 points;
+						pTurn1.raisePoints(0);//villager , gain no point;
 					}
+					pNextTurn = playerList.get(++i);
 
 				}
 
@@ -62,7 +62,7 @@ public class Test extends Preparation{
 			}else if(choiceAH.equals("h")) {
 				System.out.println("which player?");
 				String pName = in.nextLine();
-				pTurn2 = isExiste(pName,pTurn1, playerList);
+				pTurn2 = Preparation.isExiste(pName,pTurn1, playerList);
 				if(pTurn2!=null){
 					pTurn1.hunt(pTurn2);
 				}else{
@@ -75,6 +75,7 @@ public class Test extends Preparation{
 			//in.close();
 		}
 	}
+	
 
 
 	

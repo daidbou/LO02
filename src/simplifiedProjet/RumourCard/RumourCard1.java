@@ -2,7 +2,7 @@ package simplifiedProjet.RumourCard;
 
 
 import simplifiedProjet.Player;
-import simplifiedProjet.Test;
+//import simplifiedProjet.Test;
 
 
 public class RumourCard1 implements RumourCard {
@@ -10,7 +10,7 @@ public class RumourCard1 implements RumourCard {
 	String name = "Angry Mob";
 
 	@Override
-	public Player skillWitch() {
+	public Player skillWitch(String name) {
 
 		System.out.println("Take next turn");
 		return null;
@@ -18,7 +18,7 @@ public class RumourCard1 implements RumourCard {
 	}
 
 	@Override
-	public Player skillHunt() {
+	public Player skillHunt(String name) {
 		System.out.print(" Skill Hunt " + name);
 		return null;
 		
@@ -32,9 +32,10 @@ public class RumourCard1 implements RumourCard {
 
 	@Override
 	public String name() {
-
 		return name;
 	}
+
+	
 	
 
 }
