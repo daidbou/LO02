@@ -74,9 +74,20 @@ public class Test implements Preparation{
 				String pName = in.nextLine();
 				pTurn2 = Preparation.isExiste(pName,pTurn1, playerList);
 				if(pTurn2!=null){
-					pTurn1.hunt(pTurn2);
+					//pTurn1.hunt(pTurn2);
+					System.out.println("Which card do you want to use?");
+					pTurn1.showCards();//shows what cards do you have
+					System.out.println("entre 0 for the first card");
+					int cardNum = in.nextInt();//let player choose which card to use
+					pNextTurn = pTurn1.witch(cardNum);// use witch skill
+					if(pNextTurn == null){							
+						pNextTurn = playerList.get(++i);// null means take next turn	
+					}else{
+						pNextTurn = Preparation.isExiste(pNextTurn.getName(), playerList);//turn to the chosen player 
+						didChangedPlayer = 1;	
+					}
 				}else{
-					System.out.println("bug");
+					System.out.println("no such player");
 				}
 			}else{
 				System.out.println("noooooo");
