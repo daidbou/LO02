@@ -1,22 +1,25 @@
 package simplifiedProjet;
-//import java.util.List;
-//import java.util.ArrayList;
+import java.util.List;
+import java.util.ArrayList;
 //import java.util.Iterator;
 //import java.util.Random;
 import java.util.Scanner;
 
 
 public class Test implements Preparation{
-
+	
+	
 	public static void main(String[] args) {
 
-		int turns = 1;
+		List<Player> playerListOfTurn = playerList;		// its the players play in the turn, which means some of the players 
+														// would be deleted
+		
 		int i = 0;
 		int didChangedPlayer = 0; // 0 = didn't change , 1 = changed
 		Player pNextTurn  = new Player();
 		Player pTurn1 = new Player();// in every round each players has the same status, so we
 		Player pTurn2 = new Player();// just put then in pTurn1 and pTurn2
-		while(turns<3) {
+		while(ifTurnContinue(playerListOfTurn)) {
 			Scanner in = new Scanner(System.in);
 	
 			if(didChangedPlayer == 0){
@@ -26,8 +29,7 @@ public class Test implements Preparation{
 			}
 			
 			
-			
-			
+		
 			System.out.println(pTurn1.getName() + " accuse or hunt? [a/h]");
 			String choiceAH = in.nextLine();
 			if(choiceAH.equals("a")) {
@@ -96,6 +98,15 @@ public class Test implements Preparation{
 			//in.close();
 		}
 	}
+	public static boolean ifTurnContinue(List<Player> pExist){
+		for(Player p: pExist){
+			if(p.getPoint()>=5){
+				return false;
+			}
+		}
+		return true;
+
+    }
 	
 
 

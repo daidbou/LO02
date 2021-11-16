@@ -70,4 +70,7 @@ public class Player implements Preparation{
 			point++;
 		}
 	}
+	public int getPoint(){
+		return point;
+	}
 }
