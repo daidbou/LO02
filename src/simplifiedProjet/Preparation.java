@@ -104,16 +104,18 @@ public interface Preparation {
                 }
             }	
         }
-        System.out.println("no such player");
+        System.out.println("no such player, try again");
         return null;
     }
     
     public static Player isExiste(String pName,List<Player> playerList) {
     // sometimes we dont need to verify
         for(Player p:playerList) {
-            if(pName.equals(p.getName())) {
+            if(pName.equals(p.getName()) && p.ifIsOutOfTurn() == false) {
                 return p;
-            }	
+            }else if(p.ifIsOutOfTurn() == true){
+                System.out.println("he is already out of gamem try again");
+            }
         }
         System.out.println("no such player");
         return null;

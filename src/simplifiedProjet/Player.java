@@ -1,5 +1,5 @@
 package simplifiedProjet;
-import java.util.Scanner;
+//import java.util.Scanner;
 
 import simplifiedProjet.RumourCard.RumourCard;
 
@@ -8,8 +8,11 @@ import java.util.List;
 public class Player implements Preparation{
 	private String name;
 	private int identity;//1 = witch, 0 = villager
+	private boolean identityReavealed ;
 	private int point;
 	public List<RumourCard> rumourCardListPlayer;
+	public List<RumourCard> disCardCardListPlayer ;
+	private boolean isOutOfTurn;
 
 	public Player(){};
 
@@ -17,6 +20,9 @@ public class Player implements Preparation{
 		this.name = name;
 		this.identity = identity;
 		this. rumourCardListPlayer= rumourCardListP;
+		this.identityReavealed = false;
+		this.isOutOfTurn = false;
+
 	}
 	
 	public void accuse(Player player) {
@@ -24,14 +30,9 @@ public class Player implements Preparation{
 		System.out.println(this.name+" accuse "+player.name);
 	}
 	
-	public void hunt(Player player) {
-		try (Scanner in = new Scanner(System.in)) {
-			System.out.println("Which card do you want to use?");
-			int i = in.nextInt();
-			System.out.print(this.name);
-			rumourCardListPlayer.get(i).skillHunt(name);
-		}
-		System.out.println(player.name);
+	public Player hunt(int cardNum) {
+		Player pNextTurn = rumourCardListPlayer.get(cardNum).skillWitch(name);// name here is this player's name
+		return pNextTurn;
 	}
 	
 	public Player witch(int cardNum) {
@@ -70,7 +71,32 @@ public class Player implements Preparation{
 			point++;
 		}
 	}
+	
 	public int getPoint(){
 		return point;
 	}
+
+	public void revealIdentity(){
+		this.identityReavealed = true;
+	}
+
+	public boolean ifIdentityReavealed(){ // getter of the identityReavealed
+		if (this.identityReavealed == true){
+			return true;
+		}else{
+			return false;
+		}
+
+	}
+
+	public void setIsOutOfTurn(boolean t){
+		isOutOfTurn = t;
+	}
+	public boolean ifIsOutOfTurn(){
+		return isOutOfTurn;
+	}
+	public int showPoint(){
+		return point;
+	}
+	
 }
