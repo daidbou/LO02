@@ -26,6 +26,7 @@ public class PetNewt implements RumourCard{
         StringBuffer sb = new StringBuffer();
         sb.append("Witch : Take newt turn");
         sb.append("Hunt : Take a revealed Rumour card from any other player into your hands");
+        sb.append("------------------------------------------------------------------------");
         sb.append("Choose next player");
 
         return sb.toString();
