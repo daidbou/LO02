@@ -2,8 +2,8 @@ package simplifiedProjet.RumourCard;
 
 import simplifiedProjet.Player;
 
-public class RumourCard8 implements RumourCard{
-    String name ="Pauldron";
+public class Cauldron implements RumourCard{
+    String name ="Cauldron";
     @Override
     public Player skillWitch(String name) {
         // TODO Auto-generated method stub
@@ -13,13 +13,18 @@ public class RumourCard8 implements RumourCard{
     @Override
     public Player skillHunt(String name) {
         // TODO Auto-generated method stub
+        System.out.println("Take next turn");
         return null;
     }
 
     @Override
-    public void ToString() {
+    public String ToString() {
         // TODO Auto-generated method stub
-        
+        StringBuffer sb = new StringBuffer();
+        sb.append("Witch : ");
+        sb.append("Hunt : ");
+
+        return sb.toString();
     }
     @Override
 	public String name() {

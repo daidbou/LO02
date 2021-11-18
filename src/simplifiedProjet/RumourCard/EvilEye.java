@@ -17,9 +17,13 @@ public class EvilEye implements RumourCard{
     }
 
     @Override
-    public void ToString() {
+    public String ToString() {
         // TODO Auto-generated method stub
-        
+        StringBuffer sb = new StringBuffer();
+        sb.append("Witch : ");
+        sb.append("Hunt : ");
+
+        return sb.toString();
     }
 
     @Override

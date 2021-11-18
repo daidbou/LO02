@@ -11,7 +11,7 @@ public class AngryMob implements RumourCard {
 
 	@Override
 	public Player skillWitch(String name) {
-
+		
 		System.out.println("Take next turn");
 		return null;
 		
@@ -24,11 +24,15 @@ public class AngryMob implements RumourCard {
 		
 	}
 
-	@Override
-	public void ToString() {
-		
-		System.out.print(name + " ability");
-	}
+    @Override
+    public String ToString() {
+        // TODO Auto-generated method stub
+        StringBuffer sb = new StringBuffer();
+        sb.append("Witch : ");
+        sb.append("Hunt : ");
+
+        return sb.toString();
+    }
 
 	@Override
 	public String name() {

@@ -2,11 +2,14 @@ package simplifiedProjet.RumourCard;
 
 import simplifiedProjet.Player;
 
-public class RumourCard10 implements RumourCard{
-    String name ="Tood";
+public class Toad implements RumourCard{
+    
+    String name ="Toad";
+    
     @Override
     public Player skillWitch(String name) {
         // TODO Auto-generated method stub
+        System.out.println("Take next turn");
         return null;
     }
 
@@ -17,9 +20,13 @@ public class RumourCard10 implements RumourCard{
     }
 
     @Override
-    public void ToString() {
+    public String ToString() {
         // TODO Auto-generated method stub
-        
+        StringBuffer sb = new StringBuffer();
+        sb.append("Witch : ");
+        sb.append("Hunt : ");
+
+        return sb.toString();
     }
     @Override
 	public String name() {

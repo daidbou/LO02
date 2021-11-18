@@ -2,7 +2,7 @@ package simplifiedProjet.RumourCard;
 
 import simplifiedProjet.Player;
 
-public class RumourCard3 implements RumourCard{
+public class PointedHat implements RumourCard{
 	String name = "Pointed Hat";
 	@Override
 	public Player skillWitch(String name) {
@@ -17,11 +17,15 @@ public class RumourCard3 implements RumourCard{
 		return null;
 	}
 
-	@Override
-	public void ToString() {
-		
-		System.out.print("  ");
-	}
+    @Override
+    public String ToString() {
+        // TODO Auto-generated method stub
+        StringBuffer sb = new StringBuffer();
+        sb.append("Witch : ");
+        sb.append("Hunt : ");
+
+        return sb.toString();
+    }
 
 	@Override
 	public String name() {

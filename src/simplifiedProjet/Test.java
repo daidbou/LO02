@@ -11,10 +11,10 @@ public class Test implements Preparation{
 	// a little hypothese for the behave of robot
 	// because of that all the choice we have done is based on the strings/chars that we input
 	// like sk, id...
-	// so the bahave/choice of the robot should also be an inpot (randomly)
+	// so the bahave/choice of the robot should also be an input (randomly)
 	// i think that the random input could depend on the time
 	// and then we code the time into strings
-	// ex: 14:11 -> take the last digit of the minutes 1 -> if it's odd then it refers to use skill witch
+	// ex: 14:11 -> take the last digit of the minutes  it's odd then it refers t1 -> ifo use skill witch
 	// or it's even then it refers to show identity
 
 	public static void main(String[] args) {

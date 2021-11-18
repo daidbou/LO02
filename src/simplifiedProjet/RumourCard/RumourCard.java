@@ -1,8 +1,6 @@
 package simplifiedProjet.RumourCard;
 
 import simplifiedProjet.Player;
-
-
 import java.util.Scanner;
 
 public interface RumourCard{
@@ -12,6 +10,6 @@ public interface RumourCard{
 	Scanner in = new Scanner(System.in);
 	public Player skillWitch(String name);
 	public Player skillHunt(String name); 
-	public void ToString();//shows its ability
+	public String ToString();//shows its ability
 	public String name();
 }
