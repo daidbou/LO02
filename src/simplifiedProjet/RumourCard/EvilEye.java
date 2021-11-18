@@ -2,7 +2,7 @@ package simplifiedProjet.RumourCard;
 
 import simplifiedProjet.Player;
 
-public class RumourCard9 implements RumourCard{
+public class EvilEye implements RumourCard{
     String name = "Evil Eye";
     @Override
     public Player skillWitch(String name) {

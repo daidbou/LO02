@@ -5,7 +5,7 @@ import simplifiedProjet.Player;
 //import simplifiedProjet.Test;
 
 
-public class RumourCard1 implements RumourCard {
+public class AngryMob implements RumourCard {
 
 	int flag = 1;
 	String name = "Angry Mob";
