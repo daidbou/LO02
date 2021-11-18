@@ -3,6 +3,7 @@ package simplifiedProjet.RumourCard;
 import simplifiedProjet.Player;
 
 public class RumourCard3 implements RumourCard{
+	int flag = 1;
 	String name = "Pointed Hat";
 	@Override
 	public Player skillWitch(String name) {

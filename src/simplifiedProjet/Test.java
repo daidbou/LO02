@@ -1,9 +1,11 @@
 package simplifiedProjet;
+//import java.util.Collections;
 import java.util.List;
 //import java.util.ArrayList;
 //import java.util.Iterator;
 //import java.util.Random;
 import java.util.Scanner;
+//import simplifiedProjet.SetUp;
 
 
 public class Test implements Preparation{
@@ -19,6 +21,10 @@ public class Test implements Preparation{
 
 	public static void main(String[] args) {
 
+		List<Player> playerList = SetUp.setUpPlayer();
+		for(Player p: playerList){
+			p.showCards();
+		}
 		
 		int i = 0;
 		int didChangedPlayer = 0; // 0 = didn't change , 1 = changed
