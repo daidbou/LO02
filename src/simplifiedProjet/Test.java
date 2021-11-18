@@ -21,6 +21,7 @@ public class Test implements Preparation{
 
 	public static void main(String[] args) {
 
+	
 		List<Player> playerList = SetUp.setUpPlayer();
 		for(Player p: playerList){
 			p.showCards();
