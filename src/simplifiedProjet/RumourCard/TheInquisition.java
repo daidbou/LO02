@@ -3,6 +3,8 @@ package simplifiedProjet.RumourCard;
 import simplifiedProjet.Player;
 
 public class TheInquisition implements RumourCard {
+
+	int flag = 2;
 	
 	String name = "The Inquisition";
 	

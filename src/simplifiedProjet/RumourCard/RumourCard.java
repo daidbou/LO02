@@ -1,9 +1,9 @@
 package simplifiedProjet.RumourCard;
-
+//import simplifiedProjet.SetUp;
 import simplifiedProjet.Player;
 import java.util.Scanner;
 
-public interface RumourCard{
+public interface RumourCard {
 	
 	int status = 0;// maybe for discard card
 	String name = "";

@@ -4,15 +4,17 @@ package simplifiedProjet;
 import simplifiedProjet.RumourCard.RumourCard;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Player implements Preparation{
 	private String name;
 	private int identity;//1 = witch, 0 = villager
 	private boolean identityReavealed ;
 	private int point;
-	public List<RumourCard> rumourCardListPlayer;
+	private List<RumourCard> rumourCardListPlayer;
 	public List<RumourCard> disCardCardListPlayer ;
 	private boolean isOutOfTurn;
+	Scanner sc = new Scanner(System.in);
 
 	public Player(){};
 
@@ -25,6 +27,10 @@ public class Player implements Preparation{
 
 	}
 	
+	public Player(String name) {
+		this.name = name;
+	}
+
 	public void accuse(Player player) {
 		
 		System.out.println(this.name+" accuse "+player.name);
@@ -99,4 +105,15 @@ public class Player implements Preparation{
 		return point;
 	}
 	
+	public void setRumourCardListPlayer(List<RumourCard> l){
+		rumourCardListPlayer = l;
+		System.out.println("what identity do you want to be? (1 for witch, 0 for villager)");
+		int id = sc.nextInt();
+		identity = id;
+
+	}
+	public List<RumourCard> getRumourCardListPlayer(){
+		
+		return rumourCardListPlayer;
+	}
 }

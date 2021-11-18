@@ -1,5 +1,6 @@
 package simplifiedProjet;
 import java.util.ArrayList;
+//import java.util.Collection;
 import java.util.List;
 
 import simplifiedProjet.RumourCard.RumourCard;
@@ -53,6 +54,7 @@ public interface Preparation {
 	//static List<RumourCard> rumourCardListP1 = rumourCardList.subList(0, 2);//it's players own rumourcard list
 	//static List<RumourCard> rumourCardListP2 = rumourCardList.subList(2, 4);// needs to be controlled, it's not random yet
 
+
     // /!\ 18/11/2021 don't forget to name the card with the correct name
 
     public static List<RumourCard> rumourCardListP1 = new ArrayList<RumourCard>(){{
@@ -92,6 +94,7 @@ public interface Preparation {
         add(p3);
         add(p4);
 	}};
+
 		
     public static Player isExiste(String pName, Player pTurn1,List<Player> playerList) {
         // pName is the target player

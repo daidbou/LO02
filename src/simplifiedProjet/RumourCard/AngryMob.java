@@ -7,7 +7,14 @@ import simplifiedProjet.Player;
 
 public class AngryMob implements RumourCard {
 
+	int flag = 1;
 	String name = "Angry Mob";
+	public RumourCard1(int flag) {
+		flag = 1;
+	}
+
+	public RumourCard1() {
+	}
 
 	@Override
 	public Player skillWitch(String name) {
