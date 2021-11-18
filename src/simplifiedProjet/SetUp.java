@@ -69,12 +69,9 @@ public class SetUp implements Preparation{
             List<RumourCard> rumourCardListPlayer = rumourCardDupl.subList((i)*numCardsPerPlayer, (i+1)*numCardsPerPlayer);
 
             playerListAll.get(i).setRumourCardListPlayer(rumourCardListPlayer);//the same time define theirs identity
-            //playerListAll.get(i).showCards();
+            
             playerList.add(playerListAll.get(i));
-            //playerList.get(i).showCards();
-            // for (int j = 0; j < numCardsPerPlayer; j++){
-            //     rumourCardDupl.remove(0);
-            // }
+            
             playerList.get(i).showCards();
         }
         
