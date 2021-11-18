@@ -56,7 +56,7 @@ public class SetUp implements Preparation{
     public static List<RumourCard> rumourCardDupl = rumourCardList; 
     
     public static List<Player> setUpPlayer(){
-        List<Player> playerList2 = new ArrayList<Player>();
+        //List<Player> playerList2 = new ArrayList<Player>();
         Scanner sc = new Scanner(System.in);
         System.out.println("How many players? (3-6)");
         int numPlayer = sc.nextInt();
@@ -66,21 +66,21 @@ public class SetUp implements Preparation{
 
         //Iterator<Player> it = playerListAll.iterator(); 
         for(int i = 0; i<numPlayer ;i++){
-            List<RumourCard> rumourCardListPlayer = rumourCardDupl.subList(0, numCardsPerPlayer);
+            List<RumourCard> rumourCardListPlayer = rumourCardDupl.subList((i)*numCardsPerPlayer, (i+1)*numCardsPerPlayer);
+
             playerListAll.get(i).setRumourCardListPlayer(rumourCardListPlayer);//the same time define theirs identity
             //playerListAll.get(i).showCards();
-            playerList2.add(playerListAll.get(i));
-            playerList2.get(i).showCards();
-            for (int j = 0; j < numCardsPerPlayer; j++){
-                rumourCardDupl.remove(0);
-            }
+            playerList.add(playerListAll.get(i));
+            //playerList.get(i).showCards();
+            // for (int j = 0; j < numCardsPerPlayer; j++){
+            //     rumourCardDupl.remove(0);
+            // }
+            playerList.get(i).showCards();
         }
-        //above succeed
         
-        playerListAll.get(2).showCards();
-        playerList2.get(2).showCards();
+        
 
-        return playerList2;
+        return playerList;
             
         
     }

@@ -50,12 +50,7 @@ public interface Preparation {
 
 	}};//add 12 rumour cards to a list
 			
-	
-	//static List<RumourCard> rumourCardListP1 = rumourCardList.subList(0, 2);//it's players own rumourcard list
-	//static List<RumourCard> rumourCardListP2 = rumourCardList.subList(2, 4);// needs to be controlled, it's not random yet
 
-
-    // /!\ 18/11/2021 don't forget to name the card with the correct name
 
 
     public static Player isExiste(String pName, Player pTurn1,List<Player> playerList) {
