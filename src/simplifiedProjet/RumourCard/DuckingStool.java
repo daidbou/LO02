@@ -23,7 +23,6 @@ public class DuckingStool implements RumourCard {
 
     @Override
     public String ToString() {
-        // TODO Auto-generated method stub
         StringBuffer sb = new StringBuffer();
         
         sb.append("Witch :\n");

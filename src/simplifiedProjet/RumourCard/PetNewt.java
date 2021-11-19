@@ -22,7 +22,6 @@ public class PetNewt implements RumourCard{
 
     @Override
     public String ToString() {
-        // TODO Auto-generated method stub
         StringBuffer sb = new StringBuffer();
         sb.append("Witch :\n");
         sb.append("Take next turn\n\n");
