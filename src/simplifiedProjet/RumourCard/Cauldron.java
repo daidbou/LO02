@@ -21,9 +21,16 @@ public class Cauldron implements RumourCard{
     public String ToString() {
         // TODO Auto-generated method stub
         StringBuffer sb = new StringBuffer();
-        sb.append("Witch : ");
-        sb.append("Take next turn");
-        sb.append("Hunt : ");
+        
+        sb.append("Witch : \n");
+        sb.append("The player who accused you discards a random card from their hand\n");
+        sb.append("Take next turn\n\n");
+        
+        sb.append("Hunt :\n");
+        sb.append("Reveal your identity\n");
+        sb.append("Witch: Player to your left takes newt turn\n");
+        sb.append("Villager: Choose next player");
+
 
         return sb.toString();
     }

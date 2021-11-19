@@ -23,9 +23,16 @@ public class PointedHat implements RumourCard{
     public String ToString() {
         // TODO Auto-generated method stub
         StringBuffer sb = new StringBuffer();
-        sb.append("Witch : ");
-		sb.append("Take next turn");
-        sb.append("Hunt : ");
+        
+		sb.append("Witch :\n ");
+		sb.append("Only playable if you have a revealed Rumour card\n");
+		sb.append("Take one of your own revealed Rumour cards into your hand\n");
+		sb.append("Take next turn\n\n");
+
+        sb.append("Hunt : \n");
+		sb.append("Only playable if you have a revealed Rumour card\n");
+		sb.append("Take one of your own revealed Rumour cards into your hand\n");
+		sb.append("Choose next player");
 
         return sb.toString();
     }

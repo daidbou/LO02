@@ -21,9 +21,14 @@ public class HookedNose implements RumourCard{
     public String ToString() {
         // TODO Auto-generated method stub
         StringBuffer sb = new StringBuffer();
-        sb.append("Witch : ");
-		sb.append("Take next turn");
-        sb.append("Hunt : ");
+        
+		sb.append("Witch : \n");
+		sb.append("Take one card from the hand of the player who accused you\n");
+		sb.append("Take next turn\n\n");
+
+        sb.append("Hunt : \n");
+		sb.append("Choose next player\n");
+		sb.append("Before their turn, take a random card from their hand and add it to your hand");
 
         return sb.toString();
     }

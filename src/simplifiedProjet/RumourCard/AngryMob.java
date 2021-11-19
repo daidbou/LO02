@@ -36,13 +36,12 @@ public class AngryMob implements RumourCard {
         // TODO Auto-generated method stub
         StringBuffer sb = new StringBuffer();
 
-        sb.append("Witch : Take next turn\n\n");
-		sb.append("-------------------------------------------------------\n");
-		sb.append("-------------------------------------------------------\n");
-        sb.append("Hunt : Reveal another player's identity\n");
-		sb.append("(Only playable if you have been revealed as a Villager)\n");
-		sb.append("-------------------------------------------------------\n");
+        sb.append("Witch :\n"); 
+		sb.append("Take next turn\n\n");
 
+        sb.append("Hunt :\n");
+		sb.append("(Only playable if you have been revealed as a Villager)\n");
+		sb.append("Reveal another player's identity\n");
 		sb.append("Witch: you gain 2pts.You take next turn\n");
 		sb.append("Villager: you lose 2pts. They take next turn");
 

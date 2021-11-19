@@ -25,8 +25,15 @@ public class DuckingStool implements RumourCard {
     public String ToString() {
         // TODO Auto-generated method stub
         StringBuffer sb = new StringBuffer();
-        sb.append("Witch : Take next turn");
-        sb.append("Hunt : ");
+        
+        sb.append("Witch :\n");
+        sb.append("Take next turn\n\n");
+        
+        sb.append("Hunt : \n");
+        sb.append("Choose a player. They must revealed their identity or discard a card from their hand\n");
+        sb.append("Witch: You gain 1pt. You take newt turn\n");
+        sb.append("Villager: You lose 1pt.They take next turn\n");
+        sb.append("If they discard: They take next turn");
 
         return sb.toString();
     }

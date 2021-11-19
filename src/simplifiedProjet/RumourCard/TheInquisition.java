@@ -25,9 +25,15 @@ public class TheInquisition implements RumourCard {
     public String ToString() {
         // TODO Auto-generated method stub
         StringBuffer sb = new StringBuffer();
-        sb.append("Witch : ");
-		sb.append("Take next turn");
-        sb.append("Hunt : ");
+        
+		sb.append("Witch : \n");
+		sb.append("Discard a card from your hand\n");
+		sb.append("Take next turn\n\n");
+
+        sb.append("Hunt : \n");
+		sb.append("Only playable if you have been revealed as a Villager\n");
+		sb.append("Choose next player\n");
+		sb.append("Before their turn, secretly look at their identity");
 
         return sb.toString();
     }

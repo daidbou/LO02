@@ -20,8 +20,14 @@ public class EvilEye implements RumourCard{
     public String ToString() {
         // TODO Auto-generated method stub
         StringBuffer sb = new StringBuffer();
-        sb.append("Witch : ");
-        sb.append("Hunt : ");
+        
+        sb.append("Witch : \n");
+        sb.append("Choose next player");
+        sb.append("On their turn they must accuse a player other than you, if possible\n\n");
+
+        sb.append("Hunt : \n");
+        sb.append("Choose next player\n");
+        sb.append("On their turn they must accuse a player other than you, if possible");
 
         return sb.toString();
     }

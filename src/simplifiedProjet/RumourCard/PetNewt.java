@@ -24,9 +24,11 @@ public class PetNewt implements RumourCard{
     public String ToString() {
         // TODO Auto-generated method stub
         StringBuffer sb = new StringBuffer();
-        sb.append("Witch : Take newt turn");
-        sb.append("Hunt : Take a revealed Rumour card from any other player into your hands");
-        sb.append("------------------------------------------------------------------------");
+        sb.append("Witch :\n");
+        sb.append("Take next turn\n\n");
+
+        sb.append("Hunt : \n");
+        sb.append("Take a revealed Rumour card from any other player into your hands\n");
         sb.append("Choose next player");
 
         return sb.toString();

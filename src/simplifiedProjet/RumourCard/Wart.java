@@ -23,8 +23,12 @@ public class Wart implements RumourCard{
     public String ToString() {
         // TODO Auto-generated method stub
         StringBuffer sb = new StringBuffer();
-        sb.append("Witch : Take next turn");
-        sb.append("Hunt : ");
+        
+        sb.append("Witch : \n");
+        sb.append("Take next turn\n\n");
+        
+        sb.append("Hunt : \n");
+        sb.append("Choose next player");
 
         return sb.toString();
     }
