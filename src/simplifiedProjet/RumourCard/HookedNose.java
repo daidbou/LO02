@@ -22,6 +22,7 @@ public class HookedNose implements RumourCard{
         // TODO Auto-generated method stub
         StringBuffer sb = new StringBuffer();
         sb.append("Witch : ");
+		sb.append("Take next turn");
         sb.append("Hunt : ");
 
         return sb.toString();

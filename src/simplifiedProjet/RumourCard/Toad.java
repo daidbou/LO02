@@ -23,7 +23,7 @@ public class Toad implements RumourCard{
     public String ToString() {
         // TODO Auto-generated method stub
         StringBuffer sb = new StringBuffer();
-        sb.append("Witch : ");
+        sb.append("Witch : Take next turn");
         sb.append("Hunt : ");
 
         return sb.toString();
