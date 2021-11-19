@@ -23,8 +23,10 @@ public class BlackCat implements RumourCard{
     public String ToString() {
         // TODO Auto-generated method stub
         StringBuffer sb = new StringBuffer();
-        sb.append("Witch : Take next turn");
-        sb.append("Hunt : ");
+        sb.append("Witch : Take next turn\n");
+        sb.append("-------------------------------------------------------\n");
+        sb.append("-------------------------------------------------------\n");
+        sb.append("Hunt : Add one discard ");
 
         return sb.toString();
     }
