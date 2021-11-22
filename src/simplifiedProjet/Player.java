@@ -23,7 +23,7 @@ public class Player implements Preparation{
 	public Player(String name, int identity, List<RumourCard> rumourCardListP) {
 		this.name = name;
 		this.identity = identity;
-		this. rumourCardListPlayer= rumourCardListP;
+		this.rumourCardListPlayer= rumourCardListP;
 		this.identityReavealed = false;
 		this.isOutOfTurn = false;
 		this.virtual = 0;
@@ -41,22 +41,25 @@ public class Player implements Preparation{
 	 * @param playerList
 	 * @return
 	 */
-	public Player accuse(List<Player> playerList) { // 改好了
+	public Player accuse(List<Player> playerList) { 
 		System.out.println(name+" is a real");
 		System.out.println("which player? ex: p1 b1");
+		while(true){
 		Scanner sc = new Scanner(System.in);
 		String pName = sc.nextLine();
 		Player pTurn2 = Preparation.isExiste(pName,name, playerList);
 		if(pTurn2 == null){
 			System.out.println("no such player, try again");
-			return null;
+			continue;
 		}else if(pTurn2.ifIdentityReavealed() == false){
 			System.out.println(name+" accuse "+pTurn2.getName());
 			return pTurn2;
 		}else{
 			System.out.println(pTurn2.getName() + " has already revealed his identity, try again");
-			return null;
+			continue;
 		}
+		}
+		
 	}
 	
 	public Player hunt(List<Player> playerList) {
@@ -160,6 +163,12 @@ public class Player implements Preparation{
 	 */
 	public boolean ifIdentityReavealed(){
 		return identityReavealed;
+	}
+	
+	public void initializePlayer(){
+		identityReavealed = false;
+		isOutOfTurn = false;
+			
 	}
 	/**
 	 * 

@@ -8,11 +8,12 @@ public class Engine implements Preparation {
     public static void main(String[] args){
         
 
-        List<Player> playerListInit = new ArrayList<Player>();
+        List<Player> playerListInit = SetUp.initializeGame();
+
 
         GameStart:while(ifGameContinue(playerListInit)){
-             System.out.println("================================ new turn ======================================= ");
-            List<Player> playerList = SetUp.setUpPlayer();
+            System.out.println("================================ new turn ======================================= ");
+            List<Player> playerList = SetUp.setUpPlayer(playerListInit);
            
             
             Player pTurn1 = new Player();
@@ -61,8 +62,20 @@ public class Engine implements Preparation {
 
                 if(!ifTurnContinue(playerList)){//this turn ends
                     showStatus(playerList);
+                    playerList = playerListInit;
                 }
                 
+            }
+            if(!ifGameContinue(playerListInit)){
+                int max = playerListInit.get(0).getPoint();
+                String str = playerListInit.get(0).getName();
+                for(Player p: playerListInit){
+                    if (p.getPoint()>max){
+                        max = p.getPoint();
+                        str = p.getName();
+                    }
+                }
+                System.out.println(str+"win!");
             }
         }
     }
@@ -99,8 +112,6 @@ public class Engine implements Preparation {
                 return false;
             }
         }
-        
-       
     }
 
     public static boolean doChoiceAH_Real(Player pTurn1) {
@@ -159,21 +170,24 @@ public class Engine implements Preparation {
 
     public static boolean ifGameContinue(List<Player> pAll) {
         for (Player p : pAll) {
-            if (p.getPoint() >= 5) {
+            if (p.getPoint() >= 3) {
                 return false;
             }
         }
         return true;
     }
 
-    public static boolean ifTurnContinue(List<Player> pAll) {
-        int i = pAll.size();// how many players are still playing
+    public static boolean ifTurnContinue(List<Player> playerList) {
+        int i = playerList.size();// how many players are still playing
+        System.out.println("all "+i+"players");
         // System.out.println("size"+pAll.size());
-        for (Player p : pAll) {
+        for (Player p : playerList) {
             if (p.ifIdentityReavealed() == true) {
                 i--; // count how many players didn't revealed their identity
+
             }
         }
+        System.out.println("there are still "+i+"players ");
         if (i == 1) {
             return false; // if there is only one , the end this turn
         } else {

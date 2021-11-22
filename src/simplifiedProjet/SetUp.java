@@ -71,7 +71,7 @@ public class SetUp implements Preparation{
     public static final List<Player> allPlayerList = new ArrayList<>();
     public static final List<RumourCard> rumourCardDupl = rumourCardList; 
     
-    public static List<Player> setUpPlayer(){
+    public static List<Player> initializeGame(){
         Scanner sc = new Scanner(System.in);
         System.out.println("How many players(including the bots)? (3-6)");
         int numberOfPlayer = sc.nextInt();
@@ -87,27 +87,44 @@ public class SetUp implements Preparation{
 
         int numReal = numberOfPlayer-numberOfBot;
         System.out.println("this game includes "+numberOfBot+" bots and "+numReal+" players");
+        
+        int i = 0;
+        for(i = 0 ; i<numReal ;i++){ //  add real players
+            allPlayerList.add(irlPlayerList.get(i));
+        }
+        for(int j = 0 ; j<numberOfBot ;j++,i++){ // add bots
+            allPlayerList.add(botPlayerList.get(j));
+        }
+        
+        return allPlayerList;
+    }
 
+
+    public static List<Player> setUpPlayer(List<Player> playerListInit){
+       
+        int numberOfPlayer = playerListInit.size();
+        int numberOfBot = 0;
+        int numberOfCardsPerPlayer = (int)12/numberOfPlayer;
+        for(Player p:playerListInit){
+            if(p.isVirtual() == 1){
+                numberOfBot++;
+            }
+        } 
+        
+        int numReal = numberOfPlayer - numberOfBot;
+        for(Player p: playerListInit){
+            p.initializePlayer();
+        }
         int i = 0;
         for(i = 0 ; i<numReal ;i++){ // set up real players
             List<RumourCard> rumourCardListReal = rumourCardDupl.subList((i)*numberOfCardsPerPlayer, (i+1)*numberOfCardsPerPlayer);
-
             irlPlayerList.get(i).setRumourCardListPlayer(rumourCardListReal);//the same time define theirs identity
-            
-            allPlayerList.add(irlPlayerList.get(i));
-            
-            allPlayerList.get(i).showCards();
         }
         
         
-        for(int j = 0 ; j<numberOfBot ;j++,i++){ // set up bots
+        for(int j = i ; j<numberOfBot ;j++,i++){ // set up bots
             List<RumourCard> rumourCardListBot = rumourCardDupl.subList((i)*numberOfCardsPerPlayer, (i+1)*numberOfCardsPerPlayer);
-
             botPlayerList.get(j).setRumourCardListPlayer(rumourCardListBot);//the same time define theirs identity
-            
-            allPlayerList.add(botPlayerList.get(j));
-            
-            allPlayerList.get(i).showCards();
         }
         //Collections.shuffle(playerList);
         return allPlayerList;      
