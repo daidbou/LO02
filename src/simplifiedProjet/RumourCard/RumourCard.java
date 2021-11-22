@@ -1,6 +1,7 @@
 package simplifiedProjet.RumourCard;
 //import simplifiedProjet.SetUp;
 import simplifiedProjet.Player;
+import simplifiedProjet.Engine;
 
 import java.util.List;
 import java.util.Scanner;

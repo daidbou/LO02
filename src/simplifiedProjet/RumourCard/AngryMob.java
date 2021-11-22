@@ -57,20 +57,23 @@ public class AngryMob implements RumourCard {
 
 	@Override
 	public Player skillWitchBot(String name, List<Player> playerList) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Take next turn");
+		Player pNextTurn = Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
+		return pNextTurn;
 	}
 
 	@Override
 	public Player skillHunt(String name, List<Player> playerList) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Take next turn");
+		Player pNextTurn = Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
+		return pNextTurn;
 	}
 
 	@Override
 	public Player skillHuntBot(String name2, List<Player> playerList) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Take next turn");
+		Player pNextTurn = Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
+		return pNextTurn;
 	}
 
 	

@@ -154,12 +154,12 @@ public class Engine implements Preparation {
 			}
 		}
         System.out.println("index = "+index);
+        if(index == playerList.size()-1){
+            index = 0;              //problem
+        }
 		Player ppNextTurn = playerList.get(++index);
 		while(ppNextTurn.ifIsOutOfTurn()){
-			ppNextTurn = playerList.get(++index);
-            if(ppNextTurn == null){
-                ppNextTurn = playerList.get(0);
-            }
+	
 			ppNextTurn = Preparation.isExiste(ppNextTurn.getName(), p.getName(),playerList);
 		}
 		return ppNextTurn;
