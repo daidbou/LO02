@@ -35,7 +35,7 @@ public interface RumourCard {
 	
 	/**
 	 * Use the Hunt! ability
-	 * @param name
+	 * @param name is pTurn1's name, the player who use the huntSkill
 	 * 		
 	 * @return
 	 */
@@ -52,7 +52,7 @@ public interface RumourCard {
 	public String ToString();
 	
 	/**
-	 * TODO
+	 * return this cards name
 	 * @return
 	 */
 	public String name();

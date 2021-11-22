@@ -55,4 +55,5 @@ public class Cauldron implements RumourCard{
 	public Player skillHuntBot(String name2, List<Player> playerList) {
 		System.out.println("Take next turn");
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
-	}}
+	}
+}

@@ -34,6 +34,13 @@ public class Player implements Preparation{
 		this.virtual = 0;
 	}
 
+	/**
+	 * for a real player to accuse someone, we cannot accuse someon's
+	 * identity is already revealed, or someone is already out of turn
+	 * 
+	 * @param playerList
+	 * @return
+	 */
 	public Player accuse(List<Player> playerList) { // 改好了
 		System.out.println(name+" is a real");
 		System.out.println("which player? ex: p1 b1");
@@ -62,7 +69,7 @@ public class Player implements Preparation{
 		return pNextTurn ;
 	}
 	/**
-	 * this.player accuse 
+	 * 
 	 * @param pTurn1 is the player who accused you
 	 * 		
 	 * @return next player of pTurn1
@@ -116,7 +123,7 @@ public class Player implements Preparation{
 	
 	/**
 	 * Get the identity (witch or villager) of the player
-	 * @return
+	 * @return a int, witch 1 refers to 
 	 */
 	public int getIdentity(){
 		return identity;
@@ -124,7 +131,7 @@ public class Player implements Preparation{
 
 	/**
 	 * Raise the score of the player
-	 * @param num
+	 * @param num shows how many to raise
 	 */
 	public void raisePoints(int num){
 		for(int i = 0; i < num; i++){
@@ -134,13 +141,13 @@ public class Player implements Preparation{
 	
 	/**
 	 * Get the total of points of a the player
-	 * @return
+	 * @return point
 	 */
 	public int getPoint(){
 		return point;
 	}
 
-	/**
+	/** player reveals it's identity
 	 *
 	 */
 	public void revealIdentity(){
@@ -154,11 +161,17 @@ public class Player implements Preparation{
 	public boolean ifIdentityReavealed(){
 		return identityReavealed;
 	}
-
+	/**
+	 * 
+	 * @param t if it's out of turn(identity revealed as a witch), input true
+	 */
 	public void setIsOutOfTurn(boolean t){
 		isOutOfTurn = t;
 	}
-
+	/**
+ 	 *  getter of isOutOfTurn
+ 	 * @return isOutOfTurn
+ 	 */
 	public boolean ifIsOutOfTurn(){
 		return isOutOfTurn;
 	}
@@ -172,7 +185,7 @@ public class Player implements Preparation{
 	}
 	
 	/**
-	 * Set the identity of IRL player
+	 * Set the identity of real players, and the same time set the rumour card list of the player
 	 * @param l
 	 */
 	public void setRumourCardListPlayer(List<RumourCard> l){

@@ -59,6 +59,6 @@ public class PointedHat implements RumourCard{
 		System.out.println("Take next turn");
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
 	}
-	}
 	
-
+	
+}

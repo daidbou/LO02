@@ -64,10 +64,13 @@ public class Bot extends Player{
 	}
 
 	/**
-	 * pTurn1 accuse you
+	 * when pTurn1 accuse you, then bot use skillWitch.
+	 * the card bot use is randomly chosen bt Math.random()
+	 * 
 	 * @param pTurn1 is the player who accused you
 	 * 		
-	 * @return next player of pTurn1
+	 * @return pNextTurn 
+	 * 	the next player of pTurn1
 	 */
 	public Player witch(Player pTurn1,List<Player> playerList){
 		int cardNumBot = (int)(Math.random()*getRumourCardListPlayer().size()-1);	
@@ -76,7 +79,11 @@ public class Bot extends Player{
 		rumourCardListPlayer.remove(cardNumBot);
 		return pNextTurn;
 	}
-
+	/**
+	 * bot use skill hunt
+	 * 
+	 * @param 
+	 */
 	public Player hunt(List<Player> playerList){
 		int cardNumBot = (int)(Math.random()*getRumourCardListPlayer().size()-1);
 		
