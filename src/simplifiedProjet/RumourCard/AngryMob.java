@@ -1,8 +1,13 @@
 package simplifiedProjet.RumourCard;
 
 
+import java.util.List;
+
+import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
+//import simplifiedProjet.Preparation;
 //import simplifiedProjet.Test;
+//import simplifiedProjet.SetUp;
 
 
 public class AngryMob implements RumourCard {
@@ -16,20 +21,9 @@ public class AngryMob implements RumourCard {
 	public AngryMob() {
 	}
 
-	@Override
-	public Player skillWitch(String name) {
-		
-		System.out.println("Take next turn");
-		return null;
-		
-	}
 
-	@Override
-	public Player skillHunt(String name) {
-		System.out.print(" Skill Hunt " + name);
-		return null;
-		
-	}
+
+
 
     @Override
     public String ToString() {
@@ -50,6 +44,33 @@ public class AngryMob implements RumourCard {
 	@Override
 	public String name() {
 		return name;
+	}
+
+	
+
+	@Override
+	public Player skillWitch(String name, List<Player> playerList) {
+		System.out.println("Take next turn");
+		Player pNextTurn = Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
+		return pNextTurn;
+	}
+
+	@Override
+	public Player skillWitchBot(String name, List<Player> playerList) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Player skillHunt(String name, List<Player> playerList) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Player skillHuntBot(String name2, List<Player> playerList) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

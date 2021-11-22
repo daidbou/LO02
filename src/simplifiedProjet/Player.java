@@ -7,14 +7,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Player implements Preparation{
-	private String name;
-	private int identity;//1 = witch, 0 = villager
-	private boolean identityReavealed ;
-	private int point;
-	private List<RumourCard> rumourCardListPlayer;
-	public List<RumourCard> disCardCardListPlayer ;
-	private boolean isOutOfTurn;
-	Scanner sc = new Scanner(System.in);
+	protected String name;
+	protected int identity;//1 = witch, 0 = villager
+	protected boolean identityReavealed ;
+	protected int point;
+	protected List<RumourCard> rumourCardListPlayer;
+	protected List<RumourCard> disCardCardListPlayer ;
+	protected boolean isOutOfTurn;
+	protected int virtual ; // 1 = virtual
+	
+	Scanner in = new Scanner(System.in);
 
 	public Player(){};
 
@@ -24,35 +26,64 @@ public class Player implements Preparation{
 		this. rumourCardListPlayer= rumourCardListP;
 		this.identityReavealed = false;
 		this.isOutOfTurn = false;
-
+		this.virtual = 0;
 	}
 	
 	public Player(String name) {
 		this.name = name;
+		this.virtual = 0;
 	}
 
-	public void accuse(Player player) {
-		
-		System.out.println(this.name+" accuse "+player.name);
+	public Player accuse(List<Player> playerList) { // 改好了
+		System.out.println(name+" is a real");
+		System.out.println("which player? ex: p1 b1");
+		Scanner sc = new Scanner(System.in);
+		String pName = sc.nextLine();
+		Player pTurn2 = Preparation.isExiste(pName,name, playerList);
+		if(pTurn2 == null){
+			System.out.println("no such player, try again");
+			return null;
+		}else if(pTurn2.ifIdentityReavealed() == false){
+			System.out.println(name+" accuse "+pTurn2.getName());
+			return pTurn2;
+		}else{
+			System.out.println(pTurn2.getName() + " has already revealed his identity, try again");
+			return null;
+		}
 	}
 	
-	public Player hunt(int cardNum) {
-		Player pNextTurn = rumourCardListPlayer.get(cardNum).skillWitch(name);// name here is this player's name
-		return pNextTurn;
+	public Player hunt(List<Player> playerList) {
+		
+		showCards();
+		System.out.println(" entre 0 for the first card");
+		int cardNum = in.nextInt();
+		Player pNextTurn = rumourCardListPlayer.get(cardNum).skillHunt(name,playerList);// name here is this player's name
+		return pNextTurn ;
 	}
 	
-	public Player witch(int cardNum) {
+	public Player witch(List<Player> playerList) {
 		
-		Player pNextTurn = rumourCardListPlayer.get(cardNum).skillWitch(name);// name here is this player's name
-		return pNextTurn;
+		showCards();
+		System.out.println(" entre 0 for the first card");
+		int cardNum = in.nextInt();
+		Player pNextTurn = rumourCardListPlayer.get(cardNum).skillWitch(name,playerList);// name here is this player's name
+		return pNextTurn ;//在这里检查?
 	}
 
+	/**
+	 * Show player's identity
+	 * @param 
+	 * 		
+	 * @return
+	 */
 	public void showIdentity(){
+		System.out.println(name+" choose to reveal identity");
 		if(identity == 0){
 			System.out.println(name + "is a villager" );
 		}else{
 			System.out.println(name + "is a witch" );
 		}
+		
 		
 	}
 
@@ -87,33 +118,35 @@ public class Player implements Preparation{
 	}
 
 	public boolean ifIdentityReavealed(){ // getter of the identityReavealed
-		if (this.identityReavealed == true){
-			return true;
-		}else{
-			return false;
-		}
-
+		return identityReavealed;
 	}
 
 	public void setIsOutOfTurn(boolean t){
 		isOutOfTurn = t;
 	}
+
 	public boolean ifIsOutOfTurn(){
 		return isOutOfTurn;
 	}
+
 	public int showPoint(){
 		return point;
 	}
 	
 	public void setRumourCardListPlayer(List<RumourCard> l){
 		rumourCardListPlayer = l;
-		System.out.println("what identity do you want to be? (1 for witch, 0 for villager)");
-		int id = sc.nextInt();
+		System.out.println(name+", what identity do you want to be? (1 for witch, 0 for villager)");
+		int id = in.nextInt();
 		identity = id;
 
 	}
-	public List<RumourCard> getRumourCardListPlayer(){
-		
+
+	public List<RumourCard> getRumourCardListPlayer(){	
 		return rumourCardListPlayer;
 	}
+
+	public int isVirtual(){
+		return virtual;
+	}
+
 }

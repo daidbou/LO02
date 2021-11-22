@@ -1,23 +1,14 @@
 package simplifiedProjet.RumourCard;
 
+import java.util.List;
+
 import simplifiedProjet.Player;
 
 public class Wart implements RumourCard{
     
     String name = "Wart";
     
-    @Override
-    public Player skillWitch(String name) {
-        // TODO Auto-generated method stub
-        System.out.println("Take next turn");
-        return null;
-    }
-
-    @Override
-    public Player skillHunt(String name) {
-        // TODO Auto-generated method stub
-        return null;
-    }
+   
 
     @Override
     public String ToString() {
@@ -37,6 +28,32 @@ public class Wart implements RumourCard{
 		
 		return name;
 	}
+
+   
+
+    @Override
+    public Player skillWitch(String name, List<Player> playerList) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Player skillWitchBot(String name, List<Player> playerList) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Player skillHunt(String name, List<Player> playerList) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Player skillHuntBot(String name2, List<Player> playerList) {
+        // TODO Auto-generated method stub
+        return null;
+    }
 
     
 }
