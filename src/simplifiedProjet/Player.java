@@ -122,21 +122,36 @@ public class Player implements Preparation{
 		return identity;
 	}
 
+	/**
+	 * Raise the score of the player
+	 * @param num
+	 */
 	public void raisePoints(int num){
 		for(int i = 0; i < num; i++){
 			point++;
 		}
 	}
 	
+	/**
+	 * Get the total of points of a the player
+	 * @return
+	 */
 	public int getPoint(){
 		return point;
 	}
 
+	/**
+	 *
+	 */
 	public void revealIdentity(){
 		this.identityReavealed = true;
 	}
 
-	public boolean ifIdentityReavealed(){ // getter of the identityReavealed
+	/**
+	 * getter of the identityReavealed
+	 * @return bool
+	 */
+	public boolean ifIdentityReavealed(){
 		return identityReavealed;
 	}
 
@@ -148,10 +163,18 @@ public class Player implements Preparation{
 		return isOutOfTurn;
 	}
 
+	/**
+	 * Get the number of points of the player
+	 * @return point of the player
+	 */
 	public int showPoint(){
 		return point;
 	}
 	
+	/**
+	 * Set the identity of IRL player
+	 * @param l
+	 */
 	public void setRumourCardListPlayer(List<RumourCard> l){
 		
 		rumourCardListPlayer = l;
