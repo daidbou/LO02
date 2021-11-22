@@ -69,7 +69,7 @@ public class SetUp implements Preparation{
     }};
     
     public static final List<Player> allPlayerList = new ArrayList<>();
-    public static final List<RumourCard> rumourCardDupl = rumourCardList; 
+    public static final List<RumourCard> rumourCardShuffled = rumourCardList; 
     
     public static List<Player> initializeGame(){
         Scanner sc = new Scanner(System.in);
@@ -111,19 +111,19 @@ public class SetUp implements Preparation{
             }
         } 
         
-        int numReal = numberOfPlayer - numberOfBot;
+        int numIrlPlayer = numberOfPlayer - numberOfBot;
         for(Player p: playerListInit){
             p.initializePlayer();
         }
         int i = 0;
-        for(i = 0 ; i<numReal ;i++){ // set up real players
-            List<RumourCard> rumourCardListReal = rumourCardDupl.subList((i)*numberOfCardsPerPlayer, (i+1)*numberOfCardsPerPlayer);
+        for(i = 0 ; i<numIrlPlayer ;i++){ // set up real players
+            List<RumourCard> rumourCardListReal = rumourCardShuffled.subList((i)*numberOfCardsPerPlayer, (i+1)*numberOfCardsPerPlayer);
             irlPlayerList.get(i).setRumourCardListPlayer(rumourCardListReal);//the same time define theirs identity
         }
         
         
         for(int j = i ; j<numberOfBot ;j++,i++){ // set up bots
-            List<RumourCard> rumourCardListBot = rumourCardDupl.subList((i)*numberOfCardsPerPlayer, (i+1)*numberOfCardsPerPlayer);
+            List<RumourCard> rumourCardListBot = rumourCardShuffled.subList((i)*numberOfCardsPerPlayer, (i+1)*numberOfCardsPerPlayer);
             botPlayerList.get(j).setRumourCardListPlayer(rumourCardListBot);//the same time define theirs identity
         }
         //Collections.shuffle(playerList);
