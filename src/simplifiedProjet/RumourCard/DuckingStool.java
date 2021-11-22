@@ -8,7 +8,7 @@ import simplifiedProjet.Player;
 import simplifiedProjet.SetUp;
 
 public class DuckingStool implements RumourCard {
-    String name ="Ducking Stool";
+    String nameCard ="Ducking Stool";
     @Override
     public Player skillWitch(String name,List<Player> playerList) {
 
@@ -49,20 +49,20 @@ public class DuckingStool implements RumourCard {
     @Override
 	public String name() {
 		
-		return name;
+		return nameCard;
 	}
    
     
     @Override
-    public Player skillHunt(String name, List<Player> playerList) {
+    public Player skillHunt(String name2, List<Player> playerList) {
         System.out.println("Take next turn");
-		Player pNextTurn = Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
+		Player pNextTurn = Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name2));
 		return pNextTurn;
     }
     @Override
     public Player skillHuntBot(String name2, List<Player> playerList) {
         System.out.println("Take next turn");
-		Player pNextTurn = Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
+		Player pNextTurn = Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name2));
 		return pNextTurn;
     }
 

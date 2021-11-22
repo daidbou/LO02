@@ -7,7 +7,7 @@ import simplifiedProjet.Player;
 
 public class BlackCat implements RumourCard{
     
-    String name ="Black Cat";
+    String nameCard ="Black Cat";
     
     
 
@@ -27,7 +27,7 @@ public class BlackCat implements RumourCard{
     @Override
 	public String name() {
 		
-		return name;
+		return nameCard;
 	}
 
     @Override
@@ -52,7 +52,7 @@ public class BlackCat implements RumourCard{
     }
 
     @Override
-    public Player skillHuntBot(String name2, List<Player> playerList) {
+    public Player skillHuntBot(String name, List<Player> playerList) {
         System.out.println("Take next turn");
 		Player pNextTurn = Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
 		return pNextTurn;

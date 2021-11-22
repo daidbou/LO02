@@ -13,7 +13,7 @@ import simplifiedProjet.Player;
 public class AngryMob implements RumourCard {
 
 	int flag = 1;
-	String name = "Angry Mob";
+	String nameCard = "Angry Mob";
 	public AngryMob(int flag) {
 		flag = 1;
 	}
@@ -43,7 +43,7 @@ public class AngryMob implements RumourCard {
 
 	@Override
 	public String name() {
-		return name;
+		return nameCard;
 	}
 
 	
@@ -70,7 +70,7 @@ public class AngryMob implements RumourCard {
 	}
 
 	@Override
-	public Player skillHuntBot(String name2, List<Player> playerList) {
+	public Player skillHuntBot(String name, List<Player> playerList) {
 		System.out.println("Take next turn");
 		Player pNextTurn = Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
 		return pNextTurn;

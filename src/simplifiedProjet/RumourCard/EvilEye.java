@@ -6,7 +6,7 @@ import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
 
 public class EvilEye implements RumourCard{
-    String name = "Evil Eye";
+    String nameCard = "Evil Eye";
     
     
 
@@ -28,7 +28,7 @@ public class EvilEye implements RumourCard{
     @Override
 	public String name() {
 		
-		return name;
+		return nameCard;
 	}
 
    
@@ -55,7 +55,7 @@ public class EvilEye implements RumourCard{
     }
 
     @Override
-    public Player skillHuntBot(String name2, List<Player> playerList) {
+    public Player skillHuntBot(String name, List<Player> playerList) {
         System.out.println("Take next turn");
 		Player pNextTurn = Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
 		return pNextTurn;

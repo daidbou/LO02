@@ -57,16 +57,23 @@ public class Player implements Preparation{
 		showCards();
 		System.out.println(" entre 0 for the first card");
 		int cardNum = in.nextInt();
-		Player pNextTurn = rumourCardListPlayer.get(cardNum).skillHunt(name,playerList);// name here is this player's name
+		Player pNextTurn = rumourCardListPlayer.get(cardNum).skillHunt(name,playerList);
+		rumourCardListPlayer.remove(cardNum);
 		return pNextTurn ;
 	}
-	
-	public Player witch(List<Player> playerList) {
+	/**
+	 * this.player accuse 
+	 * @param pTurn1 is the player who accused you
+	 * 		
+	 * @return next player of pTurn1
+	 */
+	public Player witch(Player pTurn1,List<Player> playerList) {
 		
 		showCards();
 		System.out.println(" entre 0 for the first card");
 		int cardNum = in.nextInt();
-		Player pNextTurn = rumourCardListPlayer.get(cardNum).skillWitch(name,playerList);// name here is this player's name
+		Player pNextTurn = rumourCardListPlayer.get(cardNum).skillWitch(pTurn1.getName(),playerList);
+		rumourCardListPlayer.remove(cardNum);
 		return pNextTurn ;//在这里检查?
 	}
 
@@ -149,4 +156,17 @@ public class Player implements Preparation{
 		return virtual;
 	}
 
+	/**
+	 * returns true when player don't have  any rumourcard
+	 * @param 
+	 * 		
+	 * @return 
+	 */
+	public boolean checkRumourCardList(){
+		if (rumourCardList.size() == 0){
+			return true;
+		}else{
+			return false;
+		}
+	}
 }

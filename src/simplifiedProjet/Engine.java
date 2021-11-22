@@ -11,6 +11,7 @@ public class Engine implements Preparation {
         List<Player> playerListInit = new ArrayList<Player>();
 
         GameStart:while(ifGameContinue(playerListInit)){
+             System.out.println("================================ new turn ======================================= ");
             List<Player> playerList = SetUp.setUpPlayer();
            
             
@@ -19,16 +20,16 @@ public class Engine implements Preparation {
             Player pNextTurn  = playerList.get(0);
 
             TurnStart:while(ifTurnContinue(playerList)){
-
+               
                 pTurn1 = pNextTurn;
-                if( ((pTurn1.isVirtual() == 1) && doChoiceAh_Bot(pTurn1))  || ((pTurn1.isVirtual() == 0) && doChoiceAH_Real(pTurn1)) ){
+                System.out.println("--------------------------------"+pTurn1.getName()+"'s round -----------------------");
+
+                if( ((pTurn1.isVirtual() == 1) && doChoiceAh_Bot(pTurn1))  || ((pTurn1.isVirtual() == 0) && doChoiceAH_Real(pTurn1) )){
                     //accuse
                     pTurn2 = pTurn1.accuse(playerList);
                     if(((pTurn2.isVirtual() == 1) && doChoiceWI_Bot(pTurn2))  || ((pTurn2.isVirtual() == 0) && doChoiceWI_Real(pTurn2))){
-                        //pTurn2.showIdentity();
-                        //System.out.println(pTurn2.isVirtual());
-                        System.out.println("bot choose WI"+doChoiceWI_Bot(pTurn2));
-                        pNextTurn = pTurn2.witch(playerList);
+                        pNextTurn = pTurn2.witch(pTurn1,playerList);
+                        pTurn2.showCards();
                         System.out.println("pNextPlayer = "+pNextTurn.getName());
                         
                     }else{
@@ -38,42 +39,76 @@ public class Engine implements Preparation {
                             pTurn1.raisePoints(1);
                             System.out.println(pTurn1.getName() + " gains 1 point");
                             pTurn2.setIsOutOfTurn(true); //pTurn2 should left the game
+                            pNextTurn = nextPlayer(playerList, pTurn1);
                            
                         
                         }else{
                             pTurn1.raisePoints(0);//villager , gain no point;
                             System.out.println(pTurn1.getName() + " gains 0 point");
-                            
+                            pNextTurn = pTurn2;// acussed player takes next turn
                         }
-                        pNextTurn = nextPlayer(playerList,pTurn2);
-                        System.out.println("pNextPlayer = "+pNextTurn.getName());
+                        
+                        //System.out.println("pNextPlayer = "+pNextTurn.getName());
                     }
                 }else{
                     pTurn2 = pTurn1.hunt(playerList);
+                    pTurn1.showCards();
                     pNextTurn = pTurn2;
                     System.out.println("pNextPlayer = "+pNextTurn.getName());
                 }
-                //System.out.println("pNextPlayer = "+pNextTurn);
                 
+                //showAllCards(playerList);
+
+                if(!ifTurnContinue(playerList)){//this turn ends
+                    showStatus(playerList);
+                }
                 
             }
         }
     }
 
-    public static boolean doChoiceWI_Real(Player pTurn1) {
-        Scanner in = new Scanner(System.in);
-        System.out.println(pTurn1.getName() + " SkillWitch or ShowIdentity? [sk/id]");
-        String choiceAH_Real = in.nextLine();
-        //in.close();
-        if (choiceAH_Real.equals("sk")) {
-            return true;
-        } else {
-            return false;
+    private static void showStatus(List<Player> playerList) {
+        System.out.println("++++++++++++++++conclusion+++++++++++++++++++++");
+        for(Player p: playerList){
+            if(p.getIdentity() == 0){
+                System.out.print("    + "+p.getName() + "is a villager" );
+            }else{
+                System.out.print("    + "+p.getName() + "is a witch   " );
+            }
+            System.out.println(" and got "+p.getPoint()+" points +  ");
         }
+        System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
+    }
+   
+
+
+
+    public static boolean doChoiceWI_Real(Player pTurn2) {
+        Scanner in = new Scanner(System.in);
+        if(pTurn2.checkRumourCardList()){
+           System.out.println("you don't have rumour cards, you have to show your identity");
+           return false;
+
+        }else{
+            System.out.println(pTurn2.getName() + " SkillWitch or ShowIdentity? [sk/id]");
+            String choiceAH_Real = in.nextLine();
+            //in.close();
+            if (choiceAH_Real.equals("sk")) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
+       
     }
 
     public static boolean doChoiceAH_Real(Player pTurn1) {
         Scanner in = new Scanner(System.in);
+        if(pTurn1.checkRumourCardList()){
+            System.out.println("you don't have rumour cards, you have to accuse someone");
+            return true;
+        }
         System.out.println(pTurn1.getName() + " accuse or hunt? [a/h]");
         String choiceAH_Real = in.nextLine();
         //in.close();
@@ -95,19 +130,28 @@ public class Engine implements Preparation {
     */
     public static boolean doChoiceAh_Bot(Player pTurn1) {
         double ChoiceAh_Bot = (Math.random() + 0.5);
-        if (ChoiceAh_Bot > 1) {
-            return true;
+        if (pTurn1.checkRumourCardList() || ChoiceAh_Bot > 1 ) {
+            return true;// accuse
         } else {
             return false;
         }
     }
 
+     /**
+    * For a bot to choose randomly use witch or show id 
+    * @param pTurn1
+    * 		it's the bot who use this fonction
+    * @return  a boolean
+    *      the choice by random
+    *      if true then means witch
+    *      else means show id 
+    */
     public static boolean doChoiceWI_Bot(Player pTurn1) { //witch or show id
         double ChoiceWI_Bot = (Math.random() + 0.5);
-        //System.out.println("bot choiceWI " +ChoiceWI_Bot );
-        if (ChoiceWI_Bot > 1) {
-            return true;
-        } else {
+        
+        if (ChoiceWI_Bot > 1 && !pTurn1.checkRumourCardList()) {
+            return true;//use witch skill
+        }else{
             return false;
         }
     }
@@ -131,7 +175,7 @@ public class Engine implements Preparation {
             }
         }
         if (i == 1) {
-            return false; // if there is only one , the end game
+            return false; // if there is only one , the end this turn
         } else {
             return true;
         }
@@ -154,16 +198,36 @@ public class Engine implements Preparation {
 			}
 		}
         System.out.println("index = "+index);
-        if(index == playerList.size()-1){
-            index = 0;              //problem
+        Player ppNextTurn = new Player();
+        if(ifTurnContinue(playerList)){
+            if(index == playerList.size()-1){
+                index = 0;        
+                ppNextTurn = playerList.get(index);
+            }else{
+                ppNextTurn = playerList.get(++index);
+                while(ppNextTurn.ifIsOutOfTurn()){
+                 ppNextTurn = playerList.get(++index);
+                }
+            }
+            return ppNextTurn;
+        }else{
+            System.out.println("this turn ends");
+            return null;// has a problem here
         }
-		Player ppNextTurn = playerList.get(++index);
-		while(ppNextTurn.ifIsOutOfTurn()){
-	
-			ppNextTurn = Preparation.isExiste(ppNextTurn.getName(), p.getName(),playerList);
-		}
-		return ppNextTurn;
+        
+        
+		
     }
+
+    /**
+	 * change a string name to Player p
+	 * @param playerList
+	 * 		the list you want
+     * @param name
+     *      player's name
+	 * @return
+     * the Player P of this name in the list
+	 */
     public static Player nameToPlayer(List<Player> playerList, String name){
         int index = 0;
 		for(int i = 0; i <playerList.size();i++){
