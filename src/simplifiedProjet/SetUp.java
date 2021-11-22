@@ -50,7 +50,7 @@ public class SetUp implements Preparation{
    
 
 
-	public static List<Player> realPlayerListAll = new ArrayList<Player>(){{//player list
+	public static List<Player> irlPlayerList = new ArrayList<Player>(){{//player list
         add(p1);
 		add(p2);
         add(p3);
@@ -59,7 +59,7 @@ public class SetUp implements Preparation{
         add(p6);
 	}};
 
-    public static List<Bot> botListAll = new ArrayList<Bot>(){{//Bot List
+    public static List<Bot> botPlayerList = new ArrayList<Bot>(){{//Bot List
         add(b1);
         add(b2);
         add(b3);
@@ -68,49 +68,48 @@ public class SetUp implements Preparation{
         add(b6);
     }};
     
-    public static List<Player> playerList = new ArrayList<Player>();
-    public static List<RumourCard> rumourCardDupl = rumourCardList; 
+    public static final List<Player> allPlayerList = new ArrayList<>();
+    public static final List<RumourCard> rumourCardDupl = rumourCardList; 
     
     public static List<Player> setUpPlayer(){
         Scanner sc = new Scanner(System.in);
         System.out.println("How many players(including the bots)? (3-6)");
-        int numPlayer = sc.nextInt();
-        int numCardsPerPlayer = (int)12/numPlayer;
-        System.out.println("each player has "+numCardsPerPlayer+"cards");
+        int numberOfPlayer = sc.nextInt();
+        int numberOfCardsPerPlayer = (int)12/numberOfPlayer;
+        System.out.println("each player has "+numberOfCardsPerPlayer+"cards");
         //Collections.shuffle(rumourCardDupl);
         System.out.println("how many bots?");
-        int numbot = sc.nextInt();
-        while(numbot>numPlayer || numbot<0){
-            System.out.println("pls enter again");
-            numbot = sc.nextInt();
+        int numberOfBot = sc.nextInt();
+        while(numberOfBot>numberOfPlayer || numberOfBot<0){
+            System.out.println("please enter again");
+            numberOfBot = sc.nextInt();
         }
 
-        int numReal = numPlayer-numbot;
-        System.out.println("this game includes "+numbot+" bots and "+numReal+" players");
+        int numReal = numberOfPlayer-numberOfBot;
+        System.out.println("this game includes "+numberOfBot+" bots and "+numReal+" players");
 
         int i = 0;
         for(i = 0 ; i<numReal ;i++){ // set up real players
-            List<RumourCard> rumourCardListReal = rumourCardDupl.subList((i)*numCardsPerPlayer, (i+1)*numCardsPerPlayer);
+            List<RumourCard> rumourCardListReal = rumourCardDupl.subList((i)*numberOfCardsPerPlayer, (i+1)*numberOfCardsPerPlayer);
 
-            realPlayerListAll.get(i).setRumourCardListPlayer(rumourCardListReal);//the same time define theirs identity
+            irlPlayerList.get(i).setRumourCardListPlayer(rumourCardListReal);//the same time define theirs identity
             
-            playerList.add(realPlayerListAll.get(i));
+            allPlayerList.add(irlPlayerList.get(i));
             
-            playerList.get(i).showCards();
+            allPlayerList.get(i).showCards();
         }
         
         
-        for(int j = 0 ; j<numbot ;j++,i++){ // set up bots
-            List<RumourCard> rumourCardListBot = rumourCardDupl.subList((i)*numCardsPerPlayer, (i+1)*numCardsPerPlayer);
+        for(int j = 0 ; j<numberOfBot ;j++,i++){ // set up bots
+            List<RumourCard> rumourCardListBot = rumourCardDupl.subList((i)*numberOfCardsPerPlayer, (i+1)*numberOfCardsPerPlayer);
 
-            botListAll.get(j).setRumourCardListPlayer(rumourCardListBot);//the same time define theirs identity
+            botPlayerList.get(j).setRumourCardListPlayer(rumourCardListBot);//the same time define theirs identity
             
-            playerList.add(botListAll.get(j));
+            allPlayerList.add(botPlayerList.get(j));
             
-            playerList.get(i).showCards();
+            allPlayerList.get(i).showCards();
         }
         //Collections.shuffle(playerList);
-        return playerList;      
+        return allPlayerList;      
     }
-    
 }

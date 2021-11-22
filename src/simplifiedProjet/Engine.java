@@ -221,12 +221,13 @@ public class Engine implements Preparation {
 
     /**
 	 * change a string name to Player p
+     * get the correct player in the list playerList with his player's name
 	 * @param playerList
-	 * 		the list you want
+	 * 		the list of player of the game
      * @param name
-     *      player's name
+     *      player's name 
 	 * @return
-     * the Player P of this name in the list
+     * the player of type Player selected
 	 */
     public static Player nameToPlayer(List<Player> playerList, String name){
         int index = 0;

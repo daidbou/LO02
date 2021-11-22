@@ -54,8 +54,3 @@ public class BlackCat implements RumourCard{
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
 	}
     }
-
-    
-
-    
-}

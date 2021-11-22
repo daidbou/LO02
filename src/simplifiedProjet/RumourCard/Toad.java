@@ -59,4 +59,4 @@ public class Toad implements RumourCard{
     }
 
     
-}
+

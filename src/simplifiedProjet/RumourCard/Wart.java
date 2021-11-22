@@ -58,4 +58,4 @@ public class Wart implements RumourCard{
     }
 
     
-}
+
