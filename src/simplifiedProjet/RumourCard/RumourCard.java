@@ -22,6 +22,8 @@ public interface RumourCard {
 	 * @return
 	 */
 	public Player skillWitch(String name,List<Player> playerList);
+	
+	
 	/**
 	 * use the Witch? ability for bot
 	 * @param name
@@ -38,7 +40,11 @@ public interface RumourCard {
 	 * @return
 	 */
 	public Player skillHunt(String name,List<Player> playerList); 
+	
+	
 	public Player skillHuntBot(String name2, List<Player> playerList);
+	
+	
 	/**
 	 * show the card ability
 	 * @return sb.toString()

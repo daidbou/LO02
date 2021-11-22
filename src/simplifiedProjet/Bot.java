@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Bot extends Player{
 
-   // private String name;
+    // private String name;
 	// private int identity;//1 = witch, 0 = villager
 	// private boolean identityReavealed ;
 	// private int point;
@@ -54,15 +54,13 @@ public class Bot extends Player{
 	public Player witch(List<Player> playerList){
 		int cardNumBot = (int)(Math.random()*getRumourCardListPlayer().size());
 		System.out.println(name+"use witch skill by "+rumourCardListPlayer.get(cardNumBot).name());
-		Player pNextTurn = rumourCardListPlayer.get(cardNumBot).skillWitchBot(name,playerList);
-		return pNextTurn;
+		return rumourCardListPlayer.get(cardNumBot).skillWitchBot(name,playerList);
 	}
 
 	public Player hunt(List<Player> playerList){
 		int cardNumBot = (int)(Math.random()*getRumourCardListPlayer().size());
 		System.out.println(name+"use hunt skill by  "+rumourCardListPlayer.get(cardNumBot).name());
-		Player pNextTurn = rumourCardListPlayer.get(cardNumBot).skillHuntBot(name,playerList);
-		return pNextTurn;
+		return rumourCardListPlayer.get(cardNumBot).skillHuntBot(name,playerList);
 
 	}
     public int isVirtual(){

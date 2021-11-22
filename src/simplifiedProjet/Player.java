@@ -134,12 +134,28 @@ public class Player implements Preparation{
 	}
 	
 	public void setRumourCardListPlayer(List<RumourCard> l){
+		
 		rumourCardListPlayer = l;
 		System.out.println(name+", what identity do you want to be? (1 for witch, 0 for villager)");
-		int id = in.nextInt();
-		identity = id;
-
-	}
+		String id = in.nextLine();
+		
+		while(true){
+			
+			if(id.equals("0")){
+				identity = 0;
+				break;
+			}
+			else if(id.equals("1")){
+				identity = 1;
+				break;
+			}
+			else{
+				System.out.println("error, please select 0 or 1");
+				System.out.println(name+", what identity do you want to be? (1 for witch, 0 for villager)");
+				id = in.nextLine();
+			}
+		}
+}
 
 	public List<RumourCard> getRumourCardListPlayer(){	
 		return rumourCardListPlayer;

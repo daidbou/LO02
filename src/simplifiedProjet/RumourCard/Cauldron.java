@@ -33,33 +33,26 @@ public class Cauldron implements RumourCard{
 
    
 
-    @Override
-    public Player skillWitch(String name, List<Player> playerList) {
-        System.out.println("Take next turn");
-		Player pNextTurn = Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
-		return pNextTurn;
-    }
+	@Override
+	public Player skillWitch(String name, List<Player> playerList) {
+		System.out.println("Take next turn");
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
+	}
 
-    @Override
-    public Player skillWitchBot(String name, List<Player> playerList) {
-        System.out.println("Take next turn");
-		Player pNextTurn = Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
-		return pNextTurn;
-    }
+	@Override
+	public Player skillWitchBot(String name, List<Player> playerList) {
+		System.out.println("Take next turn");
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
+	}
 
-    @Override
-    public Player skillHunt(String name, List<Player> playerList) {
-        System.out.println("Take next turn");
-		Player pNextTurn = Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
-		return pNextTurn;
-    }
+	@Override
+	public Player skillHunt(String name, List<Player> playerList) {
+		System.out.println("Take next turn");
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
+	}
 
-    @Override
-    public Player skillHuntBot(String name2, List<Player> playerList) {
-        System.out.println("Take next turn");
-		Player pNextTurn = Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
-		return pNextTurn;
-    }
-
-    
-}
+	@Override
+	public Player skillHuntBot(String name2, List<Player> playerList) {
+		System.out.println("Take next turn");
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
+	}
