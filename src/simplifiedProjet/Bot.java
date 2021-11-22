@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Bot extends Player{
 
-    // private String name;
+   // private String name;
 	// private int identity;//1 = witch, 0 = villager
 	// private boolean identityReavealed ;
 	// private int point;
@@ -33,17 +33,29 @@ public class Bot extends Player{
 	}
     public void setRumourCardListPlayer(List<RumourCard> l){
 		rumourCardListPlayer = l;
-		identity = (int)Math.random();//random set identity
+		identity = (int)(Math.random()+0.5);//random set identity
 	}
+
     public Player accuse(List<Player> playerList){
-		int noP = (int)(playerList.size()*Math.random());// random num player 
+		int noP = (int)(playerList.size()*Math.random()-1);// random num player 
+		while(playerList.get(noP).getName().equals(name)){
+			
+			if(noP>playerList.size()){
+				noP = 0;
+			}else{
+				noP++;
+			}
+		}
 
 		Player pTurn2 = playerList.get(noP);
 		while(pTurn2.ifIdentityReavealed()){
-			if(noP == playerList.size()){
-				noP = noP - playerList.size();
+			if(noP == playerList.size()-1){
+				noP = noP - playerList.size()-1;
+				pTurn2 = playerList.get(noP);
+			}else{
+				pTurn2 = playerList.get(++noP);
 			}
-			pTurn2 = playerList.get(++noP);
+			
 		}
 			
 		System.out.println(name+" accuses "+pTurn2.getName());
@@ -51,16 +63,27 @@ public class Bot extends Player{
 		
 	}
 
-	public Player witch(List<Player> playerList){
-		int cardNumBot = (int)(Math.random()*getRumourCardListPlayer().size());
-		System.out.println(name+"use witch skill by "+rumourCardListPlayer.get(cardNumBot).name());
-		return rumourCardListPlayer.get(cardNumBot).skillWitchBot(name,playerList);
+	/**
+	 * pTurn1 accuse you
+	 * @param pTurn1 is the player who accused you
+	 * 		
+	 * @return next player of pTurn1
+	 */
+	public Player witch(Player pTurn1,List<Player> playerList){
+		int cardNumBot = (int)(Math.random()*getRumourCardListPlayer().size()-1);	
+		Player pNextTurn = rumourCardListPlayer.get(cardNumBot).skillWitchBot(pTurn1.getName(),playerList);
+		System.out.println(name+"use witch skill to "+pTurn1.getName()+" using "+rumourCardListPlayer.get(cardNumBot).name());
+		rumourCardListPlayer.remove(cardNumBot);
+		return pNextTurn;
 	}
 
 	public Player hunt(List<Player> playerList){
-		int cardNumBot = (int)(Math.random()*getRumourCardListPlayer().size());
-		System.out.println(name+"use hunt skill by  "+rumourCardListPlayer.get(cardNumBot).name());
-		return rumourCardListPlayer.get(cardNumBot).skillHuntBot(name,playerList);
+		int cardNumBot = (int)(Math.random()*getRumourCardListPlayer().size()-1);
+		
+		Player pNextTurn = rumourCardListPlayer.get(cardNumBot).skillHuntBot(name,playerList);
+		System.out.println(name+"use hunt skill to "+pNextTurn.getName()+" using "+rumourCardListPlayer.get(cardNumBot).name());
+		rumourCardListPlayer.remove(cardNumBot);
+		return pNextTurn;
 
 	}
     public int isVirtual(){

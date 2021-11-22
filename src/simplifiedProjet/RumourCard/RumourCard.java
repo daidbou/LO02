@@ -1,7 +1,7 @@
 package simplifiedProjet.RumourCard;
 //import simplifiedProjet.SetUp;
 import simplifiedProjet.Player;
-import simplifiedProjet.Engine;
+//import simplifiedProjet.Engine;
 
 import java.util.List;
 import java.util.Scanner;
@@ -12,13 +12,13 @@ import java.util.Scanner;
 public interface RumourCard {
 	
 	int status = 0;// maybe for discard card
-	String name = "";
+	String nameCard = "";
 	Scanner in = new Scanner(System.in);
 	
 	/**
 	 * use the Witch? ability
 	 * @param name
-	 * 		name of the player who use this card
+	 * 		name here is theplayer being accused
 	 * @return
 	 */
 	public Player skillWitch(String name,List<Player> playerList);
@@ -27,7 +27,7 @@ public interface RumourCard {
 	/**
 	 * use the Witch? ability for bot
 	 * @param name
-	 * 		name of the player who use this card
+	 * 		name here is theplayer being accused
 	 * @return
 	 */
 	public Player skillWitchBot(String name,List<Player> playerList);
@@ -36,7 +36,7 @@ public interface RumourCard {
 	/**
 	 * Use the Hunt! ability
 	 * @param name
-	 * 		name of the player who use this card
+	 * 		
 	 * @return
 	 */
 	public Player skillHunt(String name,List<Player> playerList); 

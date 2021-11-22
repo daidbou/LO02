@@ -6,7 +6,7 @@ import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
 
 public class HookedNose implements RumourCard{
-	String name = "Hooked Nose";
+	String nameCard = "Hooked Nose";
 	
 
     @Override
@@ -27,7 +27,7 @@ public class HookedNose implements RumourCard{
 	@Override
 	public String name() {
 		
-		return name;
+		return nameCard;
 	}
 
 	
@@ -51,7 +51,7 @@ public class HookedNose implements RumourCard{
 	}
 
 	@Override
-	public Player skillHuntBot(String name2, List<Player> playerList) {
+	public Player skillHuntBot(String name, List<Player> playerList) {
 		System.out.println("Take next turn");
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
 	}

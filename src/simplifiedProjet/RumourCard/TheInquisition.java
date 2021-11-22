@@ -9,7 +9,7 @@ public class TheInquisition implements RumourCard {
 
 	int flag = 2;
 	
-	String name = "The Inquisition";
+	String nameCard = "The Inquisition";
 	
 	
 
@@ -33,7 +33,7 @@ public class TheInquisition implements RumourCard {
 	@Override
 	public String name() {
 		
-		return name;
+		return nameCard;
 	}
 
 	
@@ -58,7 +58,7 @@ public class TheInquisition implements RumourCard {
 	}
 
 	@Override
-	public Player skillHuntBot(String name2, List<Player> playerList) {
+	public Player skillHuntBot(String name, List<Player> playerList) {
 		System.out.println("Take next turn");
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
 	}
