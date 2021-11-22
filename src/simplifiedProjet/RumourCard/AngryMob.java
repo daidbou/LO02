@@ -51,6 +51,7 @@ public class AngryMob implements RumourCard {
 	@Override
 	public Player skillWitch(String name, List<Player> playerList) {
 		System.out.println("Take next turn");
+		
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
 	}
 

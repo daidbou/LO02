@@ -94,7 +94,10 @@ public class Player implements Preparation{
 		
 	}
 
-	public void showCards() {//show it's rumourcards
+	/**
+	 * Show the card of the player
+	 */
+	public void showCards() {
 		System.out.println(name+" and cards with ");
 		for (int i = 0; i < rumourCardListPlayer.size(); i++) {
 			System.out.println(rumourCardListPlayer.get(i).name());
@@ -102,10 +105,19 @@ public class Player implements Preparation{
 		System.out.println();
 	}
 	
+	/**
+	 * Get the name of the player
+	 * @return
+	 */
 	public String getName() {
 		return name;
 	}
 	
+	
+	/**
+	 * Get the identity (witch or villager) of the player
+	 * @return
+	 */
 	public int getIdentity(){
 		return identity;
 	}
@@ -185,4 +197,5 @@ public class Player implements Preparation{
 			return false;
 		}
 	}
+
 }
