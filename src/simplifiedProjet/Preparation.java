@@ -52,20 +52,13 @@ public interface Preparation {
 			
 
 
-    /**
-	 * verify if the player exists in the list
-	 * @param pName target player
-	 * @param pTurn1 player who use this method, in
-     *               sure that pTurn1 cannot do something to himself	
-     * @param playerList the list you want to choose
-	 * @return the target player if exist, if not return null
-	 */
-    public static Player isExiste(String pName, String pTurn1Name,List<Player> playerList) {
+
+    public static Player isExiste(String pName, Player pTurn1,List<Player> playerList) {
         // pName is the target player
         // pTurn1 is the player who use this method, to make sure that pTurn1 cannot do something to himself
         for(Player p:playerList) {
             if(pName.equals(p.getName())) {
-                if(!pName.equals(pTurn1Name)){
+                if(!pName.equals(pTurn1.getName())){
                     return p;
                 }else{
                     System.out.println("not yourself");
@@ -83,7 +76,7 @@ public interface Preparation {
             if(pName.equals(p.getName()) && p.ifIsOutOfTurn() == false) {
                 return p;
             }else if(p.ifIsOutOfTurn() == true){
-                System.out.println("he is already out of game try again");
+                System.out.println("he is already out of gamem try again");
             }
         }
         System.out.println("no such player");

@@ -1,8 +1,6 @@
 package simplifiedProjet.RumourCard;
 //import simplifiedProjet.SetUp;
 import simplifiedProjet.Player;
-
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -17,27 +15,19 @@ public interface RumourCard {
 	/**
 	 * use the Witch? ability
 	 * @param name
-	 * 		name of the player who use this card
+	 * 		name of the player which he wants to affect
 	 * @return
 	 */
-	public Player skillWitch(String name,List<Player> playerList);
-	/**
-	 * use the Witch? ability for bot
-	 * @param name
-	 * 		name of the player who use this card
-	 * @return
-	 */
-	public Player skillWitchBot(String name,List<Player> playerList);
-
+	public Player skillWitch(String name);
 	
 	/**
 	 * Use the Hunt! ability
 	 * @param name
-	 * 		name of the player who use this card
+	 * 		name of the player which he wants to affect
 	 * @return
 	 */
-	public Player skillHunt(String name,List<Player> playerList); 
-	public Player skillHuntBot(String name2, List<Player> playerList);
+	public Player skillHunt(String name); 
+	
 	/**
 	 * show the card ability
 	 * @return sb.toString()
@@ -49,5 +39,4 @@ public interface RumourCard {
 	 * @return
 	 */
 	public String name();
-	
 }
