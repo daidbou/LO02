@@ -84,6 +84,7 @@ public class Player implements Preparation{
 		int cardNum = in.nextInt();
 		Player pNextTurn = playerRumourCardList.get(cardNum).skillWitch(pTurn1.getName(),playerList);
 		playerRumourCardList.remove(cardNum);
+		SetUp.discardedRumourCard.add(this.playerRumourCardList.get(cardNum));
 		return pNextTurn ;//在这里检查?
 	}
 
@@ -256,8 +257,9 @@ public class Player implements Preparation{
 	/**
 	 * add a card in the hand of the player
 	 */
-	public void setCardInTheList(RumourCard rumourCard){
-		
+	public void addCardInTheList(RumourCard rumourCard){
+
 		this.playerRumourCardList.add(rumourCard);
 	}
+
 }

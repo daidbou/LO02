@@ -45,29 +45,39 @@ public class BlackCat implements RumourCard{
 	}
 
 	@Override
-	public Player skillHunt(String hunted, List<Player> playerList) {
-		Player p1 = Engine.nameToPlayer(playerList, hunted);
+	public Player skillHunt(String hunter, List<Player> playerList) {
+		Player p1 = Engine.nameToPlayer(playerList, hunter);
 		p1.showDiscardedCards();
 		System.out.println("Add one discarded card to your hand\n");
 		Scanner sc = new Scanner(System.in);
 		int selectedCardNumber = sc.nextInt();
-		p1.setCardInTheList(SetUp.discardedRumourCard.get(selectedCardNumber));
-		SetUp.discardedRumourCard.remove()
+		p1.addCardInTheList(SetUp.discardedRumourCard.get(selectedCardNumber));
+		SetUp.discardedRumourCard.remove(SetUp.discardedRumourCard.get(selectedCardNumber));
+		//remove black cat from the player list of rumour card
+		for(RumourCard r: p1.getRumourCardListPlayer()){
+			if(r.name().equals("BlackCat")){
+				p1.getRumourCardListPlayer().remove(r);
+			}
 
-
-
-
-
-		
-		
-
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
+		}
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, hunter));
 	}
 
 	@Override
-	public Player skillHuntBot(String namePturn1, List<Player> playerList) {
-		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
+	public Player skillHuntBot(String hunter, List<Player> playerList) {
+		Player p1 = Engine.nameToPlayer(playerList, hunter);
+		p1.showDiscardedCards();
+		int selectedCardNumber =(int)(Math.random()*(p1.getRumourCardListPlayer().size()-1));	
+		p1.addCardInTheList(SetUp.discardedRumourCard.get(selectedCardNumber));
+		SetUp.discardedRumourCard.remove(SetUp.discardedRumourCard.get(selectedCardNumber));
+		//remove black cat from the player list of rumour card
+		for(RumourCard r: p1.getRumourCardListPlayer()){
+			if(r.name().equals("BlackCat")){
+				p1.getRumourCardListPlayer().remove(r);
+			}
+
+		}
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, hunter));
 	}
     
 
