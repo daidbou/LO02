@@ -51,7 +51,7 @@ public class SetUp implements Preparation{
     /**
      * List of every vard that we discarded
      */
-    public List<RumourCard> discardedRumourCard = new ArrayList<RumourCard>();
+    public static List<RumourCard> discardedRumourCard = new ArrayList<RumourCard>();
 
 	public static List<Player> irlPlayerList = new ArrayList<Player>(){{//player list
         add(p1);
@@ -80,7 +80,13 @@ public class SetUp implements Preparation{
         int numberOfPlayer = sc.nextInt();
         int numberOfCardsPerPlayer = (int)12/numberOfPlayer;
         System.out.println("each player has "+numberOfCardsPerPlayer+"cards");
-        //Collections.shuffle(rumourCardDupl);
+        
+        Collections.shuffle(rumourCardDupl);
+        
+        if(numberOfPlayer == 5){
+            discardedRumourCard.add(rumourCardShuffled.get(10));
+            discardedRumourCard.add(rumourCardShuffled.get(11));
+        }
         System.out.println("how many bots?");
         int numberOfBot = sc.nextInt();
         while(numberOfBot>numberOfPlayer || numberOfBot<0){
