@@ -87,6 +87,7 @@ public class Player implements Preparation{
 		int cardNum = in.nextInt();
 		Player pNextTurn = playerRumourCardList.get(cardNum).skillWitch(pTurn1.getName(),playerList);
 		playerRumourCardList.remove(cardNum);
+		SetUp.discardedRumourCard.add(this.playerRumourCardList.get(cardNum));
 		return pNextTurn ;//在这里检查?
 		
 	}
@@ -118,6 +119,17 @@ public class Player implements Preparation{
 		}
 		System.out.println();
 	}
+	/**
+	 * Show the discarded card
+	 */
+	public void showDiscardedCards() {
+		System.out.println("Discarded cards are :");
+		for (int i = 0; i < SetUp.discardedRumourCard.size(); i++) {
+			System.out.println(SetUp.discardedRumourCard.get(i).name());
+		}
+		System.out.println();
+	}
+	
 	
 	/**
 	 * Get the name of the player
@@ -245,6 +257,13 @@ public class Player implements Preparation{
 		}else{
 			return false;
 		}
+	}
+	/**
+	 * add a card in the hand of the player
+	 */
+	public void addCardInTheList(RumourCard rumourCard){
+
+		this.playerRumourCardList.add(rumourCard);
 	}
 
 	// public List<RumourCard> removeCard(String cardName, List<RumourCard> l){
