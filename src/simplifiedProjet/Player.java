@@ -14,7 +14,7 @@ public class Player implements Preparation{
 	protected boolean identityReavealed ;
 	protected int point;
 	protected CopyOnWriteArrayList<RumourCard> playerRumourCardList;
-	protected boolean isOutOfTurn;
+	protected boolean isOutOfTurn = false;
 	protected int virtual ; // 1 = virtual
 	protected boolean isBroomstick = false;
 	protected boolean isWart = false;

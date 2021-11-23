@@ -98,7 +98,7 @@ public class SetUp implements Preparation{
         for(i = 0 ; i<numReal ;i++){ //  add real players
             allPlayerList.add(irlPlayerList.get(i));
         }
-        for(int j = 0 ; j<numberOfBot ;j++,i++){ // add bots
+        for(int j = 0 ; j<numberOfBot ;j++){ // add bots
             allPlayerList.add(botPlayerList.get(j));
         }
         if(numberOfPlayer == 5){

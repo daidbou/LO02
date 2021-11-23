@@ -10,7 +10,6 @@ public class Engine implements Preparation {
 
         List<Player> playerListInit = SetUp.initializeGame();
 
-
         GameStart:while(ifGameContinue(playerListInit)){
             System.out.println("================================ new turn ======================================= ");
             List<Player> playerList = SetUp.setUpPlayer(playerListInit);

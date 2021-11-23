@@ -37,31 +37,22 @@ public class Bot extends Player{
 		identity = (int)(Math.random()+0.5);//random set identity
 	}
 
+	/**
+	 * bot accuse another player
+	 * @param playerList list of every player
+	 */
     public Player accuse(List<Player> playerList){
-		int noP = (int)(playerList.size()*Math.random()-1);// random num player 
-		while(playerList.get(noP).getName().equals(name)){
-			
-			if(noP>playerList.size()){
-				noP = 0;
-			}else{
-				noP++;
-			}
-		}
-
-		Player pTurn2 = playerList.get(noP);
-		while(pTurn2.ifIdentityReavealed()){
-			if(noP == playerList.size()-1){
-				noP = noP - playerList.size()-1;
-				pTurn2 = playerList.get(noP);
-			}else{
-				pTurn2 = playerList.get(++noP);
-			}
-			
-		}
-			
-		System.out.println(name+" accuses "+pTurn2.getName());
-		return pTurn2;
+		int noP;
 		
+		while(true){
+			noP= (int) (Math.random()*(playerList.size()-1));// random num player 
+			
+			if(!Engine.nameToPlayer(playerList, playerList.get(noP).getName()).ifIsOutOfTurn()){
+				break;
+			}
+		}
+		System.out.println(name+" accuses "+Engine.nameToPlayer(playerList, playerList.get(noP).getName()));
+		return Engine.nameToPlayer(playerList, playerList.get(noP).getName());
 	}
 
 	/**
