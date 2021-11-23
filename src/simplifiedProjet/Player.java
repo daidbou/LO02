@@ -3,7 +3,6 @@ package simplifiedProjet;
 
 import simplifiedProjet.RumourCard.RumourCard;
 
-import java.lang.ref.Cleaner;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,8 +11,7 @@ public class Player implements Preparation{
 	protected int identity;//1 = witch, 0 = villager
 	protected boolean identityReavealed ;
 	protected int point;
-	protected List<RumourCard> rumourCardListPlayer;
-	protected List<RumourCard> disCardCardListPlayer ;
+	protected List<RumourCard> playerRumourCardList;
 	protected boolean isOutOfTurn;
 	protected int virtual ; // 1 = virtual
 	
@@ -24,7 +22,7 @@ public class Player implements Preparation{
 	public Player(String name, int identity, List<RumourCard> rumourCardListP) {
 		this.name = name;
 		this.identity = identity;
-		this.rumourCardListPlayer= rumourCardListP;
+		this.playerRumourCardList= rumourCardListP;
 		this.identityReavealed = false;
 		this.isOutOfTurn = false;
 		this.virtual = 0;
@@ -68,8 +66,9 @@ public class Player implements Preparation{
 		showCards();
 		System.out.println(" entre 0 for the first card");
 		int cardNum = in.nextInt();
-		Player pNextTurn = rumourCardListPlayer.get(cardNum).skillHunt(name,playerList);
-		//rumourCardListPlayer.remove(cardNum);
+		Player pNextTurn = playerRumourCardList.get(cardNum).skillHunt(name,playerList);
+		//TODO
+		playerRumourCardList.remove(cardNum);
 		return pNextTurn ;
 	}
 	/**
@@ -83,8 +82,8 @@ public class Player implements Preparation{
 		showCards();
 		System.out.println(" entre 0 for the first card");
 		int cardNum = in.nextInt();
-		Player pNextTurn = rumourCardListPlayer.get(cardNum).skillWitch(pTurn1.getName(),playerList);
-		//rumourCardListPlayer.remove(cardNum);
+		Player pNextTurn = playerRumourCardList.get(cardNum).skillWitch(pTurn1.getName(),playerList);
+		playerRumourCardList.remove(cardNum);
 		return pNextTurn ;//在这里检查?
 	}
 
@@ -105,14 +104,13 @@ public class Player implements Preparation{
 		
 	}
 
-	
 	/**
 	 * Show the card of the player
 	 */
 	public void showCards() {
 		System.out.println(name+" and cards with ");
-		for (int i = 0; i < rumourCardListPlayer.size(); i++) {
-			System.out.println(rumourCardListPlayer.get(i).name());
+		for (int i = 0; i < playerRumourCardList.size(); i++) {
+			System.out.println(playerRumourCardList.get(i).name());
 		}
 		System.out.println();
 	}
@@ -201,7 +199,7 @@ public class Player implements Preparation{
 	 */
 	public void setRumourCardListPlayer(List<RumourCard> l){
 		
-		rumourCardListPlayer = l;
+		playerRumourCardList = l;
 		System.out.println(name+", what identity do you want to be? (1 for witch, 0 for villager)");
 		String id = in.nextLine();
 		
@@ -224,7 +222,7 @@ public class Player implements Preparation{
 }
 
 	public List<RumourCard> getRumourCardListPlayer(){	
-		return rumourCardListPlayer;
+		return playerRumourCardList;
 	}
 
 	public int isVirtual(){

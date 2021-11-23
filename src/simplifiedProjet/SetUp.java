@@ -47,8 +47,11 @@ public class SetUp implements Preparation{
     public static Bot b4 = new Bot("b4");
     public static Bot b5 = new Bot("b5");
     public static Bot b6 = new Bot("b6");
-   
 
+    /**
+     * List of every vard that we discarded
+     */
+    public List<RumourCard> discardedRumourCard = new ArrayList<RumourCard>();
 
 	public static List<Player> irlPlayerList = new ArrayList<Player>(){{//player list
         add(p1);

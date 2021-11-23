@@ -56,14 +56,12 @@ public class DuckingStool implements RumourCard {
     @Override
     public Player skillHunt(String namePturn1, List<Player> playerList) {
         System.out.println("Take next turn");
-		Player pNextTurn = Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
-		return pNextTurn;
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
     }
     @Override
     public Player skillHuntBot(String namePturn1, List<Player> playerList) {
         System.out.println("Take next turn");
-		Player pNextTurn = Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
-		return pNextTurn;
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
     }
 
     

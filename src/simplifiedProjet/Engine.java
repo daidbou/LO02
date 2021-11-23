@@ -207,6 +207,7 @@ public class Engine implements Preparation {
 	 * @return
 	 */
     public static Player nextPlayer(List<Player> playerList, Player p){
+       
         int index = 0;
 		for(int i = 0; i < playerList.size();i++){
 			if(playerList.get(i).getName().equals(p.getName())){
@@ -216,44 +217,14 @@ public class Engine implements Preparation {
 		}
         System.out.println("index = "+index);
 
-        Player ppNextTurn = new Player();
         if(ifTurnContinue(playerList)){
-           /* if(index == playerList.size()-1){//have bug
-                index = 0;        
-                ppNextTurn = playerList.get(index);
-            }else{
-                ppNextTurn = playerList.get(++index);
-                while(ppNextTurn.ifIsOutOfTurn()){
-                   
-                    if(index == playerList.size()-1){//have bug
-                        index = 0;        
-                        ppNextTurn = playerList.get(index);
-                    }
-                }
-            }*/
-            
-            /*if(index != playerList.size()-1){ // index is not the last player of the list
-                ppNextTurn = playerList.get(++index); 
-                while(ppNextTurn.ifIsOutOfTurn() && (index != playerList.size()-1)){
-                    ppNextTurn = playerList.get(++index);
-                }
-                if(index == playerList.size()-1){
-                    index = 0;
-                    ppNextTurn = playerList.get(index);
-                }
-            }else{ // index is the last player of the list
-                index = 0;
-                ppNextTurn = playerList.get(index);
-                while(ppNextTurn.ifIsOutOfTurn() && (index != playerList.size()-1)){
-                    ppNextTurn = playerList.get(++index);
-                }
-
-            }*/
-            for(int i = index+1 ; i < playerList.size()-1;i++){
+            //check if there is a player after Player p that is not out of turn
+            for(int i = index+1 ; i < playerList.size();i++){
                 if(!playerList.get(i).ifIsOutOfTurn()){
                     return playerList.get(i);
                 }
             }
+            //start a new turn to find the next player
             for(int i = 0;i<index;i++){
                 if(!playerList.get(i).ifIsOutOfTurn()){
                     return playerList.get(i);
