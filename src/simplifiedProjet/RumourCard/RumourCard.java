@@ -17,37 +17,37 @@ public interface RumourCard {
 	
 	/**
 	 * use the Witch? ability
-	 * @param namePTurn2
+	 * @param accuser
 	 * 		name here is the player being accused
 	 * @return
 	 */
-	public Player skillWitch(String namePTurn2,List<Player> playerList);
+	public Player skillWitch(String accuser,List<Player> playerList);
 	
 	
 	/**
 	 * use the Witch? ability for bot
-	 * @param namePTurn2
+	 * @param accuser
 	 * 		name here is the player being accused
 	 * @return
 	 */
-	public Player skillWitchBot(String namePTurn2,List<Player> playerList);
+	public Player skillWitchBot(String accuser,List<Player> playerList);
 
 	
 	/**
 	 * Use the Hunt! ability
-	 * @param namePTurn1 is pTurn1's name, the player who use the huntSkill
+	 * @param hunter is the player who use is hunter
 	 * 		
 	 * @return next player to take the turn
 	 */
-	public Player skillHunt(String namePturn1,List<Player> playerList); 
+	public Player skillHunt(String hunter,List<Player> playerList); 
 	
 	/**
 	 * 
-	 * @param namePturn1 is pTurn1's name, the player who use the huntSkill
+	 * @param hunter is the player who use is hunter
 	 * @param playerList List of all the player
 	 * @return
 	 */
-	public Player skillHuntBot(String namePturn1, List<Player> playerList);
+	public Player skillHuntBot(String hunter, List<Player> playerList);
 	
 	
 	/**

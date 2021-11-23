@@ -1,9 +1,11 @@
 package simplifiedProjet.RumourCard;
 
 import java.util.List;
+import java.util.Scanner;
 
 import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
+import simplifiedProjet.SetUp;
 
 public class BlackCat implements RumourCard{
     
@@ -43,8 +45,22 @@ public class BlackCat implements RumourCard{
 	}
 
 	@Override
-	public Player skillHunt(String namePturn1, List<Player> playerList) {
-		System.out.println("Take next turn");
+	public Player skillHunt(String hunted, List<Player> playerList) {
+		Player p1 = Engine.nameToPlayer(playerList, hunted);
+		p1.showDiscardedCards();
+		System.out.println("Add one discarded card to your hand\n");
+		Scanner sc = new Scanner(System.in);
+		int selectedCardNumber = sc.nextInt();
+		p1.setCardInTheList(SetUp.discardedRumourCard.get(selectedCardNumber));
+		SetUp.discardedRumourCard.remove()
+
+
+
+
+
+		
+		
+
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
 	}
 

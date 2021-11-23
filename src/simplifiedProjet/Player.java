@@ -114,6 +114,17 @@ public class Player implements Preparation{
 		}
 		System.out.println();
 	}
+	/**
+	 * Show the discarded card
+	 */
+	public void showDiscardedCards() {
+		System.out.println("Discarded cards are :");
+		for (int i = 0; i < SetUp.discardedRumourCard.size(); i++) {
+			System.out.println(SetUp.discardedRumourCard.get(i).name());
+		}
+		System.out.println();
+	}
+	
 	
 	/**
 	 * Get the name of the player
@@ -242,5 +253,11 @@ public class Player implements Preparation{
 			return false;
 		}
 	}
-
+	/**
+	 * add a card in the hand of the player
+	 */
+	public void setCardInTheList(RumourCard rumourCard){
+		
+		this.playerRumourCardList.add(rumourCard);
+	}
 }
