@@ -76,7 +76,7 @@ public class Bot extends Player{
 		int cardNumBot = (int)(Math.random()*(getRumourCardListPlayer().size()-1));	
 		Player pNextTurn = rumourCardListPlayer.get(cardNumBot).skillWitchBot(pTurn1.getName(),playerList);
 		System.out.println(name+"use witch skill to "+pTurn1.getName()+" using "+rumourCardListPlayer.get(cardNumBot).name());
-		rumourCardListPlayer.remove(cardNumBot);
+		//rumourCardListPlayer.remove(cardNumBot);
 		return pNextTurn;
 	}
 	/**
@@ -89,7 +89,7 @@ public class Bot extends Player{
 		
 		Player pNextTurn = rumourCardListPlayer.get(cardNumBot).skillHuntBot(name,playerList);
 		System.out.println(name+"use hunt skill to "+pNextTurn.getName()+" using "+rumourCardListPlayer.get(cardNumBot).name());
-		rumourCardListPlayer.remove(cardNumBot);
+		//rumourCardListPlayer.remove(cardNumBot);
 		return pNextTurn;
 
 	}

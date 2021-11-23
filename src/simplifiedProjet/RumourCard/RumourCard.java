@@ -21,7 +21,7 @@ public interface RumourCard {
 	 * 		name here is theplayer being accused
 	 * @return
 	 */
-	public Player skillWitch(String name,List<Player> playerList);
+	public Player skillWitch(String namePTurn1,List<Player> playerList);
 	
 	
 	/**
@@ -30,7 +30,7 @@ public interface RumourCard {
 	 * 		name here is theplayer being accused
 	 * @return
 	 */
-	public Player skillWitchBot(String name,List<Player> playerList);
+	public Player skillWitchBot(String namePTurn1,List<Player> playerList);
 
 	
 	/**
@@ -39,10 +39,10 @@ public interface RumourCard {
 	 * 		
 	 * @return
 	 */
-	public Player skillHunt(String name,List<Player> playerList); 
+	public Player skillHunt(String namePturn2,List<Player> playerList); 
 	
 	
-	public Player skillHuntBot(String name2, List<Player> playerList);
+	public Player skillHuntBot(String namePturn2, List<Player> playerList);
 	
 	
 	/**

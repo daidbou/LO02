@@ -3,6 +3,7 @@ package simplifiedProjet;
 
 import simplifiedProjet.RumourCard.RumourCard;
 
+import java.lang.ref.Cleaner;
 import java.util.List;
 import java.util.Scanner;
 
@@ -68,7 +69,7 @@ public class Player implements Preparation{
 		System.out.println(" entre 0 for the first card");
 		int cardNum = in.nextInt();
 		Player pNextTurn = rumourCardListPlayer.get(cardNum).skillHunt(name,playerList);
-		rumourCardListPlayer.remove(cardNum);
+		//rumourCardListPlayer.remove(cardNum);
 		return pNextTurn ;
 	}
 	/**
@@ -83,7 +84,7 @@ public class Player implements Preparation{
 		System.out.println(" entre 0 for the first card");
 		int cardNum = in.nextInt();
 		Player pNextTurn = rumourCardListPlayer.get(cardNum).skillWitch(pTurn1.getName(),playerList);
-		rumourCardListPlayer.remove(cardNum);
+		//rumourCardListPlayer.remove(cardNum);
 		return pNextTurn ;//在这里检查?
 	}
 
@@ -104,6 +105,7 @@ public class Player implements Preparation{
 		
 	}
 
+	
 	/**
 	 * Show the card of the player
 	 */

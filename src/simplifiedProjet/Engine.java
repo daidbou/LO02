@@ -14,6 +14,9 @@ public class Engine implements Preparation {
         GameStart:while(ifGameContinue(playerListInit)){
             System.out.println("================================ new turn ======================================= ");
             List<Player> playerList = SetUp.setUpPlayer(playerListInit);
+            for(Player p: playerList){
+                p.showCards();
+            }
            
             
             Player pTurn1 = new Player();
@@ -179,7 +182,7 @@ public class Engine implements Preparation {
 
     public static boolean ifTurnContinue(List<Player> playerList) {
         int i = playerList.size();// how many players are still playing
-        System.out.println("all "+i+"players");
+        //System.out.println("all "+i+"players");
         // System.out.println("size"+pAll.size());
         for (Player p : playerList) {
             if (p.ifIdentityReavealed() == true) {
@@ -187,7 +190,7 @@ public class Engine implements Preparation {
 
             }
         }
-        System.out.println("there are still "+i+"players ");
+        //System.out.println("there are still "+i+"players ");
         if (i == 1) {
             return false; // if there is only one , the end this turn
         } else {
@@ -214,13 +217,13 @@ public class Engine implements Preparation {
         System.out.println("index = "+index);
         Player ppNextTurn = new Player();
         if(ifTurnContinue(playerList)){
-            if(index == playerList.size()-1){
+            if(index == playerList.size()-1){//have bug
                 index = 0;        
                 ppNextTurn = playerList.get(index);
             }else{
                 ppNextTurn = playerList.get(++index);
                 while(ppNextTurn.ifIsOutOfTurn()){
-                 ppNextTurn = playerList.get(++index);
+                    ppNextTurn = playerList.get(++index);
                 }
             }
             return ppNextTurn;

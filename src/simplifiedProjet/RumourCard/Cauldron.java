@@ -6,7 +6,7 @@ import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
 
 public class Cauldron implements RumourCard{
-    String name ="Cauldron";
+    String nameCard ="Cauldron";
    
 
     @Override
@@ -28,32 +28,32 @@ public class Cauldron implements RumourCard{
     @Override
 	public String name() {
 		
-		return name;
+		return nameCard;
 	}
 
    
 
 	@Override
-	public Player skillWitch(String name, List<Player> playerList) {
+	public Player skillWitch(String namePTurn1, List<Player> playerList) {
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePTurn1));
 	}
 
 	@Override
-	public Player skillWitchBot(String name, List<Player> playerList) {
+	public Player skillWitchBot(String namePTurn1, List<Player> playerList) {
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePTurn1));
 	}
 
 	@Override
-	public Player skillHunt(String name, List<Player> playerList) {
+	public Player skillHunt(String namePturn2, List<Player> playerList) {
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn2));
 	}
 
 	@Override
-	public Player skillHuntBot(String name2, List<Player> playerList) {
+	public Player skillHuntBot(String namePturn2, List<Player> playerList) {
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, name));
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn2));
 	}
 }
