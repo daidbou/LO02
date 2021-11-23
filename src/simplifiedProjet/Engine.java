@@ -215,18 +215,51 @@ public class Engine implements Preparation {
 			}
 		}
         System.out.println("index = "+index);
+
         Player ppNextTurn = new Player();
         if(ifTurnContinue(playerList)){
-            if(index == playerList.size()-1){//have bug
+           /* if(index == playerList.size()-1){//have bug
                 index = 0;        
                 ppNextTurn = playerList.get(index);
             }else{
                 ppNextTurn = playerList.get(++index);
                 while(ppNextTurn.ifIsOutOfTurn()){
+                   
+                    if(index == playerList.size()-1){//have bug
+                        index = 0;        
+                        ppNextTurn = playerList.get(index);
+                    }
+                }
+            }*/
+            
+            /*if(index != playerList.size()-1){ // index is not the last player of the list
+                ppNextTurn = playerList.get(++index); 
+                while(ppNextTurn.ifIsOutOfTurn() && (index != playerList.size()-1)){
                     ppNextTurn = playerList.get(++index);
                 }
+                if(index == playerList.size()-1){
+                    index = 0;
+                    ppNextTurn = playerList.get(index);
+                }
+            }else{ // index is the last player of the list
+                index = 0;
+                ppNextTurn = playerList.get(index);
+                while(ppNextTurn.ifIsOutOfTurn() && (index != playerList.size()-1)){
+                    ppNextTurn = playerList.get(++index);
+                }
+
+            }*/
+            for(int i = index+1 ; i < playerList.size()-1;i++){
+                if(!playerList.get(i).ifIsOutOfTurn()){
+                    return playerList.get(i);
+                }
             }
-            return ppNextTurn;
+            for(int i = 0;i<index;i++){
+                if(!playerList.get(i).ifIsOutOfTurn()){
+                    return playerList.get(i);
+                }
+            }
+            return null;
         }else{
             System.out.println("this turn ends");
             return null;// has a problem here

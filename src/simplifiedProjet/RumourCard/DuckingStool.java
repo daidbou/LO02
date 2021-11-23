@@ -10,20 +10,20 @@ import simplifiedProjet.SetUp;
 public class DuckingStool implements RumourCard {
     String nameCard ="Ducking Stool";
     @Override
-    public Player skillWitch(String namePTurn1,List<Player> playerList) {
+    public Player skillWitch(String namePTurn2,List<Player> playerList) {
 
         System.out.println("choose next player");
         String pNextTurn = in.nextLine();
-        Player pMe = Preparation.isExiste(namePTurn1, playerList);//returns player pMe 
+        Player pMe = Preparation.isExiste(namePTurn2, playerList);//returns player pMe 
         return Preparation.isExiste(pNextTurn,pMe.getName(),playerList);// in order that he cannot choose himself as player next turn
         
     }
     @Override
-    public Player skillWitchBot(String namePTurn1,List<Player> playerList) {
+    public Player skillWitchBot(String namePTurn2,List<Player> playerList) {
 
         int nopRandom = (int)(Math.random()*playerList.size());
         String pNextTurn = playerList.get(nopRandom).getName();
-        Player pMe = Engine.nameToPlayer(playerList, namePTurn1);
+        Player pMe = Engine.nameToPlayer(playerList, namePTurn2);
         return Preparation.isExiste(pNextTurn,pMe.getName(),playerList);
 
     }
@@ -54,15 +54,15 @@ public class DuckingStool implements RumourCard {
    
     
     @Override
-    public Player skillHunt(String namePturn2, List<Player> playerList) {
+    public Player skillHunt(String namePturn1, List<Player> playerList) {
         System.out.println("Take next turn");
-		Player pNextTurn = Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn2));
+		Player pNextTurn = Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
 		return pNextTurn;
     }
     @Override
-    public Player skillHuntBot(String namePturn2, List<Player> playerList) {
+    public Player skillHuntBot(String namePturn1, List<Player> playerList) {
         System.out.println("Take next turn");
-		Player pNextTurn = Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn2));
+		Player pNextTurn = Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
 		return pNextTurn;
     }
 

@@ -40,27 +40,27 @@ public class TheInquisition implements RumourCard {
 	
 
 	@Override
-	public Player skillWitch(String namePTurn1, List<Player> playerList) {
+	public Player skillWitch(String namePTurn2, List<Player> playerList) {
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePTurn1));
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePTurn2));
 	}
 
 	@Override
-	public Player skillWitchBot(String namePTurn1, List<Player> playerList) {
+	public Player skillWitchBot(String namePTurn2, List<Player> playerList) {
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePTurn1));
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePTurn2));
 	}
 
 	@Override
-	public Player skillHunt(String namePturn2, List<Player> playerList) {
+	public Player skillHunt(String namePturn1, List<Player> playerList) {
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn2));
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
 	}
 
 	@Override
-	public Player skillHuntBot(String namePturn2, List<Player> playerList) {
+	public Player skillHuntBot(String namePturn1, List<Player> playerList) {
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn2));
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
 	}
 	
 	
