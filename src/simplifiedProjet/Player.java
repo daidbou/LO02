@@ -16,6 +16,8 @@ public class Player implements Preparation{
 	protected CopyOnWriteArrayList<RumourCard> playerRumourCardList;
 	protected boolean isOutOfTurn;
 	protected int virtual ; // 1 = virtual
+	protected boolean isBroomstick = false;
+	protected boolean isWart = false;
 	
 	Scanner in = new Scanner(System.in);
 
@@ -266,18 +268,15 @@ public class Player implements Preparation{
 		this.playerRumourCardList.add(rumourCard);
 	}
 
-	// public List<RumourCard> removeCard(String cardName, List<RumourCard> l){
-		
-	// 	List<RumourCard> listNew = l;
-	// 	Iterator<RumourCard> iterator = listNew.iterator();
-	// 	while(iterator.hasNext()){
-    //         RumourCard r = iterator.next();
-    //         if(r.name().equals(cardName)){
-	// 			iterator.remove();   
-	// 		}     
-    //     }
-	// 	l = listNew;
-	// 	//showCards();
-	// 	return l;
-    // }
+
+	public void isBroomstick(){
+
+		this.isBroomstick = true;
+ 
+	}
+
+	public void isWart(){
+		this.isWart = true;
+	}
+
 }

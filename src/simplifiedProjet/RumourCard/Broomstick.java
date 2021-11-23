@@ -35,17 +35,27 @@ public class Broomstick implements RumourCard{
 
 	@Override
 	public Player skillWitch(String namePTurn2, List<Player> playerList) {
+
+		Engine.nameToPlayer(playerList, namePTurn2).isBroomstick();
+
 		System.out.println("Take next turn");
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePTurn2));
 	}
 	@Override
 	public Player skillWitchBot(String namePTurn2, List<Player> playerList) {
+
+		Engine.nameToPlayer(playerList,namePTurn2).isBroomstick();
+		
 		System.out.println("Take next turn");
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePTurn2));
 	}
 
 	@Override
 	public Player skillHunt(String hunter, List<Player> playerList) {
+
+		Engine.nameToPlayer(playerList, hunter).isBroomstick();
+
+
 		System.out.println("please select one player (p1 or b1 for example :");
 		for(Player p: playerList){
 			System.out.println(p.getName());
@@ -66,6 +76,9 @@ public class Broomstick implements RumourCard{
 
 	@Override
 	public Player skillHuntBot(String hunter, List<Player> playerList) {
+
+		Engine.nameToPlayer(playerList, hunter).isBroomstick();
+
 		Random rand = new Random();
 		Player hunted = new Player();
 		while(true){
