@@ -14,6 +14,8 @@ public class Player implements Preparation{
 	protected List<RumourCard> playerRumourCardList;
 	protected boolean isOutOfTurn;
 	protected int virtual ; // 1 = virtual
+	protected boolean isBroomstick = false;
+	protected boolean isWart = false;
 	
 	Scanner in = new Scanner(System.in);
 
@@ -262,4 +264,13 @@ public class Player implements Preparation{
 		this.playerRumourCardList.add(rumourCard);
 	}
 
+	public void isBroomstick(){
+
+		this.isBroomstick = true;
+ 
+	}
+
+	public void isWart(){
+		this.isWart = true;
+	}
 }
