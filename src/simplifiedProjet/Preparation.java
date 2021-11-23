@@ -2,6 +2,7 @@ package simplifiedProjet;
 import java.util.ArrayList;
 //import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import simplifiedProjet.RumourCard.RumourCard;
 import simplifiedProjet.RumourCard.AngryMob;
@@ -33,7 +34,7 @@ public interface Preparation {
     static Wart wart = new Wart();//create 12 rumour cards
 
 
-    public static List<RumourCard> rumourCardList = new ArrayList<RumourCard>(){{
+    public static CopyOnWriteArrayList<RumourCard> rumourCardList = new CopyOnWriteArrayList<RumourCard>(){{
 		//add(null);
         add(angryMob);
 		add(blackCat);

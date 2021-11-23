@@ -3,15 +3,17 @@ package simplifiedProjet;
 
 import simplifiedProjet.RumourCard.RumourCard;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Player implements Preparation{
 	protected String name;
 	protected int identity;//1 = witch, 0 = villager
 	protected boolean identityReavealed ;
 	protected int point;
-	protected List<RumourCard> playerRumourCardList;
+	protected CopyOnWriteArrayList<RumourCard> playerRumourCardList;
 	protected boolean isOutOfTurn;
 	protected int virtual ; // 1 = virtual
 	
@@ -19,7 +21,7 @@ public class Player implements Preparation{
 
 	public Player(){};
 
-	public Player(String name, int identity, List<RumourCard> rumourCardListP) {
+	public Player(String name, int identity, CopyOnWriteArrayList<RumourCard> rumourCardListP) {
 		this.name = name;
 		this.identity = identity;
 		this.playerRumourCardList= rumourCardListP;
@@ -67,9 +69,10 @@ public class Player implements Preparation{
 		System.out.println(" entre 0 for the first card");
 		int cardNum = in.nextInt();
 		Player pNextTurn = playerRumourCardList.get(cardNum).skillHunt(name,playerList);
-		//TODO
 		playerRumourCardList.remove(cardNum);
-		return pNextTurn ;
+		
+		return pNextTurn;
+		
 	}
 	/**
 	 * 
@@ -85,6 +88,7 @@ public class Player implements Preparation{
 		Player pNextTurn = playerRumourCardList.get(cardNum).skillWitch(pTurn1.getName(),playerList);
 		playerRumourCardList.remove(cardNum);
 		return pNextTurn ;//在这里检查?
+		
 	}
 
 	/**
@@ -197,7 +201,7 @@ public class Player implements Preparation{
 	 * Set the identity of real players, and the same time set the rumour card list of the player
 	 * @param l
 	 */
-	public void setRumourCardListPlayer(List<RumourCard> l){
+	public void setRumourCardListPlayer(CopyOnWriteArrayList<RumourCard> l){
 		
 		playerRumourCardList = l;
 		System.out.println(name+", what identity do you want to be? (1 for witch, 0 for villager)");
@@ -221,7 +225,7 @@ public class Player implements Preparation{
 		}
 }
 
-	public List<RumourCard> getRumourCardListPlayer(){	
+	public CopyOnWriteArrayList<RumourCard> getRumourCardListPlayer(){	
 		return playerRumourCardList;
 	}
 
@@ -243,4 +247,18 @@ public class Player implements Preparation{
 		}
 	}
 
+	// public List<RumourCard> removeCard(String cardName, List<RumourCard> l){
+		
+	// 	List<RumourCard> listNew = l;
+	// 	Iterator<RumourCard> iterator = listNew.iterator();
+	// 	while(iterator.hasNext()){
+    //         RumourCard r = iterator.next();
+    //         if(r.name().equals(cardName)){
+	// 			iterator.remove();   
+	// 		}     
+    //     }
+	// 	l = listNew;
+	// 	//showCards();
+	// 	return l;
+    // }
 }

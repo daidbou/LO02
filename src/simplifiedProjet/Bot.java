@@ -3,6 +3,7 @@ import simplifiedProjet.RumourCard.RumourCard;
 
 import java.util.List;
 //import java.util.Scanner;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Bot extends Player{
 
@@ -22,7 +23,7 @@ public class Bot extends Player{
         this.virtual = 1;
        // super(name);
     }
-    public Bot(String name, int identity, List<RumourCard> rumourCardListP) {
+    public Bot(String name, int identity, CopyOnWriteArrayList<RumourCard> rumourCardListP) {
 		
         this.name = name;
 		this.identity = identity;
@@ -31,7 +32,7 @@ public class Bot extends Player{
 		this.isOutOfTurn = false;
         this.virtual = 1;
 	}
-    public void setRumourCardListPlayer(List<RumourCard> l){
+    public void setRumourCardListPlayer(CopyOnWriteArrayList<RumourCard> l){
 		playerRumourCardList = l;
 		identity = (int)(Math.random()+0.5);//random set identity
 	}

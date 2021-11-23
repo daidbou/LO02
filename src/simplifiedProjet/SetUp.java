@@ -4,6 +4,7 @@ import java.util.Collections;
 //import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import simplifiedProjet.RumourCard.RumourCard;
 
@@ -72,7 +73,7 @@ public class SetUp implements Preparation{
     }};
     
     public static  List<Player> allPlayerList = new ArrayList<>();
-    public static  List<RumourCard> rumourCardShuffled = rumourCardList; 
+    public static  CopyOnWriteArrayList<RumourCard> rumourCardShuffled = rumourCardList; 
     
     public static List<Player> initializeGame(){
         Scanner sc = new Scanner(System.in);
@@ -119,20 +120,34 @@ public class SetUp implements Preparation{
         for(Player p: playerListInit){
             p.initializePlayer();
         }
+       
+        
+
         int i = 0;
+        int j = 0;
+        
         for(i = 0 ; i<numIrlPlayer ;i++){ // set up real players
-            List<RumourCard> rumourCardListReal = rumourCardShuffled.subList((i)*numberOfCardsPerPlayer, (i+1)*numberOfCardsPerPlayer);
+            
+            CopyOnWriteArrayList<RumourCard> rumourCardListReal = new  CopyOnWriteArrayList<RumourCard>();
+            for (j = (i)*numberOfCardsPerPlayer;j<(i+1)*numberOfCardsPerPlayer;j++){
+                rumourCardListReal.add(rumourCardShuffled.get(j));
+            }
             irlPlayerList.get(i).setRumourCardListPlayer(rumourCardListReal);//the same time define theirs identity
             playerList.add(irlPlayerList.get(i));
         }
         
         
-        
-        for(int j = 0 ; j<numberOfBot ;j++,i++){ // set up bots
-            List<RumourCard> rumourCardListBot = rumourCardShuffled.subList((i)*numberOfCardsPerPlayer, (i+1)*numberOfCardsPerPlayer);
-            botPlayerList.get(j).setRumourCardListPlayer(rumourCardListBot);//the same time define theirs identity
-            playerList.add(botPlayerList.get(j));
+        for(int k = 0 ; k<numberOfBot ;k++,i++){
+            CopyOnWriteArrayList<RumourCard> rumourCardListBot = new  CopyOnWriteArrayList<RumourCard>();
+            for (int m = (i)*numberOfCardsPerPlayer;m<(i+1)*numberOfCardsPerPlayer;m++){
+                rumourCardListBot.add(rumourCardShuffled.get(m));
+            }
+            botPlayerList.get(k).setRumourCardListPlayer(rumourCardListBot);//the same time define theirs identity
+            playerList.add(botPlayerList.get(k));
+
+
         }
+       
         //Collections.shuffle(playerList);
         return playerList;      
     }
