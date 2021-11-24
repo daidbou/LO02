@@ -162,9 +162,16 @@ public class Player implements Preparation{
 	 * @param num shows how many to raise
 	 */
 	public void raisePoints(int num){
-		for(int i = 0; i < num; i++){
-			point++;
+		if(num > 0){
+			for(int i = 0; i < num; i++){
+				point++;
+			}
+		}else{
+			for(int i = 0; i > num; i--){
+				point -= num;
+			}
 		}
+		
 	}
 	
 	/**
@@ -286,6 +293,12 @@ public class Player implements Preparation{
 		this.isWart = true;
 	}
 	
+	/**
+	 * for a player to discard cards
+	 * it will check if you still have a rumourcard
+	 * @param cardNum which card to discard
+	 * @return 0 if succeed,  -1 failed
+	 */
 	public int disCardCard(int cardNum){
 		if(this.playerRumourCardList.size() == 0){
 			System.out.println("you don't have any cards");
