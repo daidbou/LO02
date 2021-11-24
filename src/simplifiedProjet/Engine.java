@@ -82,6 +82,11 @@ public class Engine implements Preparation {
         }
     }
 
+    /**
+     * at the end of a turn,shows the status of a player, including
+     * his name, his identity and his points
+     * @param playerList
+     */
     private static void showStatus(List<Player> playerList) {
         System.out.println("++++++++++++++++conclusion+++++++++++++++++++++");
         for(Player p: playerList){
@@ -97,7 +102,13 @@ public class Engine implements Preparation {
    
 
 
-
+    /**
+    * For a real player to choose randomly to witchskill or show identity
+    * @param pTurn1
+    * 		it's the real player who use this fonction
+    * @return  
+    *     true = witch skill , false = show identity
+    */
     public static boolean doChoiceWI_Real(Player pTurn2) {
         Scanner in = new Scanner(System.in);
         if(pTurn2.checkRumourCardList()){
@@ -116,6 +127,13 @@ public class Engine implements Preparation {
         }
     }
 
+    /**
+    * For a real player to choose randomly to accuse or hunt
+    * @param pTurn1
+    * 		it's the real player who use this fonction
+    * @return  
+    *     true = accuse , false = hunt
+    */
     public static boolean doChoiceAH_Real(Player pTurn1) {
         Scanner in = new Scanner(System.in);
         if(pTurn1.checkRumourCardList()){
@@ -133,13 +151,11 @@ public class Engine implements Preparation {
     }
 
     /**
-    * For a bot to choose randomly accuse or hunt
+    * For a bot to choose randomly to accuse or hunt
     * @param pTurn1
     * 		it's the bot who use this fonction
-    * @return  a boolean
-    *      the choice by random
-    *      if the random int > 1 then returns accuse
-    *      else returns Hunt 
+    * @return  
+    *     true = accuse , false = hunt
     */
     public static boolean doChoiceAh_Bot(Player pTurn1) {
         double ChoiceAh_Bot = Math.random();
@@ -151,13 +167,12 @@ public class Engine implements Preparation {
     }
 
      /**
-    * For a bot to choose randomly use witch or show id 
+    * For a bot to choose randomly to use witch or show id 
     * @param pTurn1
     * 		it's the bot who use this fonction
-    * @return  a boolean
-    *      the choice by random
-    *      if true then means witch
-    *      else means show id 
+    * @return 
+    *      true = witch , false = show id
+    *      
     */
     public static boolean doChoiceWI_Bot(Player pTurn1) { //witch or show id
         double ChoiceWI_Bot = Math.random();
@@ -170,6 +185,12 @@ public class Engine implements Preparation {
     }
 
 
+    /**
+     * to judge if this gameis end
+     * condition: until some players points more than 5
+     * @param playerList
+     * @return true if game ends
+     */
     public static boolean ifGameContinue(List<Player> pAll) {
         for (Player p : pAll) {
             if (p.getPoint() >= 3) {
@@ -179,9 +200,15 @@ public class Engine implements Preparation {
         return true;
     }
 
+    /**
+     * to judge if this turn is end
+     * condition: until one player didn't reveal his identity
+     * @param playerList
+     * @return true if turn ends
+     */
     public static boolean ifTurnContinue(List<Player> playerList) {
         int i = playerList.size();// how many players are still playing
-        System.out.println("all "+i+" players");
+        //System.out.println("all "+i+" players");
         //System.out.println("size"+playerList.size());
         for (Player p : playerList) {
             if (p.ifIdentityReavealed() == true) {
@@ -189,7 +216,7 @@ public class Engine implements Preparation {
 
             }
         }
-        System.out.println("there are still "+i+" players ");
+        //System.out.println("there are still "+i+" players ");
         if (i == 1) {
             return false; // if there is only one , the end this turn
         } else {
@@ -198,7 +225,9 @@ public class Engine implements Preparation {
     }
 
     /**
-	 * returns next player in the list of p, which is well examined
+	 * returns next player in the list of p, which is well examined,
+     * he should not out of turn, and will traverse again the list if reach the end of the list
+     * 
 	 * @param playerList
 	 * 		the list you want
      * @param p
@@ -261,7 +290,7 @@ public class Engine implements Preparation {
 
     }
     /**
-     * return tre of false randomly
+     * return true or false randomly
      * @return
      */
     public static boolean choiceRandom(){

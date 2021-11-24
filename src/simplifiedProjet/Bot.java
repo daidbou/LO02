@@ -36,6 +36,7 @@ public class Bot extends Player{
     public void setRumourCardListPlayer(CopyOnWriteArrayList<RumourCard> l){
 		playerRumourCardList = l;
 		identity = (int)(Math.random()+0.5);//random set identity
+		playerDiscardCardList = new CopyOnWriteArrayList<RumourCard>();
 	}
 
 	/**
@@ -88,7 +89,7 @@ public class Bot extends Player{
 	 * @param 
 	 */
 	public Player hunt(List<Player> playerList){
-		int cardNumBot = (int)((Math.random()+0.01)*(getRumourCardListPlayer().size()));
+		int cardNumBot = (int)(Math.random()*(getRumourCardListPlayer().size()));
 		
 		Player pNextTurn = playerRumourCardList.get(cardNumBot).skillHuntBot(name,playerList);
 		System.out.println(name+"use hunt skill to "+pNextTurn.getName()+" using "+playerRumourCardList.get(cardNumBot).name());

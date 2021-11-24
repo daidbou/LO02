@@ -14,11 +14,12 @@ public class Player implements Preparation{
 	protected boolean identityReavealed ;
 	protected int point;
 	protected CopyOnWriteArrayList<RumourCard> playerRumourCardList;
+	protected CopyOnWriteArrayList<RumourCard> playerDiscardCardList;
 	protected boolean isOutOfTurn = false;
 	protected int virtual ; // 1 = virtual
 	protected boolean isBroomstick = false;
 	protected boolean isWart = false;
-	
+	protected boolean isWinnerLastTurn;
 	Scanner in = new Scanner(System.in);
 
 	public Player(){};
@@ -72,8 +73,6 @@ public class Player implements Preparation{
 		System.out.println(" entre 0 for the first card");
 		int cardNum = in.nextInt();
 		Player pNextTurn = playerRumourCardList.get(cardNum).skillHunt(name,playerList);
-		//SetUp.discardedRumourCard.add(this.playerRumourCardList.get(cardNum));//TODO need to be initialized3
-		//playerRumourCardList.remove(cardNum);
 		disCardCard(cardNum);
 
 		
@@ -92,8 +91,6 @@ public class Player implements Preparation{
 		System.out.println(" entre 0 for the first card");
 		int cardNum = in.nextInt();
 		Player pNextTurn = playerRumourCardList.get(cardNum).skillWitch(pTurn1.getName(),this.name,playerList);
-		//SetUp.discardedRumourCard.add(this.playerRumourCardList.get(cardNum));//TODO need to be initialized
-		//playerRumourCardList.remove(cardNum);
 		disCardCard(cardNum);
 		
 		//use a method in setup
@@ -200,6 +197,11 @@ public class Player implements Preparation{
 	public void initializePlayer(){
 		identityReavealed = false;
 		isOutOfTurn = false;
+		if(this.playerDiscardCardList!=null){
+			this.playerDiscardCardList.clear();
+		}
+
+		//TODO all card status need to be initialized
 			
 	}
 	/**
@@ -232,6 +234,7 @@ public class Player implements Preparation{
 	public void setRumourCardListPlayer(CopyOnWriteArrayList<RumourCard> l){
 		
 		playerRumourCardList = l;
+		playerDiscardCardList = new CopyOnWriteArrayList<RumourCard>();
 		System.out.println(name+", what identity do you want to be? (1 for witch, 0 for villager)");
 		String id = in.nextLine();
 		
@@ -268,7 +271,7 @@ public class Player implements Preparation{
 	 * @return 
 	 */
 	public boolean checkRumourCardList(){
-		if (rumourCardList.size() == 0){
+		if (playerRumourCardList.size() == 0){
 			return true;
 		}else{
 			return false;
@@ -295,6 +298,7 @@ public class Player implements Preparation{
 	
 	/**
 	 * for a player to discard cards
+	 * both to the commom discardlist and the private discardlist
 	 * it will check if you still have a rumourcard
 	 * @param cardNum which card to discard
 	 * @return 0 if succeed,  -1 failed
@@ -304,11 +308,19 @@ public class Player implements Preparation{
 			System.out.println("you don't have any cards");
 			return -1;
 		}
-		SetUp.discardedRumourCard.add(this.playerRumourCardList.get(cardNum));//
+		SetUp.discardedRumourCard.add(this.playerRumourCardList.get(cardNum));
+		playerDiscardCardList.add(this.playerRumourCardList.get(cardNum));
 		playerRumourCardList.remove(cardNum);
 		return 0;
 	}
 
+	/**
+	 * for a player to discard cards
+	 * both to the commom discardlist and the private discardlist
+	 * it will check if you still have a rumourcard
+	 * @param nameCard name of the card
+	 * @return 0 if succeed,  -1 failed
+	 */
 	public int disCardCard(String nameCard){
 		if(this.playerRumourCardList.size() == 0){
 			System.out.println("you don't have any cards");
@@ -317,12 +329,31 @@ public class Player implements Preparation{
 		for(RumourCard r: this.playerRumourCardList){
 			if(r.name().equals(nameCard)){
 				SetUp.discardedRumourCard.add(r);
+				playerDiscardCardList.add(r);
 				this.playerRumourCardList.remove(r);
 				break;
 			}
 		}
 		System.out.println("no such card");
 		return 0;
+	}
+
+	public CopyOnWriteArrayList<RumourCard> getPlayerDiscardList(){
+		return this.playerDiscardCardList;
+	}
+
+	public void showPlayerDiscardList(){
+		for(RumourCard r: this.playerDiscardCardList){
+			System.out.println(r.name());
+		}
+	}
+
+	/**
+	 * 
+	 * @return true if he is the winner of last turn
+	 */
+	public boolean ifIsWinnerLastTurn(){
+		return isWinnerLastTurn;
 	}
 
 }

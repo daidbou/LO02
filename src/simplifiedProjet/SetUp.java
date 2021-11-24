@@ -155,6 +155,14 @@ public class SetUp implements Preparation{
         }
        
         //Collections.shuffle(playerList);
+        
+        //the winner of last turn goes first
+        for(int t = 0; i<playerList.size();t++){
+            if(playerList.get(t).ifIsWinnerLastTurn()){
+                Collections.swap(playerList,0,t);
+            }
+        }
+
         return playerList;      
     }
 }
