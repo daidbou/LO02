@@ -52,7 +52,7 @@ public class SetUp implements Preparation{
     /**
      * List of every card that we discarded
      */
-    public static List<RumourCard> discardedRumourCard = new ArrayList<RumourCard>();
+    public static CopyOnWriteArrayList<RumourCard> discardedRumourCard = new CopyOnWriteArrayList<RumourCard>();
 
 	public static List<Player> irlPlayerList = new ArrayList<Player>(){{//player list
         add(p1);

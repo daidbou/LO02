@@ -72,8 +72,9 @@ public class Player implements Preparation{
 		System.out.println(" entre 0 for the first card");
 		int cardNum = in.nextInt();
 		Player pNextTurn = playerRumourCardList.get(cardNum).skillHunt(name,playerList);
-		SetUp.discardedRumourCard.add(this.playerRumourCardList.get(cardNum));//TODO need to be initialized3
-		playerRumourCardList.remove(cardNum);
+		//SetUp.discardedRumourCard.add(this.playerRumourCardList.get(cardNum));//TODO need to be initialized3
+		//playerRumourCardList.remove(cardNum);
+		disCardCard(cardNum);
 
 		
 		return pNextTurn;
@@ -91,8 +92,9 @@ public class Player implements Preparation{
 		System.out.println(" entre 0 for the first card");
 		int cardNum = in.nextInt();
 		Player pNextTurn = playerRumourCardList.get(cardNum).skillWitch(pTurn1.getName(),this.name,playerList);
-		SetUp.discardedRumourCard.add(this.playerRumourCardList.get(cardNum));//TODO need to be initialized
-		playerRumourCardList.remove(cardNum);
+		//SetUp.discardedRumourCard.add(this.playerRumourCardList.get(cardNum));//TODO need to be initialized
+		//playerRumourCardList.remove(cardNum);
+		disCardCard(cardNum);
 		
 		//use a method in setup
 		return pNextTurn ;//在这里检查?
@@ -282,6 +284,32 @@ public class Player implements Preparation{
 
 	public void isWart(){
 		this.isWart = true;
+	}
+	
+	public int disCardCard(int cardNum){
+		if(this.playerRumourCardList.size() == 0){
+			System.out.println("you don't have any cards");
+			return -1;
+		}
+		SetUp.discardedRumourCard.add(this.playerRumourCardList.get(cardNum));//
+		playerRumourCardList.remove(cardNum);
+		return 0;
+	}
+
+	public int disCardCard(String nameCard){
+		if(this.playerRumourCardList.size() == 0){
+			System.out.println("you don't have any cards");
+			return -1;
+		}
+		for(RumourCard r: this.playerRumourCardList){
+			if(r.name().equals(nameCard)){
+				SetUp.discardedRumourCard.add(r);
+				this.playerRumourCardList.remove(r);
+				break;
+			}
+		}
+		System.out.println("no such card");
+		return 0;
 	}
 
 }

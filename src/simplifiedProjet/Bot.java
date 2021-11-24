@@ -1,7 +1,7 @@
 package simplifiedProjet;
 import simplifiedProjet.RumourCard.RumourCard;
 
-import java.time.Year;
+//import java.time.Year;
 import java.util.List;
 //import java.util.Scanner;
 import java.util.concurrent.CopyOnWriteArrayList;

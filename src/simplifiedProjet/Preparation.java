@@ -99,8 +99,8 @@ public interface Preparation {
     }
     /**
 	 * verify if the player exists in the list
-	 * @param pName target player
-	 * @param pTurn1Name player who use this method, in
+	 * @param accused target player
+	 * @param pNextTurn player who use this method, in
      *               sure that pTurn1 cannot do something to himself	
      * @param playerList the list you want to choose
 	 * @return true if existed
@@ -120,6 +120,23 @@ public interface Preparation {
             }	
         }
         System.out.println("no such player, try again");
+        return false;
+    }
+    public static boolean isExistedForBot(String accused,String pNextTurn,List<Player> playerList){
+        for(Player p:playerList) {
+            if(pNextTurn.equals(p.getName())) {
+                if(!accused.equals(pNextTurn)&& p.ifIsOutOfTurn() == false){
+                    return true;
+                }else if(p.ifIsOutOfTurn()){
+                    //System.out.println("already out of turn");
+                    return false;
+                }else{
+                   // System.out.println("not yourself");
+                    return false;
+                }
+            }	
+        }
+       // System.out.println("no such player, try again");
         return false;
     }
 
