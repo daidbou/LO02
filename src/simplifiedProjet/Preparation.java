@@ -61,11 +61,11 @@ public interface Preparation {
      * @param playerList the list you want to choose
 	 * @return the target player if exist, if not return null
 	 */
-    public static Player isExiste(String pName, String pTurn1Name,List<Player> playerList) {
+    public static Player isExistedP(String pName, String pTurn1Name,List<Player> playerList) {
         // pName is the target player
         // pTurn1 is the player who use this method, to make sure that pTurn1 cannot do something to himself
         for(Player p:playerList) {
-            if(pName.equals(p.getName())) {
+            if(pName.equals(p.getName())&& p.ifIsOutOfTurn() == false) {
                 if(!pName.equals(pTurn1Name)){
                     return p;
                 }else{
@@ -78,7 +78,14 @@ public interface Preparation {
         return null;
     }
     
-    public static Player isExiste(String pName,List<Player> playerList) {
+    /**
+	 * verify if the player exists in the list
+	 * @param pName target player
+	 * 	
+     * @param playerList the list you want to choose
+	 * @return the target player if exist, if not return null
+	 */
+    public static Player isExistedP(String pName,List<Player> playerList) {
     // sometimes we dont need to verify
         for(Player p:playerList) {
             if(pName.equals(p.getName()) && p.ifIsOutOfTurn() == false) {
@@ -90,6 +97,33 @@ public interface Preparation {
         System.out.println("no such player");
         return null;
     }
+    /**
+	 * verify if the player exists in the list
+	 * @param pName target player
+	 * @param pTurn1Name player who use this method, in
+     *               sure that pTurn1 cannot do something to himself	
+     * @param playerList the list you want to choose
+	 * @return true if existed
+	 */
+    public static boolean isExistedForPlayer(String accused,String pNextTurn,List<Player> playerList){
+        for(Player p:playerList) {
+            if(pNextTurn.equals(p.getName())) {
+                if(!accused.equals(pNextTurn)&& p.ifIsOutOfTurn() == false){
+                    return true;
+                }else if(p.ifIsOutOfTurn()){
+                    System.out.println("already out of turn");
+                    return false;
+                }else{
+                    System.out.println("not yourself");
+                    return false;
+                }
+            }	
+        }
+        System.out.println("no such player, try again");
+        return false;
+    }
+
+    
     
    
 

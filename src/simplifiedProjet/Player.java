@@ -45,17 +45,18 @@ public class Player implements Preparation{
 	 * @return
 	 */
 	public Player accuse(List<Player> playerList) { 
-		System.out.println(name+" is a real");
+		//System.out.println(name+" is a real");
 		System.out.println("which player? ex: p1 b1");
 		while(true){
 		Scanner sc = new Scanner(System.in);
 		String pName = sc.nextLine();
-		Player pTurn2 = Preparation.isExiste(pName,name, playerList);
+		Player pTurn2 = Preparation.isExistedP(pName,name, playerList);
 		if(pTurn2 == null){
-			System.out.println("no such player, try again");
+			//System.out.println("no such player, try again");
 			continue;
 		}else if(pTurn2.ifIdentityReavealed() == false){
 			System.out.println(name+" accuse "+pTurn2.getName());
+			//sc.close();
 			return pTurn2;
 		}else{
 			System.out.println(pTurn2.getName() + " has already revealed his identity, try again");
@@ -71,7 +72,9 @@ public class Player implements Preparation{
 		System.out.println(" entre 0 for the first card");
 		int cardNum = in.nextInt();
 		Player pNextTurn = playerRumourCardList.get(cardNum).skillHunt(name,playerList);
+		SetUp.discardedRumourCard.add(this.playerRumourCardList.get(cardNum));//TODO need to be initialized3
 		playerRumourCardList.remove(cardNum);
+
 		
 		return pNextTurn;
 		
@@ -87,9 +90,11 @@ public class Player implements Preparation{
 		showCards();
 		System.out.println(" entre 0 for the first card");
 		int cardNum = in.nextInt();
-		Player pNextTurn = playerRumourCardList.get(cardNum).skillWitch(pTurn1.getName(),playerList);
+		Player pNextTurn = playerRumourCardList.get(cardNum).skillWitch(pTurn1.getName(),this.name,playerList);
+		SetUp.discardedRumourCard.add(this.playerRumourCardList.get(cardNum));//TODO need to be initialized
 		playerRumourCardList.remove(cardNum);
-		SetUp.discardedRumourCard.add(this.playerRumourCardList.get(cardNum));
+		
+		//use a method in setup
 		return pNextTurn ;//在这里检查?
 		
 	}

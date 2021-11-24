@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
+import simplifiedProjet.Preparation;
 
 public class Broomstick implements RumourCard{
     
@@ -34,42 +35,50 @@ public class Broomstick implements RumourCard{
    
 
 	@Override
-	public Player skillWitch(String namePTurn2, List<Player> playerList) {
+	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
 
-		Engine.nameToPlayer(playerList, namePTurn2).isBroomstick();
+		Engine.nameToPlayer(playerList, accuser).isBroomstick();
 
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePTurn2));
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
 	}
 	@Override
-	public Player skillWitchBot(String namePTurn2, List<Player> playerList) {
+	public Player skillWitchBot(String accuser,String accused,List<Player> playerList) {
 
-		Engine.nameToPlayer(playerList,namePTurn2).isBroomstick();
+		Engine.nameToPlayer(playerList,accuser).isBroomstick();
 		
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePTurn2));
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
 	}
 
 	@Override
 	public Player skillHunt(String hunter, List<Player> playerList) {
 
 		Engine.nameToPlayer(playerList, hunter).isBroomstick();
-
+		
 
 		System.out.println("please select one player (p1 or b1 for example :");
 		for(Player p: playerList){
 			System.out.println(p.getName());
 		}
-		
+		String hunted = "";
 		Scanner sc = new Scanner(System.in);
-		String hunted = sc.nextLine();
+		// while(Preparation.isExistedForPlayer(hunted, playerList)){
+			
+		// 	hunted = sc.nextLine();
+
+		// }
+		do{
+			hunted = sc.nextLine();
+		}while(Preparation.isExistedForPlayer(hunted,null, playerList));
+		
 		
 		for(Player p:playerList){
 			if(p.getName().equals(hunted) && !p.ifIsOutOfTurn()){
 				return Engine.nameToPlayer(playerList, hunted);
 			}
 		}
-		sc.close();
+		
 
 		return null; 
 	}

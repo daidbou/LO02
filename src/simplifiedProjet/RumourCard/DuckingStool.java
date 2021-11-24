@@ -12,29 +12,40 @@ public class DuckingStool implements RumourCard {
     String nameCard ="Ducking Stool";
     
     @Override
-    public Player skillWitch(String namePTurn2,List<Player> playerList) {
+    public Player skillWitch(String accuser,String accused,List<Player> playerList) {
 
         /*System.out.println("choose next player");
         String pNextTurn = in.nextLine();
         Player pMe = Preparation.isExiste(namePTurn2, playerList);//returns player pMe 
         return Preparation.isExiste(pNextTurn,pMe.getName(),playerList);// in order that he cannot choose himself as player next turn*/
-        //TODO find a better solution
+        //TODO shoose next player has a problem p1 cannot choose p1
 
+        String pNextTurn = "";
         System.out.println("choose next player(p1 or b1 for example :");
 		for(Player p: playerList){
 			System.out.println(p.getName());
 		}
         Scanner sc = new Scanner(System.in);
-        String pNextTurn = sc.nextLine();
-
+        // while(!Preparation.isExistedForPlayer(pNextTurn, playerList)){
+        //     pNextTurn = sc.nextLine();
+        // }
+        do{
+            pNextTurn = sc.nextLine();
+        }while(!Preparation.isExistedForPlayer(accused,pNextTurn, playerList));
         return Engine.nameToPlayer(playerList, pNextTurn);
         
     }
     @Override
-    public Player skillWitchBot(String namePTurn2,List<Player> playerList) {
+    public Player skillWitchBot(String accuser,String accused,List<Player> playerList) {
 
-        int nopRandom = (int)(Math.random()*(playerList.size()-1));
-        String pNextTurn = playerList.get(nopRandom).getName();
+        //int nopRandom = (int)(Math.random()*(playerList.size()-1));
+        //String pNextTurn = playerList.get(nopRandom).getName();
+        int nopRandom = 0;
+        String pNextTurn = "";
+        // while(!Preparation.isExistedForBot(pNextTurn, playerList)){
+        //     nopRandom = (int)(Math.random()*(playerList.size()-1));
+        //     pNextTurn = playerList.get(nopRandom).getName();
+        // }
         //Player pMe = Engine.nameToPlayer(playerList, namePTurn2);
         //return Preparation.isExiste(pNextTurn,pMe.getName(),playerList);
         return Engine.nameToPlayer(playerList, pNextTurn);
@@ -66,8 +77,14 @@ public class DuckingStool implements RumourCard {
     
     @Override
     public Player skillHunt(String namePturn1, List<Player> playerList) {
-        System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
+        System.out.println("choose a player to hunt (p1 or b1 for example) :");
+        for(Player p: playerList){
+			System.out.println(p.getName());
+		}
+        Scanner sc = new Scanner(System.in);
+        String pNextTurn = sc.nextLine();
+        return Engine.nameToPlayer(playerList, pNextTurn);
+        
     }
     @Override
     public Player skillHuntBot(String namePturn1, List<Player> playerList) {

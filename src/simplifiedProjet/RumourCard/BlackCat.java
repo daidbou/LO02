@@ -33,15 +33,15 @@ public class BlackCat implements RumourCard{
 	}
 
 	@Override
-	public Player skillWitch(String namePTurn2, List<Player> playerList) {
+	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePTurn2));
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
 	}
 
 	@Override
-	public Player skillWitchBot(String namePTurn2, List<Player> playerList) {
+	public Player skillWitchBot(String accuser,String accused, List<Player> playerList) {
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePTurn2));
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
 	}
 
 	@Override

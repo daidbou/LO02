@@ -214,7 +214,7 @@ public class Engine implements Preparation {
 				break;
 			}
 		}
-        System.out.println("index = "+index);
+       // System.out.println("index = "+index);
 
         if(ifTurnContinue(playerList)){
             //check if there is a player after Player p that is not out of turn

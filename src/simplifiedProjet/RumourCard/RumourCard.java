@@ -18,19 +18,19 @@ public interface RumourCard {
 	/**
 	 * use the Witch? ability
 	 * @param accuser
-	 * 		name here is the player being accused
+	 * 		name here is the player who accuse
 	 * @return
 	 */
-	public Player skillWitch(String accuser,List<Player> playerList);
+	public Player skillWitch(String accuser,String accused,List<Player> playerList);
 	
 	
 	/**
 	 * use the Witch? ability for bot
 	 * @param accuser
-	 * 		name here is the player being accused
+	 * 		name here is the player who accuse
 	 * @return
 	 */
-	public Player skillWitchBot(String accuser,List<Player> playerList);
+	public Player skillWitchBot(String accuser,String accused,List<Player> playerList);
 
 	
 	/**
