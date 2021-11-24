@@ -181,15 +181,15 @@ public class Engine implements Preparation {
 
     public static boolean ifTurnContinue(List<Player> playerList) {
         int i = playerList.size();// how many players are still playing
-        //System.out.println("all "+i+"players");
-        // System.out.println("size"+pAll.size());
+        System.out.println("all "+i+"players");
+        //System.out.println("size"+playerList.size());
         for (Player p : playerList) {
             if (p.ifIdentityReavealed() == true) {
                 i--; // count how many players didn't revealed their identity
 
             }
         }
-        //System.out.println("there are still "+i+"players ");
+        System.out.println("there are still "+i+"players ");
         if (i == 1) {
             return false; // if there is only one , the end this turn
         } else {

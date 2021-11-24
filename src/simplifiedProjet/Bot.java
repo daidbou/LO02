@@ -1,6 +1,7 @@
 package simplifiedProjet;
 import simplifiedProjet.RumourCard.RumourCard;
 
+import java.time.Year;
 import java.util.List;
 //import java.util.Scanner;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -43,15 +44,25 @@ public class Bot extends Player{
 	 */
     public Player accuse(List<Player> playerList){
 		int noP;
-		
-		while(true){
-			noP= (int) (Math.random()*(playerList.size()-1));// random num player 
-			
-			if(!Engine.nameToPlayer(playerList, playerList.get(noP).getName()).ifIsOutOfTurn()){
-				break;
+		int index = 0;
+		for(int i =0; i<playerList.size();i++){
+			if(playerList.get(i).getName().equals(this.name)){
+				index = i;	
 			}
 		}
-		System.out.println(name+" accuses "+Engine.nameToPlayer(playerList, playerList.get(noP).getName()));
+		System.out.println("index = " + index);
+		while(true){
+			noP= (int) (Math.random()*(playerList.size()));// random num player 
+			
+			
+			if(!Engine.nameToPlayer(playerList, playerList.get(noP).getName()).ifIsOutOfTurn()&&
+				noP != index){
+				System.out.println("noP = "+noP);
+				break;
+			}
+
+		}
+		System.out.println(name+" accuses "+playerList.get(noP).getName());
 		return Engine.nameToPlayer(playerList, playerList.get(noP).getName());
 	}
 
@@ -65,10 +76,10 @@ public class Bot extends Player{
 	 * 	the next player of pTurn1
 	 */
 	public Player witch(Player pTurn1,List<Player> playerList){
-		int cardNumBot = (int)(Math.random()*(getRumourCardListPlayer().size()-1));	
+		int cardNumBot = (int)(Math.random()*(getRumourCardListPlayer().size()));	
 		Player pNextTurn = playerRumourCardList.get(cardNumBot).skillWitchBot(pTurn1.getName(),playerList);
 		System.out.println(name+"use witch skill to "+pTurn1.getName()+" using "+playerRumourCardList.get(cardNumBot).name());
-		//rumourCardListPlayer.remove(cardNumBot);
+		playerRumourCardList.remove(cardNumBot);
 		return pNextTurn;
 	}
 	/**
@@ -77,11 +88,11 @@ public class Bot extends Player{
 	 * @param 
 	 */
 	public Player hunt(List<Player> playerList){
-		int cardNumBot = (int)(Math.random()*(getRumourCardListPlayer().size()-1));
+		int cardNumBot = (int)((Math.random()+0.01)*(getRumourCardListPlayer().size()));
 		
 		Player pNextTurn = playerRumourCardList.get(cardNumBot).skillHuntBot(name,playerList);
 		System.out.println(name+"use hunt skill to "+pNextTurn.getName()+" using "+playerRumourCardList.get(cardNumBot).name());
-		//rumourCardListPlayer.remove(cardNumBot);
+		playerRumourCardList.remove(cardNumBot);
 		return pNextTurn;
 
 	}
