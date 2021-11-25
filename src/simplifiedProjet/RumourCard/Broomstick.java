@@ -38,49 +38,25 @@ public class Broomstick implements RumourCard{
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
 
 		Engine.nameToPlayer(playerList, accuser).isBroomstick();
-
-		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
+	
+		return takeNextTurn(playerList, accuser);
+		
 	}
 	@Override
 	public Player skillWitchBot(String accuser,String accused,List<Player> playerList) {
 
 		Engine.nameToPlayer(playerList,accuser).isBroomstick();
 		
-		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
+		return takeNextTurn(playerList, accuser);
 	}
 
 	@Override
 	public Player skillHunt(String hunter, List<Player> playerList) {
 
 		Engine.nameToPlayer(playerList, hunter).isBroomstick();
-		
 
-		System.out.println("please select one player (p1 or b1 for example :");
-		for(Player p: playerList){
-			System.out.println(p.getName());
-		}
-		String hunted = "";
-		Scanner sc = new Scanner(System.in);
-		// while(Preparation.isExistedForPlayer(hunted, playerList)){
-			
-		// 	hunted = sc.nextLine();
+		return  chooseNextplayerForReal(playerList, hunter);
 
-		// }
-		do{
-			hunted = sc.nextLine();
-		}while(Preparation.isExistedForPlayer(hunted,null, playerList));
-		
-		
-		for(Player p:playerList){
-			if(p.getName().equals(hunted) && !p.ifIsOutOfTurn()){
-				return Engine.nameToPlayer(playerList, hunted);
-			}
-		}
-		
-
-		return null; 
 	}
 
 	@Override
@@ -88,12 +64,40 @@ public class Broomstick implements RumourCard{
 
 		Engine.nameToPlayer(playerList, hunter).isBroomstick();
 
-		Random rand = new Random();
-		Player hunted = new Player();
-		while(true){
-			hunted = playerList.get(rand.nextInt(playerList.size()-1));
-			if(!hunted.ifIsOutOfTurn()){
-				return hunted;
-			}}
-		}
+		return chooseNextPlayerForBot(playerList, hunter);
 	}
+
+
+
+	
+	public static Player takeNextTurn(List<Player> playerList, String pCurrent){
+		System.out.println("Take next turn");
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, pCurrent));
+
+	}
+
+	public static Player chooseNextplayerForReal(List<Player> playerList, String pUser){
+		String pNextTurn = "";
+        System.out.println("choose next player(p1 or b1 for example :");
+		for(Player p: playerList){
+			System.out.println(p.getName());
+		}
+        Scanner sc = new Scanner(System.in);
+        do{
+            pNextTurn = sc.nextLine();
+        }while(!Preparation.isExistedForPlayer(pUser,pNextTurn, playerList));
+        return Engine.nameToPlayer(playerList, pNextTurn);
+	}
+
+	public static Player chooseNextPlayerForBot(List<Player> playerList, String pUser){
+		int nopRandom = 0;
+        String pNextTurn = "";
+        do{
+            nopRandom = (int)(Math.random()*playerList.size());
+            pNextTurn = playerList.get(nopRandom).getName();
+        }while(!Preparation.isExistedForPlayer(pUser,pNextTurn, playerList));
+
+		return Engine.nameToPlayer(playerList, pNextTurn);
+	}
+
+}

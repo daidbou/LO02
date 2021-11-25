@@ -34,14 +34,14 @@ public class Wart implements RumourCard{
 
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
-		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
+		Player pNextTurn = Broomstick.takeNextTurn(playerList, accuser);
+		return pNextTurn;
 	}
 
 	@Override
 	public Player skillWitchBot(String accuser,String accused,List<Player> playerList) {
-		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
+		Player pNextTurn = Broomstick.takeNextTurn(playerList, accuser);
+		return pNextTurn;
 	}
 
 	@Override

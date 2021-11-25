@@ -1,6 +1,7 @@
 package simplifiedProjet.RumourCard;
 import simplifiedProjet.Preparation;
 
+import java.text.BreakIterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,7 +9,7 @@ import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
 import simplifiedProjet.SetUp;
 
-public class DuckingStool implements RumourCard {
+public class DuckingStool implements RumourCard {//done
     String nameCard ="Ducking Stool";
     /**
      *choose next player 
@@ -16,16 +17,8 @@ public class DuckingStool implements RumourCard {
      */
     @Override
     public Player skillWitch(String accuser,String accused,List<Player> playerList) {
-        String pNextTurn = "";
-        System.out.println("choose next player(p1 or b1 for example :");
-		for(Player p: playerList){
-			System.out.println(p.getName());
-		}
-        Scanner sc = new Scanner(System.in);
-        do{
-            pNextTurn = sc.nextLine();
-        }while(!Preparation.isExistedForPlayer(accused,pNextTurn, playerList));
-        return Engine.nameToPlayer(playerList, pNextTurn);
+    
+        return Broomstick.chooseNextplayerForReal(playerList, accused);
         
     }
     @Override
@@ -34,13 +27,8 @@ public class DuckingStool implements RumourCard {
      *done
      */
     public Player skillWitchBot(String accuser,String accused,List<Player> playerList) {
-        int nopRandom = 0;
-        String pNextTurn = "";
-        do{
-            nopRandom = (int)(Math.random()*playerList.size());
-            pNextTurn = playerList.get(nopRandom).getName();
-        }while(!Preparation.isExistedForPlayer(accused,pNextTurn, playerList));
-        return Engine.nameToPlayer(playerList, pNextTurn);
+      
+        return Broomstick.chooseNextPlayerForBot(playerList, accused);
         
     }
 
@@ -71,17 +59,7 @@ public class DuckingStool implements RumourCard {
     @Override
     public Player skillHunt(String hunter, List<Player> playerList) {
 
-        String hunted = "";
-        System.out.println("choose next player(p1 or b1 for example :");
-		for(Player p: playerList){
-			System.out.println(p.getName());
-		}
-        Scanner sc = new Scanner(System.in);
-        do{
-            hunted = sc.nextLine();
-        }while(!Preparation.isExistedForPlayer(hunter,hunted, playerList));
-
-        Player pHunted = Engine.nameToPlayer(playerList, hunted);
+        Player pHunted = Broomstick.chooseNextplayerForReal(playerList, hunter);
         Player pHunter = Engine.nameToPlayer(playerList, hunter);
         Player pNextTurn = huntDuckingStool(pHunter, pHunted);
         return pNextTurn;
@@ -91,14 +69,9 @@ public class DuckingStool implements RumourCard {
 
     @Override
     public Player skillHuntBot(String hunter, List<Player> playerList) {
-        int nopRandom = 0;
-        String hunted = "";
-        do{
-            nopRandom = (int)(Math.random()*playerList.size());
-            hunted = playerList.get(nopRandom).getName();
-        }while(!Preparation.isExistedForPlayer(hunter,hunted, playerList));
+       
+        Player pHunted = Broomstick.chooseNextPlayerForBot(playerList, hunter);
 
-        Player pHunted = Engine.nameToPlayer(playerList, hunted);
         Player pHunter = Engine.nameToPlayer(playerList, hunter);
         Player pNextTurn = huntDuckingStool(pHunter, pHunted);
         return pNextTurn;
@@ -110,7 +83,7 @@ public class DuckingStool implements RumourCard {
         if(pHunted.isVirtual() == 0){//
             System.out.println(pHunted.getName()+"you must revealed your identity or discard a card from their hand");
             System.out.println("Enter id for reveal identity, dc for discard a card");
-            System.out.println("enter 0 for the first card");
+            
             String choice = "";
             while(true){
                 Scanner sc = new Scanner(System.in);
@@ -131,6 +104,7 @@ public class DuckingStool implements RumourCard {
                 }else if(choice.equals("dc")){
                     
                     System.out.println(pHunted.getName()+" you should discard one card");
+                    System.out.println("enter 0 for the first card");
                     pHunted.showCards();
                     int cardNum = sc.nextInt();
                     pHunted.disCardCard(cardNum);
