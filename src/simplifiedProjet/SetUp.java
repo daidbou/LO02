@@ -81,9 +81,6 @@ public class SetUp implements Preparation{
         int numberOfPlayer = sc.nextInt();
         int numberOfCardsPerPlayer = (int)12/numberOfPlayer;
         System.out.println("each player has "+numberOfCardsPerPlayer+"cards");
-        
-        Collections.shuffle(rumourCardShuffled);
-        
         System.out.println("how many bots?");
         int numberOfBot = sc.nextInt();
         while(numberOfBot>numberOfPlayer || numberOfBot<0){
@@ -112,10 +109,12 @@ public class SetUp implements Preparation{
 
     public static List<Player> setUpPlayer(List<Player> playerListInit){
         List<Player> playerList = new ArrayList<Player>();
+        Collections.shuffle(rumourCardShuffled);
        
         int numberOfPlayer = playerListInit.size();
         int numberOfBot = 0;
         int numberOfCardsPerPlayer = (int)12/numberOfPlayer;
+
         for(Player p:playerListInit){
             if(p.isVirtual() == 1){
                 numberOfBot++;
@@ -123,6 +122,7 @@ public class SetUp implements Preparation{
         } 
         
         int numIrlPlayer = numberOfPlayer - numberOfBot;
+
         for(Player p: playerListInit){
             p.initializePlayer();
         }
@@ -154,12 +154,12 @@ public class SetUp implements Preparation{
 
         }
        
-        //Collections.shuffle(playerList);
+        Collections.shuffle(playerList);
         
         //the winner of last turn goes first
         for(int t = 0; i<playerList.size();t++){
             if(playerList.get(t).ifIsWinnerLastTurn()){
-                Collections.swap(playerList,0,t);
+                Collections.swap(playerList,0,t);//TODO WHY IT'S NOT RIGHT
             }
         }
 

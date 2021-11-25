@@ -356,4 +356,8 @@ public class Player implements Preparation{
 		return isWinnerLastTurn;
 	}
 
+	public void setWinnerLastTurn(boolean b){
+		this.isWinnerLastTurn = b;
+	}
+
 }

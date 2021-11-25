@@ -64,7 +64,7 @@ public class Engine implements Preparation {
 
                 if(!ifTurnContinue(playerList)){//this turn ends
                     showStatus(playerList);
-                    playerList = playerListInit;
+                    //playerList = playerListInit;
                 }
                 
             }
@@ -85,10 +85,23 @@ public class Engine implements Preparation {
     /**
      * at the end of a turn,shows the status of a player, including
      * his name, his identity and his points
+     * at the same time get the winner of this turn
      * @param playerList
      */
     private static void showStatus(List<Player> playerList) {
         System.out.println("++++++++++++++++conclusion+++++++++++++++++++++");
+
+        for(Player p: playerList){
+            if(p.ifIdentityReavealed() == false && p.ifIsOutOfTurn() == false){
+                p.setWinnerLastTurn(true);
+                if(p.getIdentity() == 0){
+                    p.raisePoints(1);
+                }else{
+                    p.raisePoints(2);
+                }
+                System.out.println(p.getName()+"   !!! is the winner of this turn !!!");
+            }
+        }
         for(Player p: playerList){
             if(p.getIdentity() == 0){
                 System.out.print("    + "+p.getName() + "is a villager" );
@@ -97,6 +110,7 @@ public class Engine implements Preparation {
             }
             System.out.println(" and got "+p.getPoint()+" points +  ");
         }
+        
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
     }
    
@@ -211,10 +225,10 @@ public class Engine implements Preparation {
         //System.out.println("all "+i+" players");
         //System.out.println("size"+playerList.size());
         for (Player p : playerList) {
-            if (p.ifIdentityReavealed() == true) {
+            if (p.ifIdentityReavealed() == true && p.ifIsOutOfTurn() == false) {
                 i--; // count how many players didn't revealed their identity
-
             }
+            
         }
         //System.out.println("there are still "+i+" players ");
         if (i == 1) {
