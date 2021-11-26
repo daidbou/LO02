@@ -88,10 +88,11 @@ public class Player implements Preparation{
 	public Player witch(Player pTurn1,List<Player> playerList) {
 		
 		showCards();
-		System.out.println(" entre 0 for the first card");
+		System.out.println(" enter 0 for the first card");
 		int cardNum = in.nextInt();
+		String cardName = playerRumourCardList.get(cardNum).name();
 		Player pNextTurn = playerRumourCardList.get(cardNum).skillWitch(pTurn1.getName(),this.name,playerList);
-		disCardCard(cardNum);
+		disCardCard(cardName);
 		
 		//use a method in setup
 		return pNextTurn ;//在这里检查?
@@ -107,9 +108,9 @@ public class Player implements Preparation{
 	public void showIdentity(){
 		System.out.println(name+" choose to reveal identity");
 		if(identity == 0){
-			System.out.println(name + "is a villager" );
+			System.out.println(name + " is a villager" );
 		}else{
-			System.out.println(name + "is a witch" );
+			System.out.println(name + " is a witch" );
 		}
 		
 		
@@ -123,7 +124,6 @@ public class Player implements Preparation{
 		for (int i = 0; i < playerRumourCardList.size(); i++) {
 			System.out.println(playerRumourCardList.get(i).name());
 		}
-		System.out.println();
 	}
 	/**
 	 * Show the discarded card
@@ -334,7 +334,7 @@ public class Player implements Preparation{
 				break;
 			}
 		}
-		System.out.println("no such card");
+		//System.out.println("no such card");
 		return 0;
 	}
 

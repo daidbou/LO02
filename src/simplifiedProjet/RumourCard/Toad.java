@@ -46,17 +46,29 @@ public class Toad implements RumourCard{
 	}
 
 	@Override
-	public Player skillHunt(String namePturn1, List<Player> playerList) {
-		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
+	public Player skillHunt(String hunter, List<Player> playerList) {
+		Engine.nameToPlayer(playerList, hunter).showIdentity();
+		Engine.nameToPlayer(playerList, hunter).revealIdentity();
+		if(Engine.nameToPlayer(playerList, hunter).getIdentity()==0){
+			return Broomstick.chooseNextplayerForReal(playerList, hunter);
+		}
+		else{
+			Engine.nameToPlayer(playerList, hunter).setIsOutOfTurn(true);
+			return Engine.leftPlayer(playerList, Engine.nameToPlayer(playerList, hunter));
+		}
 	}
 
 	@Override
-	public Player skillHuntBot(String namePturn1, List<Player> playerList) {
-		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
+	public Player skillHuntBot(String hunter, List<Player> playerList) {
+		Engine.nameToPlayer(playerList, hunter).showIdentity();
+		Engine.nameToPlayer(playerList, hunter).revealIdentity();
+		if(Engine.nameToPlayer(playerList, hunter).getIdentity()==0){
+			return Broomstick.chooseNextPlayerForBot(playerList, hunter);
+		}
+		else{
+			Engine.nameToPlayer(playerList, hunter).setIsOutOfTurn(true);
+			return Engine.leftPlayer(playerList, Engine.nameToPlayer(playerList, hunter));
+		}
+	}
 	}
     
-
-    
-}

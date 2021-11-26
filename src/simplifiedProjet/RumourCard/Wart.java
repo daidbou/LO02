@@ -34,26 +34,28 @@ public class Wart implements RumourCard{
 
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
-		Player pNextTurn = Broomstick.takeNextTurn(playerList, accuser);
-		return pNextTurn;
+		Engine.nameToPlayer(playerList, accuser).isWart();
+		return Broomstick.takeNextTurn(playerList, accuser);
 	}
 
 	@Override
 	public Player skillWitchBot(String accuser,String accused,List<Player> playerList) {
-		Player pNextTurn = Broomstick.takeNextTurn(playerList, accuser);
-		return pNextTurn;
+		Engine.nameToPlayer(playerList, accuser).isWart();
+		return Broomstick.takeNextTurn(playerList, accuser);
 	}
 
 	@Override
-	public Player skillHunt(String namePturn1, List<Player> playerList) {
+	public Player skillHunt(String hunter, List<Player> playerList) {
+		Engine.nameToPlayer(playerList, hunter).isWart();
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList,namePturn1));
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList,hunter));
 	}
 
 	@Override
-	public Player skillHuntBot(String namePturn1, List<Player> playerList) {
+	public Player skillHuntBot(String hunter, List<Player> playerList) {
+		Engine.nameToPlayer(playerList, hunter).isWart();
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, hunter));
 	}
     
 
