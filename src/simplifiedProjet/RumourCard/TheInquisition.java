@@ -1,9 +1,11 @@
 package simplifiedProjet.RumourCard;
 
 import java.util.List;
+import java.util.Scanner;
 
 import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
+import simplifiedProjet.SetUp;
 
 public class TheInquisition implements RumourCard {
 
@@ -41,7 +43,16 @@ public class TheInquisition implements RumourCard {
 
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
+		System.out.println("Discard a card from your hand");
+		Engine.nameToPlayer(playerList, accused).showCards();
+		Scanner sc = new Scanner(System.in);
+		int selectedCardNumber = sc.nextInt();
+		RumourCard rumourCard = Engine.nameToPlayer(playerList, accused).getRumourCardListPlayer().get(selectedCardNumber);
+		SetUp.discardedRumourCard.add(rumourCard);
+		Engine.nameToPlayer(playerList, accused).getRumourCardListPlayer().remove(rumourCard);
+		
 		System.out.println("Take next turn");
+
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
 	}
 

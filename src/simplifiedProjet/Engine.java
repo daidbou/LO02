@@ -281,6 +281,45 @@ public class Engine implements Preparation {
         
 		
     }
+    /**
+     * 
+     * @param playerList the list of player in the game
+     * @param p the player that used Toad hunt! ability and need to pass the turn to the player at his left
+     * @return the next player
+     */
+    public static Player leftPlayer(List<Player> playerList, Player p){
+       
+        int index = 0;
+		for(int i = 0; i < playerList.size();i++){
+			if(playerList.get(i).getName().equals(p.getName())){
+				index = i;
+				break;
+			}
+		}
+       // System.out.println("index = "+index);
+
+        if(ifTurnContinue(playerList)){
+            //check if there is a player before Player p that is not out of turn
+            for(int i = index-1 ; i > 0;i--){
+                if(!playerList.get(i).ifIsOutOfTurn()){
+                    return playerList.get(i);
+                }
+            }
+            //start a new turn to find the next player
+            for(int i = playerList.size()-1;i>index;i--){
+                if(!playerList.get(i).ifIsOutOfTurn()){
+                    return playerList.get(i);
+                }
+            }
+            return null;
+        }else{
+            System.out.println("this turn ends");
+            return null;// has a problem here
+        }
+        
+        
+		
+    }
 
     /**
 	 * change a string name to Player p
