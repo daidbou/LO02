@@ -44,12 +44,31 @@ public class TheInquisition implements RumourCard {
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
 		System.out.println("Discard a card from your hand");
-		Engine.nameToPlayer(playerList, accused).showCards();
+		int index=0;
+		Player accusedPlayer = Engine.nameToPlayer(playerList, accused);
+
+		System.out.println(accusedPlayer.getName()+" and cards with ");
+		for (int i = 0; i < accusedPlayer.getRumourCardListPlayer().size()-1; i++) {
+			if(accusedPlayer.getRumourCardListPlayer().get(i).name()!= accusedPlayer.getName()){
+				System.out.println(accusedPlayer.getRumourCardListPlayer().get(i).name());
+			}
+			else{
+				index=i;
+			}
+		}
 		Scanner sc = new Scanner(System.in);
 		int selectedCardNumber = sc.nextInt();
-		RumourCard rumourCard = Engine.nameToPlayer(playerList, accused).getRumourCardListPlayer().get(selectedCardNumber);
+		RumourCard rumourCard;
+
+		if(selectedCardNumber<index){
+			rumourCard = accusedPlayer.getRumourCardListPlayer().get(selectedCardNumber);
+		}
+		else{
+			rumourCard = accusedPlayer.getRumourCardListPlayer().get(selectedCardNumber-1);
+		}
+		
 		SetUp.discardedRumourCard.add(rumourCard);
-		Engine.nameToPlayer(playerList, accused).getRumourCardListPlayer().remove(rumourCard);
+		accusedPlayer.getRumourCardListPlayer().remove(rumourCard);
 		
 		System.out.println("Take next turn");
 
@@ -58,7 +77,41 @@ public class TheInquisition implements RumourCard {
 
 	@Override
 	public Player skillWitchBot(String accuser,String accused, List<Player> playerList) {
+		
+		int index=0;
+		int selectedCardNumber;
+		Player accusedPlayer = Engine.nameToPlayer(playerList, accused);
+		RumourCard rumourCard;
+
+		System.out.println(accusedPlayer.getName()+" and cards with xxxxxxx");
+		for (int i = 0; i < accusedPlayer.getRumourCardListPlayer().size()-1; i++) {
+			if(accusedPlayer.getRumourCardListPlayer().get(i).name()!= accusedPlayer.getName()){
+				System.out.println(accusedPlayer.getRumourCardListPlayer().get(i).name());
+			}
+			else{
+				index=i;
+			}
+		}
+
+		while(true){
+			selectedCardNumber = (int) Math.random()*(accusedPlayer.getRumourCardListPlayer().size()-1);
+			if(selectedCardNumber!=index){
+				break;
+			}
+		}
+
+		if(selectedCardNumber<index){
+			rumourCard = accusedPlayer.getRumourCardListPlayer().get(selectedCardNumber);
+		}
+		else{
+			rumourCard = accusedPlayer.getRumourCardListPlayer().get(selectedCardNumber-1);
+		}
+		
+		SetUp.discardedRumourCard.add(rumourCard);
+		accusedPlayer.getRumourCardListPlayer().remove(rumourCard);
+		
 		System.out.println("Take next turn");
+
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
 	}
 

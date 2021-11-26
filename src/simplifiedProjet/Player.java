@@ -124,7 +124,6 @@ public class Player implements Preparation{
 		for (int i = 0; i < playerRumourCardList.size(); i++) {
 			System.out.println(playerRumourCardList.get(i).name());
 		}
-		System.out.println();
 	}
 	/**
 	 * Show the discarded card
@@ -335,7 +334,7 @@ public class Player implements Preparation{
 				break;
 			}
 		}
-		System.out.println("no such card");
+		//System.out.println("no such card");
 		return 0;
 	}
 
