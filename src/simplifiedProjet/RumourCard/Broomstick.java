@@ -43,6 +43,9 @@ public class Broomstick implements RumourCard{
 		
 	}
 	@Override
+	/**
+	 * take next turn
+	 */
 	public Player skillWitchBot(String accuser,String accused,List<Player> playerList) {
 
 		Engine.nameToPlayer(playerList,accuser).isBroomstick();
@@ -69,7 +72,7 @@ public class Broomstick implements RumourCard{
 
 
 
-	
+
 	public static Player takeNextTurn(List<Player> playerList, String pCurrent){
 		System.out.println("Take next turn");
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, pCurrent));

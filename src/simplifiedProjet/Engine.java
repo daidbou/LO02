@@ -43,6 +43,9 @@ public class Engine implements Preparation {
                             System.out.println(pTurn1.getName() + " gains 1 point");
                             pTurn2.setIsOutOfTurn(true); //pTurn2 should left the game
                             pNextTurn = nextPlayer(playerList, pTurn1);
+                            if(pNextTurn == null){
+                                break TurnStart;
+                            }
                            
                         
                         }else{
@@ -173,7 +176,7 @@ public class Engine implements Preparation {
     */
     public static boolean doChoiceAh_Bot(Player pTurn1) {
         double ChoiceAh_Bot = Math.random();
-        if (pTurn1.checkRumourCardList() || ChoiceAh_Bot > 0.5 ) {
+        if (pTurn1.checkRumourCardList() || ChoiceAh_Bot > 0 ) {
             return true;// accuse
         } else {
             return false;
@@ -191,7 +194,7 @@ public class Engine implements Preparation {
     public static boolean doChoiceWI_Bot(Player pTurn1) { //witch or show id
         double ChoiceWI_Bot = Math.random();
         
-        if (ChoiceWI_Bot > 0.5 && !pTurn1.checkRumourCardList()) {
+        if (ChoiceWI_Bot > 1 && !pTurn1.checkRumourCardList()) {
             return true;//use witch skill
         }else{
             return false;
@@ -225,12 +228,12 @@ public class Engine implements Preparation {
         //System.out.println("all "+i+" players");
         //System.out.println("size"+playerList.size());
         for (Player p : playerList) {
-            if (p.ifIdentityReavealed() == true && p.ifIsOutOfTurn() == false) {
+            if (p.ifIdentityReavealed() == true ) {
                 i--; // count how many players didn't revealed their identity
             }
             
         }
-        //System.out.println("there are still "+i+" players ");
+        System.out.println("there are still "+i+" players ");
         if (i == 1) {
             return false; // if there is only one , the end this turn
         } else {
