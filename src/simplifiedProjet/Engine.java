@@ -80,7 +80,7 @@ public class Engine implements Preparation {
                         str = p.getName();
                     }
                 }
-                System.out.println(str+"win!");
+                System.out.println(str+"win!"+"with "+max);
             }
         }
     }
@@ -303,7 +303,7 @@ public class Engine implements Preparation {
 
         if(ifTurnContinue(playerList)){
             //check if there is a player before Player p that is not out of turn
-            for(int i = index-1 ; i > 0;i--){
+            for(int i = index-1 ; i > -1;i--){
                 if(!playerList.get(i).ifIsOutOfTurn()){
                     return playerList.get(i);
                 }

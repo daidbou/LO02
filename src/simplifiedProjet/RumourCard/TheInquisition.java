@@ -47,9 +47,8 @@ public class TheInquisition implements RumourCard {
 		int index=0;
 		Player accusedPlayer = Engine.nameToPlayer(playerList, accused);
 
-		System.out.println(accusedPlayer.getName()+" and cards with ");
-		for (int i = 0; i < accusedPlayer.getRumourCardListPlayer().size()-1; i++) {
-			if(accusedPlayer.getRumourCardListPlayer().get(i).name()!= accusedPlayer.getName()){
+		for (int i = 0; i < accusedPlayer.getRumourCardListPlayer().size(); i++) {
+			if(accusedPlayer.getRumourCardListPlayer().get(i).name()!= nameCard){
 				System.out.println(accusedPlayer.getRumourCardListPlayer().get(i).name());
 			}
 			else{
@@ -83,9 +82,9 @@ public class TheInquisition implements RumourCard {
 		Player accusedPlayer = Engine.nameToPlayer(playerList, accused);
 		RumourCard rumourCard;
 
-		System.out.println(accusedPlayer.getName()+" and cards with xxxxxxx");
-		for (int i = 0; i < accusedPlayer.getRumourCardListPlayer().size()-1; i++) {
-			if(accusedPlayer.getRumourCardListPlayer().get(i).name()!= accusedPlayer.getName()){
+		System.out.println(accusedPlayer.getName()+" and cards with ");
+		for (int i = 0; i < accusedPlayer.getRumourCardListPlayer().size(); i++) {
+			if(accusedPlayer.getRumourCardListPlayer().get(i).name()!= nameCard){
 				System.out.println(accusedPlayer.getRumourCardListPlayer().get(i).name());
 			}
 			else{
@@ -112,19 +111,23 @@ public class TheInquisition implements RumourCard {
 		
 		System.out.println("Take next turn");
 
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
+		return Engine.nextPlayer(playerList, accusedPlayer);
 	}
 
 	@Override
-	public Player skillHunt(String namePturn1, List<Player> playerList) {
-		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
+	public Player skillHunt(String hunter, List<Player> playerList) {
+		Player nextPlayer = Broomstick.chooseNextplayerForReal(playerList, hunter);
+		System.out.print("(secretly looking at "+nextPlayer.getName()+" cards)\n");
+		nextPlayer.showCards();
+		return nextPlayer;
 	}
 
 	@Override
-	public Player skillHuntBot(String namePturn1, List<Player> playerList) {
-		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
+	public Player skillHuntBot(String hunter, List<Player> playerList) {
+		Player nextPlayer = Broomstick.chooseNextPlayerForBot(playerList, hunter);
+		System.out.print("(secretly looking at "+nextPlayer.getName()+" cards");
+		nextPlayer.showCards();
+		return nextPlayer;
 	}
 	
 	
