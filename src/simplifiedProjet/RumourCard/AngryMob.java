@@ -62,18 +62,18 @@ public class AngryMob implements RumourCard {
 	}
 
 	@Override
-	public Player skillHunt(String namePTurn1, List<Player> playerList) {
+	public Player skillHunt(String hunter, List<Player> playerList) {
 
-		Engine.nameToPlayer(playerList, namePTurn1);
+		Engine.nameToPlayer(playerList, hunter);
 
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePTurn1));
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, hunter));
 	}
 
 	@Override
-	public Player skillHuntBot(String namePTurn1, List<Player> playerList) {
+	public Player skillHuntBot(String hunter, List<Player> playerList) {
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePTurn1));
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, hunter));
 	}
 
 	
