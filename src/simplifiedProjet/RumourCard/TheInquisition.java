@@ -45,11 +45,11 @@ public class TheInquisition implements RumourCard {
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
 		System.out.println("Discard a card from your hand");
 		int index=0;
-		Player accusedPlayer = Engine.nameToPlayer(playerList, accused);
+		Player p1 = Engine.nameToPlayer(playerList, accused);
 
-		for (int i = 0; i < accusedPlayer.getRumourCardListPlayer().size(); i++) {
-			if(accusedPlayer.getRumourCardListPlayer().get(i).name()!= nameCard){
-				System.out.println(accusedPlayer.getRumourCardListPlayer().get(i).name());
+		for (int i = 0; i < p1.getRumourCardListPlayer().size(); i++) {
+			if(p1.getRumourCardListPlayer().get(i).name()!= nameCard){
+				System.out.println(p1.getRumourCardListPlayer().get(i).name());
 			}
 			else{
 				index=i;
@@ -60,14 +60,16 @@ public class TheInquisition implements RumourCard {
 		RumourCard rumourCard;
 
 		if(selectedCardNumber<index){
-			rumourCard = accusedPlayer.getRumourCardListPlayer().get(selectedCardNumber);
+			rumourCard = p1.getRumourCardListPlayer().get(selectedCardNumber);
 		}
 		else{
-			rumourCard = accusedPlayer.getRumourCardListPlayer().get(selectedCardNumber-1);
+			rumourCard = p1.getRumourCardListPlayer().get(selectedCardNumber-1);
 		}
 		
 		SetUp.discardedRumourCard.add(rumourCard);
-		accusedPlayer.getRumourCardListPlayer().remove(rumourCard);
+		p1.getRumourCardListPlayer().remove(rumourCard);
+
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 		
 		System.out.println("Take next turn");
 
@@ -79,13 +81,13 @@ public class TheInquisition implements RumourCard {
 		
 		int index=0;
 		int selectedCardNumber;
-		Player accusedPlayer = Engine.nameToPlayer(playerList, accused);
+		Player p1 = Engine.nameToPlayer(playerList, accused);
 		RumourCard rumourCard;
 
-		System.out.println(accusedPlayer.getName()+" and cards with ");
-		for (int i = 0; i < accusedPlayer.getRumourCardListPlayer().size(); i++) {
-			if(accusedPlayer.getRumourCardListPlayer().get(i).name()!= nameCard){
-				System.out.println(accusedPlayer.getRumourCardListPlayer().get(i).name());
+		System.out.println(p1.getName()+" and cards with ");
+		for (int i = 0; i < p1.getRumourCardListPlayer().size(); i++) {
+			if(p1.getRumourCardListPlayer().get(i).name()!= nameCard){
+				System.out.println(p1.getRumourCardListPlayer().get(i).name());
 			}
 			else{
 				index=i;
@@ -93,25 +95,27 @@ public class TheInquisition implements RumourCard {
 		}
 
 		while(true){
-			selectedCardNumber = (int) Math.random()*(accusedPlayer.getRumourCardListPlayer().size()-1);
+			selectedCardNumber = (int) Math.random()*(p1.getRumourCardListPlayer().size()-1);
 			if(selectedCardNumber!=index){
 				break;
 			}
 		}
 
 		if(selectedCardNumber<index){
-			rumourCard = accusedPlayer.getRumourCardListPlayer().get(selectedCardNumber);
+			rumourCard = p1.getRumourCardListPlayer().get(selectedCardNumber);
 		}
 		else{
-			rumourCard = accusedPlayer.getRumourCardListPlayer().get(selectedCardNumber-1);
+			rumourCard = p1.getRumourCardListPlayer().get(selectedCardNumber-1);
 		}
 		
 		SetUp.discardedRumourCard.add(rumourCard);
-		accusedPlayer.getRumourCardListPlayer().remove(rumourCard);
+		p1.getRumourCardListPlayer().remove(rumourCard);
+
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 		
 		System.out.println("Take next turn");
 
-		return Engine.nextPlayer(playerList, accusedPlayer);
+		return Engine.nextPlayer(playerList, p1);
 	}
 
 	@Override
@@ -119,6 +123,8 @@ public class TheInquisition implements RumourCard {
 		Player nextPlayer = Broomstick.chooseNextplayerForReal(playerList, hunter);
 		System.out.print("(secretly looking at "+nextPlayer.getName()+" cards)\n");
 		nextPlayer.showCards();
+		Player p1 = Engine.nameToPlayer(playerList, hunter);
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 		return nextPlayer;
 	}
 
@@ -126,6 +132,8 @@ public class TheInquisition implements RumourCard {
 	public Player skillHuntBot(String hunter, List<Player> playerList) {
 		Player nextPlayer = Broomstick.chooseNextPlayerForBot(playerList, hunter);
 		System.out.print("(secretly looking at "+nextPlayer.getName()+" cards");
+		Player p1 = Engine.nameToPlayer(playerList, hunter);
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 		nextPlayer.showCards();
 		return nextPlayer;
 	}

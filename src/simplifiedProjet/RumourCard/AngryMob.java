@@ -51,7 +51,8 @@ public class AngryMob implements RumourCard {
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
 		System.out.println("Take next turn");
-		Engine.nameToPlayer(playerList, accused).revealCardAndRemoveFromRumourCardList("Angry Mob");
+		Player p1 = Engine.nameToPlayer(playerList, accused);
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 		
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
 	}
@@ -59,21 +60,28 @@ public class AngryMob implements RumourCard {
 	@Override
 	public Player skillWitchBot(String accuser,String accused, List<Player> playerList) {
 		System.out.println("Take next turn");
+		Player p1 = Engine.nameToPlayer(playerList, accused);
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
 	}
 
 	@Override
 	public Player skillHunt(String hunter, List<Player> playerList) {
 
-		Engine.nameToPlayer(playerList, hunter);
+		Player p1 = Engine.nameToPlayer(playerList, hunter);
 
 		System.out.println("Take next turn");
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, hunter));
 	}
 
 	@Override
 	public Player skillHuntBot(String hunter, List<Player> playerList) {
+		
+		Player p1 = Engine.nameToPlayer(playerList, hunter);
+
 		System.out.println("Take next turn");
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, hunter));
 	}
 

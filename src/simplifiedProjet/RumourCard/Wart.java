@@ -34,28 +34,37 @@ public class Wart implements RumourCard{
 
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
-		Engine.nameToPlayer(playerList, accuser).isWart();
+		Player p1 = Engine.nameToPlayer(playerList, accused);
+		p1.isWart();
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+
 		return Broomstick.takeNextTurn(playerList, accuser);
 	}
 
 	@Override
 	public Player skillWitchBot(String accuser,String accused,List<Player> playerList) {
-		Engine.nameToPlayer(playerList, accuser).isWart();
+		Player p1 = Engine.nameToPlayer(playerList, accused);
+		p1.isWart();
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 		return Broomstick.takeNextTurn(playerList, accuser);
 	}
 
 	@Override
 	public Player skillHunt(String hunter, List<Player> playerList) {
-		Engine.nameToPlayer(playerList, hunter).isWart();
+		Player p1 = Engine.nameToPlayer(playerList, hunter);
+		p1.isWart();
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList,hunter));
+		return Engine.nextPlayer(playerList, p1);
 	}
 
 	@Override
 	public Player skillHuntBot(String hunter, List<Player> playerList) {
-		Engine.nameToPlayer(playerList, hunter).isWart();
+		Player p1 = Engine.nameToPlayer(playerList, hunter);
+		p1.isWart();
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, hunter));
+		return Engine.nextPlayer(playerList, p1);
 	}
     
 

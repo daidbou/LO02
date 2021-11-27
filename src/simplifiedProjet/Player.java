@@ -70,28 +70,42 @@ public class Player implements Preparation{
 	public Player hunt(List<Player> playerList) {
 		
 		showCards();
-		System.out.println(" entre 0 for the first card");
+		System.out.println(" enter 0 for the first card");
 		int cardNum = in.nextInt();
 		Player pNextTurn;
 		
 		while(true){
 
-			if(!(playerRumourCardList.get(cardNum).name() == "The Inquisition" || playerRumourCardList.get(cardNum).name() == "Angry Mob")){
+			if(playerRumourCardList.get(cardNum).name().equals("Pointed Hat") && playerRevealedCardList.size()<0){
 				pNextTurn = playerRumourCardList.get(cardNum).skillHunt(name,playerList);
 				break;
 			}
+			else if(playerRumourCardList.get(cardNum).name().equals("Pointed Hat") && playerRevealedCardList.size()==0){
+				System.out.println("Sorry you don't have any revealed Rumour Card, you can't play Pointed Hat");
+				showCards();
+				System.out.println(" enter 0 for the first card");
+				cardNum = in.nextInt();
+
+				continue;
+			}
 			else{
-				if(this.identity==0 && this.identityReavealed){
+
+				if(!(playerRumourCardList.get(cardNum).name().equals("The Inquisition") || playerRumourCardList.get(cardNum).name().equals("Angry Mob"))){
 					pNextTurn = playerRumourCardList.get(cardNum).skillHunt(name,playerList);
 					break;
 				}
 				else{
-					System.out.println(playerRumourCardList.get(cardNum).name()+" is only playable if you have been revealed as a Villager ");
-					showCards();
-					System.out.print("select a card other than "+playerRumourCardList.get(cardNum).name());
-					cardNum = in.nextInt();
+					if(this.identity==0 && this.identityReavealed){
+						pNextTurn = playerRumourCardList.get(cardNum).skillHunt(name,playerList);
+						break;
+					}
+					else{
+						System.out.println(playerRumourCardList.get(cardNum).name()+" is only playable if you have been revealed as a Villager ");
+						showCards();
+						System.out.print("select a card other than "+playerRumourCardList.get(cardNum).name());
+						cardNum = in.nextInt();
+					}
 				}
-
 			}
 		}
 		//TODO
@@ -355,11 +369,11 @@ public class Player implements Preparation{
 		return 0;
 	}
 
-	public CopyOnWriteArrayList<RumourCard> getPlayerDiscardList(){
+	public CopyOnWriteArrayList<RumourCard> getPlayerRevealedCardList(){
 		return this.playerRevealedCardList;
 	}
 
-	public void showPlayerDiscardList(){
+	public void showPlayerRevealedList(){
 		for(RumourCard r: this.playerRevealedCardList){
 			System.out.println(r.name());
 		}

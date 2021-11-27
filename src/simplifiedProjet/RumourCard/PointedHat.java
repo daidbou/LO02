@@ -1,6 +1,7 @@
 package simplifiedProjet.RumourCard;
 
 import java.util.List;
+import java.util.Scanner;
 
 import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
@@ -38,26 +39,68 @@ public class PointedHat implements RumourCard{
 
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
+		Player p1 = Engine.nameToPlayer(playerList, accused);
+		int index = 0;
+
+		System.out.println("Take one of your own revealed Rumour cards into your hand\n");
+		p1.showPlayerRevealedList();
+		Scanner sc = new Scanner(System.in);
+		index = sc.nextInt();
+		p1.getRumourCardListPlayer().add(p1.getPlayerRevealedCardList().get(index));
+		p1.getPlayerRevealedCardList().remove(p1.getPlayerRevealedCardList().get(index));
 		System.out.println("Take next turn");
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList,accuser));
 	}
 
 	@Override
 	public Player skillWitchBot(String accuser,String accused, List<Player> playerList) {
+		
+		Player p1 = Engine.nameToPlayer(playerList, accused);
+		int index = 0;
+
+		System.out.println("Take one of your own revealed Rumour cards into your hand\n");
+		p1.showPlayerRevealedList();
+		index = (int) Math.random()*(p1.getPlayerRevealedCardList().size()-1);
+		p1.getRumourCardListPlayer().add(p1.getPlayerRevealedCardList().get(index));
+		p1.getPlayerRevealedCardList().remove(p1.getPlayerRevealedCardList().get(index));
 		System.out.println("Take next turn");
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList,accuser));
 	}
 
 	@Override
-	public Player skillHunt(String namePturn1, List<Player> playerList) {
+	public Player skillHunt(String hunter, List<Player> playerList) {
+	
+		Player p1 = Engine.nameToPlayer(playerList, hunter);
+		int index = 0;
+
+		System.out.println("Take one of your own revealed Rumour cards into your hand\n");
+		p1.showPlayerRevealedList();
+		Scanner sc = new Scanner(System.in);
+		index = sc.nextInt();
+		p1.getRumourCardListPlayer().add(p1.getPlayerRevealedCardList().get(index));
+		p1.getPlayerRevealedCardList().remove(p1.getPlayerRevealedCardList().get(index));
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+		return Broomstick.chooseNextplayerForReal(playerList, hunter);
 	}
 
 	@Override
-	public Player skillHuntBot(String namePturn1, List<Player> playerList) {
+	public Player skillHuntBot(String hunter, List<Player> playerList) {
+		Player p1 = Engine.nameToPlayer(playerList, hunter);
+		int index = 0;
+
+		System.out.println("Take one of your own revealed Rumour cards into your hand\n");
+		p1.showPlayerRevealedList();
+		index = (int) Math.random()*(p1.getPlayerRevealedCardList().size()-1);
+		p1.getRumourCardListPlayer().add(p1.getPlayerRevealedCardList().get(index));
+		p1.getPlayerRevealedCardList().remove(p1.getPlayerRevealedCardList().get(index));
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+		return Broomstick.chooseNextPlayerForBot(playerList, hunter);
 	}
 	
 	

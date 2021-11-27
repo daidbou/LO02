@@ -36,38 +36,55 @@ public class Toad implements RumourCard{
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
 		System.out.println("Take next turn");
+		Player p1= Engine.nameToPlayer(playerList, accused);
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+
+
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
 	}
 
 	@Override
 	public Player skillWitchBot(String accuser,String accused,List<Player> playerList) {
 		System.out.println("Take next turn");
+		Player p1= Engine.nameToPlayer(playerList, accused);
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
 	}
 
 	@Override
 	public Player skillHunt(String hunter, List<Player> playerList) {
-		Engine.nameToPlayer(playerList, hunter).showIdentity();
-		Engine.nameToPlayer(playerList, hunter).revealIdentity();
-		if(Engine.nameToPlayer(playerList, hunter).getIdentity()==0){
+		
+		Player p1= Engine.nameToPlayer(playerList, hunter);
+
+		p1.showIdentity();
+		p1.revealIdentity();
+		if(p1.getIdentity()==0){
+			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 			return Broomstick.chooseNextplayerForReal(playerList, hunter);
 		}
 		else{
-			Engine.nameToPlayer(playerList, hunter).setIsOutOfTurn(true);
-			return Engine.leftPlayer(playerList, Engine.nameToPlayer(playerList, hunter));
+			p1.setIsOutOfTurn(true);
+			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+			return Engine.leftPlayer(playerList, p1);
 		}
+
 	}
 
 	@Override
 	public Player skillHuntBot(String hunter, List<Player> playerList) {
-		Engine.nameToPlayer(playerList, hunter).showIdentity();
-		Engine.nameToPlayer(playerList, hunter).revealIdentity();
-		if(Engine.nameToPlayer(playerList, hunter).getIdentity()==0){
+		Player p1 = Engine.nameToPlayer(playerList, hunter);
+		p1.showIdentity();
+		p1.revealIdentity();
+		if(p1.getIdentity()==0){
+			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 			return Broomstick.chooseNextPlayerForBot(playerList, hunter);
 		}
 		else{
-			Engine.nameToPlayer(playerList, hunter).setIsOutOfTurn(true);
-			return Engine.leftPlayer(playerList, Engine.nameToPlayer(playerList, hunter));
+			p1.setIsOutOfTurn(true);
+			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+
+			return Engine.leftPlayer(playerList, p1);
 		}
 	}
 	}

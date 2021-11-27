@@ -36,56 +36,73 @@ public class Cauldron implements RumourCard{
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
 		System.out.println(accuser+" have to discard a random card");
-		int cardNum = (int)(Math.random()*(Engine.nameToPlayer(playerList, accuser).getRumourCardListPlayer().size()-1));
-		Engine.nameToPlayer(playerList, accuser).disCardCard(cardNum);
+		Player p1= Engine.nameToPlayer(playerList, accused);
+
+		int cardNum = (int)(Math.random()*(p1.getRumourCardListPlayer().size()-1));
+		p1.disCardCard(cardNum);
 
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
+		
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+
+		return Engine.nextPlayer(playerList, p1);
 	}
 
 	@Override
 	public Player skillWitchBot(String accuser,String accused, List<Player> playerList) {
+		
+		Player p1= Engine.nameToPlayer(playerList, accused);
+
 		System.out.println(accuser+" have to discard a random card");
-		int cardNum = (int)(Math.random()*(Engine.nameToPlayer(playerList, accuser).getRumourCardListPlayer().size()-1));
-		Engine.nameToPlayer(playerList, accuser).disCardCard(cardNum);
+		int cardNum = (int)(Math.random()*(p1.getRumourCardListPlayer().size()-1));
+		p1.disCardCard(cardNum);
 
 		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+
+		return Engine.nextPlayer(playerList, p1);
 	}
 
 	@Override
 	public Player skillHunt(String hunter, List<Player> playerList) {
-		Player hunterPlayer = Engine.nameToPlayer(playerList, hunter);
-		Player nextPlayer;
+		Player p1 = Engine.nameToPlayer(playerList, hunter);
 
-		hunterPlayer.revealIdentity();
-		hunterPlayer.showIdentity();
 
-		if(hunterPlayer.getIdentity() == 1){
-			nextPlayer = Engine.leftPlayer(playerList, hunterPlayer);
-			return Engine.nextPlayer(playerList, nextPlayer);
+		p1.revealIdentity();
+		p1.showIdentity();
+
+		if(p1.getIdentity() == 1){
+			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+
+			return Engine.leftPlayer(playerList, p1);
 		}
 		else{
-			nextPlayer = Broomstick.chooseNextplayerForReal(playerList, hunter);
-			return Engine.nextPlayer(playerList, nextPlayer);
+			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+
+			return Broomstick.chooseNextplayerForReal(playerList, hunter);
+
 		}
 	}
 
 	@Override
 	public Player skillHuntBot(String hunter, List<Player> playerList) {
-		Player hunterPlayer = Engine.nameToPlayer(playerList, hunter);
+		Player p1 = Engine.nameToPlayer(playerList, hunter);
 		Player nextPlayer;
 
-		hunterPlayer.revealIdentity();
-		hunterPlayer.showIdentity();
+		p1.revealIdentity();
+		p1.showIdentity();
 
-		if(hunterPlayer.getIdentity() == 1){
-			nextPlayer = Engine.leftPlayer(playerList, hunterPlayer);
-			return Engine.nextPlayer(playerList, nextPlayer);
+		if(p1.getIdentity() == 1){
+			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+
+			nextPlayer = Engine.leftPlayer(playerList, p1);
+			return p1;
 		}
 		else{
+			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+
 			nextPlayer = Broomstick.chooseNextPlayerForBot(playerList, hunter );
-			return Engine.nextPlayer(playerList, nextPlayer);
+			return p1;
 		}
 	}
 }
