@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Player implements Preparation{
-	protected String hunter;
+	protected String name;
 	protected int identity;//1 = witch, 0 = villager
 	protected boolean identityReavealed ;
 	protected int point;
@@ -25,7 +25,7 @@ public class Player implements Preparation{
 	public Player(){};
 
 	public Player(String name, int identity, CopyOnWriteArrayList<RumourCard> rumourCardListP) {
-		this.hunter = name;
+		this.name = name;
 		this.identity = identity;
 		this.playerRumourCardList= rumourCardListP;
 		this.identityReavealed = false;
@@ -34,7 +34,7 @@ public class Player implements Preparation{
 	}
 	
 	public Player(String name) {
-		this.hunter = name;
+		this.name = name;
 		this.virtual = 0;
 	}
 
@@ -51,12 +51,12 @@ public class Player implements Preparation{
 		while(true){
 		Scanner sc = new Scanner(System.in);
 		String pName = sc.nextLine();
-		Player pTurn2 = Preparation.isExistedP(pName,hunter, playerList);
+		Player pTurn2 = Preparation.isExistedP(pName,name, playerList);
 		if(pTurn2 == null){
 			//System.out.println("no such player, try again");
 			continue;
 		}else if(pTurn2.ifIdentityReavealed() == false){
-			System.out.println(hunter+" accuse "+pTurn2.getName());
+			System.out.println(name+" accuse "+pTurn2.getName());
 			//sc.close();
 			return pTurn2;
 		}else{
@@ -77,12 +77,12 @@ public class Player implements Preparation{
 		while(true){
 
 			if(!(playerRumourCardList.get(cardNum).name() == "The Inquisition" || playerRumourCardList.get(cardNum).name() == "Angry Mob")){
-				pNextTurn = playerRumourCardList.get(cardNum).skillHunt(hunter,playerList);
+				pNextTurn = playerRumourCardList.get(cardNum).skillHunt(name,playerList);
 				break;
 			}
 			else{
 				if(this.identity==0 && this.identityReavealed){
-					pNextTurn = playerRumourCardList.get(cardNum).skillHunt(hunter,playerList);
+					pNextTurn = playerRumourCardList.get(cardNum).skillHunt(name,playerList);
 					break;
 				}
 				else{
@@ -109,7 +109,7 @@ public class Player implements Preparation{
 		System.out.println(" enter 0 for the first card");
 		int cardNum = in.nextInt();
 		String cardName = playerRumourCardList.get(cardNum).name();
-		Player pNextTurn = playerRumourCardList.get(cardNum).skillWitch(pTurn1.getName(),this.hunter,playerList);
+		Player pNextTurn = playerRumourCardList.get(cardNum).skillWitch(pTurn1.getName(),this.name,playerList);
 		disCardCard(cardName);
 		
 		//use a method in setup
@@ -124,11 +124,11 @@ public class Player implements Preparation{
 	 * @return
 	 */
 	public void showIdentity(){
-		System.out.println(hunter+" choose to reveal identity");
+		System.out.println(name+" choose to reveal identity");
 		if(identity == 0){
-			System.out.println(hunter + " is a villager" );
+			System.out.println(name + " is a villager" );
 		}else{
-			System.out.println(hunter + " is a witch" );
+			System.out.println(name + " is a witch" );
 		}
 		
 		
@@ -138,7 +138,7 @@ public class Player implements Preparation{
 	 * Show the card of the player
 	 */
 	public void showCards() {
-		System.out.println(hunter+" and cards with ");
+		System.out.println(name+" and cards with ");
 		for (int i = 0; i < playerRumourCardList.size(); i++) {
 			System.out.println(playerRumourCardList.get(i).name());
 		}
@@ -160,7 +160,7 @@ public class Player implements Preparation{
 	 * @return
 	 */
 	public String getName() {
-		return hunter;
+		return name;
 	}
 	
 	
@@ -253,7 +253,7 @@ public class Player implements Preparation{
 		
 		playerRumourCardList = l;
 		playerDiscardCardList = new CopyOnWriteArrayList<RumourCard>();
-		System.out.println(hunter+", what identity do you want to be? (1 for witch, 0 for villager)");
+		System.out.println(name+", what identity do you want to be? (1 for witch, 0 for villager)");
 		String id = in.nextLine();
 		
 		while(true){
@@ -268,7 +268,7 @@ public class Player implements Preparation{
 			}
 			else{
 				System.out.println("error, please select 0 or 1");
-				System.out.println(hunter+", what identity do you want to be? (1 for witch, 0 for villager)");
+				System.out.println(name+", what identity do you want to be? (1 for witch, 0 for villager)");
 				id = in.nextLine();
 			}
 		}
