@@ -287,7 +287,7 @@ public class Engine implements Preparation {
     /**
      * 
      * @param playerList the list of player in the game
-     * @param p the player that used Toad hunt! ability and need to pass the turn to the player at his left
+     * @param p the player that used Toad or Cauldron hunt! ability and need to pass the turn to the player at his left
      * @return the next player
      */
     public static Player leftPlayer(List<Player> playerList, Player p){
@@ -309,7 +309,7 @@ public class Engine implements Preparation {
                 }
             }
             //start a new turn to find the next player
-            for(int i = playerList.size()-1;i>index;i--){
+            for(int i = playerList.size();i>index;i--){
                 if(!playerList.get(i).ifIsOutOfTurn()){
                     return playerList.get(i);
                 }

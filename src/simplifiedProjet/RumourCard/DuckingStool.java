@@ -132,7 +132,7 @@ public class DuckingStool implements RumourCard {//done
             }else{ //bot chooses to discard cards
                 System.out.println(pHunted.getName()+" you should discard one card");
                 pHunted.showCards();
-                int cardNum = (int)(Math.random()*pHunted.getRumourCardListPlayer().size());
+                int cardNum = (int)(Math.random()*pHunted.getRumourCardListPlayer().size()-1);
                 pHunted.disCardCard(cardNum);
                 return pHunted;
             }         

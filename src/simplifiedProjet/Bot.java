@@ -20,13 +20,13 @@ public class Bot extends Player{
 	//Scanner sc = new Scanner(System.in);
     
     public Bot(String string) {
-        hunter = string;
+        name = string;
         this.virtual = 1;
        // super(name);
     }
     public Bot(String name, int identity, CopyOnWriteArrayList<RumourCard> rumourCardListP) {
 		
-        this.hunter = name;
+        this.name = name;
 		this.identity = identity;
 		this. playerRumourCardList= rumourCardListP;
 		this.identityReavealed = false;
@@ -36,7 +36,7 @@ public class Bot extends Player{
     public void setRumourCardListPlayer(CopyOnWriteArrayList<RumourCard> l){
 		playerRumourCardList = l;
 		identity = (int)(Math.random()+0.5);//random set identity
-		playerDiscardCardList = new CopyOnWriteArrayList<RumourCard>();
+		playerRevealedCardList = new CopyOnWriteArrayList<RumourCard>();
 	}
 
 	/**
@@ -47,13 +47,13 @@ public class Bot extends Player{
 		int noP;
 		int index = 0;
 		for(int i =0; i<playerList.size();i++){
-			if(playerList.get(i).getName().equals(this.hunter)){
+			if(playerList.get(i).getName().equals(this.name)){
 				index = i;	
 			}
 		}
 		System.out.println("index = " + index);
 		while(true){
-			noP= (int) (Math.random()*(playerList.size()));// random num player 
+			noP= (int) (Math.random()*(playerList.size()-1));// random num player 
 			
 			
 			if(!Engine.nameToPlayer(playerList, playerList.get(noP).getName()).ifIsOutOfTurn()&&
@@ -63,7 +63,7 @@ public class Bot extends Player{
 			}
 
 		}
-		System.out.println(hunter+" accuses "+playerList.get(noP).getName());
+		System.out.println(name+" accuses "+playerList.get(noP).getName());
 		return Engine.nameToPlayer(playerList, playerList.get(noP).getName());
 	}
 
@@ -77,9 +77,9 @@ public class Bot extends Player{
 	 * 	the next player of pTurn1
 	 */
 	public Player witch(Player pTurn1,List<Player> playerList){
-		int cardNumBot = (int)(Math.random()*(getRumourCardListPlayer().size()));	
-		Player pNextTurn = playerRumourCardList.get(cardNumBot).skillWitchBot(pTurn1.getName(),this.hunter,playerList);
-		System.out.println(hunter+"use witch skill to "+pTurn1.getName()+" using "+playerRumourCardList.get(cardNumBot).name());
+		int cardNumBot = (int)(Math.random()*(getRumourCardListPlayer().size()-1));	
+		Player pNextTurn = playerRumourCardList.get(cardNumBot).skillWitchBot(pTurn1.getName(),this.name,playerList);
+		System.out.println(name+"use witch skill to "+pTurn1.getName()+" using "+playerRumourCardList.get(cardNumBot).name());
 		playerRumourCardList.remove(cardNumBot);
 		return pNextTurn;
 	}
@@ -89,10 +89,10 @@ public class Bot extends Player{
 	 * @param 
 	 */
 	public Player hunt(List<Player> playerList){
-		int cardNumBot = (int)(Math.random()*(getRumourCardListPlayer().size()));
+		int cardNumBot = (int)(Math.random()*(getRumourCardListPlayer().size()-1));
 		
-		Player pNextTurn = playerRumourCardList.get(cardNumBot).skillHuntBot(hunter,playerList);
-		System.out.println(hunter+"use hunt skill to "+pNextTurn.getName()+" using "+playerRumourCardList.get(cardNumBot).name());
+		Player pNextTurn = playerRumourCardList.get(cardNumBot).skillHuntBot(name,playerList);
+		System.out.println(name+"use hunt skill to "+pNextTurn.getName()+" using "+playerRumourCardList.get(cardNumBot).name());
 		playerRumourCardList.remove(cardNumBot);
 		return pNextTurn;
 

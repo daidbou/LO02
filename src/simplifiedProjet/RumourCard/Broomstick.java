@@ -79,6 +79,12 @@ public class Broomstick implements RumourCard{
 
 	}
 
+/**
+ * player choose the next player of the next round
+ * @param playerList list of player in the game
+ * @param pUser name of the player that choose the next player
+ * @return next player
+ */
 	public static Player chooseNextplayerForReal(List<Player> playerList, String pUser){
 		String pNextTurn = "";
         System.out.println("choose next player(p1 or b1 for example :");
@@ -92,11 +98,17 @@ public class Broomstick implements RumourCard{
         return Engine.nameToPlayer(playerList, pNextTurn);
 	}
 
+/**
+ * player choose the next player of the next round
+ * @param playerList list of player in the game
+ * @param pUser name of the player that choose the next player
+ * @return next player
+ */
 	public static Player chooseNextPlayerForBot(List<Player> playerList, String pUser){
 		int nopRandom = 0;
         String pNextTurn = "";
         do{
-            nopRandom = (int)(Math.random()*playerList.size());
+            nopRandom = (int)(Math.random()*playerList.size()-1);
             pNextTurn = playerList.get(nopRandom).getName();
         }while(!Preparation.isExistedForPlayer(pUser,pNextTurn, playerList));
 

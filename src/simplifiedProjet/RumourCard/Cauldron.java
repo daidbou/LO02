@@ -35,25 +35,56 @@ public class Cauldron implements RumourCard{
 
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
+		System.out.println(accuser+" have to discard a random card");
+		int cardNum = (int)(Math.random()*(Engine.nameToPlayer(playerList, accuser).getRumourCardListPlayer().size()-1));
+		Engine.nameToPlayer(playerList, accuser).disCardCard(cardNum);
+
 		System.out.println("Take next turn");
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
 	}
 
 	@Override
 	public Player skillWitchBot(String accuser,String accused, List<Player> playerList) {
+		System.out.println(accuser+" have to discard a random card");
+		int cardNum = (int)(Math.random()*(Engine.nameToPlayer(playerList, accuser).getRumourCardListPlayer().size()-1));
+		Engine.nameToPlayer(playerList, accuser).disCardCard(cardNum);
+
 		System.out.println("Take next turn");
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
 	}
 
 	@Override
-	public Player skillHunt(String namePturn1, List<Player> playerList) {
-		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
+	public Player skillHunt(String hunter, List<Player> playerList) {
+		Player hunterPlayer = Engine.nameToPlayer(playerList, hunter);
+		Player nextPlayer;
+
+		hunterPlayer.revealIdentity();
+		hunterPlayer.showIdentity();
+
+		if(hunterPlayer.getIdentity() == 1){
+			nextPlayer = Engine.leftPlayer(playerList, hunterPlayer);
+			return Engine.nextPlayer(playerList, nextPlayer);
+		}
+		else{
+			nextPlayer = Broomstick.chooseNextplayerForReal(playerList, hunter);
+			return Engine.nextPlayer(playerList, nextPlayer);
+		}
 	}
 
 	@Override
-	public Player skillHuntBot(String namePturn1, List<Player> playerList) {
-		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
+	public Player skillHuntBot(String hunter, List<Player> playerList) {
+		Player hunterPlayer = Engine.nameToPlayer(playerList, hunter);
+		Player nextPlayer;
+
+		hunterPlayer.revealIdentity();
+		hunterPlayer.showIdentity();
+
+		if(hunterPlayer.getIdentity() == 1){
+			nextPlayer = Engine.leftPlayer(playerList, hunterPlayer);
+			return Engine.nextPlayer(playerList, nextPlayer);
+		}
+		else{
+			nextPlayer = Broomstick.chooseNextPlayerForBot(playerList, hunter );
+			return Engine.nextPlayer(playerList, nextPlayer);
+		}
 	}
-}

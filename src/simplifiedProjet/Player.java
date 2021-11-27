@@ -14,7 +14,7 @@ public class Player implements Preparation{
 	protected boolean identityReavealed ;
 	protected int point;
 	protected CopyOnWriteArrayList<RumourCard> playerRumourCardList;
-	protected CopyOnWriteArrayList<RumourCard> playerDiscardCardList;
+	protected CopyOnWriteArrayList<RumourCard> playerRevealedCardList;
 	protected boolean isOutOfTurn = false;
 	protected int virtual ; // 1 = virtual
 	protected boolean isBroomstick = false;
@@ -119,9 +119,6 @@ public class Player implements Preparation{
 
 	/**
 	 * Show player's identity
-	 * @param 
-	 * 		
-	 * @return
 	 */
 	public void showIdentity(){
 		System.out.println(name+" choose to reveal identity");
@@ -215,8 +212,8 @@ public class Player implements Preparation{
 	public void initializePlayer(){
 		identityReavealed = false;
 		isOutOfTurn = false;
-		if(this.playerDiscardCardList!=null){
-			this.playerDiscardCardList.clear();
+		if(this.playerRevealedCardList!=null){
+			this.playerRevealedCardList.clear();
 		}
 
 		//TODO all card status need to be initialized
@@ -252,7 +249,7 @@ public class Player implements Preparation{
 	public void setRumourCardListPlayer(CopyOnWriteArrayList<RumourCard> l){
 		
 		playerRumourCardList = l;
-		playerDiscardCardList = new CopyOnWriteArrayList<RumourCard>();
+		playerRevealedCardList = new CopyOnWriteArrayList<RumourCard>();
 		System.out.println(name+", what identity do you want to be? (1 for witch, 0 for villager)");
 		String id = in.nextLine();
 		
@@ -327,7 +324,7 @@ public class Player implements Preparation{
 			return -1;
 		}
 		SetUp.discardedRumourCard.add(this.playerRumourCardList.get(cardNum));
-		this.playerDiscardCardList.add(this.playerRumourCardList.get(cardNum));
+		//this.playerRevealedCardList.add(this.playerRumourCardList.get(cardNum));
 		playerRumourCardList.remove(cardNum);
 		return 0;
 	}
@@ -347,7 +344,7 @@ public class Player implements Preparation{
 		for(RumourCard r: this.playerRumourCardList){
 			if(r.name().equals(nameCard)){
 				SetUp.discardedRumourCard.add(r);
-				playerDiscardCardList.add(r);
+				//playerRevealedCardList.add(r);
 				this.playerRumourCardList.remove(r);
 				break;
 			}
@@ -357,11 +354,11 @@ public class Player implements Preparation{
 	}
 
 	public CopyOnWriteArrayList<RumourCard> getPlayerDiscardList(){
-		return this.playerDiscardCardList;
+		return this.playerRevealedCardList;
 	}
 
 	public void showPlayerDiscardList(){
-		for(RumourCard r: this.playerDiscardCardList){
+		for(RumourCard r: this.playerRevealedCardList){
 			System.out.println(r.name());
 		}
 	}
