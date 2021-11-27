@@ -37,7 +37,10 @@ public class Broomstick implements RumourCard{
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
 
-		Engine.nameToPlayer(playerList, accuser).isBroomstick();
+		System.out.println("Take next turn.");
+		Player p1 = Engine.nameToPlayer(playerList, accused);
+		p1.isBroomstick();
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 	
 		return takeNextTurn(playerList, accuser);
 		
@@ -48,15 +51,20 @@ public class Broomstick implements RumourCard{
 	 */
 	public Player skillWitchBot(String accuser,String accused,List<Player> playerList) {
 
-		Engine.nameToPlayer(playerList,accuser).isBroomstick();
-		
+		System.out.println("Take next turn.");
+		Player p1 = Engine.nameToPlayer(playerList, accused);
+		p1.isBroomstick();
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+	
 		return takeNextTurn(playerList, accuser);
 	}
 
 	@Override
 	public Player skillHunt(String hunter, List<Player> playerList) {
 
-		Engine.nameToPlayer(playerList, hunter).isBroomstick();
+		Player p1 = Engine.nameToPlayer(playerList, hunter);
+		p1.isBroomstick();
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 
 		return  chooseNextplayerForReal(playerList, hunter);
 
@@ -65,7 +73,9 @@ public class Broomstick implements RumourCard{
 	@Override
 	public Player skillHuntBot(String hunter, List<Player> playerList) {
 
-		Engine.nameToPlayer(playerList, hunter).isBroomstick();
+		Player p1 = Engine.nameToPlayer(playerList, hunter);
+		p1.isBroomstick();
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 
 		return chooseNextPlayerForBot(playerList, hunter);
 	}

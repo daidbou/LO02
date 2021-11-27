@@ -66,7 +66,12 @@ public class Player implements Preparation{
 		}
 		
 	}
-	
+	/**
+	 * Start the hunt process.
+	 * Select a Rumour card in the player RumourCard list then use his Hunt! ability
+	 * @param playerList list of player
+	 * @return pNextTurn, the next player for the round
+	 */
 	public Player hunt(List<Player> playerList) {
 		
 		showCards();
@@ -108,8 +113,6 @@ public class Player implements Preparation{
 				}
 			}
 		}
-		//TODO
-		//disCardCard(cardNum);
 		
 		return pNextTurn;	
 	}
@@ -126,7 +129,6 @@ public class Player implements Preparation{
 		int cardNum = in.nextInt();
 
 		Player pNextTurn = playerRumourCardList.get(cardNum).skillWitch(pTurn1.getName(),this.name,playerList);
-		//disCardCard(cardName);
 		
 		//use a method in setup
 		return pNextTurn ;//在这里检查?

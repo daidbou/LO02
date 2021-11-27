@@ -34,27 +34,63 @@ public class HookedNose implements RumourCard{
 
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
+		Player accuserPlayer = Engine.nameToPlayer(playerList, accuser);
+		Player accusedPlayer = Engine.nameToPlayer(playerList, accused);
+		int cardNum;
+
+		cardNum = (int) Math.random()*(accuserPlayer.getRumourCardListPlayer().size()-1);
+		accusedPlayer.getRumourCardListPlayer().add(accuserPlayer.getRumourCardListPlayer().get(cardNum));
+		accuserPlayer.getRumourCardListPlayer().remove(accuserPlayer.getRumourCardListPlayer().get(cardNum));
+
+		accusedPlayer.revealCardAndRemoveFromRumourCardList(accusedPlayer.stringToCard(nameCard));
+
 		System.out.println("Take next turn");
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList,accuser));
 	}
 
 	@Override
 	public Player skillWitchBot(String accuser,String accused, List<Player> playerList) {
+		Player accuserPlayer = Engine.nameToPlayer(playerList, accuser);
+		Player accusedPlayer = Engine.nameToPlayer(playerList, accused);
+		int cardNum;
+
+		cardNum = (int) Math.random()*(accuserPlayer.getRumourCardListPlayer().size()-1);
+		accusedPlayer.getRumourCardListPlayer().add(accuserPlayer.getRumourCardListPlayer().get(cardNum));
+		accuserPlayer.getRumourCardListPlayer().remove(accuserPlayer.getRumourCardListPlayer().get(cardNum));
+
+		accusedPlayer.revealCardAndRemoveFromRumourCardList(accusedPlayer.stringToCard(nameCard));
+
 		System.out.println("Take next turn");
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
 	}
 
 	@Override
-	public Player skillHunt(String namePturn1, List<Player> playerList) {
-		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
+	public Player skillHunt(String hunter, List<Player> playerList) {
+
+		Player pNextTurn = Broomstick.chooseNextplayerForReal(playerList, hunter);
+		Player p1 = Engine.nameToPlayer(playerList, hunter);
+		int cardNum = (int) Math.random()*(pNextTurn.getRumourCardListPlayer().size()-1);
+
+		p1.getRumourCardListPlayer().add(pNextTurn.getRumourCardListPlayer().get(cardNum));
+		pNextTurn.getRumourCardListPlayer().remove(pNextTurn.getRumourCardListPlayer().get(cardNum));
+
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+
+		return pNextTurn;
+
 	}
 
 	@Override
-	public Player skillHuntBot(String namePturn1, List<Player> playerList) {
-		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
+	public Player skillHuntBot(String hunter, List<Player> playerList) {
+		Player pNextTurn = Broomstick.chooseNextPlayerForBot(playerList, hunter);
+		Player p1 = Engine.nameToPlayer(playerList, hunter);
+		int cardNum = (int) Math.random()*(pNextTurn.getRumourCardListPlayer().size()-1);
+
+		p1.getRumourCardListPlayer().add(pNextTurn.getRumourCardListPlayer().get(cardNum));
+		pNextTurn.getRumourCardListPlayer().remove(pNextTurn.getRumourCardListPlayer().get(cardNum));
+
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+
+		return pNextTurn;
 	}
-	
-	
 }
