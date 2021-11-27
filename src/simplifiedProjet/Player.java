@@ -96,8 +96,6 @@ public class Player implements Preparation{
 		}
 		//TODO
 		//disCardCard(cardNum);
-		this.playerRevealedCardList.add(playerRumourCardList.get(cardNum));
-		this.playerRumourCardList.remove(playerRumourCardList.get(cardNum));
 		
 		return pNextTurn;	
 	}
@@ -112,11 +110,9 @@ public class Player implements Preparation{
 		showCards();
 		System.out.println(" enter 0 for the first card");
 		int cardNum = in.nextInt();
-		String cardName = playerRumourCardList.get(cardNum).name();
+
 		Player pNextTurn = playerRumourCardList.get(cardNum).skillWitch(pTurn1.getName(),this.name,playerList);
 		//disCardCard(cardName);
-		this.playerRevealedCardList.add(playerRumourCardList.get(cardNum));
-		this.playerRumourCardList.remove(playerRumourCardList.get(cardNum));
 		
 		//use a method in setup
 		return pNextTurn ;//在这里检查?
@@ -381,4 +377,24 @@ public class Player implements Preparation{
 		this.isWinnerLastTurn = b;
 	}
 
+	public void revealCardAndRemoveFromRumourCardList(RumourCard r){
+		this.playerRevealedCardList.add(r);
+		this.playerRumourCardList.remove(r);
+	}
+
+	public RumourCard stringToCard(String nameCard){
+
+		RumourCard rumourCard; 
+		
+		for(RumourCard r: SetUp.rumourCardList){
+
+			if(nameCard.equals(r.name())){
+				rumourCard = r;
+				return rumourCard;
+
+			}
+			else{}
+		}
+		return null;
+	}
 }

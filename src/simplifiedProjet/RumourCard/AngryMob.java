@@ -51,6 +51,7 @@ public class AngryMob implements RumourCard {
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
 		System.out.println("Take next turn");
+		Engine.nameToPlayer(playerList, accused).revealCardAndRemoveFromRumourCardList("Angry Mob");
 		
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
 	}

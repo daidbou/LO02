@@ -35,25 +35,41 @@ public class PetNewt implements RumourCard{
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
 		System.out.println("Take next turn");
+		Player p1= Engine.nameToPlayer(playerList, accused);
+
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
 	}
 
 	@Override
 	public Player skillWitchBot(String accuser,String accused, List<Player> playerList) {
 		System.out.println("Take next turn");
+		Player p1= Engine.nameToPlayer(playerList, accused);
+
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
 	}
 
 	@Override
-	public Player skillHunt(String namePturn1, List<Player> playerList) {
-		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
+	public Player skillHunt(String hunter, List<Player> playerList) {
+
+		Player p1= Engine.nameToPlayer(playerList, hunter);
+
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, hunter));
 	}
 
 	@Override
-	public Player skillHuntBot(String namePturn1, List<Player> playerList) {
-		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, namePturn1));
+	public Player skillHuntBot(String hunter, List<Player> playerList) {
+
+		Player p1= Engine.nameToPlayer(playerList, hunter);
+
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+		
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, hunter));
 	}
  
     

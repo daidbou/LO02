@@ -61,5 +61,6 @@ public interface RumourCard {
 	 * @return
 	 */
 	public String name();
+
 	
 }
