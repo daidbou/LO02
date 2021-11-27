@@ -94,7 +94,11 @@ public class Player implements Preparation{
 
 			}
 		}
-		disCardCard(cardNum);
+		//TODO
+		//disCardCard(cardNum);
+		this.playerRevealedCardList.add(playerRumourCardList.get(cardNum));
+		this.playerRumourCardList.remove(playerRumourCardList.get(cardNum));
+		
 		return pNextTurn;	
 	}
 	/**
@@ -110,7 +114,9 @@ public class Player implements Preparation{
 		int cardNum = in.nextInt();
 		String cardName = playerRumourCardList.get(cardNum).name();
 		Player pNextTurn = playerRumourCardList.get(cardNum).skillWitch(pTurn1.getName(),this.name,playerList);
-		disCardCard(cardName);
+		//disCardCard(cardName);
+		this.playerRevealedCardList.add(playerRumourCardList.get(cardNum));
+		this.playerRumourCardList.remove(playerRumourCardList.get(cardNum));
 		
 		//use a method in setup
 		return pNextTurn ;//在这里检查?

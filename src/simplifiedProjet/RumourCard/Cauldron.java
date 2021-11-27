@@ -88,3 +88,4 @@ public class Cauldron implements RumourCard{
 			return Engine.nextPlayer(playerList, nextPlayer);
 		}
 	}
+}
