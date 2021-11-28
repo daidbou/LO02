@@ -1,9 +1,11 @@
 package simplifiedProjet.RumourCard;
 
 import java.util.List;
+import java.util.Scanner;
 
 import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
+import simplifiedProjet.Preparation;
 
 public class PetNewt implements RumourCard{
     
@@ -56,6 +58,19 @@ public class PetNewt implements RumourCard{
 	public Player skillHunt(String hunter, List<Player> playerList) {//TODO implement
 
 		Player p1= Engine.nameToPlayer(playerList, hunter);
+		String playerRobbed;
+
+		Scanner sc = new Scanner(System.in);
+		System.out.println("choose a player first");
+		for(Player p: playerList){
+			System.out.println(p.getName());
+		}
+		do{
+			playerRobbed =  sc.nextLine();
+		}while(Preparation.isExistedP(playerRobbed, playerList)!=null);
+		System.out.println("choose one of "+playerRobbed+" revealed cards");
+		for()
+		
 
 		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 
