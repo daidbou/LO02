@@ -86,10 +86,12 @@ public class AngryMob implements RumourCard {
 					break;
 				}
 				else{
+					System.out.println(hunted+"is out of turn or has a revealed Broomstick RumourCard, please select another player");
 					continue;
 				}
 			}
 			else{
+				System.out.println("this player doesn't exist");
 				continue;
 			}
 		}
