@@ -105,6 +105,14 @@ public class SetUp implements Preparation{
 
 
     public static List<Player> setUpPlayer(List<Player> playerListInit){
+        Player pWinner = playerListInit.get(0);
+        for(Player p: playerListInit){
+            if(p.ifIsWinnerLastTurn()){
+                System.out.println(p.getName()+"is the winner SetUp");
+                pWinner = p;
+                break;
+            }
+        }
         List<Player> playerList = new ArrayList<Player>();
 
         if(discardedRumourCard.size()!=0){ //initialze the discard card list
@@ -162,10 +170,10 @@ public class SetUp implements Preparation{
         Collections.shuffle(playerList);
         
         //the winner of last turn goes first
-        for(int t = 0; i<playerList.size();t++){
-            if(playerList.get(t).ifIsWinnerLastTurn()){
+        for(int t = 0; t<playerList.size();t++){
+            if(playerList.get(t).getName().equals(pWinner.getName())){
                 System.out.println("winner of last turn is "+playerList.get(t).getName());
-                Collections.swap(playerList,0,t);//TODO WHY IT'S NOT RIGHT
+                Collections.swap(playerList,0,t);
             }
         }
         for(Player p: playerList){

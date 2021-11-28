@@ -8,12 +8,22 @@ import java.util.Scanner;
 import simplifiedProjet.RumourCard.RumourCard;
 
 public class Engine implements Preparation {
-    public static void main(String[] args){
+    
+    private static Engine engine = new Engine();
+    private Engine(){
+
+    }
+
+    public static Engine getEngine(){
+        return engine;
+    }
+    public void player(){
         
 
         List<Player> playerListInit = SetUp.initializeGame();
 
         GameStart:while(ifGameContinue(playerListInit)){
+            
             System.out.println("================================ new turn ======================================= ");
             List<Player> playerList = SetUp.setUpPlayer(playerListInit);
             for(Player p: playerList){
@@ -68,11 +78,6 @@ public class Engine implements Preparation {
                 if(!ifTurnContinue(playerList)){//this turn ends
                     showStatusOfTurn(playerList);
                     playerListInit = playerList;
-                    for(Player p:playerListInit){
-                        if(p.ifIsWinnerLastTurn()){
-                            System.out.println(p.getName()+"is the winner");
-                        }
-                    }
                 }
                 
             }
@@ -91,6 +96,7 @@ public class Engine implements Preparation {
         for(RumourCard r: SetUp.discardedRumourCard){
             System.out.println(r.name());
         }
+        System.out.println("====================");
     }
 
 
@@ -239,7 +245,7 @@ public class Engine implements Preparation {
      */
     public static boolean ifGameContinue(List<Player> pAll) {
         for (Player p : pAll) {
-            if (p.getPoint() >= 3) {
+            if (p.getPoint() >= 5) {
                 return false;
             }
         }
