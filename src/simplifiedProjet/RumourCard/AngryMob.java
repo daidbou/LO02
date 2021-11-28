@@ -2,12 +2,14 @@ package simplifiedProjet.RumourCard;
 
 
 import java.util.List;
+import java.util.Scanner;
 
 import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
 //import simplifiedProjet.Preparation;
 //import simplifiedProjet.Test;
 //import simplifiedProjet.SetUp;
+import simplifiedProjet.Preparation;
 
 
 public class AngryMob implements RumourCard {
@@ -69,23 +71,78 @@ public class AngryMob implements RumourCard {
 	public Player skillHunt(String hunter, List<Player> playerList) {
 
 		Player p1 = Engine.nameToPlayer(playerList, hunter);
+		Scanner sc = new Scanner(System.in);
+		String hunted;
 
-		System.out.println("Take next turn");
-		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, hunter));
+		System.out.println("Reveal another player identity : \n");
+		for(Player p: playerList){
+			System.out.println(p.getName());
+		}
+		while(true){
+			System.out.println("Select a player (p1 or b1 for example : \n");
+			hunted = sc.nextLine();
+			if(Preparation.isExistedForPlayer(hunted, hunter, playerList) || Preparation.isExistedForBot(hunted, hunter, playerList)){
+				if(Engine.nameToPlayer(playerList, hunted).ifIsOutOfTurn()==false && Engine.nameToPlayer(playerList, hunted).getIsBroomstick()==false){
+					break;
+				}
+				else{
+					continue;
+				}
+			}
+			else{
+				continue;
+			}
+		}
+		Player huntedPlayer = Engine.nameToPlayer(playerList, hunted);
+		huntedPlayer.revealIdentity();
+		if(huntedPlayer.getIdentity()==0){
+			System.out.println(hunted+" is a villager, you lose 2 points. They take next turn.");
+			p1.raisePoints(-2);
+			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+			return huntedPlayer;
+		}
+		else{
+			System.out.println(hunted+" is a witch, you win 2 points. You take next turn.");
+			p1.raisePoints(2);
+			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+			return p1;
+		}
 	}
 
 	@Override
 	public Player skillHuntBot(String hunter, List<Player> playerList) {
 		
 		Player p1 = Engine.nameToPlayer(playerList, hunter);
+		int huntedNumber;
+		Player huntedPlayer;
 
-		System.out.println("Take next turn");
-		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, hunter));
+		System.out.println("Reveal another player identity : \n");
+		for(Player p: playerList){
+			System.out.println(p.getName());
+		}
+		while(true){
+			huntedNumber = 	(int) Math.random()*(playerList.size()-1);
+			huntedPlayer = playerList.get(huntedNumber);
+			if(huntedPlayer.ifIsOutOfTurn()==false && huntedPlayer.getIsBroomstick()==false){
+				break;
+			}
+			else{
+				continue;
+			}
+		}
+
+		huntedPlayer.revealIdentity();
+		if(huntedPlayer.getIdentity()==0){
+			System.out.println(huntedPlayer.getName()+" is a villager, you lose 2 points. They take next turn.");
+			p1.raisePoints(-2);
+			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+			return huntedPlayer;
+		}
+		else{
+			System.out.println(huntedPlayer.getName()+" is a witch, you win 2 points. You take next turn.");
+			p1.raisePoints(2);
+			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+			return p1;
+		}
 	}
-
-	
-	
-
 }

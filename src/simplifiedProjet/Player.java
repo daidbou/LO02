@@ -198,7 +198,7 @@ public class Player implements Preparation{
 			}
 		}else{
 			for(int i = 0; i > num; i--){
-				point -= num;
+				point--;
 			}
 		}
 		
@@ -212,7 +212,7 @@ public class Player implements Preparation{
 		return point;
 	}
 
-	/** player reveals it's identity
+	/** player reveals his identity
 	 *
 	 */
 	public void revealIdentity(){
@@ -244,6 +244,7 @@ public class Player implements Preparation{
 	public void setIsOutOfTurn(boolean t){
 		isOutOfTurn = t;
 	}
+
 	/**
  	 *  getter of isOutOfTurn
  	 * @return isOutOfTurn
@@ -318,15 +319,35 @@ public class Player implements Preparation{
 		this.playerRumourCardList.add(rumourCard);
 	}
 
-
+	/**
+	 * set true if the player reveal a broomstick rumourCard
+	 */
 	public void isBroomstick(){
 
 		this.isBroomstick = true;
  
 	}
 
+	/**
+	 * return true if the player has reveal a broomstick Card
+	 */
+	public boolean getIsBroomstick(){
+		return this.isBroomstick;
+	}
+
+	/**
+	 * set true if the player reveal a wart rumourCard
+	 */
 	public void isWart(){
 		this.isWart = true;
+	}
+
+	/**
+	 * return true if the player has revealed a wart rumourCard
+	 * @return
+	 */
+	public boolean getIsWart(){
+		return this.isWart;
 	}
 	
 	/**

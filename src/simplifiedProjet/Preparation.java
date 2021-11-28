@@ -122,6 +122,14 @@ public interface Preparation {
         System.out.println("no such player, try again");
         return false;
     }
+
+    /**
+     * verify if the bot exists in the list
+     * @param accused taget bot
+     * @param pNextTurn player who use this method, int sure that pNextTurn cannot do something to himself
+     * @param playerList
+     * @return true if the bot accused exist
+     */
     public static boolean isExistedForBot(String accused,String pNextTurn,List<Player> playerList){
         for(Player p:playerList) {
             if(pNextTurn.equals(p.getName())) {
