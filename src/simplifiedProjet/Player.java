@@ -19,6 +19,7 @@ public class Player implements Preparation{
 	protected int virtual ; // 1 = virtual
 	protected boolean isBroomstick = false;
 	protected boolean isWart = false;
+	protected boolean isEvilEye=false;
 	protected boolean isWinnerLastTurn;
 	Scanner in = new Scanner(System.in);
 
@@ -366,6 +367,21 @@ public class Player implements Preparation{
 	 */
 	public boolean getIsWart(){
 		return this.isWart;
+	}
+	/**
+	 * set true if the player reveal Evil Eye
+	 * @return
+	 */
+	public void isEvilEye(){
+		 isEvilEye=true;
+	}
+
+	/**
+	 * return true if the player reveal Evil Eye
+	 * @return
+	 */
+	public boolean getIsEvilEye(){
+		return isEvilEye;
 	}
 	
 	/**

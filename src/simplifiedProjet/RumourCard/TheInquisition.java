@@ -127,7 +127,7 @@ public class TheInquisition implements RumourCard {
 	 */
 	@Override
 	public Player skillHunt(String hunter, List<Player> playerList) {
-		Player nextPlayer = Broomstick.chooseNextplayerForReal(playerList, hunter);
+		Player nextPlayer = Broomstick.chooseNextPlayerForReal(playerList, hunter);
 		System.out.print("(secretly looking at "+nextPlayer.getName()+" identity)\n");
 		nextPlayer.showIdentity();
 		Player pHunter = Engine.nameToPlayer(playerList, hunter);

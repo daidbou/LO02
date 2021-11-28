@@ -1,9 +1,12 @@
 package simplifiedProjet.RumourCard;
 
 import java.util.List;
+import java.util.Scanner;
 
 import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
+import simplifiedProjet.Preparation;
+import simplifiedProjet.SetUp;
 
 public class EvilEye implements RumourCard{
     String nameCard = "Evil Eye";
@@ -35,25 +38,87 @@ public class EvilEye implements RumourCard{
 
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
-	
-		return Broomstick.chooseNextPlayerForReal(playerList, accused);
+		Player p1 = Engine.nameToPlayer(playerList, accused);
+		p1.isEvilEye();
+
+		return EvilEye.chooseNextPlayerForReal(playerList, accused);
 	}
 
 	@Override
 	public Player skillWitchBot(String accuser,String accused, List<Player> playerList) {
-		return Broomstick.chooseNextPlayerForBot(playerList, accused);
+		Player p1 = Engine.nameToPlayer(playerList, accused);
+		p1.isEvilEye();
+		
+		return EvilEye.chooseNextPlayerForBot(playerList, accused);
 
 	}
 
 	@Override
 	public Player skillHunt(String hunter, List<Player> playerList) {
-		return Broomstick.chooseNextPlayerForReal(playerList, hunter);
+		return EvilEye.chooseNextPlayerForReal(playerList, hunter);
 	}
 
 	@Override
 	public Player skillHuntBot(String hunter, List<Player> playerList) {
-		System.out.println("Take next turn");
-		return Broomstick.chooseNextPlayerForBot(playerList, hunter);
+		return EvilEye.chooseNextPlayerForBot(playerList, hunter);
 	}
     
+	public static Player chooseNextPlayerForReal(List<Player> playerList, String pUser){
+		String pNextTurn = "";
+		int playerLeft=0;
+		int nextPlayerIndex=0;
+
+		for(int i=0; i< SetUp.allPlayerList.size(); i++){
+			if(!SetUp.allPlayerList.get(i).ifIsOutOfTurn() && !SetUp.allPlayerList.get(i).getName().equals(pUser)){
+				playerLeft++;
+				nextPlayerIndex += i; 
+			}
+			else{
+
+			}
+		}
+		if(playerLeft==1){
+			return SetUp.allPlayerList.get(nextPlayerIndex);
+		}
+
+		else{
+			System.out.println("choose next player other than" + pUser+ " (p1 or b1 for example :");
+			for(Player p: playerList){
+				System.out.println(p.getName());
+			}
+			Scanner sc = new Scanner(System.in);
+			do{
+				pNextTurn = sc.nextLine();
+			}while(!Preparation.isExistedForPlayer(pUser,pNextTurn, playerList) && Engine.nameToPlayer(playerList, pNextTurn).getIsEvilEye()==false);
+			return Engine.nameToPlayer(playerList, pNextTurn);
+		}
+	}
+
+	public static Player chooseNextPlayerForBot(List<Player> playerList, String pUser){
+		int nopRandom = 0;
+        String pNextTurn = "";
+		int playerLeft=0;
+		int nextPlayerIndex=0;
+
+		for(int i=0; i< SetUp.allPlayerList.size(); i++){
+			if(!SetUp.allPlayerList.get(i).ifIsOutOfTurn() && !SetUp.allPlayerList.get(i).getName().equals(pUser)){
+				playerLeft++;
+				nextPlayerIndex += i; 
+			}
+			else{
+
+			}
+		}
+		if(playerLeft == 1){
+			return SetUp.allPlayerList.get(nextPlayerIndex);
+		}
+		else{
+			do{
+            nopRandom = (int)(Math.random()*playerList.size());
+            pNextTurn = playerList.get(nopRandom).getName();
+        	}while(!Preparation.isExistedForBot(pUser,pNextTurn, playerList) && Engine.nameToPlayer(playerList, pNextTurn).getIsEvilEye()==false);
+
+		return Engine.nameToPlayer(playerList, pNextTurn);
+		}
+	}
 }
