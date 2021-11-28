@@ -55,14 +55,14 @@ public class Player implements Preparation{
 		Player pTurn2 = Preparation.isExistedP(pName,name, playerList);
 		if(pTurn2 == null){
 			//System.out.println("no such player, try again");
-			continue;
-		}else if(pTurn2.ifIdentityReavealed() == false){
+	
+		}else if(!pTurn2.ifIdentityReavealed()){
 			System.out.println(name+" accuse "+pTurn2.getName());
 			//sc.close();
 			return pTurn2;
 		}else{
 			System.out.println(pTurn2.getName() + " has already revealed his identity, try again");
-			continue;
+
 		}
 		}
 		
@@ -82,7 +82,7 @@ public class Player implements Preparation{
 		
 		while(true){
 
-			if(playerRumourCardList.get(cardNum).name().equals("Pointed Hat") && playerRevealedCardList.size()<0){
+			if(playerRumourCardList.get(cardNum).name().equals("Pointed Hat") && playerRevealedCardList.size()>0){
 				pNextTurn = playerRumourCardList.get(cardNum).skillHunt(name,playerList);
 				break;
 			}
@@ -91,8 +91,6 @@ public class Player implements Preparation{
 				showCards();
 				System.out.println(" enter 0 for the first card");
 				cardNum = in.nextInt();
-
-				continue;
 			}
 			else{
 
@@ -131,7 +129,7 @@ public class Player implements Preparation{
 		Player pNextTurn;
 
 		while(true){
-			if(playerRumourCardList.get(cardNum).name().equals("Pointed Hat") && playerRevealedCardList.size()<0){
+			if(playerRumourCardList.get(cardNum).name().equals("Pointed Hat") && playerRevealedCardList.size()>0){
 				pNextTurn = playerRumourCardList.get(cardNum).skillHunt(name,playerList);
 				break;
 			}
@@ -141,7 +139,6 @@ public class Player implements Preparation{
 				System.out.println(" enter 0 for the first card");
 				cardNum = in.nextInt();
 
-				continue;
 			}
 			else{
 				pNextTurn = playerRumourCardList.get(cardNum).skillWitch(pTurn1.getName(),this.name,playerList);
