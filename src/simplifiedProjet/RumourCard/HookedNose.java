@@ -67,7 +67,7 @@ public class HookedNose implements RumourCard{
 	@Override
 	public Player skillHunt(String hunter, List<Player> playerList) {
 
-		Player pNextTurn = Broomstick.chooseNextplayerForReal(playerList, hunter);
+		Player pNextTurn = Broomstick.chooseNextPlayerForReal(playerList, hunter);
 		Player p1 = Engine.nameToPlayer(playerList, hunter);
 		int cardNum = (int) Math.random()*(pNextTurn.getRumourCardListPlayer().size());
 
