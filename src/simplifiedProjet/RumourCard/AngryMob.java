@@ -49,41 +49,54 @@ public class AngryMob implements RumourCard {
 	}
 
 	
-
+	/**
+	 * take next turn
+	 */
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
+		System.out.println(accused+" use skill Witch of Card "+ nameCard);
 
-		System.out.println("Take next turn");
-		Player p1 = Engine.nameToPlayer(playerList, accused);
-		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
-		
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
+		Player pAccused = Engine.nameToPlayer(playerList, accused);
+		pAccused.revealCardAndRemoveFromRumourCardList(pAccused.stringToCard(nameCard));
+
+		return Broomstick.takeNextTurn(playerList, accuser);
 	}
 
 	@Override
 	public Player skillWitchBot(String accuser,String accused, List<Player> playerList) {
-		//TODO Add the cards name
-		System.out.println("Take next turn");
-		Player p1 = Engine.nameToPlayer(playerList, accused);
-		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
+		System.out.println(accused+" use skill Witch of Card "+ nameCard);
+		
+		Player pAccused = Engine.nameToPlayer(playerList, accused);
+		pAccused.revealCardAndRemoveFromRumourCardList(pAccused.stringToCard(nameCard));
+
+		return Broomstick.takeNextTurn(playerList, accuser);
 	}
 
+	/**
+	 * reveal another player's identity and gain/lose points
+	 */
 	@Override
 	public Player skillHunt(String hunter, List<Player> playerList) {
 
-		Player p1 = Engine.nameToPlayer(playerList, hunter);
+		Player pHunter = Engine.nameToPlayer(playerList, hunter);
 		Scanner sc = new Scanner(System.in);
 		String hunted;
 
 		System.out.println("Reveal another player identity : \n");
 		for(Player p: playerList){
-			System.out.println(p.getName());
+			if(!p.ifIdentityReavealed() && !p.ifIsOutOfTurn()){
+				System.out.println(p.getName());
+			}else if(p.ifIdentityReavealed()){
+				System.out.println(p.getName()+" has already revealed his identity ");
+			}else{
+				System.out.println(p.getName()+" is already out of turn ");
+			}
+			
 		}
 		while(true){
 			System.out.println("Select a player (p1 or b1 for example : \n");
 			hunted = sc.nextLine();
-			if(Preparation.isExistedForPlayer(hunted, hunter, playerList) || Preparation.isExistedForBot(hunted, hunter, playerList)){
+			if(Preparation.isExistedForPlayer(hunted, hunter, playerList)){
 				if(Engine.nameToPlayer(playerList, hunted).ifIsOutOfTurn()==false && Engine.nameToPlayer(playerList, hunted).getIsBroomstick()==false){
 					break;
 				}
@@ -97,19 +110,20 @@ public class AngryMob implements RumourCard {
 				continue;
 			}
 		}
+
 		Player huntedPlayer = Engine.nameToPlayer(playerList, hunted);
 		huntedPlayer.revealIdentity();
 		if(huntedPlayer.getIdentity()==0){
 			System.out.println(hunted+" is a villager, you lose 2 points. They take next turn.");
-			p1.raisePoints(-2);
-			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+			pHunter.raisePoints(-2);
+			pHunter.revealCardAndRemoveFromRumourCardList(pHunter.stringToCard(nameCard));
 			return huntedPlayer;
 		}
 		else{
 			System.out.println(hunted+" is a witch, you win 2 points. You take next turn.");
-			p1.raisePoints(2);
-			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
-			return p1;
+			pHunter.raisePoints(2);
+			pHunter.revealCardAndRemoveFromRumourCardList(pHunter.stringToCard(nameCard));
+			return pHunter;
 		}
 	}
 

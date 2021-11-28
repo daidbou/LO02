@@ -44,6 +44,7 @@ public class Engine implements Preparation {
                             pTurn2.setIsOutOfTurn(true); //pTurn2 should left the game
                             pNextTurn = nextPlayer(playerList, pTurn1);
                             if(pNextTurn == null){
+                                showStatus(playerList);
                                 break TurnStart;
                             }
                            
@@ -58,7 +59,7 @@ public class Engine implements Preparation {
                     pTurn2 = pTurn1.hunt(playerList);
                     pTurn1.showCards();
                     pNextTurn = pTurn2;
-                    System.out.println("pNextPlayer = "+pNextTurn.getName());
+                    //System.out.println("pNextPlayer = "+pNextTurn.getName());
                 }
                 
                 //showAllCards(playerList);

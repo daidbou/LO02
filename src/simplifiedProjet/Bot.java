@@ -8,21 +8,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Bot extends Player{
 
-   // private String name;
-	// private int identity;//1 = witch, 0 = villager
-	// private boolean identityReavealed ;
-	// private int point;
-	// private List<RumourCard> rumourCardListPlayer;
-	// public List<RumourCard> disCardCardListPlayer ;
-	// private boolean isOutOfTurn;
     protected int virtual ; // 1 = virtual
 	
-	//Scanner sc = new Scanner(System.in);
-    
     public Bot(String string) {
         name = string;
         this.virtual = 1;
-       // super(name);
     }
     public Bot(String name, int identity, CopyOnWriteArrayList<RumourCard> rumourCardListP) {
 		
@@ -78,9 +68,8 @@ public class Bot extends Player{
 	 */
 	public Player witch(Player pTurn1,List<Player> playerList){
 		int cardNumBot = (int)(Math.random()*(getRumourCardListPlayer().size()));	
+		System.out.println(name+"use witch skill to "+pTurn1.getName()+" using "+playerRumourCardList.get(cardNumBot).name());
 		Player pNextTurn = playerRumourCardList.get(cardNumBot).skillWitchBot(pTurn1.getName(),this.name,playerList);
-		//System.out.println(name+"use witch skill to "+pTurn1.getName()+" using "+playerRumourCardList.get(cardNumBot).name());
-		//playerRumourCardList.remove(cardNumBot);
 		return pNextTurn;
 	}
 	/**
@@ -89,11 +78,10 @@ public class Bot extends Player{
 	 * @param 
 	 */
 	public Player hunt(List<Player> playerList){
+
 		int cardNumBot = (int)(Math.random()*(getRumourCardListPlayer().size()));
 		
 		Player pNextTurn = playerRumourCardList.get(cardNumBot).skillHuntBot(name,playerList);
-		//System.out.println(name+"use hunt skill to "+pNextTurn.getName()+" using "+playerRumourCardList.get(cardNumBot).name());
-		//playerRumourCardList.remove(cardNumBot);
 		return pNextTurn;
 
 	}

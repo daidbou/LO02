@@ -41,18 +41,21 @@ public class TheInquisition implements RumourCard {
 	
 	
 
+	/**
+	 * discard a card from your hand
+	 */
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
 		System.out.println("Discard a card from your hand");
 		int index=0;
-		Player p1 = Engine.nameToPlayer(playerList, accused);
+		Player pAccused = Engine.nameToPlayer(playerList, accused);
 
-		for (int i = 0; i < p1.getRumourCardListPlayer().size(); i++) {
-			if(p1.getRumourCardListPlayer().get(i).name()!= nameCard){
-				System.out.println(p1.getRumourCardListPlayer().get(i).name());
+		for (int i = 0; i < pAccused.getRumourCardListPlayer().size(); i++) {
+			if(pAccused.getRumourCardListPlayer().get(i).name()!= nameCard){
+				System.out.println(pAccused.getRumourCardListPlayer().get(i).name());
 			}
 			else{
-				index=i;
+				index=i; // this.nameCard's index in the list
 			}
 		}
 		Scanner sc = new Scanner(System.in);
@@ -60,16 +63,17 @@ public class TheInquisition implements RumourCard {
 		RumourCard rumourCard;
 
 		if(selectedCardNumber<index){
-			rumourCard = p1.getRumourCardListPlayer().get(selectedCardNumber);
+			rumourCard = pAccused.getRumourCardListPlayer().get(selectedCardNumber);
 		}
 		else{
-			rumourCard = p1.getRumourCardListPlayer().get(selectedCardNumber-1);
+			rumourCard = pAccused.getRumourCardListPlayer().get(selectedCardNumber-1);
 		}
 		
 		SetUp.discardedRumourCard.add(rumourCard);
-		p1.getRumourCardListPlayer().remove(rumourCard);
 
-		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+		pAccused.getRumourCardListPlayer().remove(rumourCard);//remove the card chosen
+
+		pAccused.revealCardAndRemoveFromRumourCardList(pAccused.stringToCard(nameCard));// remove this.cardName
 		
 		System.out.println("Take next turn");
 
@@ -81,13 +85,13 @@ public class TheInquisition implements RumourCard {
 		
 		int index=0;
 		int selectedCardNumber;
-		Player p1 = Engine.nameToPlayer(playerList, accused);
+		Player pAccused = Engine.nameToPlayer(playerList, accused);
 		RumourCard rumourCard;
 
-		System.out.println(p1.getName()+" and cards with ");
-		for (int i = 0; i < p1.getRumourCardListPlayer().size(); i++) {
-			if(p1.getRumourCardListPlayer().get(i).name()!= nameCard){
-				System.out.println(p1.getRumourCardListPlayer().get(i).name());
+		System.out.println(pAccused.getName()+" and cards with ");
+		for (int i = 0; i < pAccused.getRumourCardListPlayer().size(); i++) {
+			if(pAccused.getRumourCardListPlayer().get(i).name()!= nameCard){
+				System.out.println(pAccused.getRumourCardListPlayer().get(i).name());
 			}
 			else{
 				index=i;
@@ -95,46 +99,49 @@ public class TheInquisition implements RumourCard {
 		}
 
 		while(true){
-			selectedCardNumber = (int) Math.random()*(p1.getRumourCardListPlayer().size());
+			selectedCardNumber = (int) Math.random()*(pAccused.getRumourCardListPlayer().size());
 			if(selectedCardNumber!=index){
 				break;
 			}
 		}
 
 		if(selectedCardNumber<index){
-			rumourCard = p1.getRumourCardListPlayer().get(selectedCardNumber);
+			rumourCard = pAccused.getRumourCardListPlayer().get(selectedCardNumber);
 		}
 		else{
-			rumourCard = p1.getRumourCardListPlayer().get(selectedCardNumber);
+			rumourCard = pAccused.getRumourCardListPlayer().get(selectedCardNumber-1);
 		}
 		
-		SetUp.discardedRumourCard.add(rumourCard);
-		p1.getRumourCardListPlayer().remove(rumourCard);
+		SetUp.discardedRumourCard.add(rumourCard);//TODO initialize discardList
+		pAccused.getRumourCardListPlayer().remove(rumourCard);
 
-		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+		pAccused.revealCardAndRemoveFromRumourCardList(pAccused.stringToCard(nameCard));
 		
 		System.out.println("Take next turn");
 
-		return Engine.nextPlayer(playerList, p1);
+		return Engine.nextPlayer(playerList, pAccused);
 	}
 
+	/**
+	 * choose a player and secretly see his identity
+	 */
 	@Override
 	public Player skillHunt(String hunter, List<Player> playerList) {
 		Player nextPlayer = Broomstick.chooseNextplayerForReal(playerList, hunter);
-		System.out.print("(secretly looking at "+nextPlayer.getName()+" cards)\n");
-		nextPlayer.showCards();
-		Player p1 = Engine.nameToPlayer(playerList, hunter);
-		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+		System.out.print("(secretly looking at "+nextPlayer.getName()+" identity)\n");
+		nextPlayer.showIdentity();
+		Player pHunter = Engine.nameToPlayer(playerList, hunter);
+		pHunter.revealCardAndRemoveFromRumourCardList(pHunter.stringToCard(nameCard));
 		return nextPlayer;
 	}
 
 	@Override
 	public Player skillHuntBot(String hunter, List<Player> playerList) {
 		Player nextPlayer = Broomstick.chooseNextPlayerForBot(playerList, hunter);
-		System.out.print("(secretly looking at "+nextPlayer.getName()+" cards");
-		Player p1 = Engine.nameToPlayer(playerList, hunter);
-		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
-		nextPlayer.showCards();
+		System.out.print("(secretly looking at "+nextPlayer.getName()+"'s identity");
+		Player pHunter = Engine.nameToPlayer(playerList, hunter);
+		pHunter.revealCardAndRemoveFromRumourCardList(pHunter.stringToCard(nameCard));
+		nextPlayer.showIdentity();
 		return nextPlayer;
 	}
 	

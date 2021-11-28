@@ -75,8 +75,8 @@ public class Player implements Preparation{
 	public Player hunt(List<Player> playerList) {
 		
 		showCards();
-		System.out.println(" enter 0 for the first card");
-		int cardNum = in.nextInt();
+		System.out.println(" enter 1 for the first card");
+		int cardNum = in.nextInt() - 1 ;
 		Player pNextTurn;
 		
 		while(true){
@@ -131,7 +131,7 @@ public class Player implements Preparation{
 		Player pNextTurn = playerRumourCardList.get(cardNum).skillWitch(pTurn1.getName(),this.name,playerList);
 		
 		//use a method in setup
-		return pNextTurn ;//在这里检查?
+		return pNextTurn ;
 		
 	}
 
@@ -139,14 +139,12 @@ public class Player implements Preparation{
 	 * Show player's identity
 	 */
 	public void showIdentity(){
-		System.out.println(name+" choose to reveal identity");
+		System.out.println(name+" reveals his identity");
 		if(identity == 0){
 			System.out.println(name + " is a villager" );
 		}else{
 			System.out.println(name + " is a witch" );
 		}
-		
-		
 	}
 
 	/**
@@ -181,7 +179,7 @@ public class Player implements Preparation{
 	
 	/**
 	 * Get the identity (witch or villager) of the player
-	 * @return a int, witch 1 refers to 
+	 * @return  witch 1 refers to witch, 0 refers villager
 	 */
 	public int getIdentity(){
 		return identity;
@@ -193,14 +191,15 @@ public class Player implements Preparation{
 	 */
 	public void raisePoints(int num){
 		if(num > 0){
-			for(int i = 0; i < num; i++){
-				point++;
-			}
+			this.point += num;
 		}else{
-			for(int i = 0; i > num; i--){
-				point--;
+			if(this.point > num){
+				this.point -= num;
+			}else{
+				this.point = 0;
 			}
 		}
+			
 		
 	}
 	
@@ -363,8 +362,6 @@ public class Player implements Preparation{
 			return -1;
 		}
 		SetUp.discardedRumourCard.add(this.playerRumourCardList.get(cardNum));
-		//this.playerRevealedCardList.add(this.playerRumourCardList.get(cardNum));
-		playerRumourCardList.remove(cardNum);
 		return 0;
 	}
 

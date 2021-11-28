@@ -36,31 +36,40 @@ public class Cauldron implements RumourCard{
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
 		System.out.println(accuser+" have to discard a random card");
-		Player p1= Engine.nameToPlayer(playerList, accused);
+		Player pAccuser= Engine.nameToPlayer(playerList, accuser);
+		if(pAccuser.getRumourCardListPlayer().size() == 0){
+			System.out.println(pAccuser.getName()+"has no more rumour cards so he cannot discard a card");
+		}else{
+			int cardNum = (int)(Math.random()*(pAccuser.getRumourCardListPlayer().size()));
+			pAccuser.disCardCard(cardNum);
+		}
 
-		int cardNum = (int)(Math.random()*(p1.getRumourCardListPlayer().size()));
-		p1.disCardCard(cardNum);
-
+		Player pAccused = Engine.nameToPlayer(playerList, accused);
+		pAccused.revealCardAndRemoveFromRumourCardList(pAccused.stringToCard(nameCard));
 		System.out.println("Take next turn");
-		
-		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 
-		return Engine.nextPlayer(playerList, p1);
+		return Engine.nextPlayer(playerList, pAccuser);
 	}
 
 	@Override
 	public Player skillWitchBot(String accuser,String accused, List<Player> playerList) {
 		
-		Player p1= Engine.nameToPlayer(playerList, accused);
+		Player pAccuser= Engine.nameToPlayer(playerList, accuser);
 
 		System.out.println(accuser+" have to discard a random card");
-		int cardNum = (int)(Math.random()*(p1.getRumourCardListPlayer().size()));
-		p1.disCardCard(cardNum);
-
+		
+		if(pAccuser.getRumourCardListPlayer().size() == 0){
+			System.out.println(pAccuser.getName()+"has no more rumour cards so he cannot discard a card");
+		}else{
+			int cardNum = (int)(Math.random()*(pAccuser.getRumourCardListPlayer().size()));
+			pAccuser.disCardCard(cardNum);
+		}
+		
+		Player pAccused = Engine.nameToPlayer(playerList, accused);
+		pAccused.revealCardAndRemoveFromRumourCardList(pAccused.stringToCard(nameCard));
 		System.out.println("Take next turn");
-		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 
-		return Engine.nextPlayer(playerList, p1);
+		return Engine.nextPlayer(playerList, pAccuser);
 	}
 
 	@Override
@@ -70,17 +79,13 @@ public class Cauldron implements RumourCard{
 
 		p1.revealIdentity();
 		p1.showIdentity();
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 
 		if(p1.getIdentity() == 1){
-			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
-
 			return Engine.leftPlayer(playerList, p1);
 		}
 		else{
-			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
-
 			return Broomstick.chooseNextplayerForReal(playerList, hunter);
-
 		}
 	}
 
@@ -91,18 +96,15 @@ public class Cauldron implements RumourCard{
 
 		p1.revealIdentity();
 		p1.showIdentity();
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 
 		if(p1.getIdentity() == 1){
-			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
-
 			nextPlayer = Engine.leftPlayer(playerList, p1);
-			return p1;
+			return nextPlayer;
 		}
 		else{
-			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
-
 			nextPlayer = Broomstick.chooseNextPlayerForBot(playerList, hunter );
-			return p1;
+			return nextPlayer;
 		}
 	}
 }

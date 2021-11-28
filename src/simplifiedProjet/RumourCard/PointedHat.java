@@ -35,26 +35,28 @@ public class PointedHat implements RumourCard{
 		return nameCard;
 	}
 
-	
+	/**
+	 * Take one of your own revealed Rumour cards into your hand
+	 */
 
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
-		Player p1 = Engine.nameToPlayer(playerList, accused);
+		Player pAccused = Engine.nameToPlayer(playerList, accused);
 		int index = 0;
 
-		if(p1.getPlayerRevealedCardList().size()>0){
+		if(pAccused.getPlayerRevealedCardList().size()>0){ // TODO in player
 			System.out.println("Take one of your own revealed Rumour cards into your hand\n");
-			p1.showPlayerRevealedList();
+			pAccused.showPlayerRevealedList();
 			Scanner sc = new Scanner(System.in);
 			index = sc.nextInt();
-			p1.getRumourCardListPlayer().add(p1.getPlayerRevealedCardList().get(index));
-			p1.getPlayerRevealedCardList().remove(p1.getPlayerRevealedCardList().get(index));
+			pAccused.getRumourCardListPlayer().add(pAccused.getPlayerRevealedCardList().get(index));
+			pAccused.getPlayerRevealedCardList().remove(pAccused.getPlayerRevealedCardList().get(index));
 		}
 		else{
 			System.out.println(accused+" has no revealed Rumour cards");
 		}
 		System.out.println("Take next turn");
-		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+		pAccused.revealCardAndRemoveFromRumourCardList(pAccused.stringToCard(nameCard));
 
 		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList,accuser));
 	}
@@ -84,17 +86,17 @@ public class PointedHat implements RumourCard{
 	@Override
 	public Player skillHunt(String hunter, List<Player> playerList) {
 	
-		Player p1 = Engine.nameToPlayer(playerList, hunter);
+		Player pHunter = Engine.nameToPlayer(playerList, hunter);
 		int index = 0;
 
 		System.out.println("Take one of your own revealed Rumour cards into your hand\n");
-		p1.showPlayerRevealedList();
+		pHunter.showPlayerRevealedList();
 		Scanner sc = new Scanner(System.in);
 		index = sc.nextInt();
-		p1.getRumourCardListPlayer().add(p1.getPlayerRevealedCardList().get(index));
-		p1.getPlayerRevealedCardList().remove(p1.getPlayerRevealedCardList().get(index));
+		pHunter.getRumourCardListPlayer().add(pHunter.getPlayerRevealedCardList().get(index));
+		pHunter.getPlayerRevealedCardList().remove(pHunter.getPlayerRevealedCardList().get(index));
 		System.out.println("Take next turn");
-		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+		pHunter.revealCardAndRemoveFromRumourCardList(pHunter.stringToCard(nameCard));
 		return Broomstick.chooseNextplayerForReal(playerList, hunter);
 	}
 

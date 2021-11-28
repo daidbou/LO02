@@ -97,7 +97,7 @@ public class Broomstick implements RumourCard{
  */
 	public static Player chooseNextplayerForReal(List<Player> playerList, String pUser){
 		String pNextTurn = "";
-        System.out.println("choose next player(p1 or b1 for example :");
+        System.out.println("choose next player (p1 or b1 for example :");
 		for(Player p: playerList){
 			System.out.println(p.getName());
 		}
@@ -120,7 +120,7 @@ public class Broomstick implements RumourCard{
         do{
             nopRandom = (int)(Math.random()*playerList.size());
             pNextTurn = playerList.get(nopRandom).getName();
-        }while(!Preparation.isExistedForPlayer(pUser,pNextTurn, playerList));
+        }while(!Preparation.isExistedForBot(pUser,pNextTurn, playerList));
 
 		return Engine.nameToPlayer(playerList, pNextTurn);
 	}
