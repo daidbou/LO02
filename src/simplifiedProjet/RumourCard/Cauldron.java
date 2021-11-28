@@ -79,7 +79,7 @@ public class Cauldron implements RumourCard{
 		else{
 			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 
-			return Broomstick.chooseNextplayerForReal(playerList, hunter);
+			return Broomstick.chooseNextPlayerForReal(playerList, hunter);
 
 		}
 	}

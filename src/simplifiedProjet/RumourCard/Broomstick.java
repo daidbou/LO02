@@ -66,7 +66,7 @@ public class Broomstick implements RumourCard{
 		p1.isBroomstick();
 		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 
-		return  chooseNextplayerForReal(playerList, hunter);
+		return  chooseNextPlayerForReal(playerList, hunter);
 
 	}
 
@@ -95,7 +95,7 @@ public class Broomstick implements RumourCard{
  * @param pUser name of the player that choose the next player
  * @return next player
  */
-	public static Player chooseNextplayerForReal(List<Player> playerList, String pUser){
+	public static Player chooseNextPlayerForReal(List<Player> playerList, String pUser){
 		String pNextTurn = "";
         System.out.println("choose next player(p1 or b1 for example :");
 		for(Player p: playerList){

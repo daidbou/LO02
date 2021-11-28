@@ -61,7 +61,7 @@ public class Toad implements RumourCard{
 		p1.revealIdentity();
 		if(p1.getIdentity()==0){
 			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
-			return Broomstick.chooseNextplayerForReal(playerList, hunter);
+			return Broomstick.chooseNextPlayerForReal(playerList, hunter);
 		}
 		else{
 			p1.setIsOutOfTurn(true);

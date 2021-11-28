@@ -18,7 +18,7 @@ public class DuckingStool implements RumourCard {//done
     @Override
     public Player skillWitch(String accuser,String accused,List<Player> playerList) {
     
-        return Broomstick.chooseNextplayerForReal(playerList, accused);
+        return Broomstick.chooseNextPlayerForReal(playerList, accused);
         
     }
     @Override
@@ -64,7 +64,7 @@ public class DuckingStool implements RumourCard {//done
 
         
         while(true){
-            pHunted = Broomstick.chooseNextplayerForReal(playerList, hunter);
+            pHunted = Broomstick.chooseNextPlayerForReal(playerList, hunter);
             if(pHunted.getIsWart()==false){
                 break;
             }

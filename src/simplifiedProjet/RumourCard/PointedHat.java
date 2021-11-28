@@ -95,7 +95,7 @@ public class PointedHat implements RumourCard{
 		p1.getPlayerRevealedCardList().remove(p1.getPlayerRevealedCardList().get(index));
 		System.out.println("Take next turn");
 		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
-		return Broomstick.chooseNextplayerForReal(playerList, hunter);
+		return Broomstick.chooseNextPlayerForReal(playerList, hunter);
 	}
 
 	@Override
