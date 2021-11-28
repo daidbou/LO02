@@ -118,7 +118,7 @@ public class Broomstick implements RumourCard{
 		int nopRandom = 0;
         String pNextTurn = "";
         do{
-            nopRandom = (int)(Math.random()*playerList.size();
+            nopRandom = (int)(Math.random()*playerList.size());
             pNextTurn = playerList.get(nopRandom).getName();
         }while(!Preparation.isExistedForPlayer(pUser,pNextTurn, playerList));
 
