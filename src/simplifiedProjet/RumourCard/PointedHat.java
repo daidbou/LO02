@@ -44,7 +44,7 @@ public class PointedHat implements RumourCard{
 		Player pAccused = Engine.nameToPlayer(playerList, accused);
 		int index = 0;
 
-		if(pAccused.getPlayerRevealedCardList().size()>0){ // TODO in player
+		if(pAccused.getPlayerRevealedCardList().size()>0){ 
 			System.out.println("Take one of your own revealed Rumour cards into your hand\n");
 			pAccused.showPlayerRevealedList();
 			Scanner sc = new Scanner(System.in);

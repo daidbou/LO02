@@ -106,13 +106,13 @@ public class TheInquisition implements RumourCard {
 		}
 
 		if(selectedCardNumber<index){
-			rumourCard = pAccused.getRumourCardListPlayer().get(selectedCardNumber);
+			rumourCard = pAccused.getRumourCardListPlayer().get(selectedCardNumber);//TODO have bugs here
 		}
 		else{
 			rumourCard = pAccused.getRumourCardListPlayer().get(selectedCardNumber-1);
 		}
 		
-		SetUp.discardedRumourCard.add(rumourCard);//TODO initialize discardList
+		SetUp.discardedRumourCard.add(rumourCard);
 		pAccused.getRumourCardListPlayer().remove(rumourCard);
 
 		pAccused.revealCardAndRemoveFromRumourCardList(pAccused.stringToCard(nameCard));
