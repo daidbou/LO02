@@ -46,7 +46,7 @@ public class TheInquisition implements RumourCard {
 	 */
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
-		System.out.println("Discard a card from your hand");
+		System.out.println("Discard a card from your hand (from 0)");
 		int index=0;
 		Player pAccused = Engine.nameToPlayer(playerList, accused);
 
@@ -66,7 +66,7 @@ public class TheInquisition implements RumourCard {
 			rumourCard = pAccused.getRumourCardListPlayer().get(selectedCardNumber);
 		}
 		else{
-			rumourCard = pAccused.getRumourCardListPlayer().get(selectedCardNumber-1);
+			rumourCard = pAccused.getRumourCardListPlayer().get(selectedCardNumber+1);
 		}
 		
 		SetUp.discardedRumourCard.add(rumourCard);
@@ -82,7 +82,7 @@ public class TheInquisition implements RumourCard {
 
 	@Override
 	public Player skillWitchBot(String accuser,String accused, List<Player> playerList) {
-		
+
 		int index=0;
 		int selectedCardNumber;
 		Player pAccused = Engine.nameToPlayer(playerList, accused);
@@ -103,14 +103,12 @@ public class TheInquisition implements RumourCard {
 			if(selectedCardNumber!=index){
 				break;
 			}
+			else{
+				//continue until we find a number other than index
+			}
 		}
 
-		if(selectedCardNumber<index){
-			rumourCard = pAccused.getRumourCardListPlayer().get(selectedCardNumber);//TODO have bugs here
-		}
-		else{
-			rumourCard = pAccused.getRumourCardListPlayer().get(selectedCardNumber-1);
-		}
+		rumourCard = pAccused.getRumourCardListPlayer().get(selectedCardNumber);//TODO have bugs here
 		
 		SetUp.discardedRumourCard.add(rumourCard);
 		pAccused.getRumourCardListPlayer().remove(rumourCard);
@@ -120,6 +118,7 @@ public class TheInquisition implements RumourCard {
 		System.out.println("Take next turn");
 
 		return Engine.nextPlayer(playerList, pAccused);
+		
 	}
 
 	/**
