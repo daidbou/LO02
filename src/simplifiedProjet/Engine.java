@@ -3,7 +3,7 @@ package simplifiedProjet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.concurrent.ThreadPoolExecutor.DiscardOldestPolicy;
+
 
 import simplifiedProjet.RumourCard.RumourCard;
 
@@ -68,6 +68,11 @@ public class Engine implements Preparation {
                 if(!ifTurnContinue(playerList)){//this turn ends
                     showStatusOfTurn(playerList);
                     playerListInit = playerList;
+                    for(Player p:playerListInit){
+                        if(p.ifIsWinnerLastTurn()){
+                            System.out.println(p.getName()+"is the winner");
+                        }
+                    }
                 }
                 
             }
@@ -302,7 +307,7 @@ public class Engine implements Preparation {
             return null;
         }else{
             System.out.println("this turn ends111");
-            return null;// has a problem here
+            return null;
         }
         
         
