@@ -53,7 +53,7 @@ public class PetNewt implements RumourCard{
 	}
 
 	@Override
-	public Player skillHunt(String hunter, List<Player> playerList) {//TODO to implement
+	public Player skillHunt(String hunter, List<Player> playerList) {//TODO implement
 
 		Player p1= Engine.nameToPlayer(playerList, hunter);
 

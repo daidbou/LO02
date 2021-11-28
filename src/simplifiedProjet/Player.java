@@ -20,7 +20,7 @@ public class Player implements Preparation{
 	protected boolean isBroomstick = false;
 	protected boolean isWart = false;
 	protected boolean isEvilEye=false;
-	protected boolean isWinnerLastTurn;
+	protected boolean isWinnerLastTurn=false;
 	Scanner in = new Scanner(System.in);
 
 	public Player(){};
@@ -184,7 +184,7 @@ public class Player implements Preparation{
 		for (int i = 0; i < SetUp.discardedRumourCard.size(); i++) {
 			System.out.println(SetUp.discardedRumourCard.get(i).name());
 		}
-		System.out.println();
+		System.out.println("");
 	}
 	
 	
@@ -252,7 +252,8 @@ public class Player implements Preparation{
 		if(this.playerRevealedCardList!=null){
 			this.playerRevealedCardList.clear();
 		}
-
+		isBroomstick = false;
+		isWart = false;
 		//TODO all card status need to be initialized
 			
 	}

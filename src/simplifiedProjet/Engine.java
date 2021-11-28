@@ -3,6 +3,9 @@ package simplifiedProjet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.ThreadPoolExecutor.DiscardOldestPolicy;
+
+import simplifiedProjet.RumourCard.RumourCard;
 
 public class Engine implements Preparation {
     public static void main(String[] args){
@@ -17,12 +20,13 @@ public class Engine implements Preparation {
                 p.showCards();
             }
            
-            
+            showDisCardCard();
             Player pTurn1 = new Player();
             Player pTurn2 = new Player();
             Player pNextTurn  = playerList.get(0);
 
             TurnStart:while(ifTurnContinue(playerList)){
+                
                
                 pTurn1 = pNextTurn;
                 System.out.println("--------------------------------"+pTurn1.getName()+"'s round -----------------------");
@@ -33,7 +37,6 @@ public class Engine implements Preparation {
                     if(((pTurn2.isVirtual() == 1) && doChoiceWI_Bot(pTurn2))  || ((pTurn2.isVirtual() == 0) && doChoiceWI_Real(pTurn2))){
                         pNextTurn = pTurn2.witch(pTurn1,playerList);
                         pTurn2.showCards();
-                        System.out.println("pNextPlayer = "+pNextTurn.getName());
                         
                     }else{
                         pTurn2.showIdentity();
@@ -44,7 +47,7 @@ public class Engine implements Preparation {
                             pTurn2.setIsOutOfTurn(true); //pTurn2 should left the game
                             pNextTurn = nextPlayer(playerList, pTurn1);
                             if(pNextTurn == null){
-                                showStatus(playerList);
+                                showStatusOfTurn(playerList);
                                 break TurnStart;
                             }
                            
@@ -59,31 +62,52 @@ public class Engine implements Preparation {
                     pTurn2 = pTurn1.hunt(playerList);
                     pTurn1.showCards();
                     pNextTurn = pTurn2;
-                    //System.out.println("pNextPlayer = "+pNextTurn.getName());
+
                 }
                 
-                //showAllCards(playerList);
-
                 if(!ifTurnContinue(playerList)){//this turn ends
-                    showStatus(playerList);
-                    //playerList = playerListInit;
+                    showStatusOfTurn(playerList);
+                    playerListInit = playerList;
                 }
                 
             }
+
             if(!ifGameContinue(playerListInit)){
-                int max = playerListInit.get(0).getPoint();
-                String str = playerListInit.get(0).getName();
-                for(Player p: playerListInit){
-                    if (p.getPoint()>max){
-                        max = p.getPoint();
-                        str = p.getName();
-                    }
-                }
-                System.out.println(str+"win!"+"with "+max);
-                showStatus(playerListInit);
+                showStatusOfGame(playerListInit);
             }
         }
     }
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private static void showDisCardCard() {
+        System.out.println("=== discard card ===");
+        for(RumourCard r: SetUp.discardedRumourCard){
+            System.out.println(r.name());
+        }
+    }
+
+
+    private static void showStatusOfGame(List<Player> playerListInit) {
+
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!Conclusion of Game!!!!!!!!!!!!!!!!!!!!!!!!!");
+        for(Player p: playerListInit){
+            System.out.println(p.getName()+" got "+p.getPoint()+" points +  ");
+        }
+        
+        int max = playerListInit.get(0).getPoint();
+        String str = playerListInit.get(0).getName();
+        for(Player p: playerListInit){
+            if (p.getPoint()>max){
+                max = p.getPoint();
+                str = p.getName();
+            }
+        }  
+        System.out.println(str+"win!");
+        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    }
+
 
     /**
      * at the end of a turn,shows the status of a player, including
@@ -91,8 +115,8 @@ public class Engine implements Preparation {
      * at the same time get the winner of this turn
      * @param playerList
      */
-    private static void showStatus(List<Player> playerList) {
-        System.out.println("++++++++++++++++conclusion+++++++++++++++++++++");
+    private static void showStatusOfTurn(List<Player> playerList) {
+        System.out.println("++++++++++++++++Conclusion of Turn+++++++++++++++++++++");
 
         for(Player p: playerList){
             if(p.ifIdentityReavealed() == false && p.ifIsOutOfTurn() == false){

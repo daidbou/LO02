@@ -98,10 +98,7 @@ public class SetUp implements Preparation{
         for(int j = 0 ; j<numberOfBot ;j++){ // add bots
             allPlayerList.add(botPlayerList.get(j));
         }
-        if(numberOfPlayer == 5){
-            discardedRumourCard.add(rumourCardShuffled.get(10));
-            discardedRumourCard.add(rumourCardShuffled.get(11));
-        }
+     
         
         return allPlayerList;
     }
@@ -109,6 +106,10 @@ public class SetUp implements Preparation{
 
     public static List<Player> setUpPlayer(List<Player> playerListInit){
         List<Player> playerList = new ArrayList<Player>();
+
+        if(discardedRumourCard.size()!=0){ //initialze the discard card list
+            discardedRumourCard.clear();
+        }
         Collections.shuffle(rumourCardShuffled);
        
         int numberOfPlayer = playerListInit.size();
@@ -153,14 +154,22 @@ public class SetUp implements Preparation{
 
 
         }
+        if(numberOfPlayer == 5){
+            discardedRumourCard.add(rumourCardShuffled.get(10));
+            discardedRumourCard.add(rumourCardShuffled.get(11));
+        }
        
         Collections.shuffle(playerList);
         
         //the winner of last turn goes first
         for(int t = 0; i<playerList.size();t++){
             if(playerList.get(t).ifIsWinnerLastTurn()){
+                System.out.println("winner of last turn is "+playerList.get(t).getName());
                 Collections.swap(playerList,0,t);//TODO WHY IT'S NOT RIGHT
             }
+        }
+        for(Player p: playerList){
+            System.out.println(p.getName());
         }
 
         return playerList;      
