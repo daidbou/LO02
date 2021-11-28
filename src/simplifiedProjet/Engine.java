@@ -53,8 +53,6 @@ public class Engine implements Preparation {
                             System.out.println(pTurn1.getName() + " gains 0 point");
                             pNextTurn = pTurn2;// acussed player takes next turn
                         }
-                        
-                        //System.out.println("pNextPlayer = "+pNextTurn.getName());
                     }
                 }else{
                     pTurn2 = pTurn1.hunt(playerList);
@@ -81,6 +79,7 @@ public class Engine implements Preparation {
                     }
                 }
                 System.out.println(str+"win!"+"with "+max);
+                showStatus(playerListInit);
             }
         }
     }
@@ -176,7 +175,7 @@ public class Engine implements Preparation {
     */
     public static boolean doChoiceAh_Bot(Player pTurn1) {
         double ChoiceAh_Bot = Math.random();
-        if (pTurn1.checkRumourCardList() || ChoiceAh_Bot > 0 ) {
+        if (pTurn1.checkRumourCardList() || ChoiceAh_Bot > 0.5 ) {
             return true;// accuse
         } else {
             return false;
@@ -194,7 +193,7 @@ public class Engine implements Preparation {
     public static boolean doChoiceWI_Bot(Player pTurn1) { //witch or show id
         double ChoiceWI_Bot = Math.random();
         
-        if (ChoiceWI_Bot > 1 && !pTurn1.checkRumourCardList()) {
+        if (ChoiceWI_Bot > 0.5 && !pTurn1.checkRumourCardList()) {
             return true;//use witch skill
         }else{
             return false;
@@ -277,7 +276,7 @@ public class Engine implements Preparation {
             }
             return null;
         }else{
-            System.out.println("this turn ends");
+            System.out.println("this turn ends111");
             return null;// has a problem here
         }
         
@@ -316,7 +315,7 @@ public class Engine implements Preparation {
             }
             return null;
         }else{
-            System.out.println("this turn ends");
+            System.out.println("this turn ends222");
             return null;// has a problem here
         }
         
