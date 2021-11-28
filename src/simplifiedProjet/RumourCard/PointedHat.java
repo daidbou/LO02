@@ -87,13 +87,18 @@ public class PointedHat implements RumourCard{
 		Player p1 = Engine.nameToPlayer(playerList, hunter);
 		int index = 0;
 
-		System.out.println("Take one of your own revealed Rumour cards into your hand\n");
-		p1.showPlayerRevealedList();
-		Scanner sc = new Scanner(System.in);
-		index = sc.nextInt();
-		p1.getRumourCardListPlayer().add(p1.getPlayerRevealedCardList().get(index));
-		p1.getPlayerRevealedCardList().remove(p1.getPlayerRevealedCardList().get(index));
-		System.out.println("Take next turn");
+		if(p1.getPlayerRevealedCardList().size()>0){
+			System.out.println("Take one of your own revealed Rumour cards into your hand\n");
+			p1.showPlayerRevealedList();
+			Scanner sc = new Scanner(System.in);
+			index = sc.nextInt();
+			p1.getRumourCardListPlayer().add(p1.getPlayerRevealedCardList().get(index));
+			p1.getPlayerRevealedCardList().remove(p1.getPlayerRevealedCardList().get(index));
+		}
+		else{
+			System.out.println(hunter+" has no revealed Rumour cards")
+		}
+		System.out.println("Choose next player");
 		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 		return Broomstick.chooseNextplayerForReal(playerList, hunter);
 	}
@@ -105,10 +110,15 @@ public class PointedHat implements RumourCard{
 
 		System.out.println("Take one of your own revealed Rumour cards into your hand\n");
 		p1.showPlayerRevealedList();
-		index = (int) Math.random()*(p1.getPlayerRevealedCardList().size()-1);
-		p1.getRumourCardListPlayer().add(p1.getPlayerRevealedCardList().get(index));
-		p1.getPlayerRevealedCardList().remove(p1.getPlayerRevealedCardList().get(index));
-		System.out.println("Take next turn");
+		if(p1.getPlayerRevealedCardList().size()>0){
+			index = (int) Math.random()*(p1.getPlayerRevealedCardList().size()-1);
+			p1.getRumourCardListPlayer().add(p1.getPlayerRevealedCardList().get(index));
+			p1.getPlayerRevealedCardList().remove(p1.getPlayerRevealedCardList().get(index));
+		}
+		else{
+			System.out.println(hunter+" has no revealed Rumour cards");
+		}
+		System.out.println("Choose next player");
 		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 		return Broomstick.chooseNextPlayerForBot(playerList, hunter);
 	}
