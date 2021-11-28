@@ -85,7 +85,7 @@ public class Cauldron implements RumourCard{
 			return Engine.leftPlayer(playerList, p1);
 		}
 		else{
-			return Broomstick.chooseNextplayerForReal(playerList, hunter);
+			return Broomstick.chooseNextPlayerForReal(playerList, hunter);
 		}
 	}
 
