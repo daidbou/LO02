@@ -52,6 +52,7 @@ public class AngryMob implements RumourCard {
 
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
+
 		System.out.println("Take next turn");
 		Player p1 = Engine.nameToPlayer(playerList, accused);
 		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
@@ -61,6 +62,7 @@ public class AngryMob implements RumourCard {
 
 	@Override
 	public Player skillWitchBot(String accuser,String accused, List<Player> playerList) {
+		//TODO Add the cards name
 		System.out.println("Take next turn");
 		Player p1 = Engine.nameToPlayer(playerList, accused);
 		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
