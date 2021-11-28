@@ -42,12 +42,17 @@ public class PointedHat implements RumourCard{
 		Player p1 = Engine.nameToPlayer(playerList, accused);
 		int index = 0;
 
-		System.out.println("Take one of your own revealed Rumour cards into your hand\n");
-		p1.showPlayerRevealedList();
-		Scanner sc = new Scanner(System.in);
-		index = sc.nextInt();
-		p1.getRumourCardListPlayer().add(p1.getPlayerRevealedCardList().get(index));
-		p1.getPlayerRevealedCardList().remove(p1.getPlayerRevealedCardList().get(index));
+		if(p1.getPlayerRevealedCardList().size()>0){
+			System.out.println("Take one of your own revealed Rumour cards into your hand\n");
+			p1.showPlayerRevealedList();
+			Scanner sc = new Scanner(System.in);
+			index = sc.nextInt();
+			p1.getRumourCardListPlayer().add(p1.getPlayerRevealedCardList().get(index));
+			p1.getPlayerRevealedCardList().remove(p1.getPlayerRevealedCardList().get(index));
+		}
+		else{
+			System.out.println(accused+" has no revealed Rumour cards")
+		}
 		System.out.println("Take next turn");
 		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 
