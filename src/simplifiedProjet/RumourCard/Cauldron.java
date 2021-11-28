@@ -38,7 +38,7 @@ public class Cauldron implements RumourCard{
 		System.out.println(accuser+" have to discard a random card");
 		Player p1= Engine.nameToPlayer(playerList, accused);
 
-		int cardNum = (int)(Math.random()*(p1.getRumourCardListPlayer().size()-1));
+		int cardNum = (int)(Math.random()*(p1.getRumourCardListPlayer().size()));
 		p1.disCardCard(cardNum);
 
 		System.out.println("Take next turn");
@@ -54,7 +54,7 @@ public class Cauldron implements RumourCard{
 		Player p1= Engine.nameToPlayer(playerList, accused);
 
 		System.out.println(accuser+" have to discard a random card");
-		int cardNum = (int)(Math.random()*(p1.getRumourCardListPlayer().size()-1));
+		int cardNum = (int)(Math.random()*(p1.getRumourCardListPlayer().size()));
 		p1.disCardCard(cardNum);
 
 		System.out.println("Take next turn");

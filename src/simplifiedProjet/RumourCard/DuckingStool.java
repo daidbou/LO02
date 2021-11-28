@@ -58,25 +58,47 @@ public class DuckingStool implements RumourCard {//done
     
     @Override
     public Player skillHunt(String hunter, List<Player> playerList) {
-
-        Player pHunted = Broomstick.chooseNextplayerForReal(playerList, hunter);
-        Player pHunter = Engine.nameToPlayer(playerList, hunter);
-        Player pNextTurn = huntDuckingStool(pHunter, pHunted);
-        return pNextTurn;
-
        
+        Player pHunted;
+        Player p1 = Engine.nameToPlayer(playerList, hunter);
+
+        
+        while(true){
+            pHunted = Broomstick.chooseNextplayerForReal(playerList, hunter);
+            if(pHunted.getIsWart()==false){
+                break;
+            }
+            else{
+                System.out.println("select another player, "+pHunted.getName()+" has a Wart Rumour card Revealed");
+                continue;
+            }
+        }
+        p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+
+
+        return pHunted;   
     }
 
     @Override
     public Player skillHuntBot(String hunter, List<Player> playerList) {
        
-        Player pHunted = Broomstick.chooseNextPlayerForBot(playerList, hunter);
+        Player pHunted;
+        Player p1 = Engine.nameToPlayer(playerList, hunter);
 
-        Player pHunter = Engine.nameToPlayer(playerList, hunter);
-        Player pNextTurn = huntDuckingStool(pHunter, pHunted);
-        return pNextTurn;
+        
+        while(true){
+            pHunted = Broomstick.chooseNextPlayerForBot(playerList, hunter);
+            if(pHunted.getIsWart()==false){
+                break;
+            }
+            else{
+                continue;
+            }
+        }
+        p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 
 
+        return pHunted;   
     }
 
     public Player huntDuckingStool(Player pHunter, Player pHunted){
@@ -92,12 +114,12 @@ public class DuckingStool implements RumourCard {//done
                     pHunted.showIdentity();
                     pHunted.revealIdentity();
                     if(pHunted.getIdentity() == 1){
-                        System.out.println(pHunted.getName()+"is a Witch:"+pHunter.getName()+" gain 1pt. You take next turn");
+                        System.out.println(pHunted.getName()+"is a Witch:"+pHunter.getName()+" gains 1pt. You take next turn");
                         pHunter.raisePoints(1);
                         pHunted.setIsOutOfTurn(true);
                         return pHunter;
                     }else{
-                        System.out.println(pHunted.getName()+"is a village:"+pHunter.getName()+" lose 1pt. "+pHunted.getName()+" take next turn");
+                        System.out.println(pHunted.getName()+"is a villager:"+pHunter.getName()+" loses 1pt. "+pHunted.getName()+" take next turn");
                         pHunter.raisePoints(-1);
                         return pHunted;
                     }
@@ -132,7 +154,7 @@ public class DuckingStool implements RumourCard {//done
             }else{ //bot chooses to discard cards
                 System.out.println(pHunted.getName()+" you should discard one card");
                 pHunted.showCards();
-                int cardNum = (int)(Math.random()*pHunted.getRumourCardListPlayer().size()-1);
+                int cardNum = (int)(Math.random()*pHunted.getRumourCardListPlayer().size());
                 pHunted.disCardCard(cardNum);
                 return pHunted;
             }         

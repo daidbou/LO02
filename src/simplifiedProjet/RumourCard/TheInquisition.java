@@ -95,7 +95,7 @@ public class TheInquisition implements RumourCard {
 		}
 
 		while(true){
-			selectedCardNumber = (int) Math.random()*(p1.getRumourCardListPlayer().size()-1);
+			selectedCardNumber = (int) Math.random()*(p1.getRumourCardListPlayer().size());
 			if(selectedCardNumber!=index){
 				break;
 			}
@@ -105,7 +105,7 @@ public class TheInquisition implements RumourCard {
 			rumourCard = p1.getRumourCardListPlayer().get(selectedCardNumber);
 		}
 		else{
-			rumourCard = p1.getRumourCardListPlayer().get(selectedCardNumber-1);
+			rumourCard = p1.getRumourCardListPlayer().get(selectedCardNumber);
 		}
 		
 		SetUp.discardedRumourCard.add(rumourCard);

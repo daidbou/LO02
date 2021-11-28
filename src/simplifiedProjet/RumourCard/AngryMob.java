@@ -125,7 +125,7 @@ public class AngryMob implements RumourCard {
 			System.out.println(p.getName());
 		}
 		while(true){
-			huntedNumber = 	(int) Math.random()*(playerList.size()-1);
+			huntedNumber = 	(int) Math.random()*(playerList.size());
 			huntedPlayer = playerList.get(huntedNumber);
 			if(huntedPlayer.ifIsOutOfTurn()==false && huntedPlayer.getIsBroomstick()==false){
 				break;

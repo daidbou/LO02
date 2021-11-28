@@ -84,7 +84,7 @@ public class BlackCat implements RumourCard{
 		}
 		else{
 			p1.showDiscardedCards();
-			int selectedCardNumber =(int)(Math.random()*(p1.getRumourCardListPlayer().size()-1));	
+			int selectedCardNumber =(int)(Math.random()*(p1.getRumourCardListPlayer().size()));	
 			
 			p1.addCardInTheList(SetUp.discardedRumourCard.get(selectedCardNumber));
 			SetUp.discardedRumourCard.remove(SetUp.discardedRumourCard.get(selectedCardNumber));
