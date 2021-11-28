@@ -51,7 +51,7 @@ public class PointedHat implements RumourCard{
 			p1.getPlayerRevealedCardList().remove(p1.getPlayerRevealedCardList().get(index));
 		}
 		else{
-			System.out.println(accused+" has no revealed Rumour cards")
+			System.out.println(accused+" has no revealed Rumour cards");
 		}
 		System.out.println("Take next turn");
 		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
