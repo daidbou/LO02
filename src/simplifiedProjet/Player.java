@@ -127,9 +127,28 @@ public class Player implements Preparation{
 		showCards();
 		System.out.println(" enter 0 for the first card");
 		int cardNum = in.nextInt();
+		Player pNextTurn;
 
-		Player pNextTurn = playerRumourCardList.get(cardNum).skillWitch(pTurn1.getName(),this.name,playerList);
-		
+		while(true){
+			if(playerRumourCardList.get(cardNum).name().equals("Pointed Hat") && playerRevealedCardList.size()<0){
+				pNextTurn = playerRumourCardList.get(cardNum).skillHunt(name,playerList);
+				break;
+			}
+			else if(playerRumourCardList.get(cardNum).name().equals("Pointed Hat") && playerRevealedCardList.size()==0){
+				System.out.println("Sorry you don't have any revealed Rumour Card, you can't play Pointed Hat");
+				showCards();
+				System.out.println(" enter 0 for the first card");
+				cardNum = in.nextInt();
+
+				continue;
+			}
+			else{
+				pNextTurn = playerRumourCardList.get(cardNum).skillWitch(pTurn1.getName(),this.name,playerList);
+				break;
+
+			}
+
+		}		
 		//use a method in setup
 		return pNextTurn ;//在这里检查?
 		
