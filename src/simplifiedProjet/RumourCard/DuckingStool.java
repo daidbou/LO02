@@ -18,6 +18,8 @@ public class DuckingStool implements RumourCard {//done
     @Override
     public Player skillWitch(String accuser,String accused,List<Player> playerList) {
     
+        Player p1 = Engine.nameToPlayer(playerList, accused);
+        p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
         return Broomstick.chooseNextPlayerForReal(playerList, accused);
         
     }
@@ -27,7 +29,9 @@ public class DuckingStool implements RumourCard {//done
      *done
      */
     public Player skillWitchBot(String accuser,String accused,List<Player> playerList) {
-      
+        
+        Player p1 = Engine.nameToPlayer(playerList, accused);
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
         return Broomstick.chooseNextPlayerForBot(playerList, accused);
         
     }
@@ -35,7 +39,7 @@ public class DuckingStool implements RumourCard {//done
   
 
     @Override
-    public String ToString() {
+    public String toString() {
         StringBuffer sb = new StringBuffer();
         
         sb.append("Witch :\n");
@@ -65,12 +69,11 @@ public class DuckingStool implements RumourCard {//done
         
         while(true){
             pHunted = Broomstick.chooseNextPlayerForReal(playerList, hunter);
-            if(pHunted.getIsWart()==false){
+            if(!pHunted.getIsWart()){
                 break;
             }
             else{
                 System.out.println("select another player, "+pHunted.getName()+" has a Wart Rumour card Revealed");
-                continue;
             }
         }
         p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
@@ -88,11 +91,11 @@ public class DuckingStool implements RumourCard {//done
         
         while(true){
             pHunted = Broomstick.chooseNextPlayerForBot(playerList, hunter);
-            if(pHunted.getIsWart()==false){
+            if(!pHunted.getIsWart()){
                 break;
             }
             else{
-                continue;
+
             }
         }
         p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
@@ -133,7 +136,6 @@ public class DuckingStool implements RumourCard {//done
                     return pHunted;
                 }else{
                     System.out.println("please re-enter");
-                    continue;
                 }
             }
         }else{// phunted is a bot

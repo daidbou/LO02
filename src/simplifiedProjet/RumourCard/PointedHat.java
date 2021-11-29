@@ -13,7 +13,7 @@ public class PointedHat implements RumourCard{
 	
 
     @Override
-    public String ToString() {
+    public String toString() {
         StringBuffer sb = new StringBuffer();
         
 		sb.append("Witch :\n ");
@@ -107,12 +107,21 @@ public class PointedHat implements RumourCard{
 
 		System.out.println("Take one of your own revealed Rumour cards into your hand\n");
 		p1.showPlayerRevealedList();
-		index = (int) Math.random()*(p1.getPlayerRevealedCardList().size());
-		p1.getRumourCardListPlayer().add(p1.getPlayerRevealedCardList().get(index));
-		p1.getPlayerRevealedCardList().remove(p1.getPlayerRevealedCardList().get(index));
-		System.out.println("Take next turn");
-		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
-		return Broomstick.chooseNextPlayerForBot(playerList, hunter);
+		if(p1.getPlayerRevealedCardList().size()==0){
+			System.out.println("You don't have any rumour card revealed, choose next player");
+			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+			return Broomstick.chooseNextPlayerForBot(playerList, hunter); 
+		}
+		else{
+			
+			index = (int) Math.random()*(p1.getPlayerRevealedCardList().size());
+			p1.getRumourCardListPlayer().add(p1.getPlayerRevealedCardList().get(index));
+			System.out.println(" You taked "+p1.getPlayerRevealedCardList().get(index).name());
+			p1.getPlayerRevealedCardList().remove(p1.getPlayerRevealedCardList().get(index));
+			System.out.println("Take next turn");
+			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+			return Broomstick.chooseNextPlayerForBot(playerList, hunter);
+		}
 	}
 	
 	

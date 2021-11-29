@@ -46,7 +46,7 @@ public class Engine implements Preparation {
                     pTurn2 = pTurn1.accuse(playerList);
                     if(((pTurn2.isVirtual() == 1) && doChoiceWI_Bot(pTurn2))  || ((pTurn2.isVirtual() == 0) && doChoiceWI_Real(pTurn2))){
                         pNextTurn = pTurn2.witch(pTurn1,playerList);
-                        pTurn2.showCards();
+                        //pTurn2.showCards();
                         
                     }else{
                         pTurn2.showIdentity();
@@ -70,7 +70,7 @@ public class Engine implements Preparation {
                     }
                 }else{
                     pTurn2 = pTurn1.hunt(playerList);
-                    pTurn1.showCards();
+                    //pTurn1.showCards();
                     pNextTurn = pTurn2;
 
                 }
@@ -130,7 +130,7 @@ public class Engine implements Preparation {
         System.out.println("++++++++++++++++Conclusion of Turn+++++++++++++++++++++");
 
         for(Player p: playerList){
-            if(p.ifIdentityReavealed() == false && p.ifIsOutOfTurn() == false){
+            if(!p.ifIdentityReavealed() && !p.ifIsOutOfTurn()){
                 p.setWinnerLastTurn(true);
                 if(p.getIdentity() == 0){
                     p.raisePoints(1);
@@ -263,13 +263,13 @@ public class Engine implements Preparation {
         //System.out.println("all "+i+" players");
         //System.out.println("size"+playerList.size());
         for (Player p : playerList) {
-            if (p.ifIdentityReavealed() == true ) {
+            if (p.ifIdentityReavealed() ) {
                 i--; // count how many players didn't revealed their identity
             }
             
         }
-        System.out.println("there are still "+i+" players ");
-        if (i == 1) {
+        System.out.println("there are still "+i+" players that didn't reveal their identity ");
+        if (i <= 1) {
             return false; // if there is only one , the end this turn
         } else {
             return true;
@@ -338,13 +338,13 @@ public class Engine implements Preparation {
 
         if(ifTurnContinue(playerList)){
             //check if there is a player before Player p that is not out of turn
-            for(int i = index-1 ; i > -1;i--){
+            for(int i = index-1 ; i >= 0;i--){
                 if(!playerList.get(i).ifIsOutOfTurn()){
                     return playerList.get(i);
                 }
             }
             //start a new turn to find the next player
-            for(int i = playerList.size();i>index;i--){
+            for(int i = playerList.size()-1;i>index;i--){
                 if(!playerList.get(i).ifIsOutOfTurn()){
                     return playerList.get(i);
                 }
@@ -352,7 +352,7 @@ public class Engine implements Preparation {
             return null;
         }else{
             System.out.println("this turn ends222");
-            return null;// has a problem here
+            return p;
         }
         
         

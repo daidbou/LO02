@@ -14,7 +14,7 @@ public class EvilEye implements RumourCard{
     
 
     @Override
-    public String ToString() {
+    public String toString() {
         StringBuffer sb = new StringBuffer();
         
         sb.append("Witch : \n");
@@ -40,6 +40,8 @@ public class EvilEye implements RumourCard{
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
 		Player p1 = Engine.nameToPlayer(playerList, accused);
 		p1.isEvilEye();
+		
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 
 		return EvilEye.chooseNextPlayerForReal(playerList, accused);
 	}
@@ -49,17 +51,24 @@ public class EvilEye implements RumourCard{
 		Player p1 = Engine.nameToPlayer(playerList, accused);
 		p1.isEvilEye();
 		
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+		
 		return EvilEye.chooseNextPlayerForBot(playerList, accused);
 
 	}
 
 	@Override
 	public Player skillHunt(String hunter, List<Player> playerList) {
+		Player p1 = Engine.nameToPlayer(playerList, hunter);
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 		return EvilEye.chooseNextPlayerForReal(playerList, hunter);
 	}
 
 	@Override
 	public Player skillHuntBot(String hunter, List<Player> playerList) {
+		Player p1 = Engine.nameToPlayer(playerList, hunter);
+		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+
 		return EvilEye.chooseNextPlayerForBot(playerList, hunter);
 	}
     
@@ -89,7 +98,7 @@ public class EvilEye implements RumourCard{
 			Scanner sc = new Scanner(System.in);
 			do{
 				pNextTurn = sc.nextLine();
-			}while(!Preparation.isExistedForPlayer(pUser,pNextTurn, playerList) && Engine.nameToPlayer(playerList, pNextTurn).getIsEvilEye()==false);
+			}while(!Preparation.isExistedForPlayer(pUser,pNextTurn, playerList) && !Engine.nameToPlayer(playerList, pNextTurn).getIsEvilEye());
 			return Engine.nameToPlayer(playerList, pNextTurn);
 		}
 	}
@@ -116,7 +125,7 @@ public class EvilEye implements RumourCard{
 			do{
             nopRandom = (int)(Math.random()*playerList.size());
             pNextTurn = playerList.get(nopRandom).getName();
-        	}while(!Preparation.isExistedForBot(pUser,pNextTurn, playerList) && Engine.nameToPlayer(playerList, pNextTurn).getIsEvilEye()==false);
+        	}while(!Preparation.isExistedForBot(pUser,pNextTurn, playerList) && !Engine.nameToPlayer(playerList, pNextTurn).getIsEvilEye());
 
 		return Engine.nameToPlayer(playerList, pNextTurn);
 		}

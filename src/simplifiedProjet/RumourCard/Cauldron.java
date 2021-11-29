@@ -10,7 +10,7 @@ public class Cauldron implements RumourCard{
    
 
     @Override
-    public String ToString() {
+    public String toString() {
         StringBuffer sb = new StringBuffer();
         
         sb.append("Witch : \n");

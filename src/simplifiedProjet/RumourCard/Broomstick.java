@@ -14,7 +14,7 @@ public class Broomstick implements RumourCard{
     
     
     @Override
-    public String ToString() {
+    public String toString() {
         StringBuffer sb = new StringBuffer();
         
         sb.append("Witch :\n");
@@ -121,6 +121,8 @@ public class Broomstick implements RumourCard{
             nopRandom = (int)(Math.random()*playerList.size());
             pNextTurn = playerList.get(nopRandom).getName();
         }while(!Preparation.isExistedForBot(pUser,pNextTurn, playerList));
+		System.out.println(pUser+" has choose player number "+nopRandom+", named "+pNextTurn);
+
 
 		return Engine.nameToPlayer(playerList, pNextTurn);
 	}

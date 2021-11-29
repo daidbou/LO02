@@ -23,7 +23,7 @@ public class Player implements Preparation{
 	protected boolean isWinnerLastTurn=false;
 	Scanner in = new Scanner(System.in);
 
-	public Player(){};
+	public Player(){}
 
 	public Player(String name, int identity, CopyOnWriteArrayList<RumourCard> rumourCardListP) {
 		this.name = name;
@@ -251,7 +251,7 @@ public class Player implements Preparation{
 		}
 		isBroomstick = false;
 		isWart = false;
-		//TODO all card status need to be initialized
+		isEvilEye =false;
 			
 	}
 	/**

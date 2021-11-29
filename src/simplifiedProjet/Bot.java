@@ -69,8 +69,7 @@ public class Bot extends Player{
 	public Player witch(Player pTurn1,List<Player> playerList){
 		int cardNumBot = (int)(Math.random()*(getRumourCardListPlayer().size()));	
 		System.out.println(name+"use witch skill to "+pTurn1.getName()+" using "+playerRumourCardList.get(cardNumBot).name());
-		Player pNextTurn = playerRumourCardList.get(cardNumBot).skillWitchBot(pTurn1.getName(),this.name,playerList);
-		return pNextTurn;
+		return playerRumourCardList.get(cardNumBot).skillWitchBot(pTurn1.getName(),this.name,playerList);
 	}
 	/**
 	 * bot use skill hunt
@@ -79,10 +78,12 @@ public class Bot extends Player{
 	 */
 	public Player hunt(List<Player> playerList){
 
+		System.out.println(this.name+" choose hunt");
 		int cardNumBot = (int)(Math.random()*(getRumourCardListPlayer().size()));
+
+		System.out.println(this.name+" choose "+getRumourCardListPlayer().get(cardNumBot).name());
 		
-		Player pNextTurn = playerRumourCardList.get(cardNumBot).skillHuntBot(name,playerList);
-		return pNextTurn;
+		return playerRumourCardList.get(cardNumBot).skillHuntBot(name,playerList);
 
 	}
     public int isVirtual(){

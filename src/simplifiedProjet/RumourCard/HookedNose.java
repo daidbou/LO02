@@ -10,7 +10,7 @@ public class HookedNose implements RumourCard{
 	
 
     @Override
-    public String ToString() {
+    public String toString() {
         StringBuffer sb = new StringBuffer();
         
 		sb.append("Witch : \n");
@@ -55,13 +55,21 @@ public class HookedNose implements RumourCard{
 		int cardNum;
 
 		cardNum = (int) Math.random()*(accuserPlayer.getRumourCardListPlayer().size());
-		accusedPlayer.getRumourCardListPlayer().add(accuserPlayer.getRumourCardListPlayer().get(cardNum));
-		accuserPlayer.getRumourCardListPlayer().remove(accuserPlayer.getRumourCardListPlayer().get(cardNum));
 
-		accusedPlayer.revealCardAndRemoveFromRumourCardList(accusedPlayer.stringToCard(nameCard));
+		if(accuserPlayer.getRumourCardListPlayer().size()==0){
 
-		System.out.println("Take next turn");
-		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
+			accusedPlayer.revealCardAndRemoveFromRumourCardList(accusedPlayer.stringToCard(nameCard));
+			return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
+		}
+		else{
+			accusedPlayer.getRumourCardListPlayer().add(accuserPlayer.getRumourCardListPlayer().get(cardNum));
+			accuserPlayer.getRumourCardListPlayer().remove(accuserPlayer.getRumourCardListPlayer().get(cardNum));
+
+			accusedPlayer.revealCardAndRemoveFromRumourCardList(accusedPlayer.stringToCard(nameCard));
+
+			System.out.println("Take next turn");
+			return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser));
+		}
 	}
 
 	@Override
@@ -84,6 +92,11 @@ public class HookedNose implements RumourCard{
 	public Player skillHuntBot(String hunter, List<Player> playerList) {
 		Player pNextTurn = Broomstick.chooseNextPlayerForBot(playerList, hunter);
 		Player p1 = Engine.nameToPlayer(playerList, hunter);
+		if(pNextTurn.getRumourCardListPlayer().size()<=0){
+			System.out.println(pNextTurn.getName()+" has no Rumour Card left");
+			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
+			return pNextTurn;
+		}
 		int cardNum = (int) Math.random()*(pNextTurn.getRumourCardListPlayer().size());
 
 		p1.getRumourCardListPlayer().add(pNextTurn.getRumourCardListPlayer().get(cardNum));

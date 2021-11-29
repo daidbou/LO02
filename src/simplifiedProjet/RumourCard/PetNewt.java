@@ -1,11 +1,13 @@
 package simplifiedProjet.RumourCard;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
 import simplifiedProjet.Preparation;
+import simplifiedProjet.SetUp;
 
 public class PetNewt implements RumourCard{
     
@@ -14,7 +16,7 @@ public class PetNewt implements RumourCard{
     
 
     @Override
-    public String ToString() {
+    public String toString() {
         StringBuffer sb = new StringBuffer();
         sb.append("Witch :\n");
         sb.append("Take next turn\n\n");
@@ -55,12 +57,12 @@ public class PetNewt implements RumourCard{
 	}
 
 	@Override
-	public Player skillHunt(String hunter, List<Player> playerList) {//TODO implement
+	public Player skillHunt(String hunter, List<Player> playerList) {
 
 		Player p1= Engine.nameToPlayer(playerList, hunter);
 		String playerRobbed;
 		int cardNum;
-		int numberOfPlayerWithRevealedCard=0;
+		List<Player> playerWithRevealedCards = new ArrayList<>();
 
 		Scanner sc = new Scanner(System.in);
 		
@@ -68,14 +70,12 @@ public class PetNewt implements RumourCard{
 		for(Player p: playerList){
 			if(p.getPlayerRevealedCardList().size()>0){
 				System.out.println(p.getName());
-				numberOfPlayerWithRevealedCard++;
-			}
-			else{
-				continue;
+				playerWithRevealedCards.add(p);
+
 			}
 		}
 
-		if(numberOfPlayerWithRevealedCard==0){
+		if(playerWithRevealedCards.size()==0){
 			System.out.println("no player have reveal their rumour cards yet");
 			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 
@@ -84,7 +84,7 @@ public class PetNewt implements RumourCard{
 		else{
 			do{
 				playerRobbed =  sc.nextLine();
-			}while(Preparation.isExistedP(playerRobbed, playerList)!=null && Engine.nameToPlayer(playerList, playerRobbed).getPlayerRevealedCardList().size()>0);
+			}while(Preparation.isExistedP(playerRobbed, playerList)==null || Engine.nameToPlayer(playerList, playerRobbed).getPlayerRevealedCardList().size()==0);
 			
 			while(true){
 				System.out.println("choose one of "+playerRobbed+" revealed cards");
@@ -109,41 +109,38 @@ public class PetNewt implements RumourCard{
 	@Override
 	public Player skillHuntBot(String hunter, List<Player> playerList) {
 		Player p1= Engine.nameToPlayer(playerList, hunter);
-		String playerRobbed;
+		Player playerRobbed;
 		int cardNum;
-		int numberOfPlayerWithRevealedCard=0;
-
-		Scanner sc = new Scanner(System.in);
+		List<Player> playerWithRevealedCards = new ArrayList<>();
+	
 		
 		System.out.println("choose a player first");
 		for(Player p: playerList){
 			if(p.getPlayerRevealedCardList().size()>0){
 				System.out.println(p.getName());
-				numberOfPlayerWithRevealedCard++;
-			}
-			else{
-				continue;
+				playerWithRevealedCards.add(p);
+
 			}
 		}
 		
-		if(numberOfPlayerWithRevealedCard==0){
+		if(playerWithRevealedCards.size()==0){
 			System.out.println("no player have reveal their rumour cards yet");
 			p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 
-			return Broomstick.chooseNextPlayerForReal(playerList, hunter);
+			return Broomstick.chooseNextPlayerForBot(playerList, hunter);
 		}
 		else{
-			do{
-				int playerNum = (int) Math.random()*playerList.size();
-				playerRobbed =  playerList.get(playerNum).getName();
-			}while(Engine.nameToPlayer(playerList, playerRobbed).getPlayerRevealedCardList().size()>0);
 
-			System.out.println("choose one of "+playerRobbed+" revealed cards");
-			Engine.nameToPlayer(playerList, playerRobbed).showPlayerRevealedList();
+			int playerNum = (int) Math.random()*playerWithRevealedCards.size();
+			playerRobbed =  playerWithRevealedCards.get(playerNum);
+
+			System.out.println("choose one of "+playerRobbed.getName()+" revealed cards");
+			playerRobbed.showPlayerRevealedList();
 		
-			cardNum = (int) Math.random()*Engine.nameToPlayer(playerList, playerRobbed).getPlayerRevealedCardList().size();
-			p1.getRumourCardListPlayer().add(Engine.nameToPlayer(playerList, playerRobbed).getPlayerRevealedCardList().get(cardNum));
-			Engine.nameToPlayer(playerList, playerRobbed).getPlayerRevealedCardList().remove(Engine.nameToPlayer(playerList, playerRobbed).getPlayerRevealedCardList().get(cardNum));
+			cardNum = (int) Math.random()*playerRobbed.getPlayerRevealedCardList().size();
+			p1.getRumourCardListPlayer().add(playerRobbed.getPlayerRevealedCardList().get(cardNum));
+			System.out.println("you choose "+playerRobbed.getName()+playerRobbed.getPlayerRevealedCardList().get(cardNum).name()+" cards");
+			playerRobbed.getPlayerRevealedCardList().remove(playerRobbed.getPlayerRevealedCardList().get(cardNum));
 		
 			
 

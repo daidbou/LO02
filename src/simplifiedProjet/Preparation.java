@@ -125,7 +125,7 @@ public interface Preparation {
 
     /**
      * verify if the bot exists in the list
-     * @param accused taget bot
+     * @param accused target bot
      * @param pNextTurn player who use this method, int sure that pNextTurn cannot do something to himself
      * @param playerList
      * @return true if the bot accused exist
@@ -133,7 +133,7 @@ public interface Preparation {
     public static boolean isExistedForBot(String accused,String pNextTurn,List<Player> playerList){
         for(Player p:playerList) {
             if(pNextTurn.equals(p.getName())) {
-                if(!accused.equals(pNextTurn)&& p.ifIsOutOfTurn() == false){
+                if(!accused.equals(pNextTurn) && p.ifIsOutOfTurn() == false){
                     return true;
                 }else if(p.ifIsOutOfTurn()){
                     //System.out.println("already out of turn");

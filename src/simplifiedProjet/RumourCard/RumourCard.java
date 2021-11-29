@@ -54,7 +54,7 @@ public interface RumourCard {
 	 * show the card ability
 	 * @return sb.toString()
 	 */
-	public String ToString();
+	public String toString();
 	
 	/**
 	 * return this cards name

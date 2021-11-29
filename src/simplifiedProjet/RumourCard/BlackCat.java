@@ -14,7 +14,7 @@ public class BlackCat implements RumourCard{
     
 
     @Override
-    public String ToString() {
+    public String toString() {
         StringBuffer sb = new StringBuffer();
         
         sb.append("Witch :\n");

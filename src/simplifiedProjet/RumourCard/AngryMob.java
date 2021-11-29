@@ -1,6 +1,7 @@
 package simplifiedProjet.RumourCard;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -28,7 +29,7 @@ public class AngryMob implements RumourCard {
 
 
     @Override
-    public String ToString() {
+    public String toString() {
         StringBuffer sb = new StringBuffer();
 
         sb.append("Witch :\n"); 
@@ -97,17 +98,17 @@ public class AngryMob implements RumourCard {
 			System.out.println("Select a player (p1 or b1 for example : \n");
 			hunted = sc.nextLine();
 			if(Preparation.isExistedForPlayer(hunted, hunter, playerList)){
-				if(Engine.nameToPlayer(playerList, hunted).ifIsOutOfTurn()==false && Engine.nameToPlayer(playerList, hunted).getIsBroomstick()==false){
+				if(!Engine.nameToPlayer(playerList, hunted).ifIsOutOfTurn() && !Engine.nameToPlayer(playerList, hunted).getIsBroomstick()){
 					break;
 				}
 				else{
 					System.out.println(hunted+"is out of turn or has a revealed Broomstick RumourCard, please select another player");
-					continue;
+
 				}
 			}
 			else{
 				System.out.println("this player doesn't exist");
-				continue;
+
 			}
 		}
 
@@ -133,21 +134,20 @@ public class AngryMob implements RumourCard {
 		Player p1 = Engine.nameToPlayer(playerList, hunter);
 		int huntedNumber;
 		Player huntedPlayer;
+		List<Player> cards = new ArrayList<>();
 
 		System.out.println("Reveal another player identity : \n");
 		for(Player p: playerList){
-			System.out.println(p.getName());
-		}
-		while(true){
-			huntedNumber = 	(int) Math.random()*(playerList.size());
-			huntedPlayer = playerList.get(huntedNumber);
-			if(huntedPlayer.ifIsOutOfTurn()==false && huntedPlayer.getIsBroomstick()==false){
-				break;
+			if(!p.ifIdentityReavealed() && !p.getIsBroomstick()){
+				System.out.println(p.getName());
+				cards.add(p);
 			}
-			else{
-				continue;
-			}
+			
 		}
+
+		huntedNumber = 	(int) Math.random()*(cards.size());
+		huntedPlayer = cards.get(huntedNumber);
+
 
 		huntedPlayer.revealIdentity();
 		if(huntedPlayer.getIdentity()==0){

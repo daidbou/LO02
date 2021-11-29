@@ -1,5 +1,6 @@
 package simplifiedProjet.RumourCard;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class TheInquisition implements RumourCard {
 	
 
     @Override
-    public String ToString() {
+    public String toString() {
 
         StringBuffer sb = new StringBuffer();
         
@@ -46,7 +47,7 @@ public class TheInquisition implements RumourCard {
 	 */
 	@Override
 	public Player skillWitch(String accuser,String accused, List<Player> playerList) {
-		System.out.println("Discard a card from your hand (from 0)");
+		System.out.println("Discard a card from your hand (from ");
 		int index=0;
 		Player pAccused = Engine.nameToPlayer(playerList, accused);
 
@@ -83,32 +84,29 @@ public class TheInquisition implements RumourCard {
 	@Override
 	public Player skillWitchBot(String accuser,String accused, List<Player> playerList) {
 
-		int index=0;
 		int selectedCardNumber;
 		Player pAccused = Engine.nameToPlayer(playerList, accused);
 		RumourCard rumourCard;
+		List<RumourCard> cards = new ArrayList<>();
+
+		if(pAccused.getRumourCardListPlayer().size()==1){
+
+			System.out.println("You have no card to discard");
+			pAccused.revealCardAndRemoveFromRumourCardList(pAccused.stringToCard(nameCard));
+			return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser ));
+		}
 
 		System.out.println(pAccused.getName()+" and cards with ");
 		for (int i = 0; i < pAccused.getRumourCardListPlayer().size(); i++) {
 			if(pAccused.getRumourCardListPlayer().get(i).name()!= nameCard){
 				System.out.println(pAccused.getRumourCardListPlayer().get(i).name());
-			}
-			else{
-				index=i;
+					cards.add(pAccused.getRumourCardListPlayer().get(i));
 			}
 		}
 
-		while(true){
-			selectedCardNumber = (int) Math.random()*(pAccused.getRumourCardListPlayer().size());
-			if(selectedCardNumber!=index){
-				break;
-			}
-			else{
-				//continue until we find a number other than index
-			}
-		}
+		selectedCardNumber = (int) Math.random()*(cards.size());
 
-		rumourCard = pAccused.getRumourCardListPlayer().get(selectedCardNumber);//TODO have bugs here
+		rumourCard = cards.get(selectedCardNumber);
 		
 		SetUp.discardedRumourCard.add(rumourCard);
 		pAccused.getRumourCardListPlayer().remove(rumourCard);
@@ -117,7 +115,7 @@ public class TheInquisition implements RumourCard {
 		
 		System.out.println("Take next turn");
 
-		return Engine.nextPlayer(playerList, pAccused);
+		return Engine.nextPlayer(playerList, Engine.nameToPlayer(playerList, accuser ));
 		
 	}
 
