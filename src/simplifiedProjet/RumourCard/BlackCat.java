@@ -59,9 +59,9 @@ public class BlackCat implements RumourCard{
 		
 			p1.showDiscardedCards();
 			System.out.println("Add one discarded card to your hand\n");
-			System.out.println("enter 1 for the first card");
+			System.out.println("enter 0 for the first card");
 			Scanner sc = new Scanner(System.in);
-			int selectedCardNumber = sc.nextInt()-1;
+			int selectedCardNumber = sc.nextInt();
 			p1.addCardInTheList(SetUp.discardedRumourCard.get(selectedCardNumber));
 			SetUp.discardedRumourCard.remove(SetUp.discardedRumourCard.get(selectedCardNumber));
 			//remove black cat from the player's list of rumour card

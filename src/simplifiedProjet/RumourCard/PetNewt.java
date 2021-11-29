@@ -91,6 +91,7 @@ public class PetNewt implements RumourCard{
 				Engine.nameToPlayer(playerList, playerRobbed).showPlayerRevealedList();
 			
 				cardNum = sc.nextInt();
+				System.out.println("enter 0 for the card");
 				if(0<=cardNum && cardNum<Engine.nameToPlayer(playerList, playerRobbed).getPlayerRevealedCardList().size()){
 					p1.getRumourCardListPlayer().add(Engine.nameToPlayer(playerList, playerRobbed).getPlayerRevealedCardList().get(cardNum));
 					Engine.nameToPlayer(playerList, playerRobbed).getPlayerRevealedCardList().remove(Engine.nameToPlayer(playerList, playerRobbed).getPlayerRevealedCardList().get(cardNum));

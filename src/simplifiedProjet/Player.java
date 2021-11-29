@@ -76,8 +76,8 @@ public class Player implements Preparation{
 	public Player hunt(List<Player> playerList) {
 		
 		showCards();
-		System.out.println(" enter 1 for the first card");
-		int cardNum = in.nextInt() - 1 ;
+		System.out.println(" enter 0 for the first card");
+		int cardNum = in.nextInt()  ;
 		Player pNextTurn;
 		
 		while(true){
