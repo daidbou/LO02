@@ -106,12 +106,9 @@ public class SetUp implements Preparation{
 
     public static List<Player> setUpPlayer(List<Player> playerListInit){
         Player pWinner = playerListInit.get(0);
+      
         for(Player p: playerListInit){
-            if(p.ifIsWinnerLastTurn()){
-                System.out.println(p.getName()+"is the winner SetUp");
-                pWinner = p;
-                break;
-            }
+            p.initializePlayer();
         }
         List<Player> playerList = new ArrayList<Player>();
 
@@ -132,9 +129,7 @@ public class SetUp implements Preparation{
         
         int numIrlPlayer = numberOfPlayer - numberOfBot;
 
-        for(Player p: playerListInit){
-            p.initializePlayer();
-        }
+        
        
         
 

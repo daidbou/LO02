@@ -65,13 +65,6 @@ public class BlackCat implements RumourCard{
 			p1.addCardInTheList(SetUp.discardedRumourCard.get(selectedCardNumber));
 			SetUp.discardedRumourCard.remove(SetUp.discardedRumourCard.get(selectedCardNumber));
 			//remove black cat from the player's list of rumour card
-			/*for(RumourCard r: p1.getRumourCardListPlayer()){
-				if(r.name().equals("Black Cat")){
-					SetUp.discardedRumourCard.add(r);
-					p1.getRumourCardListPlayer().remove(r);
-				}
-
-			}*/
 			SetUp.discardedRumourCard.add(this);
 			p1.getRumourCardListPlayer().remove(this);
 			return Engine.nextPlayer(playerList, p1);
@@ -90,14 +83,10 @@ public class BlackCat implements RumourCard{
 			int selectedCardNumber =(int)(Math.random()*(p1.getRumourCardListPlayer().size()));	
 			
 			p1.addCardInTheList(SetUp.discardedRumourCard.get(selectedCardNumber));
+			System.out.println("choosed card "+SetUp.discardedRumourCard.get(selectedCardNumber).name());
 			SetUp.discardedRumourCard.remove(SetUp.discardedRumourCard.get(selectedCardNumber));
 			//remove black cat from the player list of rumour card
-			// for(RumourCard r: p1.getRumourCardListPlayer()){
-			// 	if(r.name().equals("Black Cat")){
-			// 		SetUp.discardedRumourCard.add(r);
-			// 		p1.getRumourCardListPlayer().remove(r);
-			// 	}
-			// }
+
 			SetUp.discardedRumourCard.add(this);
 			p1.getRumourCardListPlayer().remove(this);
 			

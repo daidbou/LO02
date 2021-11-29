@@ -249,6 +249,7 @@ public class Player implements Preparation{
 		if(this.playerRevealedCardList!=null){
 			this.playerRevealedCardList.clear();
 		}
+		isWinnerLastTurn = false;
 		isBroomstick = false;
 		isWart = false;
 		isEvilEye =false;
