@@ -48,10 +48,15 @@ public class Player implements Preparation{
 	 */
 	public Player accuse(List<Player> playerList) { 
 		//System.out.println(name+" is a real");
-		System.out.println("which player? ex: p1 b1");
+		System.out.println("which player? ex: p1 b1, enter -1 to return");
 		while(true){
 		Scanner sc = new Scanner(System.in);
 		String pName = sc.nextLine();
+		if(pName.equals("-1")){
+			return this;
+		}
+
+
 		Player pTurn2 = Preparation.isExistedP(pName,name, playerList);
 		if(pTurn2 == null){
 			//System.out.println("no such player, try again");
@@ -76,9 +81,13 @@ public class Player implements Preparation{
 	public Player hunt(List<Player> playerList) {
 		
 		showCards();
-		System.out.println(" enter 0 for the first card");
-		int cardNum = in.nextInt()  ;
+		System.out.println(" enter 0 for the first card, -1 to return");
+		int cardNum = in.nextInt();
+		if(cardNum == -1){
+			return this;
+		}
 		Player pNextTurn;
+		
 		
 		while(true){
 
@@ -124,9 +133,12 @@ public class Player implements Preparation{
 	public Player witch(Player pTurn1,List<Player> playerList) {
 		
 		showCards();
-		System.out.println(" enter 0 for the first card");
+		System.out.println(" enter 0 for the first card, // enter -1 to return");
 		int cardNum = in.nextInt();
 		Player pNextTurn;
+		if(cardNum == -1){
+			return this;
+		}
 
 		while(true){
 			if(playerRumourCardList.get(cardNum).name().equals("Pointed Hat") && playerRevealedCardList.size()>0){

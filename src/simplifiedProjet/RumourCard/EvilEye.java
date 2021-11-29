@@ -91,12 +91,13 @@ public class EvilEye implements RumourCard{
 		}
 
 		else{
-			System.out.println("choose next player other than" + pUser+ " (p1 or b1 for example :");
+			System.out.println("choose next player other than " + pUser+ " (p1 or b1 for example :");
 			for(Player p: playerList){
 				System.out.println(p.getName());
 			}
 			Scanner sc = new Scanner(System.in);
 			do{
+				System.out.println("you choose ");
 				pNextTurn = sc.nextLine();
 			}while(!Preparation.isExistedForPlayer(pUser,pNextTurn, playerList) && !Engine.nameToPlayer(playerList, pNextTurn).getIsEvilEye());
 			return Engine.nameToPlayer(playerList, pNextTurn);

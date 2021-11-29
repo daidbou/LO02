@@ -36,18 +36,27 @@ public class Engine implements Preparation {
             Player pNextTurn  = playerList.get(0);
 
             TurnStart:while(ifTurnContinue(playerList)){
-                
-               
+                Originator originator = new Originator();                
+                boolean isReturn = false;
                 pTurn1 = pNextTurn;
                 System.out.println("--------------------------------"+pTurn1.getName()+"'s round -----------------------");
 
                 if( ((pTurn1.isVirtual() == 1) && doChoiceAh_Bot(pTurn1))  || ((pTurn1.isVirtual() == 0) && doChoiceAH_Real(pTurn1) )){
                     //accuse
                     pTurn2 = pTurn1.accuse(playerList);
+                    if(pTurn2.equals(pTurn1)){
+                        continue;
+                    }
+                    //while(isReturn){}
                     if(((pTurn2.isVirtual() == 1) && doChoiceWI_Bot(pTurn2))  || ((pTurn2.isVirtual() == 0) && doChoiceWI_Real(pTurn2))){
-                        pNextTurn = pTurn2.witch(pTurn1,playerList);
-                        //pTurn2.showCards();
-                        
+                        State state = new State(pTurn1, choice);
+                        originator.setState(state);
+                        pNextTurn = pTurn2.witch(pTurn1,playerList); 
+                        if(pNextTurn.equals(pTurn2)){
+                            pNextTurn = pTurn1;
+                            isReturn = true;
+                            continue TurnStart;
+                        }
                     }else{
                         pTurn2.showIdentity();
                         pTurn2.revealIdentity();
@@ -56,16 +65,15 @@ public class Engine implements Preparation {
                             System.out.println(pTurn1.getName() + " gains 1 point");
                             pTurn2.setIsOutOfTurn(true); //pTurn2 should left the game
                             pNextTurn = nextPlayer(playerList, pTurn1);
-                            if(pNextTurn == null){
-                                showStatusOfTurn(playerList);
-                                break TurnStart;
-                            }
-                           
-                        
+                            //used to be here
                         }else{
                             pTurn1.raisePoints(0);//villager , gain no point;
                             System.out.println(pTurn1.getName() + " gains 0 point");
                             pNextTurn = pTurn2;// acussed player takes next turn
+                        }
+                        if(pNextTurn == null){
+                            showStatusOfTurn(playerList);
+                            break TurnStart;
                         }
                     }
                 }else{
@@ -74,7 +82,9 @@ public class Engine implements Preparation {
                     pNextTurn = pTurn2;
 
                 }
+
                 
+                //System.out.println("there are still "+i+" players that didn't reveal their identity ");
                 if(!ifTurnContinue(playerList)){//this turn ends
                     showStatusOfTurn(playerList);
                     playerListInit = playerList;
@@ -163,6 +173,7 @@ public class Engine implements Preparation {
     */
     public static boolean doChoiceWI_Real(Player pTurn2) {
         Scanner in = new Scanner(System.in);
+        
         if(pTurn2.checkRumourCardList()){
            System.out.println("you don't have rumour cards, you have to show your identity");
            return false;
@@ -170,7 +181,7 @@ public class Engine implements Preparation {
         }else{
             System.out.println(pTurn2.getName() + " SkillWitch or ShowIdentity? [sk/id]");
             String choiceAH_Real = in.nextLine();
-            //in.close();
+            choice = choiceAH_Real;
             if (choiceAH_Real.equals("sk")) {
                 return true;
             } else {
@@ -266,9 +277,8 @@ public class Engine implements Preparation {
             if (p.ifIdentityReavealed() ) {
                 i--; // count how many players didn't revealed their identity
             }
-            
         }
-        System.out.println("there are still "+i+" players that didn't reveal their identity ");
+        //System.out.println("there are still "+i+" players that didn't reveal their identity ");
         if (i <= 1) {
             return false; // if there is only one , the end this turn
         } else {
@@ -392,5 +402,8 @@ public class Engine implements Preparation {
             return false;
         }
     }
+
+    private static String choice;
+   
 
 }

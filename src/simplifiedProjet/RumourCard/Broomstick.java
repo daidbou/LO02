@@ -103,6 +103,7 @@ public class Broomstick implements RumourCard{
 		}
         Scanner sc = new Scanner(System.in);
         do{
+			System.out.println("you choose ");
             pNextTurn = sc.nextLine();
         }while(!Preparation.isExistedForPlayer(pUser,pNextTurn, playerList));
         return Engine.nameToPlayer(playerList, pNextTurn);
