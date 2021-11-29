@@ -68,7 +68,7 @@ public class Bot extends Player{
 	 */
 	public Player witch(Player pTurn1,List<Player> playerList){
 		int cardNumBot = (int)(Math.random()*(getRumourCardListPlayer().size()));	
-		System.out.println(name+"use witch skill to "+pTurn1.getName()+" using "+playerRumourCardList.get(cardNumBot).name());
+		System.out.println(name+" use witch skill to "+pTurn1.getName()+" using "+playerRumourCardList.get(cardNumBot).name());
 		return playerRumourCardList.get(cardNumBot).skillWitchBot(pTurn1.getName(),this.name,playerList);
 	}
 	/**
