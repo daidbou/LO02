@@ -258,6 +258,7 @@ public class Player implements Preparation{
 	public void initializePlayer(){
 		identityReavealed = false;
 		isOutOfTurn = false;
+		
 		if(this.playerRevealedCardList!=null){
 			this.playerRevealedCardList.clear();
 		}
