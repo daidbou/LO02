@@ -1,5 +1,4 @@
 package simplifiedProjet.RumourCard;
-import simplifiedProjet.Preparation;
 
 import java.text.BreakIterator;
 import java.util.List;
@@ -7,7 +6,7 @@ import java.util.Scanner;
 
 import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
-import simplifiedProjet.SetUp;
+
 
 public class DuckingStool implements RumourCard {//done
     String nameCard ="Ducking Stool";
