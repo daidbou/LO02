@@ -7,7 +7,7 @@ import java.util.Scanner;
 import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
 import simplifiedProjet.Preparation;
-import simplifiedProjet.SetUp;
+
 
 public class PetNewt implements RumourCard{
     

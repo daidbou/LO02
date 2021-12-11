@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+
+import simplifiedProjet.Engine;
+
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -42,6 +45,7 @@ public class MonInterface implements Observer{
 	 */
 	public MonInterface() {
 		initialize();
+		//new Controleur(engine,)
 	}
 
 	/**
@@ -63,12 +67,18 @@ public class MonInterface implements Observer{
 		buttonStart.setFont(new Font("BIZ UDPMincho Medium", Font.PLAIN, 29));
 		buttonStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				Engine.getEngine().player();
 			}
 		});
 		buttonStart.setBounds(343, 359, 358, 103);
 		frame.getContentPane().add(buttonStart);
 		
 		buttonQuit = new JButton("Quit");
+		buttonQuit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				return;
+			}
+		});
 		buttonQuit.setFont(new Font("BIZ UDPMincho Medium", Font.PLAIN, 33));
 		buttonQuit.setBounds(418, 514, 231, 85);
 		frame.getContentPane().add(buttonQuit);
