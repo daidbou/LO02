@@ -36,7 +36,7 @@ public class Engine implements Preparation {
             Player pNextTurn  = playerList.get(0);
 
             TurnStart:while(ifTurnContinue(playerList)){
-                Originator originator = new Originator();                
+                               
                 boolean isReturn = false;
                 pTurn1 = pNextTurn;
                 System.out.println("--------------------------------"+pTurn1.getName()+"'s round -----------------------");
@@ -49,8 +49,8 @@ public class Engine implements Preparation {
                     }
                     //while(isReturn){}
                     if(((pTurn2.isVirtual() == 1) && doChoiceWI_Bot(pTurn2))  || ((pTurn2.isVirtual() == 0) && doChoiceWI_Real(pTurn2))){
-                        State state = new State(pTurn1, choice);
-                        originator.setState(state);
+                       
+                      
                         pNextTurn = pTurn2.witch(pTurn1,playerList); 
                         if(pNextTurn.equals(pTurn2)){
                             pNextTurn = pTurn1;
