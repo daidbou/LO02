@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import controleur.ControleurEngine;
 import simplifiedProjet.Engine;
 
 import java.awt.Color;
@@ -22,6 +23,7 @@ public class MonInterface implements Observer{
 	private JFrame frame;
 	private JButton buttonStart;
 	private JButton buttonQuit;
+	private Engine engine;
 	
 
 	/**
@@ -45,7 +47,8 @@ public class MonInterface implements Observer{
 	 */
 	public MonInterface() {
 		initialize();
-		//new Controleur(engine,)
+		new ControleurEngine().ControleurEngineS(engine,buttonStart);
+		new ControleurEngine().ControleurEngineQ(engine,buttonQuit);
 	}
 
 	/**
@@ -65,20 +68,12 @@ public class MonInterface implements Observer{
 		
 		buttonStart = new JButton("Start Game");
 		buttonStart.setFont(new Font("BIZ UDPMincho Medium", Font.PLAIN, 29));
-		buttonStart.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Engine.getEngine().player();
-			}
-		});
+		
 		buttonStart.setBounds(343, 359, 358, 103);
 		frame.getContentPane().add(buttonStart);
 		
 		buttonQuit = new JButton("Quit");
-		buttonQuit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				return;
-			}
-		});
+		
 		buttonQuit.setFont(new Font("BIZ UDPMincho Medium", Font.PLAIN, 33));
 		buttonQuit.setBounds(418, 514, 231, 85);
 		frame.getContentPane().add(buttonQuit);
