@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.CopyOnWriteArrayList;
+import controleur.ControleurSetup2;
 
 import controleur.ControleurSetup1;
 import simplifiedProjet.RumourCard.RumourCard;
@@ -12,30 +13,8 @@ import simplifiedProjet.RumourCard.RumourCard;
 
 
 public class SetUp implements Preparation{
-    // public static List<RumourCard> rumourCardListP1 = new ArrayList<RumourCard>(){{
-    //     //add(null);
-    //     add(rumourCard1);
-    //     add(rumourCard2);
-    //     add(rumourCard3);
-    // }};
-    // public static List<RumourCard> rumourCardListP2 = new ArrayList<RumourCard>(){{
-    //     //add(null);
-    //     add(rumourCard4);
-    //     add(rumourCard5);
-    //     add(rumourCard7);
-    // }};
-    // public static List<RumourCard> rumourCardListP3 = new ArrayList<RumourCard>(){{
-    //     //add(null);
-    //     add(rumourCard6);
-    //     add(rumourCard8);
-    //     add(rumourCard9);
-    // }};
-    // public static List<RumourCard> rumourCardListP4 = new ArrayList<RumourCard>(){{
-    //     //add(null);
-    //     add(rumourCard10);
-    //     add(rumourCard11);
-    //     add(rumourCard12);
-    // }};
+
+	private static int numReal;
 
     public static Player p1 = new Player("p1");
     public static Player p2 = new Player("p2");
@@ -92,12 +71,12 @@ public class SetUp implements Preparation{
             numberOfBot = sc.nextInt();
         }*/
 
-        int numReal = numberOfPlayer-numberOfBot;
+        setNumReal(numberOfPlayer-numberOfBot);
        
-        System.out.println("this game includes "+numberOfBot+" bots and "+numReal+" players");
+        System.out.println("this game includes "+numberOfBot+" bots and "+getNumReal()+" players");
         
         int i = 0;
-        for(i = 0 ; i<numReal ;i++){ //  add real players
+        for(i = 0 ; i<getNumReal() ;i++){ //  add real players
             allPlayerList.add(irlPlayerList.get(i));
         }
         for(int j = 0 ; j<numberOfBot ;j++){ // add bots
@@ -109,7 +88,7 @@ public class SetUp implements Preparation{
     }
 
 
-    public static List<Player> setUpPlayer(List<Player> playerListInit){
+    public static List<Player> setUpPlayerCards(List<Player> playerListInit){
         Player pWinner = playerListInit.get(0);
       
         for(Player p: playerListInit){
@@ -134,20 +113,18 @@ public class SetUp implements Preparation{
         
         int numIrlPlayer = numberOfPlayer - numberOfBot;
 
-        
-       
-        
-
         int i = 0;
         int j = 0;
         
-        for(i = 0 ; i<numIrlPlayer ;i++){ // set up real players
+        for(i = 0 ; i<numIrlPlayer ;i++){ // set up the cards of real players
             
             CopyOnWriteArrayList<RumourCard> rumourCardListReal = new  CopyOnWriteArrayList<RumourCard>();
             for (j = (i)*numberOfCardsPerPlayer;j<(i+1)*numberOfCardsPerPlayer;j++){
                 rumourCardListReal.add(rumourCardShuffled.get(j));
             }
-            irlPlayerList.get(i).setRumourCardListPlayer(rumourCardListReal);//the same time define their identity
+            irlPlayerList.get(i).setRumourCardListPlayer(rumourCardListReal); 
+           
+            //System.out.println(playerList.get(i).getIdentity());
             playerList.add(irlPlayerList.get(i));
         }
         
@@ -167,7 +144,7 @@ public class SetUp implements Preparation{
             discardedRumourCard.add(rumourCardShuffled.get(11));
         }
        
-        Collections.shuffle(playerList);
+        //Collections.shuffle(playerList);
         
         //the winner of last turn goes first
         for(int t = 0; t<playerList.size();t++){
@@ -179,7 +156,32 @@ public class SetUp implements Preparation{
         for(Player p: playerList){
             System.out.println(p.getName());
         }
-
+        playerListInit = playerList;
         return playerList;      
     }
+    public static List<Player> setUpPlayerIdentity(List<Player> playerList){
+    	for(int i = 0; i<SetUp.getNumReal();i++) {
+    		
+    		if(ControleurSetup1.myThreadList[i].getIdentity() == 1) {
+     			playerList.get(i).setIdentity(1);
+     		}else {
+     			playerList.get(i).setIdentity(0);
+     		}
+    		System.out.println(ControleurSetup1.myThreadList[i].getpName()+" "+ControleurSetup1.myThreadList[i].getIdentity()+"131313");
+    		//System.out.println(playerList.get(i).getIdentity());
+    		
+    	}
+    	return playerList;
+    }
+   
+
+
+	public static int getNumReal() {
+		return numReal;
+	}
+
+
+	public static void setNumReal(int numReal) {
+		SetUp.numReal = numReal;
+	}
 }

@@ -22,7 +22,7 @@ public class ControleurStart {
 				
 			}
 		});
-		//Engine.getEngine().play();
+		
 		
 	}
 	public void ControleurEngineQuit(Engine engine, JButton buttonQuit) {

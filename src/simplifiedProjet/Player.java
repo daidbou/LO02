@@ -300,6 +300,8 @@ public class Player implements Preparation{
 		
 		playerRumourCardList = l;
 		playerRevealedCardList = new CopyOnWriteArrayList<RumourCard>();
+		
+		/*
 		System.out.println(name+", what identity do you want to be? (1 for witch, 0 for villager)");
 		String id = in.nextLine();
 		
@@ -318,7 +320,9 @@ public class Player implements Preparation{
 				System.out.println(name+", what identity do you want to be? (1 for witch, 0 for villager)");
 				id = in.nextLine();
 			}
-		}
+		
+		}*/
+		
 }
 
 	public CopyOnWriteArrayList<RumourCard> getRumourCardListPlayer(){	
@@ -477,5 +481,10 @@ public class Player implements Preparation{
 			else{}
 		}
 		return null;
+	}
+
+	public void setIdentity(int id) {
+		this.identity = id;
+		
 	}
 }

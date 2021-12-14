@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import controleur.ControleurSetup1;
 import simplifiedProjet.RumourCard.RumourCard;
+import vue.InterfaceSetup1;
 
 public class Engine implements Preparation {
     
@@ -18,15 +19,29 @@ public class Engine implements Preparation {
     public static Engine getEngine(){
         return engine;
     }
-    public void play(int numAllPlayer,int numBot){
+    
+    public List<Player> getPlayerList() {
+		return playerList;
+	}
+
+	public void setPlayerList(List<Player> playerList) {
+		this.playerList = playerList;
+	}
+
+	private List<Player> playerList;
+    public void play(int numAllPlayer,int numBot,controleur.ControleurSetup1.MyThread[] myThreadList){
         
 
         List<Player> playerListInit = SetUp.initializeGame(numAllPlayer,numBot);
-
+        
         GameStart:while(ifGameContinue(playerListInit)){
             
             System.out.println("================================ new turn ======================================= ");
-            List<Player> playerList = SetUp.setUpPlayer(playerListInit);
+            
+            playerList = SetUp.setUpPlayerCards(playerListInit);
+            playerList = SetUp.setUpPlayerIdentity(playerList);
+            
+            
             for(Player p: playerList){
                 p.showCards();
             }
@@ -35,6 +50,9 @@ public class Engine implements Preparation {
             Player pTurn1 = new Player();
             Player pTurn2 = new Player();
             Player pNextTurn  = playerList.get(0);
+            for(int i = 0; i<3;i++) {
+            	playerList.get(i).getIdentity();
+            }
 
             TurnStart:while(ifTurnContinue(playerList)){
                                

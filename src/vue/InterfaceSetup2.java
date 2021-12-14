@@ -19,6 +19,15 @@ public class InterfaceSetup2 {
 	private JFrame frame;
 	private JLabel lblIdentity;
 	private JToggleButton tgBtnIdentityChoice;
+	
+	public JToggleButton getTgBtnIdentityChoice() {
+		return tgBtnIdentityChoice;
+	}
+
+	public void setTgBtnIdentityChoice(JToggleButton tgBtnIdentityChoice) {
+		this.tgBtnIdentityChoice = tgBtnIdentityChoice;
+	}
+
 	private int i = 1;
 	private JButton btnConfirm;
 	private JLabel lblPlayerName;
@@ -45,9 +54,9 @@ public class InterfaceSetup2 {
 	 */
 	public InterfaceSetup2(String name) {
 		initialize(name);
-		ControleurSetup2 cst2 = new ControleurSetup2();
+		ControleurSetup2 cst2 = new ControleurSetup2(name);
 		cst2.controleurSetUp2IdChoice(tgBtnIdentityChoice);
-		cst2.controleurSetup2Confirm(btnConfirm);	
+		cst2.controleurSetup2Confirm(btnConfirm,tgBtnIdentityChoice);	
 		
 	}
 
