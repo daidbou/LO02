@@ -5,7 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
-import controleur.ControleurEngine;
+import controleur.ControleurStart;
 import simplifiedProjet.Engine;
 
 import java.awt.Color;
@@ -18,70 +18,65 @@ import java.util.Observer;
 import java.awt.event.ActionEvent;
 
 @SuppressWarnings("deprecation")
-public class MonInterface implements Observer{
+public class InterfaceStart implements Observer{
 
-	private JFrame frame;
+	private static JFrame frame;
 	private JButton buttonStart;
 	private JButton buttonQuit;
 	private Engine engine;
 	
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MonInterface window = new MonInterface();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
 	/**
 	 * Create the application.
 	 */
-	public MonInterface() {
+	public InterfaceStart() {
 		initialize();
-		new ControleurEngine().ControleurEngineS(engine,buttonStart);
-		new ControleurEngine().ControleurEngineQ(engine,buttonQuit);
+		new ControleurStart().ControleurEngineStart(engine,buttonStart);
+		new ControleurStart().ControleurEngineQuit(engine,buttonQuit);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.getContentPane().setBackground(Color.PINK);
-		frame.setBounds(100, 100, 1163, 705);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setFrame(new JFrame());
 		frame.getContentPane().setLayout(null);
+		getFrame().getContentPane().setBackground(Color.PINK);
+		getFrame().setBounds(100, 100, 1163, 705);
+		getFrame().setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getFrame().getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Welcome to Witch & Hunt");
 		lblNewLabel.setFont(new Font("BIZ UDPMincho Medium", Font.PLAIN, 42));
 		lblNewLabel.setBounds(276, 58, 582, 149);
-		frame.getContentPane().add(lblNewLabel);
+		getFrame().getContentPane().add(lblNewLabel);
 		
 		buttonStart = new JButton("Start Game");
 		buttonStart.setFont(new Font("BIZ UDPMincho Medium", Font.PLAIN, 29));
 		
 		buttonStart.setBounds(343, 359, 358, 103);
-		frame.getContentPane().add(buttonStart);
+		getFrame().getContentPane().add(buttonStart);
 		
 		buttonQuit = new JButton("Quit");
 		
 		buttonQuit.setFont(new Font("BIZ UDPMincho Medium", Font.PLAIN, 33));
 		buttonQuit.setBounds(418, 514, 231, 85);
-		frame.getContentPane().add(buttonQuit);
+		getFrame().getContentPane().add(buttonQuit);
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public static JFrame getFrame() {
+		return frame;
+	}
+
+	public void setFrame(JFrame frame) {
+		this.frame = frame;
 	}
 }

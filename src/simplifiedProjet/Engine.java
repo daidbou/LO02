@@ -1,10 +1,11 @@
 package simplifiedProjet;
 
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-
+import controleur.ControleurPreparation;
 import simplifiedProjet.RumourCard.RumourCard;
 
 public class Engine implements Preparation {
@@ -17,10 +18,10 @@ public class Engine implements Preparation {
     public static Engine getEngine(){
         return engine;
     }
-    public void player(){
+    public void play(int numAllPlayer,int numBot){
         
 
-        List<Player> playerListInit = SetUp.initializeGame();
+        List<Player> playerListInit = SetUp.initializeGame(numAllPlayer,numBot);
 
         GameStart:while(ifGameContinue(playerListInit)){
             

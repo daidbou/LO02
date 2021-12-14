@@ -1,15 +1,24 @@
 package simplifiedProjet;
 
-import controleur.ControleurEngine;
-import vue.MonInterface;
+import java.awt.EventQueue;
+
+import controleur.ControleurStart;
+import vue.InterfaceStart;
 
 public class Game {
-    public static void main(String[] args){
-    	MonInterface inter = new MonInterface();
-    	
-        //Engine engine = Engine.getEngine();
-       
-       
-        //engine.player();
-    }
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					InterfaceStart window = new InterfaceStart();
+					window.getFrame().setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 }

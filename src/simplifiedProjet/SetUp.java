@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import controleur.ControleurPreparation;
 import simplifiedProjet.RumourCard.RumourCard;
 
 
@@ -75,20 +76,24 @@ public class SetUp implements Preparation{
     public static  List<Player> allPlayerList = new ArrayList<>();
     public static  CopyOnWriteArrayList<RumourCard> rumourCardShuffled = rumourCardList; 
     
-    public static List<Player> initializeGame(){
+    public static List<Player> initializeGame(int numberOfPlayer,int numberOfBot){
         Scanner sc = new Scanner(System.in);
+        /*
         System.out.println("How many players(including the bots)? (3-6)");
-        int numberOfPlayer = sc.nextInt();
+        //int numberOfPlayer = sc.nextInt();
+        int numberOfPlayer = cp.getNumAllPlayer();
         int numberOfCardsPerPlayer = (int)12/numberOfPlayer;
         System.out.println("each player has "+numberOfCardsPerPlayer+"cards");
         System.out.println("how many bots?");
-        int numberOfBot = sc.nextInt();
+        //int numberOfBot = sc.nextInt();
+        int numberOfBot = cp.getNumBot();
         while(numberOfBot>numberOfPlayer || numberOfBot<0){
             System.out.println("please enter again");
             numberOfBot = sc.nextInt();
-        }
+        }*/
 
         int numReal = numberOfPlayer-numberOfBot;
+       
         System.out.println("this game includes "+numberOfBot+" bots and "+numReal+" players");
         
         int i = 0;
@@ -142,7 +147,7 @@ public class SetUp implements Preparation{
             for (j = (i)*numberOfCardsPerPlayer;j<(i+1)*numberOfCardsPerPlayer;j++){
                 rumourCardListReal.add(rumourCardShuffled.get(j));
             }
-            irlPlayerList.get(i).setRumourCardListPlayer(rumourCardListReal);//the same time define theirs identity
+            irlPlayerList.get(i).setRumourCardListPlayer(rumourCardListReal);//the same time define their identity
             playerList.add(irlPlayerList.get(i));
         }
         
@@ -152,7 +157,7 @@ public class SetUp implements Preparation{
             for (int m = (i)*numberOfCardsPerPlayer;m<(i+1)*numberOfCardsPerPlayer;m++){
                 rumourCardListBot.add(rumourCardShuffled.get(m));
             }
-            botPlayerList.get(k).setRumourCardListPlayer(rumourCardListBot);//the same time define theirs identity
+            botPlayerList.get(k).setRumourCardListPlayer(rumourCardListBot);//the same time define their identity
             playerList.add(botPlayerList.get(k));
 
 
