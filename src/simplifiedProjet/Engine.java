@@ -39,7 +39,7 @@ public class Engine implements Preparation {
             System.out.println("================================ new turn ======================================= ");
             
             playerList = SetUp.setUpPlayerCards(playerListInit);
-            playerList = SetUp.setUpPlayerIdentity(playerList);
+            //playerList = SetUp.setUpPlayerIdentity(playerList);
             
             
             for(Player p: playerList){

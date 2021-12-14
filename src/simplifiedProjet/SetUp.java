@@ -127,6 +127,7 @@ public class SetUp implements Preparation{
             //System.out.println(playerList.get(i).getIdentity());
             playerList.add(irlPlayerList.get(i));
         }
+        setUpPlayerIdentity(irlPlayerList);
         
         
         for(int k = 0 ; k<numberOfBot ;k++,i++){
@@ -144,7 +145,7 @@ public class SetUp implements Preparation{
             discardedRumourCard.add(rumourCardShuffled.get(11));
         }
        
-        //Collections.shuffle(playerList);
+        Collections.shuffle(playerList);
         
         //the winner of last turn goes first
         for(int t = 0; t<playerList.size();t++){
@@ -167,8 +168,8 @@ public class SetUp implements Preparation{
      		}else {
      			playerList.get(i).setIdentity(0);
      		}
-    		System.out.println(ControleurSetup1.myThreadList[i].getpName()+" "+ControleurSetup1.myThreadList[i].getIdentity()+"131313");
-    		//System.out.println(playerList.get(i).getIdentity());
+    		System.out.println(ControleurSetup1.myThreadList[i].getpName()+" "+ControleurSetup1.myThreadList[i].getIdentity()+"qq");
+    		
     		
     	}
     	return playerList;
