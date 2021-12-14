@@ -5,7 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import controleur.ControleurPreparation;
+import controleur.ControleurSetup1;
 
 import java.awt.Font;
 import javax.swing.JComboBox;
@@ -14,7 +14,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class InterfacePreparation {
+public class InterfaceSetup1 {
 
 	private static JFrame frame;
 	private JButton btnContinue;
@@ -22,11 +22,11 @@ public class InterfacePreparation {
 	private JComboBox cbxAllPlayer;
 	private JComboBox cbxBot;
 
-	public void createInterfacePre() {
+	public void createInterfaceSetup1() {
 		EventQueue.invokeLater(new Runnable() {// launch the interfacePre
 			public void run() {
 				try {
-					InterfacePreparation window = new InterfacePreparation();
+					InterfaceSetup1 window = new InterfaceSetup1();
 					window.getFrame().setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -39,10 +39,11 @@ public class InterfacePreparation {
 	/**
 	 * Create the application.
 	 */
-	public InterfacePreparation() {
+	public InterfaceSetup1() {
 		initialize();
-		new ControleurPreparation().controleurPreContinue(btnContinue, cbxAllPlayer, cbxBot);
-		new ControleurPreparation().controleurPreQuit(btnQuit);
+		ControleurSetup1 cst1 = new ControleurSetup1();
+		cst1.controleurSetup1Continue(btnContinue, cbxAllPlayer, cbxBot);
+		cst1.controleurSetup1Quit(btnQuit);
 	}
 
 	/**
@@ -71,7 +72,7 @@ public class InterfacePreparation {
 		getFrame().getContentPane().add(lblHowManyBots);
 		
 		cbxBot = new JComboBox();
-		cbxBot.setModel(new DefaultComboBoxModel(new String[] {"3", "4", "5", "6"}));
+		cbxBot.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5", "6"}));
 		cbxBot.setFont(new Font("Arial", Font.PLAIN, 23));
 		cbxBot.setBounds(644, 199, 132, 29);
 		getFrame().getContentPane().add(cbxBot);

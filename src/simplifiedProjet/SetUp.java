@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import controleur.ControleurPreparation;
+import controleur.ControleurSetup1;
 import simplifiedProjet.RumourCard.RumourCard;
 
 

@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import simplifiedProjet.Engine;
-import vue.InterfacePreparation;
+import vue.InterfaceSetup1;
 import vue.InterfaceStart;
 
 public class ControleurStart {
@@ -17,7 +17,7 @@ public class ControleurStart {
 	public void ControleurEngineStart(Engine engine, JButton buttonStart) {
 		buttonStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new InterfacePreparation().createInterfacePre();
+				new InterfaceSetup1().createInterfaceSetup1();
 				InterfaceStart.getFrame().dispose();// close the actuel frame first
 				
 			}

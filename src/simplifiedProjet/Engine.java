@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import controleur.ControleurPreparation;
+import controleur.ControleurSetup1;
 import simplifiedProjet.RumourCard.RumourCard;
 
 public class Engine implements Preparation {
