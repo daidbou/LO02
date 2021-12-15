@@ -35,8 +35,7 @@ public class ControleurSetup2 {
 			public void actionPerformed(ActionEvent e) {
 				
 				ControleurSetup1.isCountThreadAccomplished();
-				//System.out.println(tgBtnIdentityChoice.getText()+"4234232");
-				//System.out.println(name);
+				
 				for(int i = 0; i<ControleurSetup1.myThreadList.length;i++) {
 					if(ControleurSetup1.myThreadList[i].getpName().equals(name)) {
 						if(tgBtnIdentityChoice.getText().equals("witch")) {

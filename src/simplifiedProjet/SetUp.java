@@ -127,7 +127,7 @@ public class SetUp implements Preparation{
             //System.out.println(playerList.get(i).getIdentity());
             playerList.add(irlPlayerList.get(i));
         }
-        setUpPlayerIdentity(irlPlayerList);
+        setUpPlayerIdentity(playerList);
         
         
         for(int k = 0 ; k<numberOfBot ;k++,i++){
