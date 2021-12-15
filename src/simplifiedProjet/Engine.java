@@ -39,7 +39,7 @@ public class Engine implements Preparation {
             System.out.println("================================ new turn ======================================= ");
             
             playerList = SetUp.setUpPlayerCards(playerListInit);
-            //playerList = SetUp.setUpPlayerIdentity(playerList);
+           
             
             
             for(Player p: playerList){
@@ -56,7 +56,6 @@ public class Engine implements Preparation {
 
             TurnStart:while(ifTurnContinue(playerList)){
                                
-                boolean isReturn = false;
                 pTurn1 = pNextTurn;
                 System.out.println("--------------------------------"+pTurn1.getName()+"'s round -----------------------");
 
@@ -73,7 +72,6 @@ public class Engine implements Preparation {
                         pNextTurn = pTurn2.witch(pTurn1,playerList); 
                         if(pNextTurn.equals(pTurn2)){
                             pNextTurn = pTurn1;
-                            isReturn = true;
                             continue TurnStart;
                         }
                     }else{

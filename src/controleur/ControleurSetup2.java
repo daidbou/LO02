@@ -42,6 +42,7 @@ public class ControleurSetup2 {
 							ControleurSetup1.myThreadList[i].setIdentity(1);
 			     		}else {
 			     			ControleurSetup1.myThreadList[i].setIdentity(0);
+			     			
 			     		}
 					}
 				}
@@ -49,6 +50,7 @@ public class ControleurSetup2 {
 				if(ControleurSetup1.getCountThreadAccomplished() == ControleurSetup1.getNumReal()) {//when all real players confirm then game begins
 					
 					Engine.getEngine().play(ControleurSetup1.getNumAllPlayer(),ControleurSetup1.getNumBot(),ControleurSetup1.myThreadList);
+					
 				}
 				
 			}

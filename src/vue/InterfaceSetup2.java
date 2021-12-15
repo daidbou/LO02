@@ -86,7 +86,7 @@ public class InterfaceSetup2 {
 		lblIdentity.setBounds(322, 54, 279, 106);
 		frame.getContentPane().add(lblIdentity);
 		
-		tgBtnIdentityChoice = new JToggleButton("villager");
+		tgBtnIdentityChoice = new JToggleButton("villager or Witch?");
 		
 		tgBtnIdentityChoice.setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 36));
 		tgBtnIdentityChoice.setBackground(Color.YELLOW);

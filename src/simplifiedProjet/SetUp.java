@@ -123,8 +123,7 @@ public class SetUp implements Preparation{
                 rumourCardListReal.add(rumourCardShuffled.get(j));
             }
             irlPlayerList.get(i).setRumourCardListPlayer(rumourCardListReal); 
-           
-            //System.out.println(playerList.get(i).getIdentity());
+
             playerList.add(irlPlayerList.get(i));
         }
         setUpPlayerIdentity(playerList);
@@ -160,6 +159,7 @@ public class SetUp implements Preparation{
         playerListInit = playerList;
         return playerList;      
     }
+    
     public static List<Player> setUpPlayerIdentity(List<Player> playerList){
     	for(int i = 0; i<SetUp.getNumReal();i++) {
     		
@@ -169,8 +169,7 @@ public class SetUp implements Preparation{
      			playerList.get(i).setIdentity(0);
      		}
     		System.out.println(ControleurSetup1.myThreadList[i].getpName()+" "+ControleurSetup1.myThreadList[i].getIdentity()+"qq");
-    		
-    		
+
     	}
     	return playerList;
     }
