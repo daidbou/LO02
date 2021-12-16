@@ -13,7 +13,37 @@ import simplifiedProjet.RumourCard.RumourCard;
 
 
 public class SetUp implements Preparation{
+	
+	public static class MyThreadRound extends Thread{
+		public MyThreadRound() {
+			
+		}
+		
+		public MyThreadRound(Player player) {
 
+			this.setPlayer(player);
+		}
+
+
+		private Player player;
+
+
+		public void run() {
+			//new InterfaceRound1().createInterfaceRound1();
+		}
+
+
+		public Player getPlayer() {
+			return player;
+		}
+
+
+		public void setPlayer(Player player) {
+			this.player = player;
+		}
+	}
+
+	static MyThreadRound[] myThreadRoundList = new MyThreadRound[3];//TODO
 	private static int numReal;
 
     public static Player p1 = new Player("p1");
@@ -127,6 +157,13 @@ public class SetUp implements Preparation{
             playerList.add(irlPlayerList.get(i));
         }
         setUpPlayerIdentity(playerList);
+        
+        for(i = 0 ; i<numIrlPlayer ;i++){//create thread player element
+        	//MyThreadRound mtThreadRound = new Thread();
+        	
+        	
+        	myThreadRoundList[i] = new MyThreadRound(playerList.get(i));
+        }
         
         
         for(int k = 0 ; k<numberOfBot ;k++,i++){

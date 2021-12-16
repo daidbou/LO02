@@ -49,7 +49,7 @@ public class ControleurSetup2 {
 				
 				if(ControleurSetup1.getCountThreadAccomplished() == ControleurSetup1.getNumReal()) {//when all real players confirm then game begins
 					
-					Engine.getEngine().play(ControleurSetup1.getNumAllPlayer(),ControleurSetup1.getNumBot(),ControleurSetup1.myThreadList);
+					Engine.getEngine().play(ControleurSetup1.getNumAllPlayer(),ControleurSetup1.getNumBot());
 					
 				}
 				

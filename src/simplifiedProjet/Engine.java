@@ -7,29 +7,20 @@ import java.util.Scanner;
 
 import controleur.ControleurSetup1;
 import simplifiedProjet.RumourCard.RumourCard;
+import vue.InterfaceRound1;
+import vue.InterfaceRound2;
 import vue.InterfaceSetup1;
 
 public class Engine implements Preparation {
+	
+	
+	private static String choice;
     
     private static Engine engine = new Engine();
-    private Engine(){
-
-    }
-
-    public static Engine getEngine(){
-        return engine;
-    }
-    
-    public List<Player> getPlayerList() {
-		return playerList;
-	}
-
-	public void setPlayerList(List<Player> playerList) {
-		this.playerList = playerList;
-	}
+   
 
 	private List<Player> playerList;
-    public void play(int numAllPlayer,int numBot,controleur.ControleurSetup1.MyThread[] myThreadList){
+    public void play(int numAllPlayer,int numBot){
         
 
         List<Player> playerListInit = SetUp.initializeGame(numAllPlayer,numBot);
@@ -41,6 +32,14 @@ public class Engine implements Preparation {
             playerList = SetUp.setUpPlayerCards(playerListInit);
            
             
+            //TODO every thread stands for a real player
+            for(int i = 0 ; i<3 ;i++){
+            	SetUp.myThreadRoundList[i].getPlayer().getName();
+            	System.out.println("12311");
+            }
+           
+            
+            
             
             for(Player p: playerList){
                 p.showCards();
@@ -50,9 +49,8 @@ public class Engine implements Preparation {
             Player pTurn1 = new Player();
             Player pTurn2 = new Player();
             Player pNextTurn  = playerList.get(0);
-            for(int i = 0; i<3;i++) {
-            	playerList.get(i).getIdentity();
-            }
+            
+            
 
             TurnStart:while(ifTurnContinue(playerList)){
                                
@@ -65,7 +63,7 @@ public class Engine implements Preparation {
                     if(pTurn2.equals(pTurn1)){
                         continue;
                     }
-                    //while(isReturn){}
+                  
                     if(((pTurn2.isVirtual() == 1) && doChoiceWI_Bot(pTurn2))  || ((pTurn2.isVirtual() == 0) && doChoiceWI_Real(pTurn2))){
                        
                       
@@ -420,7 +418,24 @@ public class Engine implements Preparation {
         }
     }
 
-    private static String choice;
+    private Engine(){
+
+    }
+
+    public static Engine getEngine(){
+        return engine;
+    }
+    
+    public List<Player> getPlayerList() {
+		return playerList;
+	}
+
+	public void setPlayerList(List<Player> playerList) {
+		this.playerList = playerList;
+	}
+    
+   
    
 
 }
+
