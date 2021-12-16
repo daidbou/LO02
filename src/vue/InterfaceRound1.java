@@ -12,26 +12,40 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
+import simplifiedProjet.Player;
+
+import java.awt.event.ActionListener;
+import java.util.List;
+import java.awt.event.ActionEvent;
+
 public class InterfaceRound1 {
 
 	private JFrame frame;
-	private String name = "name";
+	private String name;
 	private JLabel lblPlayerName;
 	private JLabel lblWhichPlayer;
 	private JToggleButton tglbtnAOrH;
+	private JComboBox cbxPlayerList;
+	private JButton btnConfirm;
+	
 
 	/**
 	 * Launch the application.
 	 */
-	public void createInterfaceRound1() {
+	public void createInterfaceRound1(String name,List<Player> playerList) {
+		this.name = name;
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
+				
 				try {
-					InterfaceRound1 window = new InterfaceRound1();
+					
+					InterfaceRound1 window = new InterfaceRound1(name,playerList);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
+				
 			}
 		});
 	}
@@ -39,25 +53,30 @@ public class InterfaceRound1 {
 	/**
 	 * Create the application.
 	 */
-	public InterfaceRound1() {
-		initialize();
+	public InterfaceRound1(String name,List<Player> playerList) {
+		initialize(name,playerList);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String pname,List<Player> playerList) {
+		
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 717, 622);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		lblPlayerName = new JLabel(name);
+		
+		lblPlayerName.setText(pname);
 		lblPlayerName.setFont(new Font("Brush Script MT", Font.PLAIN, 33));
 		lblPlayerName.setBounds(126, 91, 128, 39);
 		frame.getContentPane().add(lblPlayerName, BorderLayout.WEST);
 		
 		JToggleButton tglbtnAOrH = new JToggleButton("accuse\r\n or hunt?");
+		
 		tglbtnAOrH.setFont(new Font("Harrington", Font.PLAIN, 37));
 		tglbtnAOrH.setBounds(67, 200, 329, 66);
 		frame.getContentPane().add(tglbtnAOrH);
@@ -67,13 +86,27 @@ public class InterfaceRound1 {
 		lblWhichPlayer.setBounds(91, 323, 225, 60);
 		frame.getContentPane().add(lblWhichPlayer);
 		
-		JComboBox cbxPlayerList = new JComboBox();
+		cbxPlayerList = new JComboBox();
+		cbxPlayerList.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		cbxPlayerList.setFont(new Font("Bradley Hand ITC", Font.PLAIN, 29));
-		cbxPlayerList.setModel(new DefaultComboBoxModel(new String[] {"for example", "p1", "p2", "b1"}));
-		cbxPlayerList.setBounds(285, 326, 192, 48);
+		String[] str = new String[playerList.size()];int i = 0;
+		for(Player p: playerList) {
+			if(p.getName() == name) {
+				i++;
+			}else if(p.ifIsOutOfTurn()) {
+				i++;
+			}
+			str[i] = p.getName();
+		}
+		cbxPlayerList.setModel(new DefaultComboBoxModel(str));
+		cbxPlayerList.setBounds(285, 326, 192, 48);//传一个数组回来
 		frame.getContentPane().add(cbxPlayerList);
 		
-		JButton btnConfirm = new JButton("Confirm");
+		btnConfirm = new JButton("Confirm");
+		
 		btnConfirm.setFont(new Font("Chiller", Font.PLAIN, 48));
 		btnConfirm.setHorizontalAlignment(SwingConstants.LEFT);
 		btnConfirm.setBounds(110, 443, 156, 66);

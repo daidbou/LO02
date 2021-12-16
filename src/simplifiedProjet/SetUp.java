@@ -9,6 +9,7 @@ import controleur.ControleurSetup2;
 
 import controleur.ControleurSetup1;
 import simplifiedProjet.RumourCard.RumourCard;
+import vue.InterfaceRound1;
 
 
 
@@ -28,8 +29,9 @@ public class SetUp implements Preparation{
 		private Player player;
 
 
-		public void run() {
-			//new InterfaceRound1().createInterfaceRound1();
+		public void run(List<Player> playerList) {
+			//List<Player> newList = selectPlayerList(playerList,this.player);
+			new InterfaceRound1(player.getName(),playerList).createInterfaceRound1(player.getName(),playerList);
 		}
 
 
@@ -43,9 +45,9 @@ public class SetUp implements Preparation{
 		}
 	}
 
-	static MyThreadRound[] myThreadRoundList = new MyThreadRound[3];//TODO
+	
 	private static int numReal;
-
+	static MyThreadRound[] myThreadRoundList = new MyThreadRound[6];//TODO
     public static Player p1 = new Player("p1");
     public static Player p2 = new Player("p2");
     public static Player p3 = new Player("p3");
@@ -158,12 +160,10 @@ public class SetUp implements Preparation{
         }
         setUpPlayerIdentity(playerList);
         
-        for(i = 0 ; i<numIrlPlayer ;i++){//create thread player element
-        	//MyThreadRound mtThreadRound = new Thread();
-        	
-        	
+        for(i = 0 ; i<numIrlPlayer ;i++){
         	myThreadRoundList[i] = new MyThreadRound(playerList.get(i));
         }
+        //so we will use threadlist (whose element is realplayer) instead of playerlist
         
         
         for(int k = 0 ; k<numberOfBot ;k++,i++){
@@ -221,4 +221,16 @@ public class SetUp implements Preparation{
 	public static void setNumReal(int numReal) {
 		SetUp.numReal = numReal;
 	}
+	public static List<Player> selectPlayerList(List<Player> playerList, Player player) {
+		   
+		 for(Player p:playerList) {
+			 if(p == player) {
+		   playerList.remove(p);
+			 }else if(p.ifIsOutOfTurn()) {
+		   playerList.remove(p);
+			 }
+		 }
+		 return playerList;
+	 }
+	
 }

@@ -10,6 +10,9 @@ import javax.swing.JToggleButton;
 import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
 import simplifiedProjet.SetUp;
+import vue.InterfaceRound2;
+import vue.InterfaceSetup1;
+import vue.InterfaceSetup2;
 
 public class ControleurSetup2 {
 	
@@ -35,6 +38,8 @@ public class ControleurSetup2 {
 			public void actionPerformed(ActionEvent e) {
 				
 				ControleurSetup1.isCountThreadAccomplished();
+				//if player confirms, countThreadAccomplished++, until count == number of realplayers
+				// the game begins
 				
 				for(int i = 0; i<ControleurSetup1.myThreadList.length;i++) {
 					if(ControleurSetup1.myThreadList[i].getpName().equals(name)) {
@@ -50,9 +55,10 @@ public class ControleurSetup2 {
 				if(ControleurSetup1.getCountThreadAccomplished() == ControleurSetup1.getNumReal()) {//when all real players confirm then game begins
 					
 					Engine.getEngine().play(ControleurSetup1.getNumAllPlayer(),ControleurSetup1.getNumBot());
+					InterfaceSetup2.getFrame().dispose();
 					
-				}
 				
+				}
 			}
 		});
 		

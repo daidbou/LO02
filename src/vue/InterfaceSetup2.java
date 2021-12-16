@@ -16,7 +16,7 @@ import javax.swing.JButton;
 
 public class InterfaceSetup2 {
 
-	private JFrame frame;
+	private static JFrame frame;
 	private JLabel lblIdentity;
 	private JToggleButton tgBtnIdentityChoice;
 	
@@ -92,5 +92,10 @@ public class InterfaceSetup2 {
 		tgBtnIdentityChoice.setBackground(Color.YELLOW);
 		tgBtnIdentityChoice.setBounds(75, 170, 369, 52);
 		frame.getContentPane().add(tgBtnIdentityChoice);
+	}
+
+	public static JFrame getFrame() {
+		
+		return frame;
 	}
 }

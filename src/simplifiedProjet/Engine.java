@@ -30,16 +30,6 @@ public class Engine implements Preparation {
             System.out.println("================================ new turn ======================================= ");
             
             playerList = SetUp.setUpPlayerCards(playerListInit);
-           
-            
-            //TODO every thread stands for a real player
-            for(int i = 0 ; i<3 ;i++){
-            	SetUp.myThreadRoundList[i].getPlayer().getName();
-            	System.out.println("12311");
-            }
-           
-            
-            
             
             for(Player p: playerList){
                 p.showCards();
@@ -50,6 +40,11 @@ public class Engine implements Preparation {
             Player pTurn2 = new Player();
             Player pNextTurn  = playerList.get(0);
             
+          
+            //TODO every thread stands for a real player
+            for(int i = 0 ; i<numAllPlayer-numBot ;i++){           	
+            	SetUp.myThreadRoundList[i].run(playerList);//for each realplayer launch it's thread
+            }
             
 
             TurnStart:while(ifTurnContinue(playerList)){
@@ -65,8 +60,7 @@ public class Engine implements Preparation {
                     }
                   
                     if(((pTurn2.isVirtual() == 1) && doChoiceWI_Bot(pTurn2))  || ((pTurn2.isVirtual() == 0) && doChoiceWI_Real(pTurn2))){
-                       
-                      
+                     
                         pNextTurn = pTurn2.witch(pTurn1,playerList); 
                         if(pNextTurn.equals(pTurn2)){
                             pNextTurn = pTurn1;
@@ -218,9 +212,9 @@ public class Engine implements Preparation {
             System.out.println("you don't have rumour cards, you have to accuse someone");
             return true;
         }
-        System.out.println(pTurn1.getName() + " accuse or hunt? [a/h]");
+        //System.out.println(pTurn1.getName() + " accuse or hunt? [a/h]");
         String choiceAH_Real = in.nextLine();
-        //in.close();
+        
         if (choiceAH_Real.equals("a")) {
             return true;
         } else {
@@ -264,14 +258,14 @@ public class Engine implements Preparation {
 
 
     /**
-     * to judge if this gameis end
+     * to judge if this game is end or no
      * condition: until some players points more than 5
      * @param playerList
      * @return true if game ends
      */
     public static boolean ifGameContinue(List<Player> pAll) {
         for (Player p : pAll) {
-            if (p.getPoint() >= 5) {
+            if (p.getPoint() >= 2) {
                 return false;
             }
         }
@@ -286,8 +280,7 @@ public class Engine implements Preparation {
      */
     public static boolean ifTurnContinue(List<Player> playerList) {
         int i = playerList.size();// how many players are still playing
-        //System.out.println("all "+i+" players");
-        //System.out.println("size"+playerList.size());
+
         for (Player p : playerList) {
             if (p.ifIdentityReavealed() ) {
                 i--; // count how many players didn't revealed their identity
@@ -434,7 +427,13 @@ public class Engine implements Preparation {
 		this.playerList = playerList;
 	}
     
-   
+	/**
+	 * for the player to know who can be chosen
+	 * @param playerList
+	 * @param player
+	 * @return
+	 */
+ 
    
 
 }
