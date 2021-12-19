@@ -1,19 +1,21 @@
 package simplifiedProjet;
 //import java.util.Scanner;
 
+import simplifiedProjet.SetUp.MyThreadRound;
 import simplifiedProjet.RumourCard.RumourCard;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class Player implements Preparation{
 	protected String name;
 	protected int identity;//1 = witch, 0 = villager
 	protected boolean identityReavealed ;
 	protected int point;
-	protected CopyOnWriteArrayList<RumourCard> playerRumourCardList;
+	private CopyOnWriteArrayList<RumourCard> playerRumourCardList;
 	protected CopyOnWriteArrayList<RumourCard> playerRevealedCardList;
 	protected boolean isOutOfTurn = false;
 	protected int virtual ; // 1 = virtual
@@ -28,7 +30,7 @@ public class Player implements Preparation{
 	public Player(String name, int identity, CopyOnWriteArrayList<RumourCard> rumourCardListP) {
 		this.name = name;
 		this.identity = identity;
-		this.playerRumourCardList= rumourCardListP;
+		this.setPlayerRumourCardList(rumourCardListP);
 		this.identityReavealed = false;
 		this.isOutOfTurn = false;
 		this.virtual = 0;
@@ -44,32 +46,33 @@ public class Player implements Preparation{
 	 * identity is already revealed, or someone is already out of turn
 	 * 
 	 * @param playerList
+	 * @param myThreadTurn1 
 	 * @return
+	 * @throws InterruptedException 
 	 */
-	public Player accuse(List<Player> playerList) { 
-		//System.out.println(name+" is a real");
-		System.out.println("which player? ex: p1 b1, enter -1 to return");
-		while(true){
-		Scanner sc = new Scanner(System.in);
-		String pName = sc.nextLine();
-		if(pName.equals("-1")){
-			return this;
-		}
+	public Player accuse(List<Player> playerList, MyThreadRound myThreadTurn1)  { 
+		System.out.println("which player? ex: p1 b1");
 
-
-		Player pTurn2 = Preparation.isExistedP(pName,name, playerList);
-		if(pTurn2 == null){
-			//System.out.println("no such player, try again");
+		
+		//Scanner sc = new Scanner(System.in);
+		//String pName = sc.nextLine();
+		
+		
 	
-		}else if(!pTurn2.ifIdentityReavealed()){
-			System.out.println(name+" accuse "+pTurn2.getName());
-			//sc.close();
-			return pTurn2;
-		}else{
-			System.out.println(pTurn2.getName() + " has already revealed his identity, try again");
+			String pName = myThreadTurn1.getIr1().getPlayer2();
+			Player pTurn2 = Preparation.isExistedP(pName,name, playerList);
+			if(pTurn2 == null){
+				//System.out.println("no such player, try again");
+	
+			}else if(!pTurn2.ifIdentityReavealed()){
+				System.out.println(name+" accuse "+pTurn2.getName());
+				return pTurn2;
+			}else{
+				System.out.println(pTurn2.getName() + " has already revealed his identity, try again");
 
-		}
-		}
+			}
+			return pTurn2;
+		
 		
 	}
 	/**
@@ -91,11 +94,11 @@ public class Player implements Preparation{
 		
 		while(true){
 
-			if(playerRumourCardList.get(cardNum).name().equals("Pointed Hat") && playerRevealedCardList.size()>0){
-				pNextTurn = playerRumourCardList.get(cardNum).skillHunt(name,playerList);
+			if(getPlayerRumourCardList().get(cardNum).name().equals("Pointed Hat") && playerRevealedCardList.size()>0){
+				pNextTurn = getPlayerRumourCardList().get(cardNum).skillHunt(name,playerList);
 				break;
 			}
-			else if(playerRumourCardList.get(cardNum).name().equals("Pointed Hat") && playerRevealedCardList.size()==0){
+			else if(getPlayerRumourCardList().get(cardNum).name().equals("Pointed Hat") && playerRevealedCardList.size()==0){
 				System.out.println("Sorry you don't have any revealed Rumour Card, you can't play Pointed Hat");
 				showCards();
 				System.out.println(" enter 0 for the first card");
@@ -103,19 +106,19 @@ public class Player implements Preparation{
 			}
 			else{
 
-				if(!(playerRumourCardList.get(cardNum).name().equals("The Inquisition") || playerRumourCardList.get(cardNum).name().equals("Angry Mob"))){
-					pNextTurn = playerRumourCardList.get(cardNum).skillHunt(name,playerList);
+				if(!(getPlayerRumourCardList().get(cardNum).name().equals("The Inquisition") || getPlayerRumourCardList().get(cardNum).name().equals("Angry Mob"))){
+					pNextTurn = getPlayerRumourCardList().get(cardNum).skillHunt(name,playerList);
 					break;
 				}
 				else{
 					if(this.identity==0 && this.identityReavealed){
-						pNextTurn = playerRumourCardList.get(cardNum).skillHunt(name,playerList);
+						pNextTurn = getPlayerRumourCardList().get(cardNum).skillHunt(name,playerList);
 						break;
 					}
 					else{
-						System.out.println(playerRumourCardList.get(cardNum).name()+" is only playable if you have been revealed as a Villager ");
+						System.out.println(getPlayerRumourCardList().get(cardNum).name()+" is only playable if you have been revealed as a Villager ");
 						showCards();
-						System.out.print("select a card other than "+playerRumourCardList.get(cardNum).name());
+						System.out.print("select a card other than "+getPlayerRumourCardList().get(cardNum).name());
 						cardNum = in.nextInt();
 					}
 				}
@@ -141,11 +144,11 @@ public class Player implements Preparation{
 		}
 
 		while(true){
-			if(playerRumourCardList.get(cardNum).name().equals("Pointed Hat") && playerRevealedCardList.size()>0){
-				pNextTurn = playerRumourCardList.get(cardNum).skillHunt(name,playerList);
+			if(getPlayerRumourCardList().get(cardNum).name().equals("Pointed Hat") && playerRevealedCardList.size()>0){
+				pNextTurn = getPlayerRumourCardList().get(cardNum).skillHunt(name,playerList);
 				break;
 			}
-			else if(playerRumourCardList.get(cardNum).name().equals("Pointed Hat") && playerRevealedCardList.size()==0){
+			else if(getPlayerRumourCardList().get(cardNum).name().equals("Pointed Hat") && playerRevealedCardList.size()==0){
 				System.out.println("Sorry you don't have any revealed Rumour Card, you can't play Pointed Hat");
 				showCards();
 				System.out.println(" enter 0 for the first card");
@@ -153,7 +156,7 @@ public class Player implements Preparation{
 
 			}
 			else{
-				pNextTurn = playerRumourCardList.get(cardNum).skillWitch(pTurn1.getName(),this.name,playerList);
+				pNextTurn = getPlayerRumourCardList().get(cardNum).skillWitch(pTurn1.getName(),this.name,playerList);
 				break;
 
 			}
@@ -181,8 +184,8 @@ public class Player implements Preparation{
 	 */
 	public void showCards() {
 		System.out.println(name+" and cards with ");
-		for (int i = 0; i < playerRumourCardList.size(); i++) {
-			System.out.println(playerRumourCardList.get(i).name());
+		for (int i = 0; i < getPlayerRumourCardList().size(); i++) {
+			System.out.println(getPlayerRumourCardList().get(i).name());
 		}
 	}
 	/**
@@ -298,7 +301,7 @@ public class Player implements Preparation{
 	 */
 	public void setRumourCardListPlayer(CopyOnWriteArrayList<RumourCard> l){
 		
-		playerRumourCardList = l;
+		setPlayerRumourCardList(l);
 		playerRevealedCardList = new CopyOnWriteArrayList<RumourCard>();
 		
 		/*
@@ -326,7 +329,7 @@ public class Player implements Preparation{
 }
 
 	public CopyOnWriteArrayList<RumourCard> getRumourCardListPlayer(){	
-		return playerRumourCardList;
+		return getPlayerRumourCardList();
 	}
 
 	public int isVirtual(){
@@ -340,7 +343,7 @@ public class Player implements Preparation{
 	 * @return 
 	 */
 	public boolean checkRumourCardList(){
-		if (playerRumourCardList.size() == 0){
+		if (getPlayerRumourCardList().size() == 0){
 			return true;
 		}else{
 			return false;
@@ -351,7 +354,7 @@ public class Player implements Preparation{
 	 */
 	public void addCardInTheList(RumourCard rumourCard){
 
-		this.playerRumourCardList.add(rumourCard);
+		this.getPlayerRumourCardList().add(rumourCard);
 	}
 
 	/**
@@ -408,11 +411,11 @@ public class Player implements Preparation{
 	 * @return 0 if succeed,  -1 failed
 	 */
 	public int disCardCard(int cardNum){
-		if(this.playerRumourCardList.size() == 0){
+		if(this.getPlayerRumourCardList().size() == 0){
 			System.out.println("you don't have any cards");
 			return -1;
 		}
-		SetUp.discardedRumourCard.add(this.playerRumourCardList.get(cardNum));
+		SetUp.discardedRumourCard.add(this.getPlayerRumourCardList().get(cardNum));
 		return 0;
 	}
 
@@ -424,15 +427,15 @@ public class Player implements Preparation{
 	 * @return 0 if succeed,  -1 failed
 	 */
 	public int disCardCard(String nameCard){
-		if(this.playerRumourCardList.size() == 0){
+		if(this.getPlayerRumourCardList().size() == 0){
 			System.out.println("you don't have any cards");
 			return -1;
 		}
-		for(RumourCard r: this.playerRumourCardList){
+		for(RumourCard r: this.getPlayerRumourCardList()){
 			if(r.name().equals(nameCard)){
 				SetUp.discardedRumourCard.add(r);
 				//playerRevealedCardList.add(r);
-				this.playerRumourCardList.remove(r);
+				this.getPlayerRumourCardList().remove(r);
 				break;
 			}
 		}
@@ -464,7 +467,7 @@ public class Player implements Preparation{
 
 	public void revealCardAndRemoveFromRumourCardList(RumourCard r){
 		this.playerRevealedCardList.add(r);
-		this.playerRumourCardList.remove(r);
+		this.getPlayerRumourCardList().remove(r);
 	}
 
 	public RumourCard stringToCard(String nameCard){
@@ -486,5 +489,13 @@ public class Player implements Preparation{
 	public void setIdentity(int id) {
 		this.identity = id;
 		
+	}
+
+	public CopyOnWriteArrayList<RumourCard> getPlayerRumourCardList() {
+		return playerRumourCardList;
+	}
+
+	public void setPlayerRumourCardList(CopyOnWriteArrayList<RumourCard> playerRumourCardList) {
+		this.playerRumourCardList = playerRumourCardList;
 	}
 }

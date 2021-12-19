@@ -16,22 +16,38 @@ import vue.InterfaceRound1;
 public class SetUp implements Preparation{
 	
 	public static class MyThreadRound extends Thread{
-		public MyThreadRound() {
+		
+		private InterfaceRound1 ir1;
+		private Player player;
+		private List<Player> playerList;
+		private boolean lock;//only when the lock is false can players do somethin
+		
+
+
+		public MyThreadRound(List<Player> playerList,Player player) {
+			this.playerList = playerList;
+			this.setPlayer(player);
+			this.ir1 = new InterfaceRound1(player.getName(),playerList);
 			
 		}
 		
-		public MyThreadRound(Player player) {
+		
 
-			this.setPlayer(player);
+		public void run() {
+			//List<Player> newList = selectPlayerList(playerList,this.player);
+			//Did reach
+			this.ir1.createInterfaceRound1(player.getName(),playerList);
+			
+		}
+
+		public boolean isLock() {
+			return lock;
 		}
 
 
-		private Player player;
 
-
-		public void run(List<Player> playerList) {
-			//List<Player> newList = selectPlayerList(playerList,this.player);
-			new InterfaceRound1(player.getName(),playerList).createInterfaceRound1(player.getName(),playerList);
+		public void setLock(boolean lock) {
+			this.lock = lock;
 		}
 
 
@@ -43,11 +59,17 @@ public class SetUp implements Preparation{
 		public void setPlayer(Player player) {
 			this.player = player;
 		}
+
+		public InterfaceRound1 getIr1() {
+			return ir1;
+		}
+
+		
 	}
 
 	
 	private static int numReal;
-	static MyThreadRound[] myThreadRoundList = new MyThreadRound[6];//TODO
+	public static MyThreadRound[] myThreadRoundList = new MyThreadRound[6];//TODO
     public static Player p1 = new Player("p1");
     public static Player p2 = new Player("p2");
     public static Player p3 = new Player("p3");
@@ -161,8 +183,10 @@ public class SetUp implements Preparation{
         setUpPlayerIdentity(playerList);
         
         for(i = 0 ; i<numIrlPlayer ;i++){
-        	myThreadRoundList[i] = new MyThreadRound(playerList.get(i));
+        	myThreadRoundList[i] = new MyThreadRound(playerList,playerList.get(i));
         }
+        
+        
         //so we will use threadlist (whose element is realplayer) instead of playerlist
         
         
@@ -200,12 +224,12 @@ public class SetUp implements Preparation{
     public static List<Player> setUpPlayerIdentity(List<Player> playerList){
     	for(int i = 0; i<SetUp.getNumReal();i++) {
     		
-    		if(ControleurSetup1.myThreadList[i].getIdentity() == 1) {
+    		if(ControleurSetup1.myThreadListC[i].getIdentity() == 1) {
      			playerList.get(i).setIdentity(1);
      		}else {
      			playerList.get(i).setIdentity(0);
      		}
-    		System.out.println(ControleurSetup1.myThreadList[i].getpName()+" "+ControleurSetup1.myThreadList[i].getIdentity()+"qq");
+    		System.out.println(ControleurSetup1.myThreadListC[i].getpName()+" "+ControleurSetup1.myThreadListC[i].getIdentity()+"qq");
 
     	}
     	return playerList;
@@ -221,16 +245,7 @@ public class SetUp implements Preparation{
 	public static void setNumReal(int numReal) {
 		SetUp.numReal = numReal;
 	}
-	public static List<Player> selectPlayerList(List<Player> playerList, Player player) {
-		   
-		 for(Player p:playerList) {
-			 if(p == player) {
-		   playerList.remove(p);
-			 }else if(p.ifIsOutOfTurn()) {
-		   playerList.remove(p);
-			 }
-		 }
-		 return playerList;
-	 }
+	
+	
 	
 }

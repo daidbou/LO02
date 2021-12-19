@@ -4,8 +4,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import controleur.ControleurSetup1;
+import simplifiedProjet.SetUp.MyThreadRound;
 import simplifiedProjet.RumourCard.RumourCard;
 import vue.InterfaceRound1;
 import vue.InterfaceRound2;
@@ -13,14 +16,27 @@ import vue.InterfaceSetup1;
 
 public class Engine implements Preparation {
 	
-	
-	private static String choice;
-    
+	private static String choice;  
     private static Engine engine = new Engine();
+    private static int numReal;
+    private static boolean isThreadCompleted;
+    private static final CountDownLatch latchAH = new CountDownLatch(1);
+    
    
+
+	public static boolean isThreadCompleted() {
+		return isThreadCompleted;
+	}
+
+
+	public static void setThreadCompleted(boolean isThreadCompleted) {
+		Engine.isThreadCompleted = isThreadCompleted;
+	}
 
 	private List<Player> playerList;
     public void play(int numAllPlayer,int numBot){
+    	numReal = numAllPlayer-numBot;
+    	
         
 
         List<Player> playerListInit = SetUp.initializeGame(numAllPlayer,numBot);
@@ -42,19 +58,49 @@ public class Engine implements Preparation {
             
           
             //TODO every thread stands for a real player
-            for(int i = 0 ; i<numAllPlayer-numBot ;i++){           	
-            	SetUp.myThreadRoundList[i].run(playerList);//for each realplayer launch it's thread
+            
+            for(int i = 0 ; i<numReal ;i++){  
+            	SetUp.myThreadRoundList[i].setPriority(8);
+            	SetUp.myThreadRoundList[i].start();//for each real player launch it's thread  
+            	SetUp.myThreadRoundList[i].setLock(true);
             }
+           
+         
             
 
             TurnStart:while(ifTurnContinue(playerList)){
                                
                 pTurn1 = pNextTurn;
-                System.out.println("--------------------------------"+pTurn1.getName()+"'s round -----------------------");
+                MyThreadRound myThreadTurn1 = null;
+                
+                for(int i = 0; i<numReal;i++) {
+            		if(SetUp.myThreadRoundList[i].getPlayer().getName().equals(pTurn1.getName())) {
+            			 myThreadTurn1 = SetUp.myThreadRoundList[i];//find myThread1 == pturn1
+            		}//Need to update every round
+            		
+                }
+                
+                System.out.println("--------------------------------"+myThreadTurn1.getPlayer().getName()+"'s round -----------------------");
 
-                if( ((pTurn1.isVirtual() == 1) && doChoiceAh_Bot(pTurn1))  || ((pTurn1.isVirtual() == 0) && doChoiceAH_Real(pTurn1) )){
+                /*try {
+					latchAH.await();
+				} catch (InterruptedException e) {
+					System.out.println("12error");
+					e.printStackTrace();
+				}*/
+                
+                while(myThreadTurn1.isLock()) {
+                	//System.out.println(myThreadTurn1.getPlayer().getName()+" "+myThreadTurn1.isLock());
+                	try {
+						TimeUnit.SECONDS.sleep(1);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+                }
+                if( ((pTurn1.isVirtual() == 1) && doChoiceAh_Bot(pTurn1))  || ((pTurn1.isVirtual() == 0) && doChoiceAH_Real(pTurn1,myThreadTurn1) )){
                     //accuse
-                    pTurn2 = pTurn1.accuse(playerList);
+                    pTurn2 = pTurn1.accuse(playerList,myThreadTurn1);
                     if(pTurn2.equals(pTurn1)){
                         continue;
                     }
@@ -203,23 +249,48 @@ public class Engine implements Preparation {
     * For a real player to choose randomly to accuse or hunt
     * @param pTurn1
     * 		it's the real player who use this fonction
+     * @param myThreadTurn1 
     * @return  
     *     true = accuse , false = hunt
     */
-    public static boolean doChoiceAH_Real(Player pTurn1) {
-        Scanner in = new Scanner(System.in);
-        if(pTurn1.checkRumourCardList()){
-            System.out.println("you don't have rumour cards, you have to accuse someone");
-            return true;
+    public static boolean doChoiceAH_Real(Player pTurn1, MyThreadRound myThreadTurn1) {
+       // Scanner in = new Scanner(System.in);
+    	
+    	//TODO delete pTurn1, use toujours mythread1
+    	
+    	
+    	if(myThreadTurn1.getPlayer().checkRumourCardList()){
+           System.out.println("you don't have rumour cards, you have to accuse someone");
+           return true;
         }
-        //System.out.println(pTurn1.getName() + " accuse or hunt? [a/h]");
-        String choiceAH_Real = in.nextLine();
+
+    		
+    	String choiceAH_Real = "Accuse";
+    	/*
+    	for(int k = 0;k<3;k++) {			
+			System.out.println("AH "+SetUp.myThreadRoundList[k].getPlayer().getName()+
+					SetUp.myThreadRoundList[k].getIr1().getStrChoice());	
+		}*/
+    	//choiceAH_Real = myThreadTurn1.getIr1().getStrChoice();
+    	System.out.println("my choice is "+choiceAH_Real);
+
+    	if (choiceAH_Real.equals("Hunt")) {
+    	        return false;
+        }else{
+            	return true;
+        }
+    		
+    	
         
-        if (choiceAH_Real.equals("a")) {
+        //System.out.println(pTurn1.getName() + " accuse or hunt? [a/h]");
+        //String choiceAH_Real = in.nextLine();
+       
+        
+        /*if (choiceAH_Real.equals("Accuse")) {
             return true;
         } else {
             return false;
-        }
+        }*/
     }
 
     /**
@@ -265,7 +336,7 @@ public class Engine implements Preparation {
      */
     public static boolean ifGameContinue(List<Player> pAll) {
         for (Player p : pAll) {
-            if (p.getPoint() >= 2) {
+            if (p.getPoint() >= 3) {
                 return false;
             }
         }
@@ -426,13 +497,15 @@ public class Engine implements Preparation {
 	public void setPlayerList(List<Player> playerList) {
 		this.playerList = playerList;
 	}
+
+
+	public static CountDownLatch getLatchAH() {
+		return latchAH;
+	}
+
+
+	
     
-	/**
-	 * for the player to know who can be chosen
-	 * @param playerList
-	 * @param player
-	 * @return
-	 */
  
    
 

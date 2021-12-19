@@ -15,7 +15,7 @@ import simplifiedProjet.Engine;
 
 public class ControleurSetup1 {
 	
-	public static MyThread[] myThreadList;
+	public static MyThread[] myThreadListC;
 	
 	private static int numAllPlayer;
 	private static int numBot;
@@ -60,13 +60,9 @@ public class ControleurSetup1 {
 			//int[] idList = 
 			//each player has his own thread
 			createThread(numReal);
-			
-			
-			
-			
 			}
 		});
-		//thread li you yige player shuxing
+		
 	}
 	public void controleurSetup1Quit(JButton btnQuit) {
 		btnQuit.addActionListener(new ActionListener() {
@@ -78,16 +74,17 @@ public class ControleurSetup1 {
 	
 	public void createThread(int numreal) {
 		String[] str = {"p1","p2","p3","p4","p5","p6"};
-		myThreadList = new MyThread[numreal];
+		myThreadListC = new MyThread[numreal];
 		for(int i = 0; i<numreal;i++) {
-			myThreadList[i] = new MyThread(str[i]);// TODO 可以把setup里的player初始化也改了
-			myThreadList[i].start();
+			myThreadListC[i] = new MyThread(str[i]);// TODO 可以把setup里的player初始化也改了
+			myThreadListC[i].start();
 		}
 		
 	}
 	public class MyThread extends Thread{
 
 		private String pName;
+		private InterfaceSetup2 ist2;
 		public String getpName() {
 			return pName;
 		}
@@ -105,7 +102,7 @@ public class ControleurSetup1 {
 			this.identity = identity;
 		}
 
-		private InterfaceSetup2 ist2;
+		
 		public MyThread(String pName) {
 			this.pName = pName;
 		}
