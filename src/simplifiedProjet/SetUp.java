@@ -5,11 +5,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.TimeUnit;
+
 import controleur.ControleurSetup2;
 
 import controleur.ControleurSetup1;
 import simplifiedProjet.RumourCard.RumourCard;
 import vue.InterfaceRound1;
+import vue.InterfaceRound2;
 
 
 
@@ -18,26 +21,34 @@ public class SetUp implements Preparation{
 	public static class MyThreadRound extends Thread{
 		
 		private InterfaceRound1 ir1;
+		private InterfaceRound2 ir2;
 		private Player player;
 		private List<Player> playerList;
-		private boolean lock;//only when the lock is false can players do somethin
-		
+		private boolean lock = true;//only when the lock is false can players do something
+		private boolean accused = false;
+		private boolean onTurn = false;
+
+
 
 
 		public MyThreadRound(List<Player> playerList,Player player) {
 			this.playerList = playerList;
+			
 			this.setPlayer(player);
-			this.ir1 = new InterfaceRound1(player.getName(),playerList);
+			this.ir1 = new InterfaceRound1(this,player.getName(),playerList);
+			this.ir2 = new InterfaceRound2();
 			
 		}
 		
 		
 
-		public void run() {
-			//List<Player> newList = selectPlayerList(playerList,this.player);
-			//Did reach
-			this.ir1.createInterfaceRound1(player.getName(),playerList);
-			
+		public void run() {		
+			if(this.accused == true) {
+				this.ir2.createInterfaceRound2();
+			}else {
+				this.ir1.createInterfaceRound1(player.getName(),playerList);
+			}
+				
 		}
 
 		public boolean isLock() {
@@ -63,13 +74,23 @@ public class SetUp implements Preparation{
 		public InterfaceRound1 getIr1() {
 			return ir1;
 		}
+		public boolean isAccused() {
+			return accused;
+		}
+
+		public void setAccused(boolean accused) {
+			this.accused = accused;
+		}
+
+
 
 		
 	}
 
 	
 	private static int numReal;
-	public static MyThreadRound[] myThreadRoundList = new MyThreadRound[6];//TODO
+	public static MyThreadRound[] myThreadRoundList0 = new MyThreadRound[6];//TODO
+	public static MyThreadRound[] myThreadRoundList = new MyThreadRound[6];
     public static Player p1 = new Player("p1");
     public static Player p2 = new Player("p2");
     public static Player p3 = new Player("p3");
@@ -150,7 +171,7 @@ public class SetUp implements Preparation{
         }
         List<Player> playerList = new ArrayList<Player>();
 
-        if(discardedRumourCard.size()!=0){ //initialze the discard card list
+        if(discardedRumourCard.size()!=0){ //initialize the discard card list
             discardedRumourCard.clear();
         }
         Collections.shuffle(rumourCardShuffled);
@@ -183,8 +204,9 @@ public class SetUp implements Preparation{
         setUpPlayerIdentity(playerList);
         
         for(i = 0 ; i<numIrlPlayer ;i++){
-        	myThreadRoundList[i] = new MyThreadRound(playerList,playerList.get(i));
+        	myThreadRoundList0[i] = new MyThreadRound(playerList,playerList.get(i));
         }
+        myThreadRoundList = myThreadRoundList0;
         
         
         //so we will use threadlist (whose element is realplayer) instead of playerlist
@@ -244,6 +266,25 @@ public class SetUp implements Preparation{
 
 	public static void setNumReal(int numReal) {
 		SetUp.numReal = numReal;
+	}
+	public static Player threadToPlayer(MyThreadRound[] l, Player p) {
+		for(int i = 0; i < l.length;i++ ) {
+			if(l[i].getPlayer().getName().equals(p.getName())){
+				return p;				
+			}
+		}
+		System.out.println("error ctr1");
+		return null;
+		
+	}
+	public static MyThreadRound playerToThread(MyThreadRound[] l, String pName) {
+		for(int i = 0; i < l.length;i++ ) {
+			if(l[i].getPlayer().getName().equals(pName)){
+				return l[i];				
+			}
+		}
+		System.out.println("error ctr1");
+		return null;
 	}
 	
 	

@@ -7,6 +7,8 @@ import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
+import javax.swing.SwingUtilities;
+
 import controleur.ControleurSetup1;
 import simplifiedProjet.SetUp.MyThreadRound;
 import simplifiedProjet.RumourCard.RumourCard;
@@ -59,55 +61,71 @@ public class Engine implements Preparation {
           
             //TODO every thread stands for a real player
             
-            for(int i = 0 ; i<numReal ;i++){  
-            	SetUp.myThreadRoundList[i].setPriority(8);
-            	SetUp.myThreadRoundList[i].start();//for each real player launch it's thread  
-            	SetUp.myThreadRoundList[i].setLock(true);
-            }
+            
            
-         
+            
+            for(int i = 0 ; i<numReal ;i++){  
+            	SetUp.myThreadRoundList[i].start();//for each real player launch it's thread   
+            	//createInterfaceRound1(player.getName(),playerList);
+            }
+            
             
 
             TurnStart:while(ifTurnContinue(playerList)){
                                
                 pTurn1 = pNextTurn;
-                MyThreadRound myThreadTurn1 = null;
                 
-                for(int i = 0; i<numReal;i++) {
-            		if(SetUp.myThreadRoundList[i].getPlayer().getName().equals(pTurn1.getName())) {
-            			 myThreadTurn1 = SetUp.myThreadRoundList[i];//find myThread1 == pturn1
-            		}//Need to update every round
-            		
-                }
-                
+                pTurn1.setOnTurn(true);
+  
+                MyThreadRound myThreadTurn1 = SetUp.playerToThread(SetUp.myThreadRoundList, pTurn1.getName());
                 System.out.println("--------------------------------"+myThreadTurn1.getPlayer().getName()+"'s round -----------------------");
-
-                /*try {
-					latchAH.await();
-				} catch (InterruptedException e) {
-					System.out.println("12error");
-					e.printStackTrace();
-				}*/
                 
-                while(myThreadTurn1.isLock()) {
-                	//System.out.println(myThreadTurn1.getPlayer().getName()+" "+myThreadTurn1.isLock());
-                	try {
-						TimeUnit.SECONDS.sleep(1);
-					} catch (InterruptedException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-                }
-                if( ((pTurn1.isVirtual() == 1) && doChoiceAh_Bot(pTurn1))  || ((pTurn1.isVirtual() == 0) && doChoiceAH_Real(pTurn1,myThreadTurn1) )){
+
+                //myThreadTurn1.getIr1().getLblYourTurn().setText("12313");               
+                myThreadTurn1.getIr1().getFrame().invalidate();
+               
+                
+                 //myThreadTurn1.getIr1().getFrame().repaint();
+                 // myThreadTurn1.getIr1().setI1("1231");
+                 
+                 
+                //myThreadTurn1.getIr1().getFrame().revalidate();
+              // System.out.println(myThreadTurn1.getIr1().getI1());
+                myThreadTurn1.getIr1().getLblYourTurn().setText("3333");
+                System.out.println(myThreadTurn1.getPlayer().getName()+" "+myThreadTurn1.getIr1().getLblYourTurn().getText());
+                //myThreadTurn1.getIr1().getFrame().update(myThreadTurn1.getIr1().getFrame().getGraphics());
+                //myThreadTurn1.getIr1().getFrame().paintComponents( myThreadTurn1.getIr1().getFrame().getGraphics());
+                //SwingUtilities.updateComponentTreeUI(myThreadTurn1.getIr1().getFrame());
+                
+                
+                waitChoice(myThreadTurn1);
+                
+                if( ((pTurn1.isVirtual() == 1) && doChoiceAh_Bot(pTurn1))  || ((pTurn1.isVirtual() == 0) && doChoiceAH_Real(myThreadTurn1) )){
                     //accuse
                     pTurn2 = pTurn1.accuse(playerList,myThreadTurn1);
+                    
                     if(pTurn2.equals(pTurn1)){
                         continue;
                     }
-                  
+                    MyThreadRound myThreadTurn2 = SetUp.playerToThread(SetUp.myThreadRoundList, pTurn2.getName());
+                    //waitChoice(myThreadTurn2);
+                    myThreadTurn2.getIr1().getFrame().setVisible(false);
+                    myThreadTurn2.getIr1().getFrame().repaint();
+                    myThreadTurn2.getIr1().getLblYourTurn().setText("3333");
+                    myThreadTurn2.getIr1().setI1("1231");
+                    System.out.println("i1="+myThreadTurn2.getIr1().getI1());
+                    System.out.println(myThreadTurn2.getPlayer().getName()+" "+myThreadTurn2.getIr1().getLblYourTurn().getText());
+                    //System.out.println(myThreadTurn2.getPlayer().getName()+" ");
+                    /**
+                     * 
+                     * WHY IT'S FUCKING NOT FUCKING UPDATING???????
+                     * 
+                     */
+                    
                     if(((pTurn2.isVirtual() == 1) && doChoiceWI_Bot(pTurn2))  || ((pTurn2.isVirtual() == 0) && doChoiceWI_Real(pTurn2))){
-                     
+                    
                         pNextTurn = pTurn2.witch(pTurn1,playerList); 
+                        
                         if(pNextTurn.equals(pTurn2)){
                             pNextTurn = pTurn1;
                             continue TurnStart;
@@ -132,11 +150,11 @@ public class Engine implements Preparation {
                         }
                     }
                 }else{
-                    pTurn2 = pTurn1.hunt(playerList);
-                    //pTurn1.showCards();
+                    pTurn2 = pTurn1.hunt(playerList,myThreadTurn1);
+                    MyThreadRound myThreadTurn2 = SetUp.playerToThread(SetUp.myThreadRoundList, pTurn2.getName());
                     pNextTurn = pTurn2;
-
                 }
+             
 
                 
                 //System.out.println("there are still "+i+" players that didn't reveal their identity ");
@@ -144,6 +162,7 @@ public class Engine implements Preparation {
                     showStatusOfTurn(playerList);
                     playerListInit = playerList;
                 }
+                
                 
             }
 
@@ -253,25 +272,15 @@ public class Engine implements Preparation {
     * @return  
     *     true = accuse , false = hunt
     */
-    public static boolean doChoiceAH_Real(Player pTurn1, MyThreadRound myThreadTurn1) {
-       // Scanner in = new Scanner(System.in);
-    	
-    	//TODO delete pTurn1, use toujours mythread1
-    	
-    	
+    public static boolean doChoiceAH_Real(MyThreadRound myThreadTurn1) {
+       // Scanner in = new Scanner(System.in);	
     	if(myThreadTurn1.getPlayer().checkRumourCardList()){
            System.out.println("you don't have rumour cards, you have to accuse someone");
            return true;
         }
-
-    		
-    	String choiceAH_Real = "Accuse";
-    	/*
-    	for(int k = 0;k<3;k++) {			
-			System.out.println("AH "+SetUp.myThreadRoundList[k].getPlayer().getName()+
-					SetUp.myThreadRoundList[k].getIr1().getStrChoice());	
-		}*/
-    	//choiceAH_Real = myThreadTurn1.getIr1().getStrChoice();
+   		
+    	String choiceAH_Real = "Accuse";// par defaut
+    	choiceAH_Real = myThreadTurn1.getIr1().getStrChoice();
     	System.out.println("my choice is "+choiceAH_Real);
 
     	if (choiceAH_Real.equals("Hunt")) {
@@ -481,6 +490,27 @@ public class Engine implements Preparation {
             return false;
         }
     }
+    public void waitChoice(MyThreadRound myThreadTurn) {
+    	while(myThreadTurn.isLock()) {
+        	//we should wait pTurn1 had done all the operation
+        	try {
+				TimeUnit.SECONDS.sleep(1);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+        }
+    }
+    public static void wait1s() {
+    	while(true) {
+
+        	try {
+				TimeUnit.SECONDS.sleep(1);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+        }
+    }
+    
 
     private Engine(){
 
