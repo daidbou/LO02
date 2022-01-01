@@ -24,7 +24,6 @@ public class Player implements Preparation{
 	protected boolean isWart = false;
 	protected boolean isEvilEye=false;
 	protected boolean isWinnerLastTurn=false;
-<<<<<<< HEAD
 	private boolean onTurn = false;
 	private boolean isAccused = false;
 	private InterfaceRound1 ir1;
@@ -33,8 +32,6 @@ public class Player implements Preparation{
 
 
 
-=======
->>>>>>> parent of 7b9fc52 (meet trouble)
 	Scanner in = new Scanner(System.in);
 
 	public Player(){
@@ -95,49 +92,63 @@ public class Player implements Preparation{
 	 * @param playerList list of player
 	 * @return pNextTurn, the next player for the round
 	 */
-	public Player hunt(List<Player> playerList) {
+	public Player hunt(List<Player> playerList,MyThreadRound myThreadTurn1) {
 		
 		showCards();
+		/*
 		System.out.println(" enter 0 for the first card, -1 to return");
 		int cardNum = in.nextInt();
 		if(cardNum == -1){
 			return this;
-		}
+		}*/
 		Player pNextTurn;
-		
-		
-		while(true){
-
-			if(getPlayerRumourCardList().get(cardNum).name().equals("Pointed Hat") && playerRevealedCardList.size()>0){
-				pNextTurn = getPlayerRumourCardList().get(cardNum).skillHunt(name,playerList);
+		String cardName = myThreadTurn1.getIr1().getRumourCardName();
+		//System.out.println(cardName+"3");
+		RumourCard rumourCardChosen = null;
+		for(RumourCard r :getPlayerRumourCardList()) {
+			if(r.name().equals(cardName)) {
+				rumourCardChosen = r;
 				break;
 			}
-			else if(getPlayerRumourCardList().get(cardNum).name().equals("Pointed Hat") && playerRevealedCardList.size()==0){
+		}
+		pNextTurn = rumourCardChosen.skillHunt(name,playerList);
+		/*//TODO easier put it into thread
+		while(true){
+			if(cardName.equals("Pointed Hat") && playerRevealedCardList.size()>0){
+				pNextTurn = rumourCardChosen.skillHunt(name,playerList);
+				break;
+			}
+			else if(cardName.equals("Pointed Hat") && playerRevealedCardList.size()==0){
 				System.out.println("Sorry you don't have any revealed Rumour Card, you can't play Pointed Hat");
-				showCards();
+				/*showCards();
 				System.out.println(" enter 0 for the first card");
 				cardNum = in.nextInt();
 			}
 			else{
 
-				if(!(getPlayerRumourCardList().get(cardNum).name().equals("The Inquisition") || getPlayerRumourCardList().get(cardNum).name().equals("Angry Mob"))){
-					pNextTurn = getPlayerRumourCardList().get(cardNum).skillHunt(name,playerList);
+				if(!(cardName.equals("The Inquisition") || cardName.equals("Angry Mob"))){
+					pNextTurn = rumourCardChosen.skillHunt(name,playerList);
 					break;
 				}
 				else{
 					if(this.identity==0 && this.identityReavealed){
-						pNextTurn = getPlayerRumourCardList().get(cardNum).skillHunt(name,playerList);
+						pNextTurn = rumourCardChosen.skillHunt(name,playerList);
 						break;
 					}
 					else{
-						System.out.println(getPlayerRumourCardList().get(cardNum).name()+" is only playable if you have been revealed as a Villager ");
-						showCards();
-						System.out.print("select a card other than "+getPlayerRumourCardList().get(cardNum).name());
+						System.out.println(rumourCardChosen.name()+" is only playable if you have been revealed as a Villager ");
+						/*showCards();
+						
 						cardNum = in.nextInt();
+						System.out.print("select a card other than "+cardName);
+						cardName = myThreadTurn1.getIr1().getRumourCardName();//TODO 无限循环 要在ir1里就设置
+						//通过判定thread里的player的身份 在thread里的ir1直接显示那些卡不能用
+						
 					}
 				}
 			}
-		}
+		}*/
+
 		
 		return pNextTurn;	
 	}
@@ -526,4 +537,20 @@ public class Player implements Preparation{
 	public void setPlayerRumourCardList(CopyOnWriteArrayList<RumourCard> playerRumourCardList) {
 		this.playerRumourCardList = playerRumourCardList;
 	}
+	public boolean isAccused() {
+		return isAccused;
+	}
+
+	public void setAccused(boolean isAccused) {
+		this.isAccused = isAccused;
+	}
+
+	public boolean isOnTurn() {
+		return onTurn;
+	}
+
+	public void setOnTurn(boolean onTurn) {
+		this.onTurn = onTurn;
+	}
+
 }
