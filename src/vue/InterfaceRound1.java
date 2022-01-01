@@ -15,7 +15,6 @@ import javax.swing.SwingConstants;
 import controleur.ControleurRound1;
 import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
-import simplifiedProjet.SetUp.MyThreadRound;
 import simplifiedProjet.RumourCard.RumourCard;
 
 import java.awt.event.ActionListener;
@@ -23,12 +22,11 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 public class InterfaceRound1 {
 
 	private JFrame frame;
+<<<<<<< HEAD
 
 
 	private String i1;
@@ -40,6 +38,9 @@ public class InterfaceRound1 {
 
 	private String rumourCardName;
 	private JLabel lblYourTurn;
+=======
+	private String pName;
+>>>>>>> parent of 7b9fc52 (meet trouble)
 	private JLabel lblPlayerName;
 	private JLabel lblWhichPlayer;
 	private JToggleButton tglbtnAOrH;
@@ -50,22 +51,31 @@ public class InterfaceRound1 {
 	private JPanel panelCard;
 	private JComboBox<String> cbxCardList;
 	private JLabel lblYourCards;
+<<<<<<< HEAD
 	private JPanel panelTurn;
 	private JLabel lblNewLabel;
 	private MyThreadRound mt;
 	private boolean onTurn;
 	private List<Player> playerList;
+=======
+>>>>>>> parent of 7b9fc52 (meet trouble)
 	/**
 	 * Launch the application.
 	 */
 	public void createInterfaceRound1(String pName,List<Player> playerList) {
 		this.pName = pName;
+<<<<<<< HEAD
 		this.playerList = playerList;
+=======
+>>>>>>> parent of 7b9fc52 (meet trouble)
 		EventQueue.invokeLater(new Runnable() {		
 			public void run() {
 				try {
 					InterfaceRound1 window = new InterfaceRound1(pName,playerList);
+<<<<<<< HEAD
 					
+=======
+>>>>>>> parent of 7b9fc52 (meet trouble)
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -97,6 +107,7 @@ public class InterfaceRound1 {
 	 */
 	public InterfaceRound1(String pName,List<Player> playerList) {
 	
+<<<<<<< HEAD
 		//this.mt = mt;
 		//this.onTurn = mt.getPlayer().isOnTurn();
 		//System.out.println(this.onTurn);
@@ -110,6 +121,17 @@ public class InterfaceRound1 {
 		c.controleurRound1Turn(frame,mt,panelTurn);
 
 
+=======
+		initialize(pName,playerList);
+		ControleurRound1 c = new ControleurRound1(pName);
+		c.controleurRound1AorH(tglbtnAOrH,panelCard);	
+		c.controleurRound1Confirm(btnConfirm,cbxPlayerList);
+		c.controleurRound1PlayerList(cbxPlayerList);
+		
+		
+		
+		
+>>>>>>> parent of 7b9fc52 (meet trouble)
 	}
 
 
@@ -124,6 +146,7 @@ public class InterfaceRound1 {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
+<<<<<<< HEAD
 		
 		
 		panelTurn = new JPanel();
@@ -148,13 +171,15 @@ public class InterfaceRound1 {
 		lblYourTurn.setFont(new Font("Bradley Hand ITC", Font.PLAIN, 30));
 		panelTurn.add(lblYourTurn);
 		
+=======
+>>>>>>> parent of 7b9fc52 (meet trouble)
 		panelCard = new JPanel();
-		panelCard.setBounds(445, 142, 229, 295);
+		panelCard.setBounds(445, 136, 229, 295);
 		frame.getContentPane().add(panelCard);
 		panelCard.setLayout(null);
 		
-		cbxCardList = new JComboBox();		
-		cbxCardList.setBounds(23, 146, 121, 37);
+		cbxCardList = new JComboBox();
+		cbxCardList.setBounds(37, 120, 121, 37);
 		Player p2 = Engine.nameToPlayer(playerList, pName);
 		int k = 0;String[] strCardList = new String[p2.getPlayerRumourCardList().size()];
 		for(RumourCard r:p2.getPlayerRumourCardList()) {
@@ -173,7 +198,7 @@ public class InterfaceRound1 {
 		lblPlayerName = new JLabel(pName);	
 		lblPlayerName.setText(pName);
 		lblPlayerName.setFont(new Font("Brush Script MT", Font.PLAIN, 33));
-		lblPlayerName.setBounds(110, 133, 128, 39);
+		lblPlayerName.setBounds(126, 91, 128, 39);
 		frame.getContentPane().add(lblPlayerName, BorderLayout.WEST);
 		
 		tglbtnAOrH = new JToggleButton("accuse or hunt?");		
@@ -191,16 +216,17 @@ public class InterfaceRound1 {
 		getCbxPlayerList().setFont(new Font("Bradley Hand ITC", Font.PLAIN, 29));
 		String[] strPlayerList = new String[playerList.size()];int i = 0;
 		for(Player p: playerList) {
+			
+			/*if(p.getName() == name) {
+				i++;
+			}else if(p.ifIsOutOfTurn()) {
+				i++;
+			}*/
 			strPlayerList[i++] = p.getName();
 		}
 		getCbxPlayerList().setModel(new DefaultComboBoxModel<String>(strPlayerList));
 		getCbxPlayerList().setBounds(279, 324, 121, 51);//传一个数组回来
 		frame.getContentPane().add(getCbxPlayerList());
-		
-		lblNewLabel = new JLabel("click on it!!");
-		lblNewLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 24));
-		lblNewLabel.setBounds(23, 99, 141, 37);
-		panelCard.add(lblNewLabel);
 		
 		btnConfirm = new JButton("Confirm");
 		btnConfirm.setFont(new Font("Chiller", Font.PLAIN, 48));
@@ -208,24 +234,7 @@ public class InterfaceRound1 {
 		btnConfirm.setBounds(110, 443, 156, 66);
 		frame.getContentPane().add(btnConfirm);
 		
-		JButton btnNewButton = new JButton("update");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//lblYourTurn.setText("fuck you");
-				System.out.println("in ir1 i1 = "+i1);
-				lblYourTurn.setText(i1);
-				System.out.println(lblYourTurn.getText());
-				frame.revalidate();
-				frame.repaint();
-				frame.revalidate();
-			}
-		});
-		btnNewButton.setBounds(336, 495, 175, 66);
-		frame.getContentPane().add(btnNewButton);
-		this.rumourCardName = cbxPlayerList.getItemAt(0);//in case the player didnt choose
-		//but seems not working
 	}
-	//public void re
 
 	public String getStrChoice() {
 		return strChoice;
@@ -258,6 +267,7 @@ public class InterfaceRound1 {
 	public void setStrChoice(String strChoice) {
 		this.strChoice = strChoice;
 	}
+<<<<<<< HEAD
 
 	public JPanel getPanelTurn() {
 		return panelTurn;
@@ -290,4 +300,6 @@ public class InterfaceRound1 {
 	}
 
 	
+=======
+>>>>>>> parent of 7b9fc52 (meet trouble)
 }

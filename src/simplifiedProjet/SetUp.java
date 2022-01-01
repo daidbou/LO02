@@ -5,14 +5,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.TimeUnit;
-
 import controleur.ControleurSetup2;
 
 import controleur.ControleurSetup1;
 import simplifiedProjet.RumourCard.RumourCard;
 import vue.InterfaceRound1;
-import vue.InterfaceRound2;
 
 
 
@@ -20,6 +17,7 @@ public class SetUp implements Preparation{
 	
 	public static class MyThreadRound extends Thread{
 		
+<<<<<<< HEAD
 		private InterfaceRound2 ir2;
 		private int numreal;
 		private List<Player> playerList;
@@ -36,9 +34,24 @@ public class SetUp implements Preparation{
 			/*for(int i = 0; i < numreal; i++) {
 				this.ir1[i] = new InterfaceRound1(this,playerList.get(i).getName(),playerList);
 			}	*/		
+=======
+		private InterfaceRound1 ir1;
+		private Player player;
+		private List<Player> playerList;
+		private boolean lock;//only when the lock is false can players do somethin
+		
+
+
+		public MyThreadRound(List<Player> playerList,Player player) {
+			this.playerList = playerList;
+			this.setPlayer(player);
+			this.ir1 = new InterfaceRound1(player.getName(),playerList);
+			
+>>>>>>> parent of 7b9fc52 (meet trouble)
 		}
 		
 
+<<<<<<< HEAD
 		public void run() {		
 
 			for(int i = 0; i < numreal; i++) { 
@@ -47,6 +60,13 @@ public class SetUp implements Preparation{
 				playerList.get(i).getIr1().createInterfaceRound1(playerList.get(i).getName(),playerList);
 			}
 				
+=======
+		public void run() {
+			//List<Player> newList = selectPlayerList(playerList,this.player);
+			//Did reach
+			this.ir1.createInterfaceRound1(player.getName(),playerList);
+			
+>>>>>>> parent of 7b9fc52 (meet trouble)
 		}
 
 		public boolean isLock() {
@@ -62,6 +82,7 @@ public class SetUp implements Preparation{
 		}
 
 
+<<<<<<< HEAD
 		public boolean isAccused() {
 			return accused;
 		}
@@ -69,6 +90,21 @@ public class SetUp implements Preparation{
 		public void setAccused(boolean accused) {
 			this.accused = accused;
 		}
+=======
+		public Player getPlayer() {
+			return player;
+		}
+
+
+		public void setPlayer(Player player) {
+			this.player = player;
+		}
+
+		public InterfaceRound1 getIr1() {
+			return ir1;
+		}
+
+>>>>>>> parent of 7b9fc52 (meet trouble)
 		
 	}
 
@@ -84,8 +120,7 @@ public class SetUp implements Preparation{
 	}
 	
 	private static int numReal;
-	public static MyThreadRound[] myThreadRoundList0 = new MyThreadRound[6];//TODO
-	public static MyThreadRound[] myThreadRoundList = new MyThreadRound[6];
+	public static MyThreadRound[] myThreadRoundList = new MyThreadRound[6];//TODO
     public static Player p1 = new Player("p1");
     public static Player p2 = new Player("p2");
     public static Player p3 = new Player("p3");
@@ -166,7 +201,7 @@ public class SetUp implements Preparation{
         }
         List<Player> playerList = new ArrayList<Player>();
 
-        if(discardedRumourCard.size()!=0){ //initialize the discard card list
+        if(discardedRumourCard.size()!=0){ //initialze the discard card list
             discardedRumourCard.clear();
         }
         Collections.shuffle(rumourCardShuffled);
@@ -198,10 +233,16 @@ public class SetUp implements Preparation{
         }
         setUpPlayerIdentity(playerList);
         
+<<<<<<< HEAD
         /*for(i = 0 ; i<numIrlPlayer ;i++){
         	myThreadRoundList0[i] = new MyThreadRound(playerList,playerList.get(i));
         }
         myThreadRoundList = myThreadRoundList0;*/
+=======
+        for(i = 0 ; i<numIrlPlayer ;i++){
+        	myThreadRoundList[i] = new MyThreadRound(playerList,playerList.get(i));
+        }
+>>>>>>> parent of 7b9fc52 (meet trouble)
         
         
         //so we will use threadlist (whose element is realplayer) instead of playerlist
@@ -262,6 +303,7 @@ public class SetUp implements Preparation{
 	public static void setNumReal(int numReal) {
 		SetUp.numReal = numReal;
 	}
+<<<<<<< HEAD
 	public static Player threadToPlayer(MyThreadRound[] l, Player p) {
 		for(int i = 0; i < l.length;i++ ) {
 			if(l[i].getPlayer().getName().equals(p.getName())){
@@ -281,6 +323,8 @@ public class SetUp implements Preparation{
 		System.out.println("error ctr1");
 		return null;
 	}
+=======
+>>>>>>> parent of 7b9fc52 (meet trouble)
 	
 	
 	

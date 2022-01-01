@@ -21,6 +21,12 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+<<<<<<< HEAD
 /vue/
 /controleur/
 /simplifiedProjet/
+=======
+/simplifiedProjet/
+/controleur/
+/vue/
+>>>>>>> parent of 7b9fc52 (meet trouble)

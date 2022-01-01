@@ -7,8 +7,6 @@ import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import javax.swing.SwingUtilities;
-
 import controleur.ControleurSetup1;
 import simplifiedProjet.SetUp.MyThreadRound;
 import simplifiedProjet.RumourCard.RumourCard;
@@ -59,6 +57,7 @@ public class Engine implements Preparation {
           
             //TODO every thread stands for a real player
             
+<<<<<<< HEAD
             
            
             
@@ -77,19 +76,40 @@ public class Engine implements Preparation {
 			System.out.println("wwwww");
            
             
+=======
+            for(int i = 0 ; i<numReal ;i++){  
+            	SetUp.myThreadRoundList[i].setPriority(8);
+            	SetUp.myThreadRoundList[i].start();//for each real player launch it's thread  
+            	SetUp.myThreadRoundList[i].setLock(true);
+            }
+           
+         
+>>>>>>> parent of 7b9fc52 (meet trouble)
             
 
             TurnStart:while(ifTurnContinue(playerList)){
                                
                 pTurn1 = pNextTurn;
+                MyThreadRound myThreadTurn1 = null;
                 
+<<<<<<< HEAD
                 pTurn1.setOnTurn(true);
   
                 //MyThreadRound myThreadTurn1 = SetUp.playerToThread(myThreadRound,pTurn1.getName());
                 //MyThreadRound myThreadTurn1 = 
                 System.out.println("--------------------------------"+pTurn1.getName()+"'s round -----------------------");
+=======
+                for(int i = 0; i<numReal;i++) {
+            		if(SetUp.myThreadRoundList[i].getPlayer().getName().equals(pTurn1.getName())) {
+            			 myThreadTurn1 = SetUp.myThreadRoundList[i];//find myThread1 == pturn1
+            		}//Need to update every round
+            		
+                }
+>>>>>>> parent of 7b9fc52 (meet trouble)
                 
+                System.out.println("--------------------------------"+myThreadTurn1.getPlayer().getName()+"'s round -----------------------");
 
+<<<<<<< HEAD
                 //myThreadTurn1.getIr1().getLblYourTurn().setText("12313");               
                 //myThreadTurn1.getIr1().getFrame().invalidate();
                
@@ -131,10 +151,34 @@ public class Engine implements Preparation {
                      * 
                      */
                     
+=======
+                /*try {
+					latchAH.await();
+				} catch (InterruptedException e) {
+					System.out.println("12error");
+					e.printStackTrace();
+				}*/
+                
+                while(myThreadTurn1.isLock()) {
+                	//System.out.println(myThreadTurn1.getPlayer().getName()+" "+myThreadTurn1.isLock());
+                	try {
+						TimeUnit.SECONDS.sleep(1);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+                }
+                if( ((pTurn1.isVirtual() == 1) && doChoiceAh_Bot(pTurn1))  || ((pTurn1.isVirtual() == 0) && doChoiceAH_Real(pTurn1,myThreadTurn1) )){
+                    //accuse
+                    pTurn2 = pTurn1.accuse(playerList,myThreadTurn1);
+                    if(pTurn2.equals(pTurn1)){
+                        continue;
+                    }
+                  
+>>>>>>> parent of 7b9fc52 (meet trouble)
                     if(((pTurn2.isVirtual() == 1) && doChoiceWI_Bot(pTurn2))  || ((pTurn2.isVirtual() == 0) && doChoiceWI_Real(pTurn2))){
-                    
+                     
                         pNextTurn = pTurn2.witch(pTurn1,playerList); 
-                        
                         if(pNextTurn.equals(pTurn2)){
                             pNextTurn = pTurn1;
                             continue TurnStart;
@@ -159,11 +203,16 @@ public class Engine implements Preparation {
                         }
                     }
                 }else{
+<<<<<<< HEAD
                     pTurn2 = pTurn1.hunt(playerList,myThreadRound);
                     //MyThreadRound myThreadTurn2 = SetUp.playerToThread(SetUp.myThreadRoundList, pTurn2.getName());
+=======
+                    pTurn2 = pTurn1.hunt(playerList);
+                    //pTurn1.showCards();
+>>>>>>> parent of 7b9fc52 (meet trouble)
                     pNextTurn = pTurn2;
+
                 }
-             
 
                 
                 //System.out.println("there are still "+i+" players that didn't reveal their identity ");
@@ -171,7 +220,6 @@ public class Engine implements Preparation {
                     showStatusOfTurn(playerList);
                     playerListInit = playerList;
                 }
-                
                 
             }
 
@@ -282,6 +330,7 @@ public class Engine implements Preparation {
     * @return  
     *     true = accuse , false = hunt
     */
+<<<<<<< HEAD
     public static boolean doChoiceAH_Real(MyThreadRound myThreadRound, Player pTurn1) {
        // Scanner in = new Scanner(System.in);	
     	if(pTurn1.checkRumourCardList()){
@@ -291,6 +340,27 @@ public class Engine implements Preparation {
    		
     	String choiceAH_Real = "Accuse";// par defaut
     	choiceAH_Real = pTurn1.getIr1().getStrChoice();
+=======
+    public static boolean doChoiceAH_Real(Player pTurn1, MyThreadRound myThreadTurn1) {
+       // Scanner in = new Scanner(System.in);
+    	
+    	//TODO delete pTurn1, use toujours mythread1
+    	
+    	
+    	if(myThreadTurn1.getPlayer().checkRumourCardList()){
+           System.out.println("you don't have rumour cards, you have to accuse someone");
+           return true;
+        }
+
+    		
+    	String choiceAH_Real = "Accuse";
+    	/*
+    	for(int k = 0;k<3;k++) {			
+			System.out.println("AH "+SetUp.myThreadRoundList[k].getPlayer().getName()+
+					SetUp.myThreadRoundList[k].getIr1().getStrChoice());	
+		}*/
+    	//choiceAH_Real = myThreadTurn1.getIr1().getStrChoice();
+>>>>>>> parent of 7b9fc52 (meet trouble)
     	System.out.println("my choice is "+choiceAH_Real);
 
     	if (choiceAH_Real.equals("Hunt")) {
@@ -500,6 +570,7 @@ public class Engine implements Preparation {
             return false;
         }
     }
+<<<<<<< HEAD
     public void waitChoice(Player pTurn1) {
     	while(pTurn1.isLock()) {
         	//we should wait pTurn1 had done all the operation
@@ -521,6 +592,8 @@ public class Engine implements Preparation {
         }
     }
     
+=======
+>>>>>>> parent of 7b9fc52 (meet trouble)
 
     private Engine(){
 
