@@ -32,9 +32,12 @@ public class InterfaceRound1 {
 
 
 	private String i1;
-	
 
 	private String pName;
+	public String getpName() {
+		return pName;
+	}
+
 	private String rumourCardName;
 	private JLabel lblYourTurn;
 	private JLabel lblPlayerName;
@@ -51,16 +54,17 @@ public class InterfaceRound1 {
 	private JLabel lblNewLabel;
 	private MyThreadRound mt;
 	private boolean onTurn;
+	private List<Player> playerList;
 	/**
 	 * Launch the application.
 	 */
 	public void createInterfaceRound1(String pName,List<Player> playerList) {
 		this.pName = pName;
-
+		this.playerList = playerList;
 		EventQueue.invokeLater(new Runnable() {		
 			public void run() {
 				try {
-					InterfaceRound1 window = new InterfaceRound1(mt,pName,playerList);
+					InterfaceRound1 window = new InterfaceRound1(pName,playerList);
 					
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -72,33 +76,42 @@ public class InterfaceRound1 {
 		
 		
 	}
+	public void createInterfaceRound1() {
+		EventQueue.invokeLater(new Runnable() {		
+			public void run() {
+				try {
+					InterfaceRound1 window = new InterfaceRound1(pName,playerList);
+					
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				
+			}
+		});
+		
+	}
 
 	/**
 	 * Create the application.
 	 */
-	public InterfaceRound1(MyThreadRound mt,String pName,List<Player> playerList) {
+	public InterfaceRound1(String pName,List<Player> playerList) {
 	
-		this.mt = mt;
-		this.onTurn = mt.getPlayer().isOnTurn();
+		//this.mt = mt;
+		//this.onTurn = mt.getPlayer().isOnTurn();
 		//System.out.println(this.onTurn);
 		initialize(pName,playerList);
-		if(this.onTurn == true) {
-			ControleurRound1 c = new ControleurRound1(pName);
-			c.controleurRound1AorH(tglbtnAOrH,panelCard);	
-			c.controleurRound1Confirm(frame,btnConfirm,cbxPlayerList);
-			c.controleurRound1PlayerList(cbxPlayerList);
-			c.controleurRound1CbxcardList(cbxCardList);
-			c.controleurRound1Turn(frame,mt,panelTurn);
-		}else {
-			//TODO new c but different way
-			// 让它变成灰色的，不能按的
-		}
 
-		
-		
-	
+		ControleurRound1 c = new ControleurRound1(pName,playerList);
+		c.controleurRound1AorH(tglbtnAOrH,panelCard);	
+		c.controleurRound1Confirm(frame,btnConfirm,cbxPlayerList);
+		c.controleurRound1PlayerList(cbxPlayerList);
+		c.controleurRound1CbxcardList(cbxCardList);
+		c.controleurRound1Turn(frame,mt,panelTurn);
+
 
 	}
+
 
 	/**
 	 * Initialize the contents of the frame.
@@ -119,11 +132,11 @@ public class InterfaceRound1 {
 		panelTurn.setBounds(84, 52, 567, 66);
 		frame.getContentPane().add(panelTurn);
 		
-		if(this.mt.getPlayer().isOnTurn()) {
+		/*if(this.mt.getPlayer().isOnTurn()) {
 			i1 = "it's your turn!";
 		}else {
 			i1 = "it's not your turn, you cannot do anything";
-		}
+		}*/
 		lblYourTurn = new JLabel(i1);
 		lblYourTurn.addComponentListener(new ComponentAdapter() {
 			@Override
@@ -275,4 +288,6 @@ public class InterfaceRound1 {
 	public void setLblYourTurn(JLabel lblYourTurn) {
 		this.lblYourTurn = lblYourTurn;
 	}
+
+	
 }
