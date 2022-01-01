@@ -18,23 +18,18 @@ public class SetUp implements Preparation{
 	public static class MyThreadRound extends Thread{
 		
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
-		private InterfaceRound1 ir1;
->>>>>>> parent of 87d1d7f (new)
 		private InterfaceRound2 ir2;
-		private Player player;
+		private int numreal;
 		private List<Player> playerList;
+		
+
 		private boolean lock = true;//only when the lock is false can players do something
 		private boolean accused = false;
 		private boolean onTurn = false;
 
 
-
-
-		public MyThreadRound(List<Player> playerList,Player player) {
+		public MyThreadRound(int numreal, List<Player> playerList) {
 			this.playerList = playerList;
-<<<<<<< HEAD
 			this.numreal = numreal;
 			/*for(int i = 0; i < numreal; i++) {
 				this.ir1[i] = new InterfaceRound1(this,playerList.get(i).getName(),playerList);
@@ -53,23 +48,16 @@ public class SetUp implements Preparation{
 			this.ir1 = new InterfaceRound1(player.getName(),playerList);
 			
 >>>>>>> parent of 7b9fc52 (meet trouble)
-=======
-			
-			this.setPlayer(player);
-			this.ir1 = new InterfaceRound1(this,player.getName(),playerList);
-			this.ir2 = new InterfaceRound2();
-			
->>>>>>> parent of 87d1d7f (new)
 		}
-		
 		
 
 <<<<<<< HEAD
 		public void run() {		
-			if(this.accused == true) {
-				this.ir2.createInterfaceRound2();
-			}else {
-				this.ir1.createInterfaceRound1(player.getName(),playerList);
+
+			for(int i = 0; i < numreal; i++) { 
+				InterfaceRound1 ir1 = new InterfaceRound1(playerList.get(i).getName(),playerList);
+				playerList.get(i).setIr1(ir1);
+				playerList.get(i).getIr1().createInterfaceRound1(playerList.get(i).getName(),playerList);
 			}
 				
 =======
@@ -84,7 +72,9 @@ public class SetUp implements Preparation{
 		public boolean isLock() {
 			return lock;
 		}
-
+		public List<Player> getPlayerList() {
+			return playerList;
+		}
 
 
 		public void setLock(boolean lock) {
@@ -93,21 +83,6 @@ public class SetUp implements Preparation{
 
 
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
-		public Player getPlayer() {
-			return player;
-		}
-
-
-		public void setPlayer(Player player) {
-			this.player = player;
-		}
-
-		public InterfaceRound1 getIr1() {
-			return ir1;
-		}
->>>>>>> parent of 87d1d7f (new)
 		public boolean isAccused() {
 			return accused;
 		}
@@ -115,7 +90,6 @@ public class SetUp implements Preparation{
 		public void setAccused(boolean accused) {
 			this.accused = accused;
 		}
-<<<<<<< HEAD
 =======
 		public Player getPlayer() {
 			return player;
@@ -131,14 +105,19 @@ public class SetUp implements Preparation{
 		}
 
 >>>>>>> parent of 7b9fc52 (meet trouble)
-=======
-
-
-
->>>>>>> parent of 87d1d7f (new)
 		
 	}
 
+	public static class MyThreadRound2 extends Thread{
+		private InterfaceRound1 ir1;
+		private InterfaceRound2 ir2;
+		public void run() {
+			for(int i = 0;i<3;i++) {
+				//this.ir1.createInterfaceRound1();
+			}
+			
+		}
+	}
 	
 	private static int numReal;
 	public static MyThreadRound[] myThreadRoundList = new MyThreadRound[6];//TODO
@@ -255,7 +234,6 @@ public class SetUp implements Preparation{
         setUpPlayerIdentity(playerList);
         
 <<<<<<< HEAD
-<<<<<<< HEAD
         /*for(i = 0 ; i<numIrlPlayer ;i++){
         	myThreadRoundList0[i] = new MyThreadRound(playerList,playerList.get(i));
         }
@@ -265,12 +243,6 @@ public class SetUp implements Preparation{
         	myThreadRoundList[i] = new MyThreadRound(playerList,playerList.get(i));
         }
 >>>>>>> parent of 7b9fc52 (meet trouble)
-=======
-        for(i = 0 ; i<numIrlPlayer ;i++){
-        	myThreadRoundList0[i] = new MyThreadRound(playerList,playerList.get(i));
-        }
-        myThreadRoundList = myThreadRoundList0;
->>>>>>> parent of 87d1d7f (new)
         
         
         //so we will use threadlist (whose element is realplayer) instead of playerlist
@@ -291,7 +263,7 @@ public class SetUp implements Preparation{
             discardedRumourCard.add(rumourCardShuffled.get(11));
         }
        
-        Collections.shuffle(playerList);
+        //Collections.shuffle(playerList);
         
         //the winner of last turn goes first
         for(int t = 0; t<playerList.size();t++){
@@ -342,10 +314,10 @@ public class SetUp implements Preparation{
 		return null;
 		
 	}
-	public static MyThreadRound playerToThread(MyThreadRound[] l, String pName) {
-		for(int i = 0; i < l.length;i++ ) {
-			if(l[i].getPlayer().getName().equals(pName)){
-				return l[i];				
+	public static MyThreadRound playerToThread(MyThreadRound myThreadRound, String pName) {
+		for(int i = 0; i < myThreadRound.getPlayerList().size();i++ ) {
+			if(myThreadRound.getPlayerList().get(i).getName().equals(pName)){
+				return myThreadRound.getPlayerList().get(i);				
 			}
 		}
 		System.out.println("error ctr1");

@@ -2,6 +2,7 @@ package simplifiedProjet;
 //import java.util.Scanner;
 
 import simplifiedProjet.SetUp.MyThreadRound;
+import vue.InterfaceRound1;
 import simplifiedProjet.RumourCard.RumourCard;
 
 import java.util.Iterator;
@@ -26,7 +27,6 @@ public class Player implements Preparation{
 <<<<<<< HEAD
 	private boolean onTurn = false;
 	private boolean isAccused = false;
-<<<<<<< HEAD
 	private InterfaceRound1 ir1;
 	private boolean lock;
 
@@ -35,12 +35,11 @@ public class Player implements Preparation{
 
 =======
 >>>>>>> parent of 7b9fc52 (meet trouble)
-=======
-	
->>>>>>> parent of 87d1d7f (new)
 	Scanner in = new Scanner(System.in);
 
-	public Player(){}
+	public Player(){
+		
+	}
 
 	public Player(String name, int identity, CopyOnWriteArrayList<RumourCard> rumourCardListP) {
 		this.name = name;
@@ -503,7 +502,21 @@ public class Player implements Preparation{
 
 	public void setIdentity(int id) {
 		this.identity = id;
-		
+	}
+	
+	public InterfaceRound1 getIr1() {
+		return ir1;
+	}
+	public boolean isLock() {
+		return lock;
+	}
+
+	public void setLock(boolean lock) {
+		this.lock = lock;
+	}
+
+	public void setIr1(InterfaceRound1 ir1) {
+		this.ir1 = ir1;
 	}
 
 	public CopyOnWriteArrayList<RumourCard> getPlayerRumourCardList() {
