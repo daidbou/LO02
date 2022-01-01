@@ -54,12 +54,9 @@ public class InterfaceRound1 {
 	private MyThreadRound mt;
 	private boolean onTurn;
 <<<<<<< HEAD
-<<<<<<< HEAD
 	private List<Player> playerList;
 =======
 >>>>>>> parent of 7b9fc52 (meet trouble)
-=======
->>>>>>> parent of 87d1d7f (new)
 =======
 >>>>>>> parent of 87d1d7f (new)
 	/**
@@ -67,7 +64,6 @@ public class InterfaceRound1 {
 	 */
 	public void createInterfaceRound1(String pName,List<Player> playerList) {
 		this.pName = pName;
-<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 		this.playerList = playerList;
@@ -88,14 +84,6 @@ public class InterfaceRound1 {
 					
 =======
 >>>>>>> parent of 7b9fc52 (meet trouble)
-=======
-
-		EventQueue.invokeLater(new Runnable() {		
-			public void run() {
-				try {
-					InterfaceRound1 window = new InterfaceRound1(mt,pName,playerList);
-					
->>>>>>> parent of 87d1d7f (new)
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -114,13 +102,8 @@ public class InterfaceRound1 {
 	
 <<<<<<< HEAD
 <<<<<<< HEAD
-<<<<<<< HEAD
 		//this.mt = mt;
 		//this.onTurn = mt.getPlayer().isOnTurn();
-=======
-		this.mt = mt;
-		this.onTurn = mt.getPlayer().isOnTurn();
->>>>>>> parent of 87d1d7f (new)
 =======
 		this.mt = mt;
 		this.onTurn = mt.getPlayer().isOnTurn();
@@ -143,7 +126,6 @@ public class InterfaceRound1 {
 		
 	
 
-<<<<<<< HEAD
 =======
 		initialize(pName,playerList);
 		ControleurRound1 c = new ControleurRound1(pName);
@@ -155,8 +137,6 @@ public class InterfaceRound1 {
 		
 		
 >>>>>>> parent of 7b9fc52 (meet trouble)
-=======
->>>>>>> parent of 87d1d7f (new)
 	}
 
 	/**
@@ -323,13 +303,10 @@ public class InterfaceRound1 {
 		this.lblYourTurn = lblYourTurn;
 	}
 <<<<<<< HEAD
-<<<<<<< HEAD
 
 	
 =======
 >>>>>>> parent of 7b9fc52 (meet trouble)
-=======
->>>>>>> parent of 87d1d7f (new)
 =======
 >>>>>>> parent of 87d1d7f (new)
 }

@@ -6,12 +6,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 <<<<<<< HEAD
-<<<<<<< HEAD
 import java.util.List;
 =======
 >>>>>>> parent of 7b9fc52 (meet trouble)
-=======
->>>>>>> parent of 87d1d7f (new)
 =======
 >>>>>>> parent of 87d1d7f (new)
 

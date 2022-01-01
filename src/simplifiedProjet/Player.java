@@ -27,7 +27,6 @@ public class Player implements Preparation{
 	private boolean onTurn = false;
 	private boolean isAccused = false;
 <<<<<<< HEAD
-<<<<<<< HEAD
 	private InterfaceRound1 ir1;
 	private boolean lock;
 
@@ -36,9 +35,6 @@ public class Player implements Preparation{
 
 =======
 >>>>>>> parent of 7b9fc52 (meet trouble)
-=======
-	
->>>>>>> parent of 87d1d7f (new)
 =======
 	
 >>>>>>> parent of 87d1d7f (new)
