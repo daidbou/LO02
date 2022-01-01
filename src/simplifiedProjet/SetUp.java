@@ -19,6 +19,10 @@ public class SetUp implements Preparation{
 		
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+		private InterfaceRound1 ir1;
+>>>>>>> parent of 87d1d7f (new)
 =======
 		private InterfaceRound1 ir1;
 >>>>>>> parent of 87d1d7f (new)
@@ -34,6 +38,7 @@ public class SetUp implements Preparation{
 
 		public MyThreadRound(List<Player> playerList,Player player) {
 			this.playerList = playerList;
+<<<<<<< HEAD
 <<<<<<< HEAD
 			this.numreal = numreal;
 			/*for(int i = 0; i < numreal; i++) {
@@ -54,11 +59,16 @@ public class SetUp implements Preparation{
 			
 >>>>>>> parent of 7b9fc52 (meet trouble)
 =======
+=======
+>>>>>>> parent of 87d1d7f (new)
 			
 			this.setPlayer(player);
 			this.ir1 = new InterfaceRound1(this,player.getName(),playerList);
 			this.ir2 = new InterfaceRound2();
 			
+<<<<<<< HEAD
+>>>>>>> parent of 87d1d7f (new)
+=======
 >>>>>>> parent of 87d1d7f (new)
 		}
 		
@@ -94,7 +104,10 @@ public class SetUp implements Preparation{
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 87d1d7f (new)
 		public Player getPlayer() {
 			return player;
 		}
@@ -107,6 +120,9 @@ public class SetUp implements Preparation{
 		public InterfaceRound1 getIr1() {
 			return ir1;
 		}
+<<<<<<< HEAD
+>>>>>>> parent of 87d1d7f (new)
+=======
 >>>>>>> parent of 87d1d7f (new)
 		public boolean isAccused() {
 			return accused;
@@ -115,6 +131,7 @@ public class SetUp implements Preparation{
 		public void setAccused(boolean accused) {
 			this.accused = accused;
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 		public Player getPlayer() {
@@ -139,6 +156,14 @@ public class SetUp implements Preparation{
 		
 	}
 
+=======
+
+
+
+		
+	}
+
+>>>>>>> parent of 87d1d7f (new)
 	
 	private static int numReal;
 	public static MyThreadRound[] myThreadRoundList = new MyThreadRound[6];//TODO
@@ -256,6 +281,7 @@ public class SetUp implements Preparation{
         
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         /*for(i = 0 ; i<numIrlPlayer ;i++){
         	myThreadRoundList0[i] = new MyThreadRound(playerList,playerList.get(i));
         }
@@ -265,6 +291,12 @@ public class SetUp implements Preparation{
         	myThreadRoundList[i] = new MyThreadRound(playerList,playerList.get(i));
         }
 >>>>>>> parent of 7b9fc52 (meet trouble)
+=======
+        for(i = 0 ; i<numIrlPlayer ;i++){
+        	myThreadRoundList0[i] = new MyThreadRound(playerList,playerList.get(i));
+        }
+        myThreadRoundList = myThreadRoundList0;
+>>>>>>> parent of 87d1d7f (new)
 =======
         for(i = 0 ; i<numIrlPlayer ;i++){
         	myThreadRoundList0[i] = new MyThreadRound(playerList,playerList.get(i));

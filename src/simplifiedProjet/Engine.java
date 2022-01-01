@@ -88,6 +88,7 @@ public class Engine implements Preparation {
                 pTurn1.setOnTurn(true);
   
 <<<<<<< HEAD
+<<<<<<< HEAD
                 //MyThreadRound myThreadTurn1 = SetUp.playerToThread(myThreadRound,pTurn1.getName());
                 //MyThreadRound myThreadTurn1 = 
                 System.out.println("--------------------------------"+pTurn1.getName()+"'s round -----------------------");
@@ -99,6 +100,10 @@ public class Engine implements Preparation {
             		
                 }
 >>>>>>> parent of 7b9fc52 (meet trouble)
+=======
+                MyThreadRound myThreadTurn1 = SetUp.playerToThread(SetUp.myThreadRoundList, pTurn1.getName());
+                System.out.println("--------------------------------"+myThreadTurn1.getPlayer().getName()+"'s round -----------------------");
+>>>>>>> parent of 87d1d7f (new)
 =======
                 MyThreadRound myThreadTurn1 = SetUp.playerToThread(SetUp.myThreadRoundList, pTurn1.getName());
                 System.out.println("--------------------------------"+myThreadTurn1.getPlayer().getName()+"'s round -----------------------");
@@ -202,12 +207,17 @@ public class Engine implements Preparation {
                 }else{
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                     pTurn2 = pTurn1.hunt(playerList,myThreadRound);
                     //MyThreadRound myThreadTurn2 = SetUp.playerToThread(SetUp.myThreadRoundList, pTurn2.getName());
 =======
                     pTurn2 = pTurn1.hunt(playerList);
                     //pTurn1.showCards();
 >>>>>>> parent of 7b9fc52 (meet trouble)
+=======
+                    pTurn2 = pTurn1.hunt(playerList,myThreadTurn1);
+                    MyThreadRound myThreadTurn2 = SetUp.playerToThread(SetUp.myThreadRoundList, pTurn2.getName());
+>>>>>>> parent of 87d1d7f (new)
 =======
                     pTurn2 = pTurn1.hunt(playerList,myThreadTurn1);
                     MyThreadRound myThreadTurn2 = SetUp.playerToThread(SetUp.myThreadRoundList, pTurn2.getName());
@@ -333,7 +343,11 @@ public class Engine implements Preparation {
     */
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     public static boolean doChoiceAH_Real(MyThreadRound myThreadRound, Player pTurn1) {
+=======
+    public static boolean doChoiceAH_Real(MyThreadRound myThreadTurn1) {
+>>>>>>> parent of 87d1d7f (new)
 =======
     public static boolean doChoiceAH_Real(MyThreadRound myThreadTurn1) {
 >>>>>>> parent of 87d1d7f (new)
@@ -344,6 +358,7 @@ public class Engine implements Preparation {
         }
    		
     	String choiceAH_Real = "Accuse";// par defaut
+<<<<<<< HEAD
 <<<<<<< HEAD
     	choiceAH_Real = pTurn1.getIr1().getStrChoice();
 =======
@@ -367,6 +382,9 @@ public class Engine implements Preparation {
 		}*/
     	//choiceAH_Real = myThreadTurn1.getIr1().getStrChoice();
 >>>>>>> parent of 7b9fc52 (meet trouble)
+=======
+    	choiceAH_Real = myThreadTurn1.getIr1().getStrChoice();
+>>>>>>> parent of 87d1d7f (new)
 =======
     	choiceAH_Real = myThreadTurn1.getIr1().getStrChoice();
 >>>>>>> parent of 87d1d7f (new)
@@ -581,8 +599,13 @@ public class Engine implements Preparation {
     }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     public void waitChoice(Player pTurn1) {
     	while(pTurn1.isLock()) {
+=======
+    public void waitChoice(MyThreadRound myThreadTurn) {
+    	while(myThreadTurn.isLock()) {
+>>>>>>> parent of 87d1d7f (new)
 =======
     public void waitChoice(MyThreadRound myThreadTurn) {
     	while(myThreadTurn.isLock()) {
