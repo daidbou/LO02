@@ -9,6 +9,7 @@ import java.awt.BorderLayout;
 import javax.swing.JToggleButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
@@ -58,6 +59,8 @@ public class InterfaceRound1 {
 	private JToggleButton tglbtnWOrS;
 	private JPanel panel_ah;
 	private Player p;
+	private JLabel lblImage;
+	private JPanel panel2;
 	/**
 	 * Launch the application.
 	 */
@@ -92,12 +95,17 @@ public class InterfaceRound1 {
 		initialize(pName,playerList);
 
 		ControleurRound1 c = new ControleurRound1(pName,playerList);
-		c.controleurRound1AorH(tglbtnAOrH,panelCard);	
-		c.controleurRound1WorS(tglbtnWOrS,panelCard);	
+		c.controleurRound1AorH(tglbtnAOrH,panelCard,panel2,lblImage);	
+		c.controleurRound1WorS(tglbtnWOrS,panelCard,panel2,lblImage);	
 		c.controleurRound1Confirm(frame,btnConfirm,cbxPlayerList,cbxCardList);
 		c.controleurRound1PlayerList(cbxPlayerList);
-		c.controleurRound1CbxcardList(cbxCardList);
+		c.controleurRound1CbxcardList(cbxCardList,lblImage);
 		
+		
+		
+
+		
+
 	}
 
 
@@ -108,9 +116,11 @@ public class InterfaceRound1 {
 		Player p2 = Engine.nameToPlayer(playerList, pName);
 
 		frame = new JFrame();
-		frame.setBounds(100, 100, 889, 757);
+		frame.setBounds(100, 100, 1015, 873);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
+	
 		
 		
 		tglbtnWOrS = new JToggleButton("Witch or showIdentity?");
@@ -142,13 +152,18 @@ public class InterfaceRound1 {
 		panelTurn.add(lblYourTurn);
 		
 		panelCard = new JPanel();
-		panelCard.setBounds(450, 380, 167, 215);
+		panelCard.setBounds(300, 442, 167, 215);
 		frame.getContentPane().add(panelCard);
 		panelCard.setLayout(null);
 		
 		cbxCardList = new JComboBox();		
 		cbxCardList.setBounds(23, 146, 121, 37);
 		
+		lblImage = new JLabel("your card is ...");
+		lblImage.setFont(new Font("Bauhaus 93", Font.PLAIN, 28));
+		
+		lblImage.setBounds(553, 323, 397, 472);
+		frame.getContentPane().add(lblImage);
 		
 		int k = 0;String[] strCardList = new String[p2.getPlayerRumourCardList().size()];
 		for(RumourCard r:p2.getPlayerRumourCardList()) {
@@ -174,11 +189,7 @@ public class InterfaceRound1 {
 		tglbtnAOrH.setFont(new Font("Harrington", Font.PLAIN, 34));
 		tglbtnAOrH.setBounds(67, 200, 286, 66);
 		frame.getContentPane().add(tglbtnAOrH);
-		
-		lblWhichPlayer = new JLabel("Which player?");
-		lblWhichPlayer.setFont(new Font("Calibri", Font.PLAIN, 29));
-		lblWhichPlayer.setBounds(67, 323, 192, 57);
-		frame.getContentPane().add(lblWhichPlayer);
+		//frame.getContentPane().add(lblWhichPlayer);
 		
 		setCbxPlayerList(new JComboBox<String>());		
 		getCbxPlayerList().setFont(new Font("Bradley Hand ITC", Font.PLAIN, 29));
@@ -189,18 +200,28 @@ public class InterfaceRound1 {
 		}
 		
 		getCbxPlayerList().setModel(new DefaultComboBoxModel<String>(strPlayerList));
-		getCbxPlayerList().setBounds(269, 323, 121, 51);//传一个数组回来
-		frame.getContentPane().add(getCbxPlayerList());
+		getCbxPlayerList().setBounds(110, 402, 121, 51);//传一个数组回来
+		//frame.getContentPane().add(getCbxPlayerList());
 		
 		lblNewLabel = new JLabel("click on it!!");
 		lblNewLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 24));
 		lblNewLabel.setBounds(23, 99, 141, 37);
 		panelCard.add(lblNewLabel);
 		
+		panel2 = new JPanel();
+		panel2.setBounds(32, 306, 322, 96);
+		
+		lblWhichPlayer = new JLabel("Which player?");
+		lblWhichPlayer.setFont(new Font("Calibri", Font.PLAIN, 29));
+		lblWhichPlayer.setBounds(67, 323, 192, 57);
+		panel2.add(lblWhichPlayer);
+		panel2.add(cbxPlayerList);
+		frame.getContentPane().add(panel2);
+		
 		btnConfirm = new JButton("Confirm");
 		btnConfirm.setFont(new Font("Chiller", Font.PLAIN, 48));
 		btnConfirm.setHorizontalAlignment(SwingConstants.LEFT);
-		btnConfirm.setBounds(256, 546, 141, 66);
+		btnConfirm.setBounds(84, 546, 156, 78);
 		frame.getContentPane().add(btnConfirm);
 		this.rumourCardName = cbxPlayerList.getItemAt(0);//in case the player didnt choose
 		//but seems not working

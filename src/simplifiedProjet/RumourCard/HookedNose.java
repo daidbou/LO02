@@ -6,7 +6,7 @@ import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
 
 public class HookedNose implements RumourCard{
-	String nameCard = "Hooked Nose";
+	String nameCard = "HookedNose";
 	
 
     @Override

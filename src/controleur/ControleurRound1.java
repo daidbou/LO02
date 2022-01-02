@@ -7,9 +7,11 @@ import java.awt.event.ComponentEvent;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JToggleButton;
 
@@ -34,7 +36,7 @@ public class ControleurRound1 {
 		this.pName = pName;
 		this.playerList = playerList;
 	}
-	public void controleurRound1AorH(JToggleButton tglbtnAOrH,JPanel panelCard) {
+	public void controleurRound1AorH(JToggleButton tglbtnAOrH,JPanel panelCard,JPanel panel2,JLabel lblImageImage) {
 		
 			tglbtnAOrH.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -42,18 +44,21 @@ public class ControleurRound1 {
 						tglbtnAOrH.setText("Accuse");
 						strChoice = "Accuse";
 						panelCard.setVisible(false);
+						lblImageImage.setVisible(false);
 						
 					}else {
 						tglbtnAOrH.setText("Hunt");
 						strChoice = "Hunt";
-						panelCard.setVisible(true);					
+						panelCard.setVisible(true);	
+						panel2.setVisible(true);
+						lblImageImage.setVisible(true);
 					}
 					i++;
 				
 				}
 			});
 	}
-	public void controleurRound1WorS(JToggleButton tglbtnWOrS,JPanel panelCard) {
+	public void controleurRound1WorS(JToggleButton tglbtnWOrS,JPanel panelCard,JPanel panel2,JLabel lblImageImage) {
 		
 		tglbtnWOrS.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -61,11 +66,15 @@ public class ControleurRound1 {
 					tglbtnWOrS.setText("Witch");
 					strChoice = "Witch";
 					panelCard.setVisible(true);
+					panel2.setVisible(true);
+					lblImageImage.setVisible(true);
 					
 				}else {
 					tglbtnWOrS.setText("ShowId");
 					strChoice = "ShowId";
-					panelCard.setVisible(false);					
+					panelCard.setVisible(false);	
+					panel2.setVisible(false);
+					lblImageImage.setVisible(false);
 				}
 				i++;
 			
@@ -109,11 +118,13 @@ public class ControleurRound1 {
 			}
 		});	
 	}
-	public void controleurRound1CbxcardList(JComboBox<String> cbxCardList) {
+	public void controleurRound1CbxcardList(JComboBox<String> cbxCardList,JLabel lblImage) {
 		cbxCardList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card = (String)cbxCardList.getSelectedItem();
-				//System.out.println(card+"1");
+				//System.out.println(card);
+				String resource = "/image/"+(String)cbxCardList.getSelectedItem()+".png";
+				lblImage.setIcon(new ImageIcon(InterfaceRound1.class.getResource(resource)));
 			}
 		});
 	}

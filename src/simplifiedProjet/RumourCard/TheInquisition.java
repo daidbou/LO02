@@ -12,7 +12,7 @@ public class TheInquisition implements RumourCard {
 
 	int flag = 2;
 	
-	String nameCard = "The Inquisition";
+	String nameCard = "TheInquisition";
 	
 	
 

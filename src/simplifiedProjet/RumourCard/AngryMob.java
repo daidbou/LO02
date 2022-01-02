@@ -16,7 +16,7 @@ import simplifiedProjet.Preparation;
 public class AngryMob implements RumourCard {
 
 	int flag = 1;
-	String nameCard = "Angry Mob";
+	String nameCard = "AngryMob";
 	public AngryMob(int flag) {
 		flag = 1;
 	}

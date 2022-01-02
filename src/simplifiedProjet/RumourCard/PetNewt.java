@@ -11,7 +11,7 @@ import simplifiedProjet.Preparation;
 
 public class PetNewt implements RumourCard{
     
-    String nameCard ="Pet Newt";
+    String nameCard ="PetNewt";
 
     
 

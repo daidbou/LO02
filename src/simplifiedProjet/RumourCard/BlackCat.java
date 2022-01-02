@@ -9,7 +9,7 @@ import simplifiedProjet.SetUp;
 
 public class BlackCat implements RumourCard{
     
-    String nameCard ="Black Cat";
+    String nameCard ="BlackCat";
     
     
 

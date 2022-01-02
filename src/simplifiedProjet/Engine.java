@@ -64,6 +64,7 @@ public class Engine implements Preparation {
       
 
             TurnStart:while(ifTurnContinue(playerList)){
+            	
                                
                 pTurn1 = pNextTurn;              
                 pTurn1.setOnTurn1(true);

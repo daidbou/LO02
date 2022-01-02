@@ -9,7 +9,7 @@ import simplifiedProjet.Preparation;
 import simplifiedProjet.SetUp;
 
 public class EvilEye implements RumourCard{
-    String nameCard = "Evil Eye";
+    String nameCard = "EvilEye";
     
     
 

@@ -9,7 +9,7 @@ import simplifiedProjet.Player;
 public class PointedHat implements RumourCard{
 
 	int flag = 1;
-	String nameCard = "Pointed Hat";
+	String nameCard = "PointedHat";
 	
 
     @Override

@@ -9,7 +9,7 @@ import simplifiedProjet.Player;
 
 
 public class DuckingStool implements RumourCard {//done
-    String nameCard ="Ducking Stool";
+    String nameCard ="DuckingStool";
     /**
      *choose next player 
      *done
