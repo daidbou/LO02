@@ -187,6 +187,7 @@ public class Engine implements Preparation {
     private static void showStatusOfTurn(List<Player> playerList) {
         System.out.println("++++++++++++++++Conclusion of Turn+++++++++++++++++++++");
 
+        StringBuffer sb = new StringBuffer();
         for(Player p: playerList){
         	
             if(!p.ifIdentityReavealed() && !p.ifIsOutOfTurn()){
@@ -197,21 +198,25 @@ public class Engine implements Preparation {
                     p.raisePoints(2);
                 }
                 System.out.println(p.getName()+"   !!! is the winner of this turn !!!");
+                sb.append(p.getName()+"   !!! is the winner of this turn !!!\n");
             }
         }
         for(Player p: playerList){
         	
             if(p.getIdentity() == 0){
                 System.out.print("    + "+p.getName() + "is a villager" );
+                sb.append("    + "+p.getName() + "is a villager\n" );
             }else{
                 System.out.print("    + "+p.getName() + "is a witch   " );
+                sb.append("    + "+p.getName() + "is a witch   \n" );
             }
             System.out.println(" and got "+p.getPoint()+" points +  ");
+            sb.append(" and got "+p.getPoint()+" points +  ");
         }
         
         //TODO end vue
-        //End end = new End(playerList);
-        //end.createEnd(playerList);
+        End end = new End(playerList,sb);
+        end.createEnd(playerList,sb);
         
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
     }

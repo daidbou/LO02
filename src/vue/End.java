@@ -17,16 +17,18 @@ public class End {
 
 	private JFrame frame;
 	private List<Player> playerList;
+	private StringBuffer sb;
 
 	/**
 	 * Launch the application.
 	 */
-	public void createEnd(List<Player> playerList) {
+	public void createEnd(List<Player> playerList,StringBuffer sb) {
 		this.playerList = playerList;
+		this.sb = sb;
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					End window = new End(playerList);
+					End window = new End(playerList,sb);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,9 +40,11 @@ public class End {
 	/**
 	 * Create the application.
 	 */
-	public End(List<Player> playerList) {
-		initialize();
+	public End(List<Player> playerList,StringBuffer sb) {
+		
 		this.playerList = playerList;
+		this.sb = sb;
+		initialize();
 	}
 
 	/**
@@ -48,12 +52,12 @@ public class End {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 663, 534);
+		frame.setBounds(100, 100, 683, 549);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(57, 39, 500, 358);
+		String str = sb.toString();
+		JLabel lblNewLabel = new JLabel(str);
+		lblNewLabel.setBounds(57, 39, 520, 381);
 		frame.getContentPane().add(lblNewLabel);
 		
 		JButton btnNewButton = new JButton("Next Round");
