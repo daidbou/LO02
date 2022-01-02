@@ -6,6 +6,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.util.List;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -15,6 +16,7 @@ import javax.swing.JToggleButton;
 import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
 import simplifiedProjet.SetUp;
+import simplifiedProjet.RumourCard.RumourCard;
 import simplifiedProjet.SetUp.MyThreadRound;
 import vue.InterfaceRound1;
 
@@ -51,28 +53,52 @@ public class ControleurRound1 {
 				}
 			});
 	}
-	public void controleurRound1Confirm(JFrame frame,JButton btnConfirm,JComboBox<String> cbxPlayerList) {
+	public void controleurRound1WorS(JToggleButton tglbtnWOrS,JPanel panelCard) {
+		
+		tglbtnWOrS.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(i%2 == 1) {
+					tglbtnWOrS.setText("Witch");
+					strChoice = "Witch";
+					panelCard.setVisible(true);
+					
+				}else {
+					tglbtnWOrS.setText("ShowId");
+					strChoice = "ShowId";
+					panelCard.setVisible(false);					
+				}
+				i++;
+			
+			}
+		});
+}
+	public void controleurRound1Confirm(JFrame frame,JButton btnConfirm,JComboBox<String> cbxPlayerList,
+								JComboBox<String> cbxCardList) {
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {			
 				//TODO accuse
 				//use a while loop in engine, only by receiving CONFIRM can player ACCUSE
-			
-				//MyThreadRound mP1 = SetUp.playerToThread(SetUp.myThreadRoundList, pName);
-				//MyThreadRound mP2 = SetUp.playerToThread(SetUp.myThreadRoundList, player2);
+				
 				Player p1 = Engine.nameToPlayer(playerList, pName);
-				Player p2 = Engine.nameToPlayer(playerList, player2);
+				Player p2 = Engine.nameToPlayer(playerList, player2);	
+				int k = 0;
+				String[] strCardList = new String[p1.getPlayerRumourCardList().size()];
+				for(RumourCard r:p1.getPlayerRumourCardList()) {
+					if(r.name().equals(card)) {
+						continue;
+					}
+					strCardList[k++] = r.name();
+				}
+				cbxCardList.setModel(new DefaultComboBoxModel<String>(strCardList));
 				
 				p1.getIr1().setStrChoice(strChoice);
 				p1.getIr1().setPlayer2(player2);			
 				p1.getIr1().setRumourCardName(card);
-				//System.out.println(card+"2");
+				
 				p1.setLock(false);
-				//frame.setVisible(false);
-				//System.out.println("mp2"+" "+mP2.getPlayer().getName());
-				p2.getIr1().getFrame().setVisible(false);
-				p2.getIr1().getFrame().update(p2.getIr1().getFrame().getGraphics());
 				p2.setAccused(true);
-				//mP2.run();
+				
+	
 			}
 		});
 	}
@@ -102,4 +128,5 @@ public class ControleurRound1 {
 			frame.paintComponents(frame.getGraphics());
 		}*/
 	}
+	
 }

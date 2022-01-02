@@ -32,19 +32,16 @@ public class SetUp implements Preparation{
 
 		public MyThreadRound(int numreal, List<Player> playerList) {
 			this.playerList = playerList;
-			this.numreal = numreal;
-			/*for(int i = 0; i < numreal; i++) {
-				this.ir1[i] = new InterfaceRound1(this,playerList.get(i).getName(),playerList);
-			}	*/		
+			this.numreal = numreal;	
 		}
 		
-
 		public void run() {		
-
 			for(int i = 0; i < numreal; i++) { 
-				InterfaceRound1 ir1 = new InterfaceRound1(playerList.get(i).getName(),playerList);
-				playerList.get(i).setIr1(ir1);
-				playerList.get(i).getIr1().createInterfaceRound1(playerList.get(i).getName(),playerList);
+				if(playerList.get(i).isVirtual() != 1) {
+					InterfaceRound1 ir1 = new InterfaceRound1(this.playerList.get(i).getName(),playerList);
+					playerList.get(i).setIr1(ir1);
+					playerList.get(i).getIr1().createInterfaceRound1(this.playerList.get(i).getName(),playerList);	
+				}		
 			}
 				
 		}
@@ -72,20 +69,9 @@ public class SetUp implements Preparation{
 		
 	}
 
-	public static class MyThreadRound2 extends Thread{
-		private InterfaceRound1 ir1;
-		private InterfaceRound2 ir2;
-		public void run() {
-			for(int i = 0;i<3;i++) {
-				//this.ir1.createInterfaceRound1();
-			}
-			
-		}
-	}
+
 	
 	private static int numReal;
-	public static MyThreadRound[] myThreadRoundList0 = new MyThreadRound[6];//TODO
-	public static MyThreadRound[] myThreadRoundList = new MyThreadRound[6];
     public static Player p1 = new Player("p1");
     public static Player p2 = new Player("p2");
     public static Player p3 = new Player("p3");
@@ -197,16 +183,7 @@ public class SetUp implements Preparation{
             playerList.add(irlPlayerList.get(i));
         }
         setUpPlayerIdentity(playerList);
-        
-        /*for(i = 0 ; i<numIrlPlayer ;i++){
-        	myThreadRoundList0[i] = new MyThreadRound(playerList,playerList.get(i));
-        }
-        myThreadRoundList = myThreadRoundList0;*/
-        
-        
-        //so we will use threadlist (whose element is realplayer) instead of playerlist
-        
-        
+               
         for(int k = 0 ; k<numberOfBot ;k++,i++){
             CopyOnWriteArrayList<RumourCard> rumourCardListBot = new  CopyOnWriteArrayList<RumourCard>();
             for (int m = (i)*numberOfCardsPerPlayer;m<(i+1)*numberOfCardsPerPlayer;m++){
@@ -222,7 +199,7 @@ public class SetUp implements Preparation{
             discardedRumourCard.add(rumourCardShuffled.get(11));
         }
        
-        //Collections.shuffle(playerList);
+        Collections.shuffle(playerList);
         
         //the winner of last turn goes first
         for(int t = 0; t<playerList.size();t++){
@@ -262,26 +239,7 @@ public class SetUp implements Preparation{
 	public static void setNumReal(int numReal) {
 		SetUp.numReal = numReal;
 	}
-	public static Player threadToPlayer(MyThreadRound[] l, Player p) {
-		for(int i = 0; i < l.length;i++ ) {
-			if(l[i].getPlayer().getName().equals(p.getName())){
-				return p;				
-			}
-		}
-		System.out.println("error ctr1");
-		return null;
-		
-	}
-	public static MyThreadRound playerToThread(MyThreadRound myThreadRound, String pName) {
-		for(int i = 0; i < myThreadRound.getPlayerList().size();i++ ) {
-			if(myThreadRound.getPlayerList().get(i).getName().equals(pName)){
-				return myThreadRound.getPlayerList().get(i);				
-			}
-		}
-		System.out.println("error ctr1");
-		return null;
-	}
-	
+
 	
 	
 }

@@ -24,13 +24,14 @@ public class Player implements Preparation{
 	protected boolean isWart = false;
 	protected boolean isEvilEye=false;
 	protected boolean isWinnerLastTurn=false;
-	private boolean onTurn = false;
+	private boolean onTurn1 = false;
 	private boolean isAccused = false;
 	private InterfaceRound1 ir1;
-	private boolean lock;
+	private boolean lock = true;
+	private boolean onTurn2 = false;
 
 
-
+	
 
 	Scanner in = new Scanner(System.in);
 
@@ -61,30 +62,26 @@ public class Player implements Preparation{
 	 * @return
 	 * @throws InterruptedException 
 	 */
-	public Player accuse(List<Player> playerList, MyThreadRound myThreadTurn1)  { 
+	public Player accuse(List<Player> playerList)  { 
 		System.out.println("which player? ex: p1 b1");
 
 		
 		//Scanner sc = new Scanner(System.in);
 		//String pName = sc.nextLine();
-		
-		
-	
-			String pName = myThreadTurn1.getIr1().getPlayer2();
-			Player pTurn2 = Preparation.isExistedP(pName,name, playerList);
-			if(pTurn2 == null){
-				//System.out.println("no such player, try again");
-	
-			}else if(!pTurn2.ifIdentityReavealed()){
-				System.out.println(name+" accuse "+pTurn2.getName());
-				return pTurn2;
-			}else{
-				System.out.println(pTurn2.getName() + " has already revealed his identity, try again");
 
-			}
+		String pName = this.getIr1().getPlayer2();
+		Player pTurn2 = Preparation.isExistedP(pName,name, playerList);
+		if(pTurn2 == null){
+			//System.out.println("no such player, try again");
+
+		}else if(!pTurn2.ifIdentityReavealed()){
+			System.out.println(name+" accuse "+pTurn2.getName());
 			return pTurn2;
-		
-		
+		}else{
+			System.out.println(pTurn2.getName() + " has already revealed his identity, try again");
+		}
+		return pTurn2;
+
 	}
 	/**
 	 * Start the hunt process.
@@ -92,7 +89,7 @@ public class Player implements Preparation{
 	 * @param playerList list of player
 	 * @return pNextTurn, the next player for the round
 	 */
-	public Player hunt(List<Player> playerList,MyThreadRound myThreadTurn1) {
+	public Player hunt(List<Player> playerList) {
 		
 		showCards();
 		/*
@@ -102,7 +99,7 @@ public class Player implements Preparation{
 			return this;
 		}*/
 		Player pNextTurn;
-		String cardName = myThreadTurn1.getIr1().getRumourCardName();
+		String cardName = this.getIr1().getRumourCardName();
 		//System.out.println(cardName+"3");
 		RumourCard rumourCardChosen = null;
 		for(RumourCard r :getPlayerRumourCardList()) {
@@ -545,12 +542,19 @@ public class Player implements Preparation{
 		this.isAccused = isAccused;
 	}
 
-	public boolean isOnTurn() {
-		return onTurn;
+	public boolean isOnTurn1() {
+		return onTurn1;
 	}
 
-	public void setOnTurn(boolean onTurn) {
-		this.onTurn = onTurn;
+	public void setOnTurn1(boolean onTurn) {
+		this.onTurn1 = onTurn;
+	}
+	public boolean isOnTurn2() {
+		return onTurn2;
+	}
+
+	public void setOnTurn2(boolean onTurn2) {
+		this.onTurn2 = onTurn2;
 	}
 
 }

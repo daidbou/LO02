@@ -55,12 +55,16 @@ public class InterfaceRound1 {
 	private MyThreadRound mt;
 	private boolean onTurn;
 	private List<Player> playerList;
+	private JToggleButton tglbtnWOrS;
+	private JPanel panel_ah;
+	private Player p;
 	/**
 	 * Launch the application.
 	 */
 	public void createInterfaceRound1(String pName,List<Player> playerList) {
 		this.pName = pName;
 		this.playerList = playerList;
+		this.p = Engine.nameToPlayer(playerList, pName);
 		EventQueue.invokeLater(new Runnable() {		
 			public void run() {
 				try {
@@ -73,24 +77,9 @@ public class InterfaceRound1 {
 				
 			}
 		});
-		
-		
+	
 	}
-	public void createInterfaceRound1() {
-		EventQueue.invokeLater(new Runnable() {		
-			public void run() {
-				try {
-					InterfaceRound1 window = new InterfaceRound1(pName,playerList);
-					
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				
-			}
-		});
-		
-	}
+	
 
 	/**
 	 * Create the application.
@@ -104,12 +93,11 @@ public class InterfaceRound1 {
 
 		ControleurRound1 c = new ControleurRound1(pName,playerList);
 		c.controleurRound1AorH(tglbtnAOrH,panelCard);	
-		c.controleurRound1Confirm(frame,btnConfirm,cbxPlayerList);
+		c.controleurRound1WorS(tglbtnWOrS,panelCard);	
+		c.controleurRound1Confirm(frame,btnConfirm,cbxPlayerList,cbxCardList);
 		c.controleurRound1PlayerList(cbxPlayerList);
 		c.controleurRound1CbxcardList(cbxCardList);
-		c.controleurRound1Turn(frame,mt,panelTurn);
-
-
+		
 	}
 
 
@@ -117,14 +105,18 @@ public class InterfaceRound1 {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(String pName,List<Player> playerList) {
-		
-		
+		Player p2 = Engine.nameToPlayer(playerList, pName);
+
 		frame = new JFrame();
-		frame.setBounds(100, 100, 717, 622);
+		frame.setBounds(100, 100, 889, 757);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		
+		tglbtnWOrS = new JToggleButton("Witch or showIdentity?");
+		tglbtnWOrS.setFont(new Font("Harrington", Font.PLAIN, 34));
+		tglbtnWOrS.setBounds(457, 200, 397, 66);
+		frame.getContentPane().add(tglbtnWOrS);
 		
 		panelTurn = new JPanel();
 		panelTurn.repaint();
@@ -132,36 +124,37 @@ public class InterfaceRound1 {
 		panelTurn.setBounds(84, 52, 567, 66);
 		frame.getContentPane().add(panelTurn);
 		
-		/*if(this.mt.getPlayer().isOnTurn()) {
+		/*if(p.isOnTurn1()) {
 			i1 = "it's your turn!";
 		}else {
 			i1 = "it's not your turn, you cannot do anything";
 		}*/
-		lblYourTurn = new JLabel(i1);
-		lblYourTurn.addComponentListener(new ComponentAdapter() {
-			@Override
-			public void componentHidden(ComponentEvent e) {
-			}
-		});
+		String strId = "";
+		if(p2.getIdentity() == 1) {
+			strId = "witch";
+		}else {
+			strId = "villager";
+		}
+		lblYourTurn = new JLabel("you are a "+strId+" and have "+p2.getPoint()+" points");
 		
 		//lblYourTurn.setVisible(false);
 		lblYourTurn.setFont(new Font("Bradley Hand ITC", Font.PLAIN, 30));
 		panelTurn.add(lblYourTurn);
 		
 		panelCard = new JPanel();
-		panelCard.setBounds(445, 142, 229, 295);
+		panelCard.setBounds(450, 380, 167, 215);
 		frame.getContentPane().add(panelCard);
 		panelCard.setLayout(null);
 		
 		cbxCardList = new JComboBox();		
 		cbxCardList.setBounds(23, 146, 121, 37);
-		Player p2 = Engine.nameToPlayer(playerList, pName);
+		
+		
 		int k = 0;String[] strCardList = new String[p2.getPlayerRumourCardList().size()];
 		for(RumourCard r:p2.getPlayerRumourCardList()) {
 			strCardList[k++] = r.name();
 		}
-		cbxCardList.setModel(new DefaultComboBoxModel<String>(strCardList));
-		
+		cbxCardList.setModel(new DefaultComboBoxModel<String>(strCardList));		
 		panelCard.add(cbxCardList);
 	
 		
@@ -189,12 +182,14 @@ public class InterfaceRound1 {
 		
 		setCbxPlayerList(new JComboBox<String>());		
 		getCbxPlayerList().setFont(new Font("Bradley Hand ITC", Font.PLAIN, 29));
+		
 		String[] strPlayerList = new String[playerList.size()];int i = 0;
 		for(Player p: playerList) {
 			strPlayerList[i++] = p.getName();
 		}
+		
 		getCbxPlayerList().setModel(new DefaultComboBoxModel<String>(strPlayerList));
-		getCbxPlayerList().setBounds(279, 324, 121, 51);//传一个数组回来
+		getCbxPlayerList().setBounds(269, 323, 121, 51);//传一个数组回来
 		frame.getContentPane().add(getCbxPlayerList());
 		
 		lblNewLabel = new JLabel("click on it!!");
@@ -205,27 +200,13 @@ public class InterfaceRound1 {
 		btnConfirm = new JButton("Confirm");
 		btnConfirm.setFont(new Font("Chiller", Font.PLAIN, 48));
 		btnConfirm.setHorizontalAlignment(SwingConstants.LEFT);
-		btnConfirm.setBounds(110, 443, 156, 66);
+		btnConfirm.setBounds(256, 546, 141, 66);
 		frame.getContentPane().add(btnConfirm);
-		
-		JButton btnNewButton = new JButton("update");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//lblYourTurn.setText("fuck you");
-				System.out.println("in ir1 i1 = "+i1);
-				lblYourTurn.setText(i1);
-				System.out.println(lblYourTurn.getText());
-				frame.revalidate();
-				frame.repaint();
-				frame.revalidate();
-			}
-		});
-		btnNewButton.setBounds(336, 495, 175, 66);
-		frame.getContentPane().add(btnNewButton);
 		this.rumourCardName = cbxPlayerList.getItemAt(0);//in case the player didnt choose
 		//but seems not working
 	}
-	//public void re
+	
+	
 
 	public String getStrChoice() {
 		return strChoice;
@@ -288,6 +269,4 @@ public class InterfaceRound1 {
 	public void setLblYourTurn(JLabel lblYourTurn) {
 		this.lblYourTurn = lblYourTurn;
 	}
-
-	
 }
