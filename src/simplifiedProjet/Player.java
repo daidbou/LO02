@@ -354,6 +354,10 @@ public class Player implements Preparation{
 		return getPlayerRumourCardList();
 	}
 
+	/**
+	 * if player is a bot, return 1
+	 * @return
+	 */
 	public int isVirtual(){
 		return virtual;
 	}

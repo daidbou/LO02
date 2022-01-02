@@ -14,6 +14,9 @@ public class ControleurStart {
 	private Engine engine;
 	//private MonInterface inter;
 	
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public void ControleurEngineStart(Engine engine, JButton buttonStart) {
 		buttonStart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -25,6 +28,9 @@ public class ControleurStart {
 		
 		
 	}
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public void ControleurEngineQuit(Engine engine, JButton buttonQuit) {
 		buttonQuit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

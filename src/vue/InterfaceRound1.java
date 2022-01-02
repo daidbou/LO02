@@ -101,10 +101,7 @@ public class InterfaceRound1 {
 		c.controleurRound1PlayerList(cbxPlayerList);
 		c.controleurRound1CbxcardList(cbxCardList,lblImage);
 		
-		
-		
 
-		
 
 	}
 

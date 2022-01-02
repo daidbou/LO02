@@ -12,6 +12,7 @@ import javax.swing.SwingUtilities;
 import controleur.ControleurSetup1;
 import simplifiedProjet.SetUp.MyThreadRound;
 import simplifiedProjet.RumourCard.RumourCard;
+import vue.End;
 import vue.InterfaceRound1;
 import vue.InterfaceRound2;
 import vue.InterfaceSetup1;
@@ -107,7 +108,7 @@ public class Engine implements Preparation {
                         }else{
                             pTurn1.raisePoints(0);//villager , gain no point;
                             System.out.println(pTurn1.getName() + " gains 0 point");
-                            pNextTurn = pTurn2;// acussed player takes next turn
+                            pNextTurn = pTurn2;// accused player takes next turn
                         }
                         if(pNextTurn == null){
                             showStatusOfTurn(playerList);
@@ -199,10 +200,7 @@ public class Engine implements Preparation {
             }
         }
         for(Player p: playerList){
-        	if(p.isVirtual() == 0) {
-        		p.getIr1().getFrame().setVisible(false);
-        		p.getIr1().getFrame().dispose();
-        	}
+        	
             if(p.getIdentity() == 0){
                 System.out.print("    + "+p.getName() + "is a villager" );
             }else{
@@ -210,7 +208,10 @@ public class Engine implements Preparation {
             }
             System.out.println(" and got "+p.getPoint()+" points +  ");
         }
+        
         //TODO end vue
+        //End end = new End(playerList);
+        //end.createEnd(playerList);
         
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
     }
@@ -419,7 +420,6 @@ public class Engine implements Preparation {
 				break;
 			}
 		}
-       // System.out.println("index = "+index);
 
         if(ifTurnContinue(playerList)){
             //check if there is a player before Player p that is not out of turn

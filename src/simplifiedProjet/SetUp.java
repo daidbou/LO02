@@ -12,7 +12,7 @@ import controleur.ControleurSetup2;
 import controleur.ControleurSetup1;
 import simplifiedProjet.RumourCard.RumourCard;
 import vue.InterfaceRound1;
-import vue.InterfaceRound2;
+
 
 
 
@@ -20,7 +20,6 @@ public class SetUp implements Preparation{
 	
 	public static class MyThreadRound extends Thread{
 		
-		private InterfaceRound2 ir2;
 		private int numreal;
 		private List<Player> playerList;
 		
@@ -36,12 +35,13 @@ public class SetUp implements Preparation{
 		}
 		
 		public void run() {		
-			for(int i = 0; i < numreal; i++) { 
+			for(int i = 0; i < playerList.size() ; i++) { 
 				if(playerList.get(i).isVirtual() != 1) {
 					InterfaceRound1 ir1 = new InterfaceRound1(this.playerList.get(i).getName(),playerList);
 					playerList.get(i).setIr1(ir1);
 					playerList.get(i).getIr1().createInterfaceRound1(this.playerList.get(i).getName(),playerList);	
-				}		
+				}
+
 			}
 				
 		}
