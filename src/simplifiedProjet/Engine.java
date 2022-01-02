@@ -74,7 +74,7 @@ public class Engine implements Preparation {
                 if( ((pTurn1.isVirtual() == 1) && doChoiceAh_Bot(pTurn1))  || ((pTurn1.isVirtual() == 0) && doChoiceAH_Real(myThreadRound,pTurn1) )){
                     //accuse
                     pTurn2 = pTurn1.accuse(playerList);
-                    pTurn2.setOnTurn2(true);
+                    //pTurn2.setOnTurn2(true);
                     
                     if(pTurn2.equals(pTurn1)){
                         continue;
@@ -186,6 +186,7 @@ public class Engine implements Preparation {
         System.out.println("++++++++++++++++Conclusion of Turn+++++++++++++++++++++");
 
         for(Player p: playerList){
+        	
             if(!p.ifIdentityReavealed() && !p.ifIsOutOfTurn()){
                 p.setWinnerLastTurn(true);
                 if(p.getIdentity() == 0){
@@ -197,6 +198,10 @@ public class Engine implements Preparation {
             }
         }
         for(Player p: playerList){
+        	if(p.isVirtual() == 0) {
+        		p.getIr1().getFrame().setVisible(false);
+        		p.getIr1().getFrame().dispose();
+        	}
             if(p.getIdentity() == 0){
                 System.out.print("    + "+p.getName() + "is a villager" );
             }else{
@@ -204,6 +209,7 @@ public class Engine implements Preparation {
             }
             System.out.println(" and got "+p.getPoint()+" points +  ");
         }
+        //TODO end vue
         
         System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++");
     }
