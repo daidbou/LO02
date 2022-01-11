@@ -23,7 +23,12 @@ public class Bot extends Player{
 		this.isOutOfTurn = false;
         this.virtual = 1;
 	}
-    public void setRumourCardListPlayer(CopyOnWriteArrayList<RumourCard> l){
+    
+	/** 
+	 * set the identity of the bot (villager or witch) + set the list of rumour card and revealed rumour card list
+	 * @param CopyOnWriteArrayList<RumourCard the list of rumour card
+	 */
+	public void setRumourCardListPlayer(CopyOnWriteArrayList<RumourCard> l){
 		setPlayerRumourCardList(l);
 		identity = (int)(Math.random()+0.5);//random set identity
 		playerRevealedCardList = new CopyOnWriteArrayList<RumourCard>();
@@ -86,6 +91,10 @@ public class Bot extends Player{
 		return getPlayerRumourCardList().get(cardNumBot).skillHuntBot(name,playerList);
 
 	}
+	/**
+	 * return 1 if the player is a bot
+	 * @return 0 if the player is real, 1 if he is virtual
+	 */
     public int isVirtual(){
 		return virtual;
 	}

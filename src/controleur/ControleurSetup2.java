@@ -23,6 +23,10 @@ public class ControleurSetup2 {
 	public ControleurSetup2(String pName) {
 		this.pName = pName;
 	}
+	
+	/** 
+	 * @param tgBtnIdentityChoice
+	 */
 	public void controleurSetUp2IdChoice(JToggleButton tgBtnIdentityChoice) {
 		tgBtnIdentityChoice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -35,6 +39,12 @@ public class ControleurSetup2 {
 			}
 		});
 	}
+	
+	/** 
+	 * @param btnConfirm
+	 * @param tgBtnIdentityChoice
+	 * @param frame
+	 */
 	public void controleurSetup2Confirm(JButton btnConfirm,JToggleButton tgBtnIdentityChoice,JFrame frame) {
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
