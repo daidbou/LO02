@@ -111,21 +111,14 @@ public class SetUp implements Preparation{
     public static  List<Player> allPlayerList = new ArrayList<>();
     public static  CopyOnWriteArrayList<RumourCard> rumourCardShuffled = rumourCardList; 
     
+    
+    /** 
+     * @param numberOfPlayer
+     * @param numberOfBot
+     * @return List<Player>
+     */
     public static List<Player> initializeGame(int numberOfPlayer,int numberOfBot){
         Scanner sc = new Scanner(System.in);
-        /*
-        System.out.println("How many players(including the bots)? (3-6)");
-        //int numberOfPlayer = sc.nextInt();
-        int numberOfPlayer = cp.getNumAllPlayer();
-        int numberOfCardsPerPlayer = (int)12/numberOfPlayer;
-        System.out.println("each player has "+numberOfCardsPerPlayer+"cards");
-        System.out.println("how many bots?");
-        //int numberOfBot = sc.nextInt();
-        int numberOfBot = cp.getNumBot();
-        while(numberOfBot>numberOfPlayer || numberOfBot<0){
-            System.out.println("please enter again");
-            numberOfBot = sc.nextInt();
-        }*/
 
         setNumReal(numberOfPlayer-numberOfBot);
        
@@ -144,6 +137,11 @@ public class SetUp implements Preparation{
     }
 
 
+    
+    /** 
+     * @param playerListInit
+     * @return List<Player>
+     */
     public static List<Player> setUpPlayerCards(List<Player> playerListInit){
         Player pWinner = playerListInit.get(0);
       
@@ -215,6 +213,11 @@ public class SetUp implements Preparation{
         return playerList;      
     }
     
+    
+    /** 
+     * @param playerList
+     * @return List<Player>
+     */
     public static List<Player> setUpPlayerIdentity(List<Player> playerList){
     	for(int i = 0; i<SetUp.getNumReal();i++) {
     		
@@ -231,12 +234,20 @@ public class SetUp implements Preparation{
    
 
 
-	public static int getNumReal() {
+	
+    /** 
+     * @return int
+     */
+    public static int getNumReal() {
 		return numReal;
 	}
 
 
-	public static void setNumReal(int numReal) {
+	
+    /** 
+     * @param numReal
+     */
+    public static void setNumReal(int numReal) {
 		SetUp.numReal = numReal;
 	}
 

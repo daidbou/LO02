@@ -12,7 +12,6 @@ import vue.InterfaceStart;
 
 public class ControleurStart {
 	private Engine engine;
-	//private MonInterface inter;
 	
 	/**
 	 * @wbp.parser.entryPoint

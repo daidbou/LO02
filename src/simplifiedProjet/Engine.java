@@ -26,17 +26,31 @@ public class Engine implements Preparation {
     private static final CountDownLatch latchAH = new CountDownLatch(1);
     
    
-
+    /**
+     * check if the thread is completed
+     * @return true if the thread is completed
+     */
 	public static boolean isThreadCompleted() {
 		return isThreadCompleted;
 	}
 
 
-	public static void setThreadCompleted(boolean isThreadCompleted) {
+	
+    /** 
+     * set isThreadCompleted into true or false
+     * @param isThreadCompleted boolean
+     */
+    public static void setThreadCompleted(boolean isThreadCompleted) {
 		Engine.isThreadCompleted = isThreadCompleted;
 	}
 
 	private List<Player> playerList;
+    
+    /** 
+     * game engine
+     * @param numAllPlayer number of player
+     * @param numBot number of bots
+     */
     public void play(int numAllPlayer,int numBot){
     	numReal = numAllPlayer-numBot;
         List<Player> playerListInit = SetUp.initializeGame(numAllPlayer,numBot);
@@ -118,7 +132,6 @@ public class Engine implements Preparation {
                 }else{
                     pTurn2 = pTurn1.hunt(playerList);
                     pTurn2.setOnTurn2(true);
-                    //MyThreadRound myThreadTurn2 = SetUp.playerToThread(SetUp.myThreadRoundList, pTurn2.getName());
                     pNextTurn = pTurn2;
                 }
                 pTurn1.setOnTurn1(false);
@@ -127,11 +140,8 @@ public class Engine implements Preparation {
                 pTurn2.setLock(true);
                 
                 for(Player p:playerList) {
-            		//System.out.println(p.getName()+" "+p.isLock());
             	}
 
-                
-                //System.out.println("there are still "+i+" players that didn't reveal their identity ");
                 if(!ifTurnContinue(playerList)){//this turn ends
                     showStatusOfTurn(playerList);
                     playerListInit = playerList;
@@ -146,9 +156,6 @@ public class Engine implements Preparation {
         }
     }
 
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     private static void showDisCardCard() {
         System.out.println("=== discard card ===");
         for(RumourCard r: SetUp.discardedRumourCard){
@@ -158,6 +165,11 @@ public class Engine implements Preparation {
     }
 
 
+    
+    /** 
+     * show the status of the game (finished or not)
+     * @param playerListInit list of player
+     */
     private static void showStatusOfGame(List<Player> playerListInit) {
 
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!Conclusion of Game!!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -271,18 +283,6 @@ public class Engine implements Preparation {
         }else{
             	return true;
         }
-    		
-    	
-        
-        //System.out.println(pTurn1.getName() + " accuse or hunt? [a/h]");
-        //String choiceAH_Real = in.nextLine();
-       
-        
-        /*if (choiceAH_Real.equals("Accuse")) {
-            return true;
-        } else {
-            return false;
-        }*/
     }
 
     /**
@@ -354,7 +354,6 @@ public class Engine implements Preparation {
                 i--; // count how many players didn't revealed their identity
             }
         }
-        //System.out.println("there are still "+i+" players that didn't reveal their identity ");
         if (i <= 1) {
             return false; // if there is only one , the end this turn
         } else {
@@ -381,7 +380,6 @@ public class Engine implements Preparation {
 				break;
 			}
 		}
-       // System.out.println("index = "+index);
 
         if(ifTurnContinue(playerList)){
             //check if there is a player after Player p that is not out of turn
@@ -477,6 +475,11 @@ public class Engine implements Preparation {
             return false;
         }
     }
+    
+    /** 
+     * wait for the end of turn or pTurn1
+     * @param pTurn1
+     */
     public void waitChoice(Player pTurn1) {
     	if(pTurn1.isVirtual() == 0) {
     		while(pTurn1.isLock()) {
@@ -490,6 +493,11 @@ public class Engine implements Preparation {
     	}
     	
     }
+    
+    /** 
+     * wait
+     * @param i
+     */
     public static void waitwait(int i) {
 
         try {
@@ -505,20 +513,36 @@ public class Engine implements Preparation {
 
     }
 
+    
+    /** 
+     * @return Engine
+     */
     public static Engine getEngine(){
         return engine;
     }
     
+    
+    /** 
+     * @return List<Player>
+     */
     public List<Player> getPlayerList() {
 		return playerList;
 	}
 
-	public void setPlayerList(List<Player> playerList) {
+	
+    /** 
+     * @param playerList
+     */
+    public void setPlayerList(List<Player> playerList) {
 		this.playerList = playerList;
 	}
 
 
-	public static CountDownLatch getLatchAH() {
+	
+    /** 
+     * @return CountDownLatch
+     */
+    public static CountDownLatch getLatchAH() {
 		return latchAH;
 	}
 

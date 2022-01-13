@@ -9,7 +9,7 @@ import vue.InterfaceStart;
 
 public class Game {
 	public final static CountDownLatch latch2 = new CountDownLatch(3);
-	//TODO
+
 	/**
 	 * Launch the application.
 	 */

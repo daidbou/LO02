@@ -92,15 +92,9 @@ public class Player implements Preparation{
 	public Player hunt(List<Player> playerList) {
 		
 		showCards();
-		/*
-		System.out.println(" enter 0 for the first card, -1 to return");
-		int cardNum = in.nextInt();
-		if(cardNum == -1){
-			return this;
-		}*/
+
 		Player pNextTurn;
 		String cardName = this.getIr1().getRumourCardName();
-		//System.out.println(cardName+"3");
 		RumourCard rumourCardChosen = null;
 		for(RumourCard r :getPlayerRumourCardList()) {
 			if(r.name().equals(cardName)) {
@@ -109,43 +103,6 @@ public class Player implements Preparation{
 			}
 		}
 		pNextTurn = rumourCardChosen.skillHunt(name,playerList);
-		/*//TODO easier put it into thread
-		while(true){
-			if(cardName.equals("Pointed Hat") && playerRevealedCardList.size()>0){
-				pNextTurn = rumourCardChosen.skillHunt(name,playerList);
-				break;
-			}
-			else if(cardName.equals("Pointed Hat") && playerRevealedCardList.size()==0){
-				System.out.println("Sorry you don't have any revealed Rumour Card, you can't play Pointed Hat");
-				/*showCards();
-				System.out.println(" enter 0 for the first card");
-				cardNum = in.nextInt();
-			}
-			else{
-
-				if(!(cardName.equals("The Inquisition") || cardName.equals("Angry Mob"))){
-					pNextTurn = rumourCardChosen.skillHunt(name,playerList);
-					break;
-				}
-				else{
-					if(this.identity==0 && this.identityReavealed){
-						pNextTurn = rumourCardChosen.skillHunt(name,playerList);
-						break;
-					}
-					else{
-						System.out.println(rumourCardChosen.name()+" is only playable if you have been revealed as a Villager ");
-						/*showCards();
-						
-						cardNum = in.nextInt();
-						System.out.print("select a card other than "+cardName);
-						cardName = myThreadTurn1.getIr1().getRumourCardName();//TODO 无限循环 要在ir1里就设置
-						//通过判定thread里的player的身份 在thread里的ir1直接显示那些卡不能用
-						
-					}
-				}
-			}
-		}*/
-
 		
 		return pNextTurn;	
 	}
@@ -324,32 +281,13 @@ public class Player implements Preparation{
 	public void setRumourCardListPlayer(CopyOnWriteArrayList<RumourCard> l){
 		
 		setPlayerRumourCardList(l);
-		playerRevealedCardList = new CopyOnWriteArrayList<RumourCard>();
-		
-		/*
-		System.out.println(name+", what identity do you want to be? (1 for witch, 0 for villager)");
-		String id = in.nextLine();
-		
-		while(true){
-			
-			if(id.equals("0")){
-				identity = 0;
-				break;
-			}
-			else if(id.equals("1")){
-				identity = 1;
-				break;
-			}
-			else{
-				System.out.println("error, please select 0 or 1");
-				System.out.println(name+", what identity do you want to be? (1 for witch, 0 for villager)");
-				id = in.nextLine();
-			}
-		
-		}*/
-		
+		playerRevealedCardList = new CopyOnWriteArrayList<RumourCard>();	
 }
 
+	
+	/** 
+	 * @return CopyOnWriteArrayList<RumourCard>
+	 */
 	public CopyOnWriteArrayList<RumourCard> getRumourCardListPlayer(){	
 		return getPlayerRumourCardList();
 	}
@@ -465,10 +403,13 @@ public class Player implements Preparation{
 				break;
 			}
 		}
-		//System.out.println("no such card");
 		return 0;
 	}
 
+	
+	/** 
+	 * @return CopyOnWriteArrayList<RumourCard>
+	 */
 	public CopyOnWriteArrayList<RumourCard> getPlayerRevealedCardList(){
 		return this.playerRevealedCardList;
 	}
@@ -487,15 +428,28 @@ public class Player implements Preparation{
 		return isWinnerLastTurn;
 	}
 
+	
+	/** 
+	 * @param b
+	 */
 	public void setWinnerLastTurn(boolean b){
 		this.isWinnerLastTurn = b;
 	}
 
+	
+	/** 
+	 * @param r
+	 */
 	public void revealCardAndRemoveFromRumourCardList(RumourCard r){
 		this.playerRevealedCardList.add(r);
 		this.getPlayerRumourCardList().remove(r);
 	}
 
+	
+	/** 
+	 * @param nameCard
+	 * @return RumourCard
+	 */
 	public RumourCard stringToCard(String nameCard){
 
 		RumourCard rumourCard; 
@@ -512,51 +466,107 @@ public class Player implements Preparation{
 		return null;
 	}
 
+	
+	/** 
+	 * @param id
+	 */
 	public void setIdentity(int id) {
 		this.identity = id;
 	}
 	
+	
+	/** 
+	 * @return InterfaceRound1
+	 */
 	public InterfaceRound1 getIr1() {
 		return ir1;
 	}
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean isLock() {
 		return lock;
 	}
 
+	
+	/** 
+	 * @param lock
+	 */
 	public void setLock(boolean lock) {
 		this.lock = lock;
 	}
 
+	
+	/** 
+	 * @param ir1
+	 */
 	public void setIr1(InterfaceRound1 ir1) {
 		this.ir1 = ir1;
 	}
 
+	
+	/** 
+	 * @return CopyOnWriteArrayList<RumourCard>
+	 */
 	public CopyOnWriteArrayList<RumourCard> getPlayerRumourCardList() {
 		return playerRumourCardList;
 	}
 
+	
+	/** 
+	 * @param playerRumourCardList
+	 */
 	public void setPlayerRumourCardList(CopyOnWriteArrayList<RumourCard> playerRumourCardList) {
 		this.playerRumourCardList = playerRumourCardList;
 	}
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean isAccused() {
 		return isAccused;
 	}
 
+	
+	/** 
+	 * @param isAccused
+	 */
 	public void setAccused(boolean isAccused) {
 		this.isAccused = isAccused;
 	}
 
+	
+	/** 
+	 * return onTurn1
+	 * @return boolean
+	 */
 	public boolean isOnTurn1() {
 		return onTurn1;
 	}
 
+	
+	/** 
+	 * set onTurn
+	 * @param onTurn boolean
+	 */
 	public void setOnTurn1(boolean onTurn) {
 		this.onTurn1 = onTurn;
 	}
+	
+	/** 
+	 * return isOnTurn2 
+	 * @return boolean
+	 */
 	public boolean isOnTurn2() {
 		return onTurn2;
 	}
 
+	
+	/** 
+	 * set the variable onTurn2
+	 * @param onTurn2 boolean
+	 */
 	public void setOnTurn2(boolean onTurn2) {
 		this.onTurn2 = onTurn2;
 	}

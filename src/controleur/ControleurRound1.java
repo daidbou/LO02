@@ -23,9 +23,7 @@ import simplifiedProjet.SetUp.MyThreadRound;
 import vue.InterfaceRound1;
 
 public class ControleurRound1 {
-	
 
-	private JComboBox<String> cbxPlayerList;
 	private String player2;
 	private String strChoice;
 	private String card;
@@ -36,6 +34,13 @@ public class ControleurRound1 {
 		this.pName = pName;
 		this.playerList = playerList;
 	}
+	
+	/** 
+	 * @param tglbtnAOrH
+	 * @param panelCard
+	 * @param panel2
+	 * @param lblImageImage
+	 */
 	public void controleurRound1AorH(JToggleButton tglbtnAOrH,JPanel panelCard,JPanel panel2,JLabel lblImageImage) {
 		
 			tglbtnAOrH.addActionListener(new ActionListener() {
@@ -58,6 +63,13 @@ public class ControleurRound1 {
 				}
 			});
 	}
+	
+	/** 
+	 * @param tglbtnWOrS
+	 * @param panelCard
+	 * @param panel2
+	 * @param lblImageImage
+	 */
 	public void controleurRound1WorS(JToggleButton tglbtnWOrS,JPanel panelCard,JPanel panel2,JLabel lblImageImage) {
 		
 		tglbtnWOrS.addActionListener(new ActionListener() {
@@ -81,6 +93,13 @@ public class ControleurRound1 {
 			}
 		});
 }
+	
+	/** 
+	 * @param frame
+	 * @param btnConfirm
+	 * @param cbxPlayerList
+	 * @param cbxCardList
+	 */
 	public void controleurRound1Confirm(JFrame frame,JButton btnConfirm,JComboBox<String> cbxPlayerList,
 								JComboBox<String> cbxCardList) {
 		btnConfirm.addActionListener(new ActionListener() {
@@ -111,6 +130,10 @@ public class ControleurRound1 {
 			}
 		});
 	}
+	
+	/** 
+	 * @param cbxPlayerList
+	 */
 	public void controleurRound1PlayerList(JComboBox<String> cbxPlayerList) {	
 		cbxPlayerList.addActionListener(new ActionListener() {			
 			public void actionPerformed(ActionEvent e) {
@@ -118,26 +141,18 @@ public class ControleurRound1 {
 			}
 		});	
 	}
+	
+	/** 
+	 * @param cbxCardList
+	 * @param lblImage
+	 */
 	public void controleurRound1CbxcardList(JComboBox<String> cbxCardList,JLabel lblImage) {
 		cbxCardList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card = (String)cbxCardList.getSelectedItem();
-				//System.out.println(card);
 				String resource = "/image/"+(String)cbxCardList.getSelectedItem()+".png";
 				lblImage.setIcon(new ImageIcon(InterfaceRound1.class.getResource(resource)));
 			}
 		});
 	}
-	public void controleurRound1Turn(JFrame frame,MyThreadRound mP1,JPanel panelTurn) {
-		//mP1.getIr1().getPanelTurn().setVisible(!mP1.isLock());//why not working
-		//System.out.println(mP1.isOnTurn());
-		/*
-		panelTurn.repaint();
-		if(mP1.isOnTurn()) {
-			frame.setVisible(false);
-			frame.update(frame.getGraphics());
-			frame.paintComponents(frame.getGraphics());
-		}*/
-	}
-	
 }

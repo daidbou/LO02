@@ -22,6 +22,10 @@ public class ControleurSetup1 {
 	private static int numReal;
 	private static int countThreadAccomplished;
 	
+	
+	/** 
+	 * @return int
+	 */
 	public static int getCountThreadAccomplished() {
 		return countThreadAccomplished;
 	}
@@ -29,14 +33,26 @@ public class ControleurSetup1 {
 		countThreadAccomplished++;
 	}
 	
+	
+	/** 
+	 * @return int
+	 */
 	public static int getNumReal() {
 		return numReal;
 	}
 	
+	
+	/** 
+	 * @return int
+	 */
 	public static int getNumAllPlayer() {
 		return numAllPlayer;
 	}
 	
+	
+	/** 
+	 * @return int
+	 */
 	public static int getNumBot() {
 		return numBot;
 	}
@@ -57,13 +73,16 @@ public class ControleurSetup1 {
 			numBot = Integer.parseInt((String)cbxBot.getSelectedItem());
 			System.out.println(numAllPlayer+""+numBot);		
 			numReal = numAllPlayer - numBot;
-			//int[] idList = 
 			//each player has his own thread
 			createThread(numReal);
 			}
 		});
 		
 	}
+	
+	/** 
+	 * @param btnQuit
+	 */
 	public void controleurSetup1Quit(JButton btnQuit) {
 		btnQuit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -72,11 +91,15 @@ public class ControleurSetup1 {
 		});
 	}
 	
+	
+	/** 
+	 * @param numreal
+	 */
 	public void createThread(int numreal) {
 		String[] str = {"p1","p2","p3","p4","p5","p6"};
 		myThreadListC = new MyThread[numreal];
 		for(int i = 0; i<numreal;i++) {
-			myThreadListC[i] = new MyThread(str[i]);// TODO 可以把setup里的player初始化也改了
+			myThreadListC[i] = new MyThread(str[i]);
 			myThreadListC[i].start();
 		}
 		
