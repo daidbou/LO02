@@ -87,5 +87,5 @@ public class Toad implements RumourCard{
 			return Engine.leftPlayer(playerList, p1);
 		}
 	}
-	}
+}
     

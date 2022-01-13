@@ -23,6 +23,10 @@ public class ControleurSetup2 {
 	public ControleurSetup2(String pName) {
 		this.pName = pName;
 	}
+	/**
+	 * the identity choice will switch orderly between witch and villager
+	 * @param tgBtnIdentityChoice
+	 */
 	public void controleurSetUp2IdChoice(JToggleButton tgBtnIdentityChoice) {
 		tgBtnIdentityChoice.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -35,6 +39,13 @@ public class ControleurSetup2 {
 			}
 		});
 	}
+	/**
+	 * when all the real players have confirmed their choice of identity, the games can begin.
+	 * it sends a LATCH to insure.
+	 * @param btnConfirm
+	 * @param tgBtnIdentityChoice
+	 * @param frame
+	 */
 	public void controleurSetup2Confirm(JButton btnConfirm,JToggleButton tgBtnIdentityChoice,JFrame frame) {
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

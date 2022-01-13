@@ -9,7 +9,6 @@ import vue.InterfaceStart;
 
 public class Game {
 	public final static CountDownLatch latch2 = new CountDownLatch(3);
-	//TODO
 	/**
 	 * Launch the application.
 	 */
@@ -30,10 +29,7 @@ public class Game {
 			e.printStackTrace();
 		}
 		
-		if(ControleurSetup1.getCountThreadAccomplished() == ControleurSetup1.getNumReal()) {//when all real players confirm then game begins	
-			Engine.getEngine().play(ControleurSetup1.getNumAllPlayer(),ControleurSetup1.getNumBot());
-				
-		}	
+		Engine.getEngine().play(ControleurSetup1.getNumAllPlayer(),ControleurSetup1.getNumBot());
 	}
 
 }

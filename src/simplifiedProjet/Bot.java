@@ -23,6 +23,9 @@ public class Bot extends Player{
 		this.isOutOfTurn = false;
         this.virtual = 1;
 	}
+    /**
+     * re-write the method for bots
+     */
     public void setRumourCardListPlayer(CopyOnWriteArrayList<RumourCard> l){
 		setPlayerRumourCardList(l);
 		identity = (int)(Math.random()+0.5);//random set identity
@@ -41,14 +44,12 @@ public class Bot extends Player{
 				index = i;	
 			}
 		}
-		System.out.println("index = " + index);
+
 		while(true){
 			noP= (int) (Math.random()*(playerList.size()));// random num player 
-			
-			
+				
 			if(!Engine.nameToPlayer(playerList, playerList.get(noP).getName()).ifIsOutOfTurn()&&
 				noP != index){
-				System.out.println("noP = "+noP);
 				break;
 			}
 
@@ -59,7 +60,7 @@ public class Bot extends Player{
 
 	/**
 	 * when pTurn1 accuse you, then bot use skillWitch.
-	 * the card bot use is randomly chosen bt Math.random()
+	 * the card bot use is randomly chosen by Math.random()
 	 * 
 	 * @param pTurn1 is the player who accused you
 	 * 		
@@ -73,6 +74,7 @@ public class Bot extends Player{
 	}
 	/**
 	 * bot use skill hunt
+	 * the player hunted and the card used is all random
 	 * 
 	 * @param 
 	 */

@@ -21,22 +21,17 @@ public class Engine implements Preparation {
 	
 	private static String choice;  
     private static Engine engine = new Engine();
+    private Engine(){
+
+    }
+
+    public static Engine getEngine(){
+        return engine;
+    }
     private static int numReal;
-    private static boolean isThreadCompleted;
     private static final CountDownLatch latchAH = new CountDownLatch(1);
-    
-   
-
-	public static boolean isThreadCompleted() {
-		return isThreadCompleted;
-	}
-
-
-	public static void setThreadCompleted(boolean isThreadCompleted) {
-		Engine.isThreadCompleted = isThreadCompleted;
-	}
-
 	private List<Player> playerList;
+	
     public void play(int numAllPlayer,int numBot){
     	numReal = numAllPlayer-numBot;
         List<Player> playerListInit = SetUp.initializeGame(numAllPlayer,numBot);
@@ -48,14 +43,13 @@ public class Engine implements Preparation {
             playerList = SetUp.setUpPlayerCards(playerListInit);
             
             for(Player p: playerList){
-               // p.showCards();
+               p.showCards();
             }
            
-            //showDisCardCard();
+            showDisCardCard();
            
             
-   
-            MyThreadRound myThreadRound = new MyThreadRound(numReal,playerList);
+            MyThreadRound myThreadRound = new MyThreadRound(playerList);
             myThreadRound.start();
             waitwait(2);
             
@@ -73,21 +67,14 @@ public class Engine implements Preparation {
                      
                 waitChoice(pTurn1);
                 
-                if( ((pTurn1.isVirtual() == 1) && doChoiceAh_Bot(pTurn1))  || ((pTurn1.isVirtual() == 0) && doChoiceAH_Real(myThreadRound,pTurn1) )){
+                if( ((pTurn1.isVirtual() == 1) && doChoiceAh_Bot(pTurn1))  || ((pTurn1.isVirtual() == 0) && doChoiceAH_Real(pTurn1) )){
                     //accuse
-                    pTurn2 = pTurn1.accuse(playerList);
-                    //pTurn2.setOnTurn2(true);
-                    
+                    pTurn2 = pTurn1.accuse(playerList);    
                     if(pTurn2.equals(pTurn1)){
                         continue;
                     }
                     waitChoice(pTurn2);
-                    /**
-                     * 
-                     * WHY IT'SNOT UPDATING???????
-                     * 
-                     */
-                    
+
                     if(((pTurn2.isVirtual() == 1) && doChoiceWI_Bot(pTurn2))  || ((pTurn2.isVirtual() == 0) && doChoiceWI_Real(pTurn2))){
                     
                         pNextTurn = pTurn2.witch(pTurn1,playerList); 
@@ -96,6 +83,7 @@ public class Engine implements Preparation {
                             pNextTurn = pTurn1;
                             continue TurnStart;
                         }
+                        
                     }else{
                         pTurn2.showIdentity();
                         pTurn2.revealIdentity();
@@ -118,26 +106,18 @@ public class Engine implements Preparation {
                 }else{
                     pTurn2 = pTurn1.hunt(playerList);
                     pTurn2.setOnTurn2(true);
-                    //MyThreadRound myThreadTurn2 = SetUp.playerToThread(SetUp.myThreadRoundList, pTurn2.getName());
                     pNextTurn = pTurn2;
                 }
                 pTurn1.setOnTurn1(false);
                 pTurn2.setOnTurn2(false);
                 pTurn1.setLock(true);
                 pTurn2.setLock(true);
-                
-                for(Player p:playerList) {
-            		//System.out.println(p.getName()+" "+p.isLock());
-            	}
-
-                
+                   
                 //System.out.println("there are still "+i+" players that didn't reveal their identity ");
                 if(!ifTurnContinue(playerList)){//this turn ends
                     showStatusOfTurn(playerList);
                     playerListInit = playerList;
                 }
-                
-                
             }
 
             if(!ifGameContinue(playerListInit)){
@@ -149,6 +129,9 @@ public class Engine implements Preparation {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /**
+     * shows the discard card of the round
+     */
     private static void showDisCardCard() {
         System.out.println("=== discard card ===");
         for(RumourCard r: SetUp.discardedRumourCard){
@@ -158,6 +141,11 @@ public class Engine implements Preparation {
     }
 
 
+    /**
+     * for each player in the playerList, shows it's status of the game,
+     * including its points and the winner of the game
+     * @param playerListInit
+     */
     private static void showStatusOfGame(List<Player> playerListInit) {
 
         System.out.println("!!!!!!!!!!!!!!!!!!!!!!!Conclusion of Game!!!!!!!!!!!!!!!!!!!!!!!!!");
@@ -182,6 +170,7 @@ public class Engine implements Preparation {
      * at the end of a turn,shows the status of a player, including
      * his name, his identity and his points
      * at the same time get the winner of this turn
+     * we'll also create a window of the ending to show the status
      * @param playerList
      */
     private static void showStatusOfTurn(List<Player> playerList) {
@@ -224,44 +213,38 @@ public class Engine implements Preparation {
 
 
     /**
-    * For a real player to choose randomly to witchskill or show identity
+    * For a real player to choose to use witchskill or show identity
+    * the choice is get from the controleurRound1 and the interfaceRound1
     * @param pTurn1
     * 		it's the real player who use this fonction
     * @return  
     *     true = witch skill , false = show identity
     */
     public static boolean doChoiceWI_Real(Player pTurn2) {
-        //Scanner in = new Scanner(System.in);
         
         if(pTurn2.checkRumourCardList()){
            System.out.println("you don't have rumour cards, you have to show your identity");
            return false;
-
         }
-            System.out.println(pTurn2.getName() + " SkillWitch or ShowIdentity? [sk/id]");
-            String choiceWS_Real = "ShowId";// par defaut
-            choiceWS_Real = pTurn2.getIr1().getStrChoice();
-        	System.out.println("my choice is "+choiceWS_Real);
-
-        	if (choiceWS_Real.equals("ShowId")) {
-        	        return false;
-            }else{
-                	return true;
-            }
-       
+        System.out.println(pTurn2.getName() + " SkillWitch or ShowIdentity? [sk/id]");
+        String choiceWS_Real = "ShowId";// par defaut
+        choiceWS_Real = pTurn2.getIr1().getStrChoice();
+        System.out.println("my choice is "+choiceWS_Real);
+        if (choiceWS_Real.equals("ShowId")) {
+      	        return false;
+        }else{
+               	return true; 
+        }  
     }
 
     /**
-    * For a real player to choose randomly to accuse or hunt
-     * @param pTurn1 
+    * For a real player to choose to accuse or hunt
     * @param pTurn1
-    * 		it's the real player who use this fonction
-     * @param myThreadTurn1 
+    * 		it's the real player who use this function
     * @return  
     *     true = accuse , false = hunt
     */
-    public static boolean doChoiceAH_Real(MyThreadRound myThreadRound, Player pTurn1) {
-       // Scanner in = new Scanner(System.in);	
+    public static boolean doChoiceAH_Real(Player pTurn1) {
     	if(pTurn1.checkRumourCardList()){
            System.out.println("you don't have rumour cards, you have to accuse someone");
            return true;
@@ -276,18 +259,7 @@ public class Engine implements Preparation {
         }else{
             	return true;
         }
-    		
-    	
-        
-        //System.out.println(pTurn1.getName() + " accuse or hunt? [a/h]");
-        //String choiceAH_Real = in.nextLine();
-       
-        
-        /*if (choiceAH_Real.equals("Accuse")) {
-            return true;
-        } else {
-            return false;
-        }*/
+ 
     }
 
     /**
@@ -331,14 +303,14 @@ public class Engine implements Preparation {
 
 
     /**
-     * to judge if this game is end or no
+     * to judge if this game is end or not
      * condition: until some players points more than 5
      * @param playerList
      * @return true if game ends
      */
     public static boolean ifGameContinue(List<Player> pAll) {
         for (Player p : pAll) {
-            if (p.getPoint() >= 3) {
+            if (p.getPoint() >= 5) {
                 return false;
             }
         }
@@ -386,8 +358,6 @@ public class Engine implements Preparation {
 				break;
 			}
 		}
-       // System.out.println("index = "+index);
-
         if(ifTurnContinue(playerList)){
             //check if there is a player after Player p that is not out of turn
             for(int i = index+1 ; i < playerList.size();i++){
@@ -471,7 +441,8 @@ public class Engine implements Preparation {
 
     }
     /**
-     * return true or false randomly
+     * return true or false randomly.
+     * it's a random way to control what bot's going to do
      * @return
      */
     public static boolean choiceRandom(){
@@ -482,6 +453,13 @@ public class Engine implements Preparation {
             return false;
         }
     }
+    /**
+     * it's the lock of the player.
+     * in the program, only when the player has done all the operations, like to choose to hunt, hunt witch
+     * player, what cards to use,or other restrictions... can the program keep on executing.
+     * so it needs a lock to make sure the input parameter is not null.
+     * @param pTurn1 wait for the choice of pTurn1
+     */
     public void waitChoice(Player pTurn1) {
     	if(pTurn1.isVirtual() == 0) {
     		while(pTurn1.isLock()) {
@@ -495,6 +473,11 @@ public class Engine implements Preparation {
     	}
     	
     }
+    /**
+     * for the thread to wait some seconds in order that all the preparation is done
+     * 
+     * @param i wait i seconds
+     */
     public static void waitwait(int i) {
 
         try {
@@ -506,13 +489,7 @@ public class Engine implements Preparation {
     
     
 
-    private Engine(){
-
-    }
-
-    public static Engine getEngine(){
-        return engine;
-    }
+   
     
     public List<Player> getPlayerList() {
 		return playerList;
@@ -527,11 +504,6 @@ public class Engine implements Preparation {
 		return latchAH;
 	}
 
-
-	
-    
- 
-   
 
 }
 

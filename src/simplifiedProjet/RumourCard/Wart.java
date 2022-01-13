@@ -65,8 +65,5 @@ public class Wart implements RumourCard{
 		p1.revealCardAndRemoveFromRumourCardList(p1.stringToCard(nameCard));
 		System.out.println("Take next turn");
 		return Engine.nextPlayer(playerList, p1);
-	}
-    
-
-    
+	} 
 }

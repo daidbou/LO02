@@ -136,15 +136,12 @@ public interface Preparation {
                 if(!accused.equals(pNextTurn) && p.ifIsOutOfTurn() == false){
                     return true;
                 }else if(p.ifIsOutOfTurn()){
-                    //System.out.println("already out of turn");
                     return false;
                 }else{
-                   // System.out.println("not yourself");
                     return false;
                 }
             }	
         }
-       // System.out.println("no such player, try again");
         return false;
     }
 

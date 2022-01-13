@@ -20,20 +20,18 @@ public class SetUp implements Preparation{
 	
 	public static class MyThreadRound extends Thread{
 		
-		private int numreal;
 		private List<Player> playerList;
-		
-
 		private boolean lock = true;//only when the lock is false can players do something
 		private boolean accused = false;
-		private boolean onTurn = false;
 
-
-		public MyThreadRound(int numreal, List<Player> playerList) {
+		public MyThreadRound(List<Player> playerList) {
 			this.playerList = playerList;
-			this.numreal = numreal;	
 		}
 		
+		/**
+		 * the thread contains a view for real players,
+		 * and it's initialized by the playerList
+		 */
 		public void run() {		
 			for(int i = 0; i < playerList.size() ; i++) { 
 				if(playerList.get(i).isVirtual() != 1) {
@@ -111,26 +109,15 @@ public class SetUp implements Preparation{
     public static  List<Player> allPlayerList = new ArrayList<>();
     public static  CopyOnWriteArrayList<RumourCard> rumourCardShuffled = rumourCardList; 
     
+    /**
+     * initialize the game with the number of bots and all players
+     * @param numberOfPlayer
+     * @param numberOfBot
+     * @return
+     */
     public static List<Player> initializeGame(int numberOfPlayer,int numberOfBot){
-        Scanner sc = new Scanner(System.in);
-        /*
-        System.out.println("How many players(including the bots)? (3-6)");
-        //int numberOfPlayer = sc.nextInt();
-        int numberOfPlayer = cp.getNumAllPlayer();
-        int numberOfCardsPerPlayer = (int)12/numberOfPlayer;
-        System.out.println("each player has "+numberOfCardsPerPlayer+"cards");
-        System.out.println("how many bots?");
-        //int numberOfBot = sc.nextInt();
-        int numberOfBot = cp.getNumBot();
-        while(numberOfBot>numberOfPlayer || numberOfBot<0){
-            System.out.println("please enter again");
-            numberOfBot = sc.nextInt();
-        }*/
-
-        setNumReal(numberOfPlayer-numberOfBot);
-       
-        System.out.println("this game includes "+numberOfBot+" bots and "+getNumReal()+" players");
-        
+        setNumReal(numberOfPlayer-numberOfBot);      
+        System.out.println("this game includes "+numberOfBot+" bots and "+getNumReal()+" players");      
         int i = 0;
         for(i = 0 ; i<getNumReal() ;i++){ //  add real players
             allPlayerList.add(irlPlayerList.get(i));
@@ -138,12 +125,17 @@ public class SetUp implements Preparation{
         for(int j = 0 ; j<numberOfBot ;j++){ // add bots
             allPlayerList.add(botPlayerList.get(j));
         }
-     
-        
+         
         return allPlayerList;
     }
 
 
+    /**
+     * set up each player's rumor cards, the discard cards and their identity they had chosen.
+     * the playerList and the rumor card list are all shuffled at the beginning
+     * @param playerListInit
+     * @return
+     */
     public static List<Player> setUpPlayerCards(List<Player> playerListInit){
         Player pWinner = playerListInit.get(0);
       
@@ -215,6 +207,11 @@ public class SetUp implements Preparation{
         return playerList;      
     }
     
+    /**
+     * set up player's identity with threads
+     * @param playerList
+     * @return
+     */
     public static List<Player> setUpPlayerIdentity(List<Player> playerList){
     	for(int i = 0; i<SetUp.getNumReal();i++) {
     		
@@ -223,7 +220,6 @@ public class SetUp implements Preparation{
      		}else {
      			playerList.get(i).setIdentity(0);
      		}
-    		System.out.println(ControleurSetup1.myThreadListC[i].getpName()+" "+ControleurSetup1.myThreadListC[i].getIdentity()+"qq");
 
     	}
     	return playerList;
@@ -239,7 +235,4 @@ public class SetUp implements Preparation{
 	public static void setNumReal(int numReal) {
 		SetUp.numReal = numReal;
 	}
-
-	
-	
 }
