@@ -2,8 +2,6 @@ package controleur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
@@ -17,9 +15,7 @@ import javax.swing.JToggleButton;
 
 import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
-import simplifiedProjet.SetUp;
 import simplifiedProjet.RumourCard.RumourCard;
-import simplifiedProjet.SetUp.MyThreadRound;
 import vue.InterfaceRound1;
 
 public class ControleurRound1 {
@@ -95,6 +91,7 @@ public class ControleurRound1 {
 }
 	
 	/** 
+	 * use a while loop in engine, only by receiving CONFIRM can player ACCUSE
 	 * @param frame
 	 * @param btnConfirm
 	 * @param cbxPlayerList
@@ -103,10 +100,7 @@ public class ControleurRound1 {
 	public void controleurRound1Confirm(JFrame frame,JButton btnConfirm,JComboBox<String> cbxPlayerList,
 								JComboBox<String> cbxCardList) {
 		btnConfirm.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {			
-				//TODO accuse
-				//use a while loop in engine, only by receiving CONFIRM can player ACCUSE
-				
+			public void actionPerformed(ActionEvent e) {				
 				Player p1 = Engine.nameToPlayer(playerList, pName);
 				Player p2 = Engine.nameToPlayer(playerList, player2);	
 				int k = 0;
@@ -131,7 +125,7 @@ public class ControleurRound1 {
 		});
 	}
 	
-	/** 
+	/** controls the player list
 	 * @param cbxPlayerList
 	 */
 	public void controleurRound1PlayerList(JComboBox<String> cbxPlayerList) {	
@@ -143,6 +137,7 @@ public class ControleurRound1 {
 	}
 	
 	/** 
+	 * controls the card list
 	 * @param cbxCardList
 	 * @param lblImage
 	 */

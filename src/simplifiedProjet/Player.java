@@ -1,15 +1,10 @@
 package simplifiedProjet;
-//import java.util.Scanner;
 
-import simplifiedProjet.SetUp.MyThreadRound;
 import vue.InterfaceRound1;
 import simplifiedProjet.RumourCard.RumourCard;
-
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class Player implements Preparation{
 	protected String name;

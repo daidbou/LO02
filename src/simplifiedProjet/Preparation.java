@@ -34,7 +34,13 @@ public interface Preparation {
     static Wart wart = new Wart();//create 12 rumour cards
 
 
-    public static CopyOnWriteArrayList<RumourCard> rumourCardList = new CopyOnWriteArrayList<RumourCard>(){{
+    public static CopyOnWriteArrayList<RumourCard> rumourCardList = new CopyOnWriteArrayList<RumourCard>(){
+    	/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+	{
 		//add(null);
         add(angryMob);
 		add(blackCat);

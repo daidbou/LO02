@@ -11,16 +11,14 @@ import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class InterfaceSetup1 {
 
 	private static JFrame frame;
 	private JButton btnContinue;
 	private JButton btnQuit;
-	private JComboBox cbxAllPlayer;
-	private JComboBox cbxBot;
+	private JComboBox<String> cbxAllPlayer;
+	private JComboBox<String> cbxBot;
 
 	public void createInterfaceSetup1() {
 		EventQueue.invokeLater(new Runnable() {// launch the interfacePre
@@ -60,9 +58,9 @@ public class InterfaceSetup1 {
 		lblNewLabel.setBounds(107, 96, 507, 42);
 		getFrame().getContentPane().add(lblNewLabel);
 		
-		cbxAllPlayer = new JComboBox();
+		cbxAllPlayer = new JComboBox<String>();
 		cbxAllPlayer.setFont(new Font("Arial", Font.PLAIN, 23));
-		cbxAllPlayer.setModel(new DefaultComboBoxModel(new String[] {"3", "4", "5", "6"}));
+		cbxAllPlayer.setModel(new DefaultComboBoxModel<String>(new String[] {"3", "4", "5", "6"}));
 		cbxAllPlayer.setBounds(644, 96, 132, 29);
 		getFrame().getContentPane().add(cbxAllPlayer);
 		
@@ -71,8 +69,8 @@ public class InterfaceSetup1 {
 		lblHowManyBots.setBounds(107, 204, 507, 42);
 		getFrame().getContentPane().add(lblHowManyBots);
 		
-		cbxBot = new JComboBox();
-		cbxBot.setModel(new DefaultComboBoxModel(new String[] {"0", "1", "2", "3", "4", "5", "6"}));
+		cbxBot = new JComboBox<String>();
+		cbxBot.setModel(new DefaultComboBoxModel<String>(new String[] {"0", "1", "2", "3", "4", "5", "6"}));
 		cbxBot.setFont(new Font("Arial", Font.PLAIN, 23));
 		cbxBot.setBounds(644, 199, 132, 29);
 		getFrame().getContentPane().add(cbxBot);

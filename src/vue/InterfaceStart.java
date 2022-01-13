@@ -1,32 +1,21 @@
 package vue;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JTextField;
-
 import controleur.ControleurStart;
 import simplifiedProjet.Engine;
-
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.util.Observable;
-import java.util.Observer;
-import java.awt.event.ActionEvent;
 
-@SuppressWarnings("deprecation")
-public class InterfaceStart implements Observer{
+public class InterfaceStart{
 
 	private static JFrame frame;
 	private JButton buttonStart;
 	private JButton buttonQuit;
 	private Engine engine;
-	
 
-	
 
 	/**
 	 * Create the application.
@@ -66,17 +55,13 @@ public class InterfaceStart implements Observer{
 		getFrame().getContentPane().add(buttonQuit);
 	}
 
-	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	public static JFrame getFrame() {
 		return frame;
 	}
 
 	public void setFrame(JFrame frame) {
-		this.frame = frame;
+		InterfaceStart.frame = frame;
 	}
 }

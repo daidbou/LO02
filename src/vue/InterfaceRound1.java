@@ -9,7 +9,6 @@ import java.awt.BorderLayout;
 import javax.swing.JToggleButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
@@ -18,14 +17,9 @@ import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
 import simplifiedProjet.SetUp.MyThreadRound;
 import simplifiedProjet.RumourCard.RumourCard;
-
-import java.awt.event.ActionListener;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.awt.event.ActionEvent;
 import javax.swing.JPanel;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
+
 
 public class InterfaceRound1 {
 
@@ -54,7 +48,6 @@ public class InterfaceRound1 {
 	private JPanel panelTurn;
 	private JLabel lblNewLabel;
 	private MyThreadRound mt;
-	private boolean onTurn;
 	private List<Player> playerList;
 	private JToggleButton tglbtnWOrS;
 	private JPanel panel_ah;
@@ -89,9 +82,6 @@ public class InterfaceRound1 {
 	 */
 	public InterfaceRound1(String pName,List<Player> playerList) {
 	
-		//this.mt = mt;
-		//this.onTurn = mt.getPlayer().isOnTurn();
-		//System.out.println(this.onTurn);
 		initialize(pName,playerList);
 
 		ControleurRound1 c = new ControleurRound1(pName,playerList);
@@ -118,8 +108,6 @@ public class InterfaceRound1 {
 		frame.getContentPane().setLayout(null);
 		
 	
-		
-		
 		tglbtnWOrS = new JToggleButton("Witch or showIdentity?");
 		tglbtnWOrS.setFont(new Font("Harrington", Font.PLAIN, 34));
 		tglbtnWOrS.setBounds(457, 200, 397, 66);
@@ -131,11 +119,6 @@ public class InterfaceRound1 {
 		panelTurn.setBounds(84, 52, 567, 66);
 		frame.getContentPane().add(panelTurn);
 		
-		/*if(p.isOnTurn1()) {
-			i1 = "it's your turn!";
-		}else {
-			i1 = "it's not your turn, you cannot do anything";
-		}*/
 		String strId = "";
 		if(p2.getIdentity() == 1) {
 			strId = "witch";
@@ -144,7 +127,6 @@ public class InterfaceRound1 {
 		}
 		lblYourTurn = new JLabel("you are a "+strId+" and have "+p2.getPoint()+" points");
 		
-		//lblYourTurn.setVisible(false);
 		lblYourTurn.setFont(new Font("Bradley Hand ITC", Font.PLAIN, 30));
 		panelTurn.add(lblYourTurn);
 		
@@ -153,7 +135,7 @@ public class InterfaceRound1 {
 		frame.getContentPane().add(panelCard);
 		panelCard.setLayout(null);
 		
-		cbxCardList = new JComboBox();		
+		cbxCardList = new JComboBox<String>();		
 		cbxCardList.setBounds(23, 146, 121, 37);
 		
 		lblImage = new JLabel("your card is ...");
@@ -182,11 +164,10 @@ public class InterfaceRound1 {
 		frame.getContentPane().add(lblPlayerName, BorderLayout.WEST);
 		
 		tglbtnAOrH = new JToggleButton("accuse or hunt?");		
-		//tglbtnAOrH.setText(strChoice);
 		tglbtnAOrH.setFont(new Font("Harrington", Font.PLAIN, 34));
 		tglbtnAOrH.setBounds(67, 200, 286, 66);
 		frame.getContentPane().add(tglbtnAOrH);
-		//frame.getContentPane().add(lblWhichPlayer);
+
 		
 		setCbxPlayerList(new JComboBox<String>());		
 		getCbxPlayerList().setFont(new Font("Bradley Hand ITC", Font.PLAIN, 29));
@@ -197,8 +178,7 @@ public class InterfaceRound1 {
 		}
 		
 		getCbxPlayerList().setModel(new DefaultComboBoxModel<String>(strPlayerList));
-		getCbxPlayerList().setBounds(110, 402, 121, 51);//传一个数组回来
-		//frame.getContentPane().add(getCbxPlayerList());
+		getCbxPlayerList().setBounds(110, 402, 121, 51);
 		
 		lblNewLabel = new JLabel("click on it!!");
 		lblNewLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 24));
@@ -220,8 +200,7 @@ public class InterfaceRound1 {
 		btnConfirm.setHorizontalAlignment(SwingConstants.LEFT);
 		btnConfirm.setBounds(84, 546, 156, 78);
 		frame.getContentPane().add(btnConfirm);
-		this.rumourCardName = cbxPlayerList.getItemAt(0);//in case the player didnt choose
-		//but seems not working
+		this.rumourCardName = cbxPlayerList.getItemAt(0);//in case the player didn't choose
 	}
 	
 	

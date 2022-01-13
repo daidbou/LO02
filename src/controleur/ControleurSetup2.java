@@ -2,19 +2,12 @@ package controleur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JToggleButton;
 
-import simplifiedProjet.Engine;
 import simplifiedProjet.Game;
-import simplifiedProjet.Player;
-import simplifiedProjet.SetUp;
-import vue.InterfaceRound2;
-import vue.InterfaceSetup1;
-import vue.InterfaceSetup2;
 
 public class ControleurSetup2 {
 	

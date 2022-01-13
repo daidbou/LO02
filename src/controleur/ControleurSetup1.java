@@ -2,16 +2,10 @@ package controleur;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import vue.InterfaceSetup1;
 import vue.InterfaceSetup2;
-import vue.InterfaceStart;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
-
-import simplifiedProjet.Engine;
 
 public class ControleurSetup1 {
 	
@@ -64,7 +58,7 @@ public class ControleurSetup1 {
 	 * @param cbxBot
 	 */
 	public void controleurSetup1Continue(JButton btnContinue,
-									JComboBox cbxAllPlayer,JComboBox cbxBot) {
+									JComboBox<String> cbxAllPlayer,JComboBox<String> cbxBot) {
 		
 		btnContinue.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {

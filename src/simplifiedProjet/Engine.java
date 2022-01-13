@@ -1,29 +1,28 @@
 package simplifiedProjet;
 
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-
-import javax.swing.SwingUtilities;
-
-import controleur.ControleurSetup1;
 import simplifiedProjet.SetUp.MyThreadRound;
 import simplifiedProjet.RumourCard.RumourCard;
-import vue.End;
-import vue.InterfaceRound1;
-import vue.InterfaceRound2;
-import vue.InterfaceSetup1;
 
 public class Engine implements Preparation {
-	
-	private static String choice;  
+	 
     private static Engine engine = new Engine();
     private static int numReal;
     private static boolean isThreadCompleted;
     private static final CountDownLatch latchAH = new CountDownLatch(1);
+    private Engine(){
+
+    }
+
+    
+    /** 
+     * @return Engine
+     */
+    public static Engine getEngine(){
+        return engine;
+    }
     
    
     /**
@@ -61,13 +60,9 @@ public class Engine implements Preparation {
             
             playerList = SetUp.setUpPlayerCards(playerListInit);
             
-            for(Player p: playerList){
-               // p.showCards();
-            }
-           
-            //showDisCardCard();
-           
-            
+
+            showDisCardCard();
+              
    
             MyThreadRound myThreadRound = new MyThreadRound(numReal,playerList);
             myThreadRound.start();
@@ -90,18 +85,12 @@ public class Engine implements Preparation {
                 if( ((pTurn1.isVirtual() == 1) && doChoiceAh_Bot(pTurn1))  || ((pTurn1.isVirtual() == 0) && doChoiceAH_Real(myThreadRound,pTurn1) )){
                     //accuse
                     pTurn2 = pTurn1.accuse(playerList);
-                    //pTurn2.setOnTurn2(true);
                     
                     if(pTurn2.equals(pTurn1)){
                         continue;
                     }
                     waitChoice(pTurn2);
-                    /**
-                     * 
-                     * WHY IT'SNOT UPDATING???????
-                     * 
-                     */
-                    
+ 
                     if(((pTurn2.isVirtual() == 1) && doChoiceWI_Bot(pTurn2))  || ((pTurn2.isVirtual() == 0) && doChoiceWI_Real(pTurn2))){
                     
                         pNextTurn = pTurn2.witch(pTurn1,playerList); 
@@ -118,7 +107,6 @@ public class Engine implements Preparation {
                             System.out.println(pTurn1.getName() + " gains 1 point");
                             pTurn2.setIsOutOfTurn(true); //pTurn2 should left the game
                             pNextTurn = nextPlayer(playerList, pTurn1);
-                            //used to be here
                         }else{
                             pTurn1.raisePoints(0);//villager , gain no point;
                             System.out.println(pTurn1.getName() + " gains 0 point");
@@ -139,8 +127,6 @@ public class Engine implements Preparation {
                 pTurn1.setLock(true);
                 pTurn2.setLock(true);
                 
-                for(Player p:playerList) {
-            	}
 
                 if(!ifTurnContinue(playerList)){//this turn ends
                     showStatusOfTurn(playerList);
@@ -509,17 +495,7 @@ public class Engine implements Preparation {
     
     
 
-    private Engine(){
 
-    }
-
-    
-    /** 
-     * @return Engine
-     */
-    public static Engine getEngine(){
-        return engine;
-    }
     
     
     /** 

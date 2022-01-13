@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 import java.util.concurrent.CountDownLatch;
 
 import controleur.ControleurSetup1;
-import controleur.ControleurStart;
 import vue.InterfaceStart;
 
 public class Game {

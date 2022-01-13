@@ -1,9 +1,7 @@
 package simplifiedProjet.RumourCard;
 
-import java.text.BreakIterator;
 import java.util.List;
 import java.util.Scanner;
-
 import simplifiedProjet.Engine;
 import simplifiedProjet.Player;
 

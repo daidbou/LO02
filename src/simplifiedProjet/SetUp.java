@@ -1,14 +1,8 @@
 package simplifiedProjet;
 import java.util.ArrayList;
 import java.util.Collections;
-//import java.util.Iterator;
 import java.util.List;
-import java.util.Scanner;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.TimeUnit;
-
-import controleur.ControleurSetup2;
-
 import controleur.ControleurSetup1;
 import simplifiedProjet.RumourCard.RumourCard;
 import vue.InterfaceRound1;
@@ -26,7 +20,6 @@ public class SetUp implements Preparation{
 
 		private boolean lock = true;//only when the lock is false can players do something
 		private boolean accused = false;
-		private boolean onTurn = false;
 
 
 		public MyThreadRound(int numreal, List<Player> playerList) {
@@ -90,7 +83,12 @@ public class SetUp implements Preparation{
      */
     public static CopyOnWriteArrayList<RumourCard> discardedRumourCard = new CopyOnWriteArrayList<RumourCard>();
 
-	public static List<Player> irlPlayerList = new ArrayList<Player>(){{//player list
+	public static List<Player> irlPlayerList = new ArrayList<Player>(){/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+	{//player list
         add(p1);
 		add(p2);
         add(p3);
@@ -99,7 +97,12 @@ public class SetUp implements Preparation{
         add(p6);
 	}};
 
-    public static List<Bot> botPlayerList = new ArrayList<Bot>(){{//Bot List
+    public static List<Bot> botPlayerList = new ArrayList<Bot>(){/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+	{//Bot List
         add(b1);
         add(b2);
         add(b3);
@@ -118,7 +121,6 @@ public class SetUp implements Preparation{
      * @return List<Player>
      */
     public static List<Player> initializeGame(int numberOfPlayer,int numberOfBot){
-        Scanner sc = new Scanner(System.in);
 
         setNumReal(numberOfPlayer-numberOfBot);
        
