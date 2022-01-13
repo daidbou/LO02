@@ -48,23 +48,22 @@ public class ControleurSetup1 {
 	 * @param cbxBot
 	 */
 	public void controleurSetup1Continue(JButton btnContinue,
-									JComboBox<String> cbxAllPlayer,JComboBox<String> cbxBot) {
+									JComboBox cbxAllPlayer,JComboBox cbxBot) {
 		
 		btnContinue.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			InterfaceSetup1.getFrame().dispose();
 			numAllPlayer = Integer.parseInt((String)cbxAllPlayer.getSelectedItem());
-			numBot = Integer.parseInt((String)cbxBot.getSelectedItem());	
+			numBot = Integer.parseInt((String)cbxBot.getSelectedItem());
+			System.out.println(numAllPlayer+""+numBot);		
 			numReal = numAllPlayer - numBot;
+			//int[] idList = 
+			//each player has his own thread
 			createThread(numReal);
 			}
 		});
 		
 	}
-	/**
-	 * when push the button, the first frame closed
-	 * @param btnQuit
-	 */
 	public void controleurSetup1Quit(JButton btnQuit) {
 		btnQuit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

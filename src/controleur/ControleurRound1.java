@@ -36,15 +36,6 @@ public class ControleurRound1 {
 		this.pName = pName;
 		this.playerList = playerList;
 	}
-	/**
-	 * a controleur that let the player to choose to auccse or hunt
-	 * when he choosed to accuse, the cardPanel and other panel will not be shown.
-	 * the same, when he choose to hunt, can he choose then what cards to use and which player to hunt
-	 * @param tglbtnAOrH
-	 * @param panelCard
-	 * @param panel2
-	 * @param lblImageImage
-	 */
 	public void controleurRound1AorH(JToggleButton tglbtnAOrH,JPanel panelCard,JPanel panel2,JLabel lblImageImage) {
 		
 			tglbtnAOrH.addActionListener(new ActionListener() {
@@ -67,16 +58,6 @@ public class ControleurRound1 {
 				}
 			});
 	}
-	/**
-	 * the same as the former, 
-	 * a controleur that let the player to choose to use witchskill or show identity
-	 * when he choosed to show id, the cardPanel and other panel will not be shown.
-	 * the same, when he choose to use witch skill, can he choose then what cards to use and which player to witch
-	 * @param tglbtnWOrS
-	 * @param panelCard
-	 * @param panel2
-	 * @param lblImageImage
-	 */
 	public void controleurRound1WorS(JToggleButton tglbtnWOrS,JPanel panelCard,JPanel panel2,JLabel lblImageImage) {
 		
 		tglbtnWOrS.addActionListener(new ActionListener() {
@@ -99,23 +80,12 @@ public class ControleurRound1 {
 			
 			}
 		});
-	}
-	/**
-	 * the confirm button contains a lock.
-	 * it collects all the choice made by the player, like the behavior accuse or hunt, the card to use,
-	 * the next players , etc.
-	 * only when the player confirms, the parameters can be send to the engine to execute.
-	 * more, the buttons refresh the cardList and the playerList when the card is discarded or
-	 * someone is already out of the game
-	 * @param frame
-	 * @param btnConfirm
-	 * @param cbxPlayerList
-	 * @param cbxCardList
-	 */
+}
 	public void controleurRound1Confirm(JFrame frame,JButton btnConfirm,JComboBox<String> cbxPlayerList,
 								JComboBox<String> cbxCardList) {
 		btnConfirm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {			
+				//TODO accuse
 				//use a while loop in engine, only by receiving CONFIRM can player ACCUSE
 				
 				Player p1 = Engine.nameToPlayer(playerList, pName);
@@ -132,17 +102,15 @@ public class ControleurRound1 {
 				
 				p1.getIr1().setStrChoice(strChoice);
 				p1.getIr1().setPlayer2(player2);			
-				p1.getIr1().setRumourCardName(card);			
+				p1.getIr1().setRumourCardName(card);
+				
 				p1.setLock(false);
 				p2.setAccused(true);
-		
+				
+	
 			}
 		});
 	}
-	/**
-	 * for the player to choose the target player 
-	 * @param cbxPlayerList
-	 */
 	public void controleurRound1PlayerList(JComboBox<String> cbxPlayerList) {	
 		cbxPlayerList.addActionListener(new ActionListener() {			
 			public void actionPerformed(ActionEvent e) {
@@ -150,19 +118,26 @@ public class ControleurRound1 {
 			}
 		});	
 	}
-	/**
-	 * for the player to choose the card
-	 * @param cbxCardList
-	 * @param lblImage
-	 */
 	public void controleurRound1CbxcardList(JComboBox<String> cbxCardList,JLabel lblImage) {
 		cbxCardList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				card = (String)cbxCardList.getSelectedItem();
+				//System.out.println(card);
 				String resource = "/image/"+(String)cbxCardList.getSelectedItem()+".png";
 				lblImage.setIcon(new ImageIcon(InterfaceRound1.class.getResource(resource)));
 			}
 		});
+	}
+	public void controleurRound1Turn(JFrame frame,MyThreadRound mP1,JPanel panelTurn) {
+		//mP1.getIr1().getPanelTurn().setVisible(!mP1.isLock());//why not working
+		//System.out.println(mP1.isOnTurn());
+		/*
+		panelTurn.repaint();
+		if(mP1.isOnTurn()) {
+			frame.setVisible(false);
+			frame.update(frame.getGraphics());
+			frame.paintComponents(frame.getGraphics());
+		}*/
 	}
 	
 }

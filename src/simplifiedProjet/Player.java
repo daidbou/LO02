@@ -64,6 +64,11 @@ public class Player implements Preparation{
 	 */
 	public Player accuse(List<Player> playerList)  { 
 		System.out.println("which player? ex: p1 b1");
+
+		
+		//Scanner sc = new Scanner(System.in);
+		//String pName = sc.nextLine();
+
 		String pName = this.getIr1().getPlayer2();
 		Player pTurn2 = Preparation.isExistedP(pName,name, playerList);
 		if(pTurn2 == null){
@@ -86,8 +91,16 @@ public class Player implements Preparation{
 	 */
 	public Player hunt(List<Player> playerList) {
 		
+		showCards();
+		/*
+		System.out.println(" enter 0 for the first card, -1 to return");
+		int cardNum = in.nextInt();
+		if(cardNum == -1){
+			return this;
+		}*/
 		Player pNextTurn;
 		String cardName = this.getIr1().getRumourCardName();
+		//System.out.println(cardName+"3");
 		RumourCard rumourCardChosen = null;
 		for(RumourCard r :getPlayerRumourCardList()) {
 			if(r.name().equals(cardName)) {
@@ -96,11 +109,7 @@ public class Player implements Preparation{
 			}
 		}
 		pNextTurn = rumourCardChosen.skillHunt(name,playerList);
-		//the part below is for the command line, in order to check if the player is able to playe
-		//the specified card. however there could be some problems when applying them in the view
-		//
-		
-		/*easier put it into thread
+		/*//TODO easier put it into thread
 		while(true){
 			if(cardName.equals("Pointed Hat") && playerRevealedCardList.size()>0){
 				pNextTurn = rumourCardChosen.skillHunt(name,playerList);
@@ -149,7 +158,6 @@ public class Player implements Preparation{
 	public Player witch(Player pTurn1,List<Player> playerList) {
 		
 		showCards();
-		/*
 		System.out.println(" enter 0 for the first card, // enter -1 to return");
 		int cardNum = in.nextInt();
 		Player pNextTurn;
@@ -175,17 +183,8 @@ public class Player implements Preparation{
 
 			}
 
-		}*/
-		Player pNextTurn;
-		String cardName = this.getIr1().getRumourCardName();
-		RumourCard rumourCardChosen = null;
-		for(RumourCard r :getPlayerRumourCardList()) {
-			if(r.name().equals(cardName)) {
-				rumourCardChosen = r;
-				break;
-			}
-		}
-		pNextTurn = rumourCardChosen.skillWitch(pTurn1.getName(),name, playerList);
+		}		
+		//use a method in setup
 		return pNextTurn ;
 		
 	}
@@ -322,10 +321,34 @@ public class Player implements Preparation{
 	 * Set the identity of real players, and the same time set the rumour card list of the player
 	 * @param l
 	 */
-	public void setRumourCardListPlayer(CopyOnWriteArrayList<RumourCard> l){		
+	public void setRumourCardListPlayer(CopyOnWriteArrayList<RumourCard> l){
+		
 		setPlayerRumourCardList(l);
 		playerRevealedCardList = new CopyOnWriteArrayList<RumourCard>();
-	}
+		
+		/*
+		System.out.println(name+", what identity do you want to be? (1 for witch, 0 for villager)");
+		String id = in.nextLine();
+		
+		while(true){
+			
+			if(id.equals("0")){
+				identity = 0;
+				break;
+			}
+			else if(id.equals("1")){
+				identity = 1;
+				break;
+			}
+			else{
+				System.out.println("error, please select 0 or 1");
+				System.out.println(name+", what identity do you want to be? (1 for witch, 0 for villager)");
+				id = in.nextLine();
+			}
+		
+		}*/
+		
+}
 
 	public CopyOnWriteArrayList<RumourCard> getRumourCardListPlayer(){	
 		return getPlayerRumourCardList();
@@ -442,9 +465,13 @@ public class Player implements Preparation{
 				break;
 			}
 		}
+		//System.out.println("no such card");
 		return 0;
 	}
 
+	public CopyOnWriteArrayList<RumourCard> getPlayerRevealedCardList(){
+		return this.playerRevealedCardList;
+	}
 
 	public void showPlayerRevealedList(){
 		for(RumourCard r: this.playerRevealedCardList){
@@ -469,28 +496,22 @@ public class Player implements Preparation{
 		this.getPlayerRumourCardList().remove(r);
 	}
 
-	/**
-	 * a method to switch a string to type RumourCard
-	 * @param nameCard
-	 * @return
-	 */
 	public RumourCard stringToCard(String nameCard){
 
 		RumourCard rumourCard; 
 		
 		for(RumourCard r: SetUp.rumourCardList){
+
 			if(nameCard.equals(r.name())){
 				rumourCard = r;
 				return rumourCard;
+
 			}
+			else{}
 		}
 		return null;
 	}
 
-	public CopyOnWriteArrayList<RumourCard> getPlayerRevealedCardList(){
-		return this.playerRevealedCardList;
-	}
-	
 	public void setIdentity(int id) {
 		this.identity = id;
 	}

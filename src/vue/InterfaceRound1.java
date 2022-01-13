@@ -116,7 +116,9 @@ public class InterfaceRound1 {
 		frame.setBounds(100, 100, 1015, 873);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
+		
 	
+		
 		
 		tglbtnWOrS = new JToggleButton("Witch or showIdentity?");
 		tglbtnWOrS.setFont(new Font("Harrington", Font.PLAIN, 34));
@@ -129,6 +131,11 @@ public class InterfaceRound1 {
 		panelTurn.setBounds(84, 52, 567, 66);
 		frame.getContentPane().add(panelTurn);
 		
+		/*if(p.isOnTurn1()) {
+			i1 = "it's your turn!";
+		}else {
+			i1 = "it's not your turn, you cannot do anything";
+		}*/
 		String strId = "";
 		if(p2.getIdentity() == 1) {
 			strId = "witch";
@@ -137,6 +144,7 @@ public class InterfaceRound1 {
 		}
 		lblYourTurn = new JLabel("you are a "+strId+" and have "+p2.getPoint()+" points");
 		
+		//lblYourTurn.setVisible(false);
 		lblYourTurn.setFont(new Font("Bradley Hand ITC", Font.PLAIN, 30));
 		panelTurn.add(lblYourTurn);
 		
@@ -174,9 +182,11 @@ public class InterfaceRound1 {
 		frame.getContentPane().add(lblPlayerName, BorderLayout.WEST);
 		
 		tglbtnAOrH = new JToggleButton("accuse or hunt?");		
+		//tglbtnAOrH.setText(strChoice);
 		tglbtnAOrH.setFont(new Font("Harrington", Font.PLAIN, 34));
 		tglbtnAOrH.setBounds(67, 200, 286, 66);
 		frame.getContentPane().add(tglbtnAOrH);
+		//frame.getContentPane().add(lblWhichPlayer);
 		
 		setCbxPlayerList(new JComboBox<String>());		
 		getCbxPlayerList().setFont(new Font("Bradley Hand ITC", Font.PLAIN, 29));
@@ -187,7 +197,8 @@ public class InterfaceRound1 {
 		}
 		
 		getCbxPlayerList().setModel(new DefaultComboBoxModel<String>(strPlayerList));
-		getCbxPlayerList().setBounds(110, 402, 121, 51);
+		getCbxPlayerList().setBounds(110, 402, 121, 51);//传一个数组回来
+		//frame.getContentPane().add(getCbxPlayerList());
 		
 		lblNewLabel = new JLabel("click on it!!");
 		lblNewLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 24));
